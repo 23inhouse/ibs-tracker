@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ibs_trackerApp: App {
+  @EnvironmentObject private var appState: AppState
+
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ContentView().environmentObject(AppState())
     }
   }
 }
