@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DayView: View {
-  @EnvironmentObject private var appState: AppState
+  @EnvironmentObject private var appState: IBSData
   @State private var date: Date = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date()
 
   var dateString: String {
@@ -80,6 +80,6 @@ struct DayView: View {
 struct DayView_Previews: PreviewProvider {
   static var previews: some View {
     DayView()
-      .environmentObject(AppState())
+      .environmentObject(IBSData())
   }
 }

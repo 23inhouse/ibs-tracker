@@ -1,5 +1,5 @@
 //
-//  AppState.swift
+//  IBSData.swift
 //  ibs-tracker
 //
 //  Created by Benjamin Lewis on 24/1/21.
@@ -7,19 +7,19 @@
 
 import Foundation
 
-class AppState: ObservableObject {
-  @Published var dayRecords: [DayRecord] = AppState.loadRecords()
+class IBSData: ObservableObject {
+  @Published var dayRecords: [DayRecord] = IBSData.loadRecords()
 }
 
-private extension AppState {
+private extension IBSData {
   static func loadRecords() -> [DayRecord] {
     let allRecords = Bundle.main.decode([IBSRecord].self, from: "records.json")
     let sortedRecords = allRecords.sorted { $0.timestamp > $1.timestamp }
 
-    var records = [DayRecord]()
-
     var currentIBSRecords: [IBSRecord] = []
     var previousKeyString: String?
+
+    var records: [DayRecord] = []
 
     for record in sortedRecords {
       guard let keyDate = record.keyDate() else { continue }

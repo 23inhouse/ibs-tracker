@@ -22,7 +22,7 @@
 		B533AC1D25BAE9D7009B6290 /* MedicationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC1C25BAE9D7009B6290 /* MedicationRow.swift */; };
 		B533AC2225BAEC36009B6290 /* WeightRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC2125BAEC36009B6290 /* WeightRow.swift */; };
 		B5421F3B25BCC78300E8B5AA /* ItemTypeDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F3A25BCC78300E8B5AA /* ItemTypeDayRowView.swift */; };
-		B5421F4525BD822C00E8B5AA /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4425BD822C00E8B5AA /* AppState.swift */; };
+		B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4425BD822C00E8B5AA /* IBSData.swift */; };
 		B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4C25BD84E900E8B5AA /* DayRecord.swift */; };
 		B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F5125BD8D9400E8B5AA /* Date+String.swift */; };
 		B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */; };
@@ -97,7 +97,7 @@
 		B533AC1C25BAE9D7009B6290 /* MedicationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationRow.swift; sourceTree = "<group>"; };
 		B533AC2125BAEC36009B6290 /* WeightRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRow.swift; sourceTree = "<group>"; };
 		B5421F3A25BCC78300E8B5AA /* ItemTypeDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypeDayRowView.swift; sourceTree = "<group>"; };
-		B5421F4425BD822C00E8B5AA /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B5421F4425BD822C00E8B5AA /* IBSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSData.swift; sourceTree = "<group>"; };
 		B5421F4C25BD84E900E8B5AA /* DayRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecord.swift; sourceTree = "<group>"; };
 		B5421F5125BD8D9400E8B5AA /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol4Shape.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 		B508997B25B4AFBE00B1EA03 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				B5421F4425BD822C00E8B5AA /* AppState.swift */,
+				B5421F4425BD822C00E8B5AA /* IBSData.swift */,
 				B5421F4C25BD84E900E8B5AA /* DayRecord.swift */,
 				B5B3261D25B346220023E286 /* IBSRecord.swift */,
 				B57B786025BE21D100985B75 /* IBSRecord+ItemType.swift */,
@@ -511,7 +511,7 @@
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
-				B5421F4525BD822C00E8B5AA /* AppState.swift in Sources */,
+				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
 				B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */,

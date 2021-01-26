@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-  @EnvironmentObject private var appState: AppState
+  @EnvironmentObject private var appState: IBSData
   @State private var filter: ItemType? = nil
 
   var records: [DayRecord] {
@@ -106,6 +106,6 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
     SearchView()
-      .environmentObject(AppState())
+      .environmentObject(IBSData())
   }
 }
