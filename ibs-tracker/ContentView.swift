@@ -10,6 +10,12 @@ import PureSwiftUI
 
 struct ContentView: View {
   var body: some View {
+    mainTabView()
+  }
+}
+
+private extension ContentView {
+  func mainTabView() -> some View {
     TabView {
       DayView()
         .tabItem {
