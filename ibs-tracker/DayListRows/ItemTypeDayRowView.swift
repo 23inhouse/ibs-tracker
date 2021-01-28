@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemTypeDayRowView: View {
-  var record: IBSRecord
+  var record: JSONIBSRecord
 
   var body: some View {
     switch record.type {
@@ -31,6 +31,6 @@ struct ItemTypeDayRowView: View {
 
 struct ItemTypeDayRowView_Previews: PreviewProvider {
   static var previews: some View {
-    ItemTypeDayRowView(record: IBSRecord(bristolScale: 3, date: Date()))
+    ItemTypeDayRowView(record: JSONIBSRecord(bristolScale: 3, date: Date()))
   }
 }

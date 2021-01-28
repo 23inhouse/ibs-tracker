@@ -16,7 +16,7 @@ struct FoodRowView: View {
 
   var body: some View {
     DayRowView(type: .food, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
+      TimestampView(record: record as! JSONIBSRecord)
       Text(record.text ?? "No meal name recorded")
         .font(.callout)
         .lineLimit(2)
@@ -28,6 +28,6 @@ struct FoodRowView: View {
 
 struct FoodRowView_Previews: PreviewProvider {
   static var previews: some View {
-    FoodRowView(for: IBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: "Safe", size: "Large"))
+    FoodRowView(for: JSONIBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: 0, size: 0))
   }
 }

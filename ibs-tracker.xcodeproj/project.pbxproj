@@ -36,14 +36,14 @@
 		B54EA7C325B250AB008C4B74 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7C225B250AB008C4B74 /* TagCloudView.swift */; };
 		B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7CA25B2587B008C4B74 /* BristolView.swift */; };
 		B54EA7D625B25959008C4B74 /* BristolShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7D525B25959008C4B74 /* BristolShape.swift */; };
-		B57B786125BE21D100985B75 /* IBSRecord+ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B786025BE21D100985B75 /* IBSRecord+ItemType.swift */; };
+		B57B786125BE21D100985B75 /* JSONIBSRecord+ItemTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B786025BE21D100985B75 /* JSONIBSRecord+ItemTypes.swift */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
-		B5B3261E25B346220023E286 /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261D25B346220023E286 /* IBSRecord.swift */; };
+		B5B3261E25B346220023E286 /* JSONIBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261D25B346220023E286 /* JSONIBSRecord.swift */; };
 		B5E3A8D625AE205B00DAC8DD /* ibs_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */; };
 		B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D725AE205B00DAC8DD /* ContentView.swift */; };
 		B5E3A8DA25AE205D00DAC8DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3A8D925AE205D00DAC8DD /* Assets.xcassets */; };
@@ -111,13 +111,13 @@
 		B54EA7C225B250AB008C4B74 /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
 		B54EA7CA25B2587B008C4B74 /* BristolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BristolView.swift; sourceTree = "<group>"; };
 		B54EA7D525B25959008C4B74 /* BristolShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BristolShape.swift; sourceTree = "<group>"; };
-		B57B786025BE21D100985B75 /* IBSRecord+ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+ItemType.swift"; sourceTree = "<group>"; };
+		B57B786025BE21D100985B75 /* JSONIBSRecord+ItemTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONIBSRecord+ItemTypes.swift"; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B592C7EE25AFA5A70040E0AC /* records.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = records.json; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
-		B5B3261D25B346220023E286 /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
+		B5B3261D25B346220023E286 /* JSONIBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONIBSRecord.swift; sourceTree = "<group>"; };
 		B5E3A8D225AE205B00DAC8DD /* ibs-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ibs-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibs_trackerApp.swift; sourceTree = "<group>"; };
 		B5E3A8D725AE205B00DAC8DD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -208,8 +208,8 @@
 			children = (
 				B5421F4425BD822C00E8B5AA /* IBSData.swift */,
 				B5421F4C25BD84E900E8B5AA /* DayRecord.swift */,
-				B5B3261D25B346220023E286 /* IBSRecord.swift */,
-				B57B786025BE21D100985B75 /* IBSRecord+ItemType.swift */,
+				B5B3261D25B346220023E286 /* JSONIBSRecord.swift */,
+				B57B786025BE21D100985B75 /* JSONIBSRecord+ItemTypes.swift */,
 				B533AC0D25BADAF8009B6290 /* ItemType.swift */,
 				B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */,
 			);
@@ -499,7 +499,7 @@
 				B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */,
 				B5E9D54A25B7001200E52387 /* NoteRow.swift in Sources */,
 				B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */,
-				B57B786125BE21D100985B75 /* IBSRecord+ItemType.swift in Sources */,
+				B57B786125BE21D100985B75 /* JSONIBSRecord+ItemTypes.swift in Sources */,
 				B508996325B4A79600B1EA03 /* AcheShape.swift in Sources */,
 				B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */,
 				B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */,
@@ -529,7 +529,7 @@
 				B533AC2225BAEC36009B6290 /* WeightRow.swift in Sources */,
 				B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */,
 				B508995325B3945800B1EA03 /* GutShape.swift in Sources */,
-				B5B3261E25B346220023E286 /* IBSRecord.swift in Sources */,
+				B5B3261E25B346220023E286 /* JSONIBSRecord.swift in Sources */,
 				B54EA7AC25B23E6D008C4B74 /* Bristol6Shape.swift in Sources */,
 				B5E9D52925B63CC200E52387 /* RowIconView.swift in Sources */,
 				B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */,

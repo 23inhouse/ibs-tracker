@@ -29,7 +29,7 @@ struct MoodRowView: View {
       tags: record.tags
     ) {
       HStack(alignment: .top, spacing: 0) {
-        TimestampView(record: record as! IBSRecord)
+        TimestampView(record: record as! JSONIBSRecord)
         Spacer()
         VStack(alignment: .trailing, spacing: 4) {
           if let feel = record.feel {
@@ -55,11 +55,11 @@ struct MoodRowView: View {
 struct MoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 0, stress: 0))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 1, stress: 1))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 2, stress: 2))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 3, stress: 3))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 4, stress: 4))
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 0, stress: 0))
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 1, stress: 1))
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 2, stress: 2))
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 3, stress: 3))
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 4, stress: 4))
     }
   }
 }

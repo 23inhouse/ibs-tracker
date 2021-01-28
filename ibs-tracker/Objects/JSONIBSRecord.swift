@@ -14,13 +14,13 @@ private func timestampString(for date: Date? = Date()) -> String {
   return dateFormatter.string(from: date ?? Date())
 }
 
-struct IBSRecord: Decodable, Hashable {
+struct JSONIBSRecord: Decodable, Hashable {
   var type: ItemType
   var timestamp: String
   var bristolScale: Int?
   var text: String?
-  var size: String?
-  var risk: String?
+  var size: Int?
+  var risk: Int?
   var pain: Int?
   var bloating: Int?
   var headache: Int?
@@ -55,8 +55,8 @@ struct IBSRecord: Decodable, Hashable {
     timestamp = try values.decode(String.self, forKey: .timestamp)
     bristolScale = try values.decodeIfPresent(Int.self, forKey: .bristolScale) ?? 0
     text = try values.decodeIfPresent(String.self, forKey: .text) ?? ""
-    size = try values.decodeIfPresent(String.self, forKey: .size)
-    risk = try values.decodeIfPresent(String.self, forKey: .risk)
+    size = try values.decodeIfPresent(Int.self, forKey: .size)
+    risk = try values.decodeIfPresent(Int.self, forKey: .risk)
     pain = try values.decodeIfPresent(Int.self, forKey: .pain)
     bloating = try values.decodeIfPresent(Int.self, forKey: .bloating)
     headache = try values.decodeIfPresent(Int.self, forKey: .headache)
@@ -83,7 +83,7 @@ struct IBSRecord: Decodable, Hashable {
     self.tags = tags
   }
 
-  init(food: String, timestamp: Date, tags: [String] = [], risk: String?, size: String?) {
+  init(food: String, timestamp: Date, tags: [String] = [], risk: Int?, size: Int?) {
     type = .food
     self.timestamp = timestampString(for: timestamp)
     text = food

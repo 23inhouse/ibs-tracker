@@ -22,7 +22,7 @@ struct AcheRowView: View {
     ) {
       VStack(alignment: .leading) {
         HStack(alignment: .top, spacing: 5) {
-          TimestampView(record: record as! IBSRecord)
+          TimestampView(record: record as! JSONIBSRecord)
           Spacer()
           VStack(alignment: .trailing, spacing: 5) {
             if let headache = record.headache {
@@ -48,6 +48,6 @@ struct AcheRowView: View {
 
 struct AcheRowView_Previews: PreviewProvider {
   static var previews: some View {
-    AcheRowView(for: IBSRecord(date: Date(), tags: ["Arthritus"], headache: 3, pain: 4))
+    AcheRowView(for: JSONIBSRecord(date: Date(), tags: ["Arthritus"], headache: 3, pain: 4))
   }
 }

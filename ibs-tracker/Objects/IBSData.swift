@@ -13,10 +13,10 @@ class IBSData: ObservableObject {
 
 private extension IBSData {
   static func loadRecords() -> [DayRecord] {
-    let allRecords = Bundle.main.decode([IBSRecord].self, from: "records.json")
+    let allRecords = Bundle.main.decode([JSONIBSRecord].self, from: "records.json")
     let sortedRecords = allRecords.sorted { $0.timestamp > $1.timestamp }
 
-    var currentIBSRecords: [IBSRecord] = []
+    var currentIBSRecords: [JSONIBSRecord] = []
     var previousKeyString: String?
 
     var records: [DayRecord] = []

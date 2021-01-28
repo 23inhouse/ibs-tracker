@@ -21,7 +21,7 @@ struct DayView: View {
     date = Calendar.current.date(byAdding: .day, value: days, to: self.date) ?? date
   }
 
-  var records: [IBSRecord] {
+  var records: [JSONIBSRecord] {
     let dayRecord = appState.dayRecords
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 

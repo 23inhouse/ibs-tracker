@@ -10,5 +10,5 @@ import Foundation
 struct DayRecord: Identifiable {
   var id = UUID()
   private(set) var date: Date
-  private(set) var ibsRecords: [IBSRecord]
+  private(set) var ibsRecords: [JSONIBSRecord]
 }

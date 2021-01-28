@@ -7,9 +7,12 @@
 
 import Foundation
 
-protocol AcheRecord {
+protocol IBSRecord {
   func dateString(for format: String) -> String
   var tags: [String] { get }
+}
+
+protocol AcheRecord: IBSRecord {
   var headache: Int? { get }
   var pain: Int? { get }
   func painScore() -> Int
@@ -17,7 +20,7 @@ protocol AcheRecord {
   func painText() -> String
 }
 
-extension IBSRecord: AcheRecord {
+extension JSONIBSRecord: AcheRecord {
   func painScore() -> Int {
     [headache ?? 0, pain ?? 0].max() ?? 0
   }
@@ -49,14 +52,12 @@ extension IBSRecord: AcheRecord {
   }
 }
 
-protocol BMRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol BMRecord : IBSRecord {
   var bristolType: BristolType? { get }
   func bristolDescription() -> String
 }
 
-extension IBSRecord: BMRecord {
+extension JSONIBSRecord: BMRecord {
   func bristolDescription() -> String {
     guard let bristolScale = bristolScale else { return "" }
 
@@ -78,19 +79,48 @@ extension IBSRecord: BMRecord {
   }
 }
 
-protocol FoodRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol FoodRecord : IBSRecord {
   var text: String? { get }
-  var size: String? { get }
-  var risk: String? { get }
+  var size: Int? { get }
+  var risk: Int? { get }
+  func FoodScore() -> Int
+  func riskText() -> String
+  func sizeText() -> String
 }
 
-extension IBSRecord: FoodRecord {}
+extension JSONIBSRecord: FoodRecord {
+  func FoodScore() -> Int {
+    [risk ?? 0, size ?? 0].max() ?? 0
+  }
 
-protocol GutRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+  func riskText() -> String {
+    let texts: [Scales: String] = [
+      .none: "no risk at all",
+      .mild: "mildly risky",
+      .moderate: "moderatly risky",
+      .severe: "I should't eat this",
+      .extreme: "I know I can't eat this",
+    ]
+
+    let scaleText = Scales(rawValue: risk ?? 0)
+    return texts[scaleText ?? .none] ?? ""
+  }
+
+  func sizeText() -> String {
+    let texts: [Scales: String] = [
+      .none: "Very small meal",
+      .mild: "Small meal",
+      .moderate: "Normal meal size",
+      .severe: "A bit too much",
+      .extreme: "Way to much",
+    ]
+
+    let scaleText = Scales(rawValue: size ?? 0)
+    return texts[scaleText ?? .none] ?? ""
+  }
+}
+
+protocol GutRecord : IBSRecord {
   var bloating: Int? { get }
   var pain: Int? { get }
   func gutScore() -> Int
@@ -98,7 +128,7 @@ protocol GutRecord {
   func gutPainText() -> String
 }
 
-extension IBSRecord: GutRecord {
+extension JSONIBSRecord: GutRecord {
   func gutScore() -> Int {
     [bloating ?? 0, pain ?? 0].max() ?? 0
   }
@@ -130,18 +160,14 @@ extension IBSRecord: GutRecord {
   }
 }
 
-protocol MedicationRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol MedicationRecord : IBSRecord {
   var text: String? { get }
   var medicationType: MedicationType? { get }
 }
 
-extension IBSRecord: MedicationRecord {}
+extension JSONIBSRecord: MedicationRecord {}
 
-protocol MoodRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol MoodRecord : IBSRecord {
   var feel: Int? { get }
   var stress: Int? { get }
   func moodScore() -> Int
@@ -149,7 +175,7 @@ protocol MoodRecord {
   func stressText() -> String
 }
 
-extension IBSRecord: MoodRecord {
+extension JSONIBSRecord: MoodRecord {
   func moodScore() -> Int {
     [feel ?? 0, stress ?? 0].max() ?? 0
   }
@@ -181,18 +207,14 @@ extension IBSRecord: MoodRecord {
   }
 }
 
-protocol NoteRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol NoteRecord : IBSRecord {
   var text: String? { get }
 }
 
-extension IBSRecord: NoteRecord {}
+extension JSONIBSRecord: NoteRecord {}
 
-protocol WeightRecord {
-  func dateString(for format: String) -> String
-  var tags: [String] { get }
+protocol WeightRecord : IBSRecord {
   var weight: Double? { get }
 }
 
-extension IBSRecord: WeightRecord {}
+extension JSONIBSRecord: WeightRecord {}
