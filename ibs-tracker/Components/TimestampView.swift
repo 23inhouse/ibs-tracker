@@ -11,7 +11,7 @@ struct TimestampView: View {
   var record: JSONIBSRecord
 
   var body: some View {
-    Text("\(record.dateString(for: "h:mm a"))")
+    Text(record.dateString(for: "h:mm a"))
       .font(.callout)
       .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
       .frame(alignment: .leading)

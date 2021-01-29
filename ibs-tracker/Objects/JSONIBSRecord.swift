@@ -124,7 +124,7 @@ struct JSONIBSRecord: Decodable, Hashable {
   }
 
   init(weight: Double, date: Date, tags: [String] = []) {
-    type = .note
+    type = .weight
     self.timestamp = timestampString(for: date)
     self.weight = weight
     self.tags = tags

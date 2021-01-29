@@ -26,26 +26,26 @@ struct DayRowView<Content>: View where Content: View {
 
   var body: some View {
     HStack(alignment: .top, spacing: 5) {
-      Group {
-        if type == .bm {
-          BristolView(scale: bristolType)
-        } else {
-          RowIconView(type: type, color: color)
-        }
-      }
-      .frame(width: 50, alignment: .center)
+      iconView
       VStack(alignment: .leading) {
         content()
           .frame(maxWidth: .infinity, alignment: .leading)
-        if type == .food {
-          TagCloudView(tags: tags)
-        } else {
-          TagCloudView(tags: tags, resize: true)
-        }
+        TagCloudView(tags: tags, resize: type != .food)
       }
       .frame(maxWidth: .infinity)
     }
     .padding(5)
+  }
+
+  var iconView: some View {
+    Group {
+      if type == .bm {
+        BristolView(scale: bristolType)
+      } else {
+        RowIconView(type: type, color: color)
+      }
+    }
+    .frame(width: 50, alignment: .center)
   }
 }
 

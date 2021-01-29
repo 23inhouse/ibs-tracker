@@ -32,6 +32,6 @@ struct PropertyView: View {
 
 struct PropertyView_Previews: PreviewProvider {
   static var previews: some View {
-    PropertyView(text: "Hi", scale: 5, color: .purple)
+    PropertyView(text: "High", scale: 5, color: .purple)
   }
 }

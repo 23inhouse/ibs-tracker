@@ -43,62 +43,40 @@ struct SearchView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .food ? nil : .food
-          }) {
-            ToolBarFilterIconView(for: .food, filteredBy: $filter)
-          }
+          filterButton(for: .food)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .medication ? nil : .medication
-          }) {
-            ToolBarFilterIconView(for: .medication, filteredBy: $filter)
-          }
+          filterButton(for: .medication)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .note ? nil : .note
-          }) {
-            ToolBarFilterIconView(for: .note, filteredBy: $filter)
-          }
+          filterButton(for: .note)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .weight ? nil : .weight
-          }) {
-            ToolBarFilterIconView(for: .weight, filteredBy: $filter)
-          }
+          filterButton(for: .weight)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .mood ? nil : .mood
-          }) {
-            ToolBarFilterIconView(for: .mood, filteredBy: $filter)
-          }
+          filterButton(for: .mood)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .ache ? nil : .ache
-          }) {
-            ToolBarFilterIconView(for: .ache, filteredBy: $filter)
-          }
+          filterButton(for: .ache)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .gut ? nil : .gut
-          }) {
-            ToolBarFilterIconView(for: .gut, filteredBy: $filter)
-          }
+          filterButton(for: .gut)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            filter = filter == .bm ? nil : .bm
-          }) {
-            ToolBarFilterIconView(for: .bm, filteredBy: $filter)
-          }
+          filterButton(for: .bm)
         }
       }
+    }
+  }
+}
+
+private extension SearchView {
+  func filterButton(for filter: ItemType) -> some View {
+    Button(action: {
+      self.filter = self.filter == filter ? nil : filter
+    }) {
+      ToolBarFilterIconView(for: filter, filteredBy: $filter)
     }
   }
 }

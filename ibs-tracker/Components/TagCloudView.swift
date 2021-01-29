@@ -18,9 +18,7 @@ struct TagCloudView: View {
   var resize: Bool = false
 
   var font: Font {
-    guard resize == true else {
-      return .caption
-    }
+    guard resize == true else { return .caption }
     return fonts[tags.count] ?? .caption2
   }
 

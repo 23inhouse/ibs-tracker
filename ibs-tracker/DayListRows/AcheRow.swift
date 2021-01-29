@@ -20,25 +20,23 @@ struct AcheRowView: View {
       color: ColorCodedContent.scaleColor(for: record.painScore()),
       tags: record.tags
     ) {
-      VStack(alignment: .leading) {
-        HStack(alignment: .top, spacing: 5) {
-          TimestampView(record: record as! JSONIBSRecord)
-          Spacer()
-          VStack(alignment: .trailing, spacing: 5) {
-            if let headache = record.headache {
-              PropertyView(
-                text: record.headacheText(),
-                scale: headache,
-                color: ColorCodedContent.scaleColor(for: record.headache)
-              )
-            }
-            if let pain = record.pain {
-              PropertyView(
-                text: record.painText(),
-                scale: pain,
-                color: ColorCodedContent.scaleColor(for: record.pain)
-              )
-            }
+      HStack(alignment: .top, spacing: 5) {
+        TimestampView(record: record as! JSONIBSRecord)
+        Spacer()
+        VStack(alignment: .trailing, spacing: 5) {
+          if let headache = record.headache {
+            PropertyView(
+              text: record.headacheText(),
+              scale: headache,
+              color: ColorCodedContent.scaleColor(for: record.headache)
+            )
+          }
+          if let pain = record.pain {
+            PropertyView(
+              text: record.painText(),
+              scale: pain,
+              color: ColorCodedContent.scaleColor(for: record.pain)
+            )
           }
         }
       }

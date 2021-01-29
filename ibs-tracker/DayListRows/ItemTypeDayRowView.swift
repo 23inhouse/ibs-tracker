@@ -31,6 +31,15 @@ struct ItemTypeDayRowView: View {
 
 struct ItemTypeDayRowView_Previews: PreviewProvider {
   static var previews: some View {
-    ItemTypeDayRowView(record: JSONIBSRecord(bristolScale: 3, date: Date()))
+    VStack {
+      ItemTypeDayRowView(record: JSONIBSRecord(bristolScale: 3, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: JSONIBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: 2, size: 4))
+      ItemTypeDayRowView(record: JSONIBSRecord(note: "A custome note", date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: JSONIBSRecord(medication: "Vitamin", type: .probiotics, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: JSONIBSRecord(weight: 60, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], bloating: 1, pain: 2))
+      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], headache: 2, pain: 3))
+      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], feel: 4, stress: 5))
+    }
   }
 }

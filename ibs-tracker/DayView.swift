@@ -11,16 +11,6 @@ struct DayView: View {
   @EnvironmentObject private var appState: IBSData
   @State private var date: Date = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date()
 
-  var dateString: String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .long
-    return formatter.string(from: date)
-  }
-
-  func changeDay(by days: Int) {
-    date = Calendar.current.date(byAdding: .day, value: days, to: self.date) ?? date
-  }
-
   var records: [JSONIBSRecord] {
     let dayRecord = appState.dayRecords
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
@@ -29,7 +19,6 @@ struct DayView: View {
   }
 
   var body: some View {
-
     NavigationView {
       List {
         ForEach(records, id: \.self) { record in
@@ -41,39 +30,57 @@ struct DayView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          Text(dateString)
+          Text(dateString())
         }
         ToolbarItem(placement: .navigationBarLeading) {
-          Button(action: {
-            date = Calendar.current.date(byAdding: .day, value: -1, to: date) ?? date
-          }) {
+          Button(action: prevDay) {
             Image(systemName: "chevron.left")
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            date = Calendar.current.date(byAdding: .day, value: 1, to: date) ?? date
-          }) {
+          Button(action: nextDay) {
             Image(systemName: "chevron.right")
           }
         }
       }
-      .gesture(
-        DragGesture(minimumDistance: 20)
-          .onEnded {
-            let start = $0.startLocation
-            let end = $0.location
-            let halfScreenWidth: CGFloat = UIScreen.halfMainWidth
-
-            if start.x < end.x && start.x < halfScreenWidth  {
-              self.changeDay(by: -1)
-            } else if start.x > end.x && start.x > halfScreenWidth {
-              self.changeDay(by: 1)
-            }
-          }
-      )
+      .gesture(swipeGesture)
       .transition(.move(edge: .bottom))
     }
+  }
+
+  var swipeGesture: _EndedGesture<DragGesture> {
+    DragGesture(minimumDistance: 20)
+      .onEnded {
+        let start = $0.startLocation
+        let end = $0.location
+        let halfScreenWidth: CGFloat = UIScreen.halfMainWidth
+
+        if start.x < end.x && start.x < halfScreenWidth  {
+          self.changeDay(by: -1)
+        } else if start.x > end.x && start.x > halfScreenWidth {
+          self.changeDay(by: 1)
+        }
+      }
+  }
+}
+
+private extension DayView {
+  func changeDay(by days: Int) {
+    date = Calendar.current.date(byAdding: .day, value: days, to: self.date) ?? date
+  }
+
+  func dateString() -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    return formatter.string(from: date)
+  }
+
+  func prevDay() {
+    changeDay(by: -1)
+  }
+
+  func nextDay() {
+    changeDay(by: 1)
   }
 }
 
