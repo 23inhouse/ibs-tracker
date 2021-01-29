@@ -47,6 +47,7 @@
 		B54EA7C325B250AB008C4B74 /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7C225B250AB008C4B74 /* TagCloudView.swift */; };
 		B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7CA25B2587B008C4B74 /* BristolView.swift */; };
 		B54EA7D625B25959008C4B74 /* BristolShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA7D525B25959008C4B74 /* BristolShape.swift */; };
+		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
@@ -168,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */,
+				B555934A25C4AC20003F02BB /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +403,7 @@
 			name = "ibs-tracker";
 			packageProductDependencies = (
 				B592C80D25B0F6980040E0AC /* PureSwiftUI */,
+				B555934925C4AC20003F02BB /* GRDB */,
 			);
 			productName = "ibs-tracker";
 			productReference = B5E3A8D225AE205B00DAC8DD /* ibs-tracker.app */;
@@ -475,6 +478,7 @@
 			mainGroup = B5E3A8C925AE205B00DAC8DD;
 			packageReferences = (
 				B592C80C25B0F6980040E0AC /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
+				B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 			);
 			productRefGroup = B5E3A8D325AE205B00DAC8DD /* Products */;
 			projectDirPath = "";
@@ -898,6 +902,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:groue/GRDB.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
 		B592C80C25B0F6980040E0AC /* XCRemoteSwiftPackageReference "pure-swift-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CodeSlicing/pure-swift-ui.git";
@@ -909,6 +921,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B555934925C4AC20003F02BB /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
 		B592C80D25B0F6980040E0AC /* PureSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B592C80C25B0F6980040E0AC /* XCRemoteSwiftPackageReference "pure-swift-ui" */;
