@@ -28,7 +28,7 @@ struct ColorCodedContent {
 
   static func scaleColor(for scale: Int?) -> Color {
     let colors: [Scales: Color] = [
-      .none: .green,
+      .zero: .green,
       .mild: .yellow,
       .moderate: .orange,
       .severe: .red,
@@ -37,7 +37,7 @@ struct ColorCodedContent {
 
     guard let scale = scale else { return .primary }
     let color = Scales(rawValue: scale)
-    return colors[color ?? .none] ?? .primary
+    return colors[color ?? .zero] ?? .primary
   }
 
   static func bristolColor(for scale: Int) -> Color {

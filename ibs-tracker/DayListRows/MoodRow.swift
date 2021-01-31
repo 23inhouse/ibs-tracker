@@ -60,6 +60,8 @@ struct MoodRowView_Previews: PreviewProvider {
       MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 2, stress: 2))
       MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 3, stress: 3))
       MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 4, stress: 4))
+      // error case
+      MoodRowView(for: JSONIBSRecord(date: Date(), tags: [""], feel: 5, stress: 5))
     }
   }
 }

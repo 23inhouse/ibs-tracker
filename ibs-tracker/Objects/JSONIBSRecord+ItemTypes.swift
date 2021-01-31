@@ -27,7 +27,7 @@ extension JSONIBSRecord: AcheRecord {
 
   func headacheText() -> String {
     let texts: [Scales: String] = [
-      .none: "no headache at all",
+      .zero: "no headache at all",
       .mild: "mild headache",
       .moderate: "moderate headache",
       .severe: "severe headache",
@@ -35,12 +35,12 @@ extension JSONIBSRecord: AcheRecord {
     ]
 
     let scaleText = Scales(rawValue: headache ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 
   func painText() -> String {
     let texts: [Scales: String] = [
-      .none: "no pain at all",
+      .zero: "no pain at all",
       .mild: "mild pain",
       .moderate: "moderate pain",
       .severe: "severe pain",
@@ -48,7 +48,7 @@ extension JSONIBSRecord: AcheRecord {
     ]
 
     let scaleText = Scales(rawValue: pain ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 }
 
@@ -95,7 +95,7 @@ extension JSONIBSRecord: FoodRecord {
 
   func riskText() -> String {
     let texts: [Scales: String] = [
-      .none: "no risk at all",
+      .zero: "no risk at all",
       .mild: "mildly risky",
       .moderate: "moderatly risky",
       .severe: "I should't eat this",
@@ -103,12 +103,12 @@ extension JSONIBSRecord: FoodRecord {
     ]
 
     let scaleText = Scales(rawValue: risk ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 
   func sizeText() -> String {
     let texts: [Scales: String] = [
-      .none: "Very small meal",
+      .zero: "Very small meal",
       .mild: "Small meal",
       .moderate: "Normal meal size",
       .severe: "A bit too much",
@@ -116,7 +116,7 @@ extension JSONIBSRecord: FoodRecord {
     ]
 
     let scaleText = Scales(rawValue: size ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 }
 
@@ -135,7 +135,7 @@ extension JSONIBSRecord: GutRecord {
 
   func bloatingText() -> String {
     let texts: [Scales: String] = [
-      .none: "no bloating at all",
+      .zero: "no bloating at all",
       .mild: "mild feeling of bloating",
       .moderate: "moderate feeling of bloating",
       .severe: "severe feeling of bloating",
@@ -143,12 +143,12 @@ extension JSONIBSRecord: GutRecord {
     ]
 
     let scaleText = Scales(rawValue: bloating ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 
   func gutPainText() -> String {
     let texts: [Scales: String] = [
-      .none: "no tummy pain at all",
+      .zero: "no tummy pain at all",
       .mild: "mild tummy pain",
       .moderate: "moderate tummy pain",
       .severe: "severe tummy pain",
@@ -156,7 +156,7 @@ extension JSONIBSRecord: GutRecord {
     ]
 
     let scaleText = Scales(rawValue: pain ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 }
 
@@ -182,7 +182,7 @@ extension JSONIBSRecord: MoodRecord {
 
   func feelText() -> String {
     let texts: [Scales: String] = [
-      .none: "I feel very good",
+      .zero: "I feel very good",
       .mild: "I feel good",
       .moderate: "I feel so so",
       .severe: "I don't feel good",
@@ -190,12 +190,12 @@ extension JSONIBSRecord: MoodRecord {
     ]
 
     let scaleText = Scales(rawValue: feel ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 
   func stressText() -> String {
     let texts: [Scales: String] = [
-      .none: "no stressed at all",
+      .zero: "no stressed at all",
       .mild: "I feel a little stress",
       .moderate: "I feel somewhat stressed",
       .severe: "I feel really stressed",
@@ -203,7 +203,7 @@ extension JSONIBSRecord: MoodRecord {
     ]
 
     let scaleText = Scales(rawValue: stress ?? 0)
-    return texts[scaleText ?? .none] ?? ""
+    return texts[scaleText ?? .zero] ?? ""
   }
 }
 
