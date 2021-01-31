@@ -34,7 +34,7 @@ struct MoodRowView: View {
         VStack(alignment: .trailing, spacing: 4) {
           if let feel = record.feel {
             PropertyView(
-              text: record.moodText(),
+              text: record.feelText(),
               scale: feel,
               color: moodColor
             )

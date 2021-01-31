@@ -171,7 +171,7 @@ protocol MoodRecord : IBSRecord {
   var feel: Int? { get }
   var stress: Int? { get }
   func moodScore() -> Int
-  func moodText() -> String
+  func feelText() -> String
   func stressText() -> String
 }
 
@@ -180,7 +180,7 @@ extension JSONIBSRecord: MoodRecord {
     [feel ?? 0, stress ?? 0].max() ?? 0
   }
 
-  func moodText() -> String {
+  func feelText() -> String {
     let texts: [Scales: String] = [
       .none: "I feel very good",
       .mild: "I feel good",
