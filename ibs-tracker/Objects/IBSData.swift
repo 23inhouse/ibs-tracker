@@ -8,37 +8,45 @@
 import Foundation
 
 class IBSData: ObservableObject {
-  @Published var dayRecords: [DayRecord] = IBSData.loadRecords()
+  @Published var dayRecords: [DayRecord] = IBSData.loadRecordsFromJSON()
 }
 
 private extension IBSData {
-  static func loadRecords() -> [DayRecord] {
-    let allRecords = Bundle.main.decode([JSONIBSRecord].self, from: "records.json")
+  static func loadRecordsFromJSON() -> [DayRecord] {
+    let allRecords = Bundle.main.decode([IBSRecord].self, from: "records.json")
     let sortedRecords = allRecords.sorted { $0.timestamp > $1.timestamp }
 
-    var currentIBSRecords: [JSONIBSRecord] = []
-    var previousKeyString: String?
+    return groupByDay(sortedRecords)
+  }
 
-    var records: [DayRecord] = []
+  static func groupByDay(_ sortedRecords: [IBSRecord]) -> [DayRecord] {
+    guard let firstJSONRecord = sortedRecords.first else { return [] }
+
+    var currentIBSRecords: [IBSRecord] = []
+    var previousKeyString: String? = DayRecord.keyString(for: firstJSONRecord.timestamp)
+    var previousKeyDate: Date?
+
+    var dayRecords: [DayRecord] = []
 
     for record in sortedRecords {
-      guard let keyDate = record.keyDate() else { continue }
-      let keyString = record.keyString()
+      guard let keyString = DayRecord.keyString(for: record.timestamp) else { continue }
+      guard let keyDate = DayRecord.keyDate(for: record.date) else { continue }
 
       if keyString == previousKeyString {
         currentIBSRecords.append(record)
       } else {
-        if currentIBSRecords.isNotEmpty {
-          let dayRecord = DayRecord(date: keyDate, ibsRecords: currentIBSRecords)
-          records.append(dayRecord)
+        if currentIBSRecords.isNotEmpty && previousKeyDate != nil {
+          let dayRecord = DayRecord(date: previousKeyDate!, ibsRecords: currentIBSRecords)
+          dayRecords.append(dayRecord)
         }
 
         currentIBSRecords = []
       }
 
       previousKeyString = keyString
+      previousKeyDate = keyDate
     }
 
-    return records
+    return dayRecords
   }
 }

@@ -22,7 +22,7 @@ enum ItemType: String {
     if let item = ItemType(rawValue: value) {
       self = item
     } else {
-      print("Error: record type out of range")
+      print("Error: ItemType record type [\(value)] out of range")
       self = .none
     }
   }
@@ -42,7 +42,7 @@ enum MedicationType: String {
     if let item = MedicationType(rawValue: value ?? "") {
       self = item
     } else {
-      print("Error: medication record type out of range")
+      print("Error: medication record type [\(String(describing: value))] out of range")
       self = .other
     }
   }
@@ -78,7 +78,7 @@ enum MoodType: Int {
     if let item = MoodType(rawValue: value ?? -1) {
       self = item
     } else {
-      print("Error: mood record type out of range")
+      print("Error: mood record type [\(String(describing: value))] out of range")
       self = .none
     }
   }

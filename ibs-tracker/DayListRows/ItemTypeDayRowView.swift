@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemTypeDayRowView: View {
-  var record: JSONIBSRecord
+  var record: IBSRecord
 
   var body: some View {
     switch record.type {
@@ -32,14 +32,14 @@ struct ItemTypeDayRowView: View {
 struct ItemTypeDayRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack {
-      ItemTypeDayRowView(record: JSONIBSRecord(bristolScale: 3, date: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: JSONIBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: 2, size: 4))
-      ItemTypeDayRowView(record: JSONIBSRecord(note: "A custome note", date: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: JSONIBSRecord(medication: "Vitamin", type: .probiotics, date: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: JSONIBSRecord(weight: 60, date: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], bloating: 1, pain: 2))
-      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], headache: 2, pain: 3))
-      ItemTypeDayRowView(record: JSONIBSRecord(date: Date(), tags: ["tag"], feel: 4, stress: 5))
+      ItemTypeDayRowView(record: IBSRecord(bristolScale: 3, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: 2, size: 4))
+      ItemTypeDayRowView(record: IBSRecord(note: "A custome note", date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(medication: "Vitamin", type: .probiotics, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(weight: 60, date: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(date: Date(), tags: ["tag"], bloating: 1, pain: 2))
+      ItemTypeDayRowView(record: IBSRecord(date: Date(), tags: ["tag"], headache: 2, bodyache: 3))
+      ItemTypeDayRowView(record: IBSRecord(date: Date(), tags: ["tag"], feel: 4, stress: 5))
     }
   }
 }

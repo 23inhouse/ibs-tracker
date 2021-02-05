@@ -16,7 +16,7 @@ struct BowelMovementRowView: View {
 
   var body: some View {
     DayRowView(type: .bm, color: .primary, bristolType: record.bristolType, tags: record.tags) {
-      TimestampView(record: record as! JSONIBSRecord)
+      TimestampView(record: record as! IBSRecord)
       Text(record.bristolDescription())
         .font(.callout)
         .foregroundColor(.secondary)
@@ -28,6 +28,6 @@ struct BowelMovementRowView: View {
 
 struct BowelMovementRowView_Previews: PreviewProvider {
   static var previews: some View {
-    BowelMovementRowView(for: JSONIBSRecord(bristolScale: 4, date: Date(), tags: ["Almost sausage"]))
+    BowelMovementRowView(for: IBSRecord(bristolScale: 4, date: Date(), tags: ["Almost sausage"]))
   }
 }

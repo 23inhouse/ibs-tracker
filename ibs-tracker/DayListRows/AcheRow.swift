@@ -17,11 +17,11 @@ struct AcheRowView: View {
   var body: some View {
     DayRowView(
       type: .ache,
-      color: ColorCodedContent.scaleColor(for: record.painScore()),
+      color: ColorCodedContent.scaleColor(for: record.acheScore()),
       tags: record.tags
     ) {
       HStack(alignment: .top, spacing: 5) {
-        TimestampView(record: record as! JSONIBSRecord)
+        TimestampView(record: record as! IBSRecord)
         Spacer()
         VStack(alignment: .trailing, spacing: 5) {
           if let headache = record.headache {
@@ -31,11 +31,11 @@ struct AcheRowView: View {
               color: ColorCodedContent.scaleColor(for: record.headache)
             )
           }
-          if let pain = record.pain {
+          if let bodyache = record.bodyache {
             PropertyView(
-              text: record.painText(),
-              scale: pain,
-              color: ColorCodedContent.scaleColor(for: record.pain)
+              text: record.bodyacheText(),
+              scale: bodyache,
+              color: ColorCodedContent.scaleColor(for: record.bodyache)
             )
           }
         }
@@ -46,6 +46,6 @@ struct AcheRowView: View {
 
 struct AcheRowView_Previews: PreviewProvider {
   static var previews: some View {
-    AcheRowView(for: JSONIBSRecord(date: Date(), tags: ["Arthritus"], headache: 3, pain: 4))
+    AcheRowView(for: IBSRecord(date: Date(), tags: ["Arthritus"], headache: 3, bodyache: 4))
   }
 }

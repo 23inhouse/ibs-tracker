@@ -16,7 +16,7 @@ struct WeightRowView: View {
 
   var body: some View {
     DayRowView(type: .weight, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! JSONIBSRecord)
+      TimestampView(record: record as! IBSRecord)
       if let weight = record.weight {
         Text(String(format: "%gkg", weight))
           .font(.body)
@@ -30,8 +30,8 @@ struct WeightRowView: View {
 struct WeightRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
-      WeightRowView(for: JSONIBSRecord(weight: 57.8, date: Date(), tags: []))
-      WeightRowView(for: JSONIBSRecord(weight: 72.0, date: Date(), tags: []))
+      WeightRowView(for: IBSRecord(weight: 57.8, date: Date(), tags: []))
+      WeightRowView(for: IBSRecord(weight: 72.0, date: Date(), tags: []))
     }
   }
 }

@@ -11,7 +11,7 @@ struct DayView: View {
   @EnvironmentObject private var appState: IBSData
   @State private var date: Date = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date()
 
-  var records: [JSONIBSRecord] {
+  var records: [IBSRecord] {
     let dayRecord = appState.dayRecords
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 

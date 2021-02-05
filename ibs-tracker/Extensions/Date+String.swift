@@ -14,3 +14,9 @@ extension Date {
     return formatter.string(from: self)
   }
 }
+
+extension Date {
+  func timestampString() -> String {
+    self.string(for: "yyyy-MM-dd HH:mm:ssZ")
+  }
+}
