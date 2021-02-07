@@ -137,6 +137,8 @@ def mode(tracking_id, tracking_type, tracking_text, tag_names)
         submode = :prokinetic
       elsif ["utamine", ].any? { |med| text.include? med }
         submode = :suppliment
+      elsif ["itamin", ].any? { |med| text.include? med }
+        submode = :vitamin
       end
     elsif text.downcase.include? " again"
       food_again = text.downcase[0..-7]

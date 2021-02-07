@@ -36,6 +36,7 @@ enum MedicationType: String {
   case probiotics
   case prokinetic
   case suppliment
+  case vitamin
   case other
 
   init(from value: String?) {
