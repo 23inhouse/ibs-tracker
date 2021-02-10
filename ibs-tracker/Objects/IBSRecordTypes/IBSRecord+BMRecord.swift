@@ -9,14 +9,14 @@ import Foundation
 
 protocol BMRecord : IBSRecordType {
   var bristolType: BristolType? { get }
-  init(bristolScale scale: Int, date: Date, tags: [String])
+  init(bristolScale scale: Int, timestamp: Date, tags: [String])
   func bristolDescription() -> String
 }
 
 extension IBSRecord: BMRecord {
-  init(bristolScale scale: Int, date: Date, tags: [String] = []) {
+  init(bristolScale scale: Int, timestamp: Date, tags: [String] = []) {
     self.type = .bm
-    self.timestamp = date.timestampString()
+    self.timestamp = timestamp
     self.bristolScale = scale
     self.tags = tags
   }

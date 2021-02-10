@@ -28,6 +28,6 @@ struct BowelMovementRowView: View {
 
 struct BowelMovementRowView_Previews: PreviewProvider {
   static var previews: some View {
-    BowelMovementRowView(for: IBSRecord(bristolScale: 4, date: Date(), tags: ["Almost sausage"]))
+    BowelMovementRowView(for: IBSRecord(bristolScale: 4, timestamp: Date(), tags: ["Almost sausage"]))
   }
 }

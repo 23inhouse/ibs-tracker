@@ -10,16 +10,16 @@ import Foundation
 protocol MoodRecord : IBSRecordType {
   var feel: Int? { get }
   var stress: Int? { get }
-  init(date: Date, tags: [String], feel: Int?, stress: Int?)
+  init(timestamp: Date, tags: [String], feel: Int?, stress: Int?)
   func moodScore() -> Int
   func feelText() -> String
   func stressText() -> String
 }
 
 extension IBSRecord: MoodRecord {
-  init(date: Date, tags: [String] = [], feel: Int?, stress: Int?) {
+  init(timestamp: Date, tags: [String] = [], feel: Int?, stress: Int?) {
     self.type = .mood
-    self.timestamp = date.timestampString()
+    self.timestamp = timestamp
     self.feel = feel
     self.stress = stress
     self.tags = tags

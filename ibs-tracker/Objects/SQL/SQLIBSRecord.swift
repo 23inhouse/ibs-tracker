@@ -35,7 +35,7 @@ struct SQLIBSRecord {
 
 extension SQLIBSRecord: Importable {
   init(from record: IBSRecord) {
-    self.timestamp = record.date
+    self.timestamp = record.timestamp
     self.type = record.type.rawValue
 
     self.text = record.text

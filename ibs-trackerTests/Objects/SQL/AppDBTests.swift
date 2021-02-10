@@ -33,7 +33,7 @@ class AppDBTests: XCTestCase {
     try appDB.truncateRecords()
 
     let bundle = Bundle(for: type(of: self))
-    let allRecords = bundle.decode([IBSRecord].self, from: "records-to-import.json")
+    let allRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
     try appDB.importRecords(allRecords)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)

@@ -54,12 +54,12 @@ struct NoteRowView: View {
 struct NoteRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
-      NoteRowView(for: IBSRecord(note: "01234567890123", date: Date(), tags: []))
-      NoteRowView(for: IBSRecord(note: "Sore ankle arthritis", date: Date(), tags: []))
-      NoteRowView(for: IBSRecord(note: "Enema w/ perenterol", date: Date(), tags: []))
-      NoteRowView(for: IBSRecord(note: "", date: Date(), tags: []))
-      NoteRowView(for: IBSRecord(note: "12345678901234567890123456", date: Date(), tags: []))
-      NoteRowView(for: IBSRecord(note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo mauris, pharetra porttitor quam non, vulputate suscipit odio. Donec luctus elit eu risus tristique, at consectetur nulla pretium. Mauris a laoreet mi. In tempus ipsum a dolor sagittis, quis pulvinar ex molestie. Sed sit amet mauris maximus, lacinia nulla a, tincidunt sapien. Vivamus tincidunt nec enim a sollicitudin. Etiam bibendum, risus ut tempus rhoncus, ligula ligula faucibus justo, et consequat nisl urna quis nunc. Aenean sit amet arcu a dui tempus mollis eu cursus metus.", date: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "01234567890123", timestamp: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "Sore ankle arthritis", timestamp: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "Enema w/ perenterol", timestamp: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "", timestamp: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "12345678901234567890123456", timestamp: Date(), tags: []))
+      NoteRowView(for: IBSRecord(note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo mauris, pharetra porttitor quam non, vulputate suscipit odio. Donec luctus elit eu risus tristique, at consectetur nulla pretium. Mauris a laoreet mi. In tempus ipsum a dolor sagittis, quis pulvinar ex molestie. Sed sit amet mauris maximus, lacinia nulla a, tincidunt sapien. Vivamus tincidunt nec enim a sollicitudin. Etiam bibendum, risus ut tempus rhoncus, ligula ligula faucibus justo, et consequat nisl urna quis nunc. Aenean sit amet arcu a dui tempus mollis eu cursus metus.", timestamp: Date(), tags: []))
     }
   }
 }

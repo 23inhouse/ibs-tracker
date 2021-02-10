@@ -13,24 +13,30 @@ class IBSData: ObservableObject {
 
 private extension IBSData {
   static func loadRecordsFromJSON() -> [DayRecord] {
-    let allRecords = Bundle.main.decode([IBSRecord].self, from: "records.json")
-    let sortedRecords = allRecords.sorted { $0.timestamp > $1.timestamp }
+    do {
+      let allRecords = try Bundle.main.decode([IBSRecord].self, from: "records.json")
+      let sortedRecords = allRecords.sorted { $0.timestamp > $1.timestamp }
 
-    return groupByDay(sortedRecords)
+      return groupByDay(sortedRecords)
+    } catch {
+      print("Error: failed to load records from records.json")
+    }
+    return []
   }
 
   static func groupByDay(_ sortedRecords: [IBSRecord]) -> [DayRecord] {
     guard let firstJSONRecord = sortedRecords.first else { return [] }
 
+    let keyStringFormat = "yyyy-MM-dd"
     var currentIBSRecords: [IBSRecord] = []
-    var previousKeyString: String? = DayRecord.keyString(for: firstJSONRecord.timestamp)
+    var previousKeyString: String? = DayRecord.keyDate(for: firstJSONRecord.timestamp)?.string(for: keyStringFormat)
     var previousKeyDate: Date?
 
     var dayRecords: [DayRecord] = []
 
     for record in sortedRecords {
-      guard let keyString = DayRecord.keyString(for: record.timestamp) else { continue }
-      guard let keyDate = DayRecord.keyDate(for: record.date) else { continue }
+      guard let keyString = DayRecord.keyDate(for: record.timestamp)?.string(for: keyStringFormat) else { continue }
+      guard let keyDate = DayRecord.keyDate(for: record.timestamp) else { continue }
 
       if keyString == previousKeyString {
         currentIBSRecords.append(record)

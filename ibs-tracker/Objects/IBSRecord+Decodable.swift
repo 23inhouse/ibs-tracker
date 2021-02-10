@@ -31,7 +31,8 @@ extension IBSRecord: Decodable {
 
     let typeString = try values.decode(String.self, forKey: .type)
     type = ItemType(from: typeString)
-    timestamp = try values.decode(String.self, forKey: .timestamp)
+    let timestampString = try values.decode(String.self, forKey: .timestamp)
+    timestamp = try IBSRecord.timestamp(from: timestampString)
     bristolScale = try values.decodeIfPresent(Int.self, forKey: .bristolScale) ?? 0
     text = try values.decodeIfPresent(String.self, forKey: .text) ?? ""
     size = try values.decodeIfPresent(Int.self, forKey: .size)
@@ -47,5 +48,14 @@ extension IBSRecord: Decodable {
     }
     weight = try values.decodeIfPresent(Double.self, forKey: .weight)
     tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
+  }
+
+  static func timestamp(from timestamp: String) throws -> Date {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
+    guard let date = formatter.date(from: timestamp) else {
+      throw "Couldn't create the date from [\(timestamp)]"
+    }
+    return date
   }
 }

@@ -11,7 +11,7 @@ struct TimestampView: View {
   var record: IBSRecord
 
   var body: some View {
-    Text(record.date.string(for: "h:mm a"))
+    Text(record.timestamp.string(for: "h:mm a"))
       .font(.callout)
       .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
       .frame(alignment: .leading)
@@ -21,7 +21,7 @@ struct TimestampView: View {
 struct TimestampView_Previews: PreviewProvider {
   static var previews: some View {
     TimestampView(
-      record: IBSRecord(date: Date(), tags: ["Pasta"], headache: 3, bodyache: 4)
+      record: IBSRecord(timestamp: Date(), tags: ["Pasta"], headache: 3, bodyache: 4)
     )
   }
 }

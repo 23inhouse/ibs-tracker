@@ -55,13 +55,13 @@ struct MoodRowView: View {
 struct MoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 0, stress: 0))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 1, stress: 1))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 2, stress: 2))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 3, stress: 3))
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 4, stress: 4))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 0, stress: 0))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 1, stress: 1))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 2, stress: 2))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 3, stress: 3))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 4, stress: 4))
       // error case
-      MoodRowView(for: IBSRecord(date: Date(), tags: [""], feel: 5, stress: 5))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: 5, stress: 5))
     }
   }
 }

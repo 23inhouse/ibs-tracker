@@ -47,11 +47,11 @@ struct GutSymptomRowView: View {
 struct GutSymptomRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack{
-      GutSymptomRowView(for: IBSRecord(date: Date(), tags: ["Gurgling sound"], bloating: 0, pain: 0))
-      GutSymptomRowView(for: IBSRecord(date: Date(), tags: ["Gurgling sound"], bloating: 1, pain: 1))
-      GutSymptomRowView(for: IBSRecord(date: Date(), tags: ["Gurgling sound"], bloating: 2, pain: 2))
-      GutSymptomRowView(for: IBSRecord(date: Date(), tags: ["Gurgling sound"], bloating: 3, pain: 3))
-      GutSymptomRowView(for: IBSRecord(date: Date(), tags: ["Gurgling sound"], bloating: 4, pain: 4))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 0, pain: 0))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 1, pain: 1))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 2, pain: 2))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 3, pain: 3))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 4, pain: 4))
     }
   }
 }

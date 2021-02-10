@@ -20,7 +20,7 @@ protocol FoodRecord : IBSRecordType {
 extension IBSRecord: FoodRecord {
   init(food: String, timestamp: Date, tags: [String] = [], risk: Int?, size: Int?) {
     self.type = .food
-    self.timestamp = timestamp.timestampString()
+    self.timestamp = timestamp
     self.text = food
     self.risk = risk
     self.size = size

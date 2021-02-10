@@ -10,16 +10,16 @@ import Foundation
 protocol GutRecord : IBSRecordType {
   var bloating: Int? { get }
   var pain: Int? { get }
-  init(date: Date, tags: [String], bloating: Int?, pain: Int?)
+  init(timestamp: Date, tags: [String], bloating: Int?, pain: Int?)
   func gutScore() -> Int
   func bloatingText() -> String
   func gutPainText() -> String
 }
 
 extension IBSRecord: GutRecord {
-  init(date: Date, tags: [String] = [], bloating: Int?, pain: Int?) {
+  init(timestamp: Date, tags: [String] = [], bloating: Int?, pain: Int?) {
     self.type = .gut
-    self.timestamp = date.timestampString()
+    self.timestamp = timestamp
     self.bloating = bloating
     self.bodyache = pain
     self.tags = tags

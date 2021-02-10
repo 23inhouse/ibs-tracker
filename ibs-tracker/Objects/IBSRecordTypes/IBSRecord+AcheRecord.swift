@@ -10,16 +10,16 @@ import Foundation
 protocol AcheRecord: IBSRecordType {
   var headache: Int? { get }
   var bodyache: Int? { get }
-  init(date: Date, tags: [String], headache: Int?, bodyache: Int?)
+  init(timestamp: Date, tags: [String], headache: Int?, bodyache: Int?)
   func acheScore() -> Int
   func headacheText() -> String
   func bodyacheText() -> String
 }
 
 extension IBSRecord: AcheRecord {
-  init(date: Date, tags: [String] = [], headache: Int?, bodyache: Int?) {
+  init(timestamp: Date, tags: [String] = [], headache: Int?, bodyache: Int?) {
     self.type = .ache
-    self.timestamp = date.timestampString()
+    self.timestamp = timestamp
     self.headache = headache
     self.bodyache = bodyache
     self.tags = tags

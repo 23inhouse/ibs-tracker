@@ -9,13 +9,13 @@ import Foundation
 
 protocol NoteRecord : IBSRecordType {
   var text: String? { get }
-  init(note text: String, date: Date, tags: [String])
+  init(note text: String, timestamp: Date, tags: [String])
 }
 
 extension IBSRecord: NoteRecord {
-  init(note text: String, date: Date, tags: [String] = []) {
+  init(note text: String, timestamp: Date, tags: [String] = []) {
     self.type = .note
-    self.timestamp = date.timestampString()
+    self.timestamp = timestamp
     self.text = text
     self.tags = tags
   }
