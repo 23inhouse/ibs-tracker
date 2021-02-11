@@ -12,11 +12,7 @@ extension AppDB {
     let tags = try tagRecords().reduce(into: [Int64: String]()) { $0[$1.ID!] = $1.name }
 
     let ibsTags = try ibsTagRecords().reduce(into: [Int64: [Int64]]()) {
-      if $0[$1.ibsID] == nil {
-        $0[$1.ibsID] = [$1.tagID]
-      } else {
-        $0[$1.ibsID]?.append($1.tagID)
-      }
+      $0[$1.ibsID, default: []].append($1.tagID)
     }
 
     return try ibsRecords().map { record in
