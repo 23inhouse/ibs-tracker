@@ -24,6 +24,7 @@
 		B5207E9125D3E7530019D18F /* AppDB+MutablePersistableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9025D3E7530019D18F /* AppDB+MutablePersistableRecord.swift */; };
 		B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9525D3E7AE0019D18F /* AppDB+Idable.swift */; };
 		B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9D25D417CD0019D18F /* String+Error.swift */; };
+		B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
 		B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */; };
@@ -122,6 +123,7 @@
 		B5207E9025D3E7530019D18F /* AppDB+MutablePersistableRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+MutablePersistableRecord.swift"; sourceTree = "<group>"; };
 		B5207E9525D3E7AE0019D18F /* AppDB+Idable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+Idable.swift"; sourceTree = "<group>"; };
 		B5207E9D25D417CD0019D18F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
+		B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+DecodableTests.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
 		B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+BMRecord.swift"; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				B5E01A7E25D03B2D00079309 /* SQL */,
+				B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 			files = (
 				B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */,
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
+				B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

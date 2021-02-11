@@ -33,8 +33,8 @@ extension IBSRecord: Decodable {
     type = ItemType(from: typeString)
     let timestampString = try values.decode(String.self, forKey: .timestamp)
     timestamp = try IBSRecord.timestamp(from: timestampString)
-    bristolScale = try values.decodeIfPresent(Int.self, forKey: .bristolScale) ?? 0
-    text = try values.decodeIfPresent(String.self, forKey: .text) ?? ""
+    bristolScale = try values.decodeIfPresent(Int.self, forKey: .bristolScale)
+    text = try values.decodeIfPresent(String.self, forKey: .text)
     size = try values.decodeIfPresent(Int.self, forKey: .size)
     risk = try values.decodeIfPresent(Int.self, forKey: .risk)
     pain = try values.decodeIfPresent(Int.self, forKey: .pain)
