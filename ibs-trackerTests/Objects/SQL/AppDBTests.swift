@@ -9,6 +9,15 @@ import XCTest
 @testable import ibs_tracker
 
 class AppDBTests: XCTestCase {
+  let appDB: AppDB = AppDB.test
+
+  override func setUpWithError() throws {
+  }
+
+  override func tearDownWithError() throws {
+    try appDB.truncateRecords()
+  }
+
   func testAppDB() throws {
     let expectedTables = [
       "IBSRecords",
@@ -16,7 +25,6 @@ class AppDBTests: XCTestCase {
       "IBSTags"
     ]
 
-    let appDB = AppDB.test
     try appDB.dbWriter.read { db in
       let selectSQL = "SELECT name FROM sqlite_master WHERE type='table'"
       let rows = try String.fetchAll(db, sql: selectSQL)
@@ -27,11 +35,23 @@ class AppDBTests: XCTestCase {
     }
   }
 
-  func testAppDBImport() throws {
-    let appDB = AppDB.test
+  func testAppDBExportRecords() throws {
+    continueAfterFailure = false
 
-    try appDB.truncateRecords()
+    let bundle = Bundle(for: type(of: self))
+    let importedRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
 
+    try appDB.importRecords(importedRecords)
+    let exportedRecords = try appDB.exportRecords()
+
+    XCTAssertEqual(exportedRecords.count, importedRecords.count, "There should be \(importedRecords.count) exported records")
+
+    for (i, record) in importedRecords.enumerated() {
+      XCTAssertEqual(exportedRecords[i], record, "The record at index[\(i)] doesn't match")
+    }
+  }
+
+  func testAppDBImportRecords() throws {
     let bundle = Bundle(for: type(of: self))
     let allRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
     try appDB.importRecords(allRecords)

@@ -25,6 +25,7 @@
 		B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9525D3E7AE0019D18F /* AppDB+Idable.swift */; };
 		B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9D25D417CD0019D18F /* String+Error.swift */; };
 		B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */; };
+		B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
 		B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */; };
@@ -124,6 +125,7 @@
 		B5207E9525D3E7AE0019D18F /* AppDB+Idable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+Idable.swift"; sourceTree = "<group>"; };
 		B5207E9D25D417CD0019D18F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+DecodableTests.swift"; sourceTree = "<group>"; };
+		B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDB.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
 		B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+BMRecord.swift"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				B533AC0D25BADAF8009B6290 /* ItemType.swift */,
 				B52E461925CD97FB00C009EC /* IBSRecord.swift */,
 				B52E467C25D0207D00C009EC /* IBSRecord+Decodable.swift */,
+				B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */,
 				B52E464525D01CA500C009EC /* IBSRecordTypes */,
 				B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */,
 				B554CE3325D02D4200E2EE17 /* SQL */,
@@ -630,6 +633,7 @@
 				B54EA7D625B25959008C4B74 /* BristolShape.swift in Sources */,
 				B508994225B36CCA00B1EA03 /* TypeShape.swift in Sources */,
 				B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */,
+				B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */,
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
 				B554CE3925D02D4200E2EE17 /* SQLIBSRecord.swift in Sources */,
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
