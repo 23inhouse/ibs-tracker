@@ -34,10 +34,10 @@ extension AppDB {
         var tagID: Int64?
 
         do {
-          var sqlTagRecord = SQLTagRecord(name: tagName)
+          var sqlTagRecord = SQLTagRecord(type: sqlRecord.type, name: tagName)
           tagID = try insertRecord(&sqlTagRecord)
         } catch {
-          tagID = try selectRecord(in: SQLTagRecord.self, named: tagName)?.ID
+          tagID = try selectRecord(in: SQLTagRecord.self, of: sqlRecord.type, named: tagName)?.ID
         }
 
         guard tagID != nil else {
@@ -79,7 +79,7 @@ private extension AppDB {
   func tagRecords() throws -> [SQLTagRecord] {
     return try dbWriter.read { db in
       let request = SQLTagRecord
-        .select([Column("ID"), Column("name")])
+        .select([Column("ID"), Column("type"), Column("name")])
 
       return try request.fetchAll(db)
     }

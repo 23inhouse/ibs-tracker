@@ -32,11 +32,11 @@ extension AppDB {
     }
   }
 
-  func selectRecord<T>(in _: T.Type, named name: String) throws -> QueryInterfaceRequest<T>.RowDecoder? where T: FetchableRecord & TableRecord {
+  func selectRecord<T>(in _: T.Type, of type: String, named name: String) throws -> QueryInterfaceRequest<T>.RowDecoder? where T: FetchableRecord & TableRecord {
     try dbWriter.read { db in
       let request = T
-        .select([Column("ID"), Column("name")])
-        .filter(key: ["name": name])
+        .select([Column("ID"), Column("type"), Column("name")])
+        .filter(key: ["type": type, "name": name])
         .limit(1)
 
       return try request.fetchOne(db)
