@@ -20,54 +20,54 @@ private extension ContentView {
       DayView()
         .tabItem {
           Image(systemName: "equal.square")
-          Text("Day")
-        }
-      WeekView()
-        .tabItem {
-          Image(systemName: "chart.bar")
-          Text("Week")
-        }
-      ActionGridView()
-        .tabItem {
-          Image(systemName: "plus.circle")
-          Text("Add")
-        }
-      MonthView()
-        .tabItem {
-          Image(systemName: "square.grid.2x2")
-          Text("Month")
+          Text("Today")
         }
       SearchView()
         .tabItem {
           Image(systemName: "magnifyingglass")
           Text("Search")
         }
+      ActionGridView()
+        .tabItem {
+          Image(systemName: "plus.circle")
+          Text("Add")
+        }
+      ReportView()
+        .tabItem {
+          Image(systemName: "chart.bar")
+          Text("Report")
+        }
+      SettingsView()
+        .tabItem {
+          Image(systemName: "gearshape")
+          Text("Settings")
+        }
     }
   }
 }
 
-struct MonthView: View {
+struct ReportView: View {
   var body: some View {
     NavigationView {
-      Text("Month")
+      Text("Report")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           ToolbarItem(placement: .principal) {
-            Text("Weeks of ...")
+            Text("Report")
           }
         }
     }
   }
 }
 
-struct WeekView: View {
+struct SettingsView: View {
   var body: some View {
     NavigationView {
-      Text("Week")
+      Text("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           ToolbarItem(placement: .principal) {
-            Text("Week of ...")
+            Text("Settings")
           }
         }
     }
