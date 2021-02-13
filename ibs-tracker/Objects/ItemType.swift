@@ -31,9 +31,10 @@ enum ItemType: String {
 extension ItemType: CaseIterable {}
 
 enum MedicationType: String {
-  case antibiotics
+  case analgesic
+  case antibiotic
   case antimicrobial
-  case probiotics
+  case probiotic
   case prokinetic
   case suppliment
   case vitamin
