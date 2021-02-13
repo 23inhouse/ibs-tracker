@@ -31,10 +31,13 @@ MEDICATION_NAMES = [
   "oregano",
   "glutamine",
   "garlic capsule",
+  "allicin",
   "iberogast",
   "perenterol",
+  "probiotic",
   "tablet",
   "vitamin",
+  "ibuprofen",
 ]
 
 TAG_TRANSLATIONS = {
@@ -122,27 +125,17 @@ TAG_TRANSLATIONS = {
   "Rindfleisch" => "Beef",
   "Kiwi" => "Kiwi fruit",
   "Rosenkohl" => "Brussels sprouts",
+  "Sauerkraut" => "Sauerkraut",
 }
 
 def mode(tracking_id, tracking_type, tracking_text, tag_names)
   if tracking_type == "food"
     text = text(:food, tracking_id, '', tag_names)
     if MEDICATION_NAMES.any? { |med| text.downcase.include? med.downcase }
-      mode = :medication
-      if ["regano", "arlic capsule", "ablet"].any? { |med| text.include? med }
-        submode = :antimicrobial
-      elsif ["erenterol"].any? { |med| text.include? med }
-        submode = :probiotic
-      elsif ["berogast"].any? { |med| text.include? med }
-        submode = :prokinetic
-      elsif ["utamine", ].any? { |med| text.include? med }
-        submode = :suppliment
-      elsif ["itamin", ].any? { |med| text.include? med }
-        submode = :vitamin
-      end
+      mode, submode = medication?(text)
     elsif text.downcase.include? " again"
       food_again = text.downcase[0..-7]
-      # puts "Search for previous: #{food_again}"
+      # puts "[AGAIN] Search for previous: #{food_again}"
       mode = :food
     else
       mode = :food
@@ -170,7 +163,9 @@ def mode(tracking_id, tracking_type, tracking_text, tag_names)
   elsif tracking_type == "skin"
     mode = :skin
   elsif tracking_type == "notes"
-    if tracking_text.include? "kg"
+    if MEDICATION_NAMES.any? { |med| tracking_text.downcase.include? med.downcase }
+      mode, submode = medication?(tracking_text)
+    elsif tracking_text.include? "kg"
       mode = :weight
     else
       mode = :note
@@ -180,23 +175,66 @@ def mode(tracking_id, tracking_type, tracking_text, tag_names)
   return mode, submode, food_again
 end
 
+def medication?(text)
+  text = text.downcase
+  if MEDICATION_NAMES.any? { |med| text.include? med.downcase }
+    mode = :medication
+    if ["oregano", "garlic capsule", "allicin"].any? { |med| text.include? med }
+      submode = :antimicrobial
+    elsif ["perenterol", "probiotic"].any? { |med| text.include? med }
+      submode = :probiotic
+    elsif ["iberogast"].any? { |med| text.include? med }
+      submode = :prokinetic
+    elsif ["glutamine", ].any? { |med| text.include? med }
+      submode = :suppliment
+    elsif ["vitamin", ].any? { |med| text.include? med }
+      submode = :vitamin
+    elsif ["ibuprofen", ].any? { |med| text.include? med }
+      submode = :analgesic
+    end
+  end
+  return mode, submode
+end
+
 def timestamp(timestamp)
   if !['0', '5'].include? timestamp[15]
+    original_timestamp = timestamp.dup
     precision = 5
     minute = (timestamp[15].to_f / precision).round * precision
     timestamp[15] = minute.to_s[-1]
+    if minute == 10
+      timestamp[14] = (timestamp[14].to_i + 1).to_s
+      if timestamp[14] == '6'
+        timestamp[14] = '0'
+        if timestamp[12] == '9'
+          timestamp[12] = '0'
+          timestamp[11] = (timestamp[11].to_i + 1).to_s
+        else
+          timestamp[12] = (timestamp[12].to_i + 1).to_s
+        end
+
+        # puts "Corrected timestamp: [#{original_timestamp}] -> [#{timestamp}]"
+        if timestamp[11..12] == '25'
+          puts "Error: Invalid timestamp [#{timestamp}]"
+          exit
+        end
+      end
+    end
   end
-  micro_seconds_removed = timestamp.match(/([^\.\+]*).*/i).to_a[1]
-  timestamp = "#{micro_seconds_removed}+00:00"
+  timestamp = "#{timestamp[0..15]}:00+00:00"
 
   return timestamp
 end
 
 def text(mode, id, text, tag_names)
   if [:food, :medication].include? mode
-    puts "no name for [#{id}] in associated_tags" if tag_names[id].nil?
-    tag_names[id] ||= 0
-    tag_names[id][0]
+    if tag_names[id].nil?
+      puts "Warning: No name for [#{id}] in associated_tags using [#{text}]" if !text.include? "Enema"
+      return text
+    else
+      tag_names[id] ||= []
+      tag_names[id][0]
+    end
   elsif mode == :note
     text
   end
@@ -219,8 +257,16 @@ def weight(tracking_text)
   tracking_text.scan(/[\d\.]+/).first
 end
 
-def tags(mode, id, tags, tag_names)
+def tags(mode, id, tags, tag_names, text)
   if [:food, :medication].include? mode
+    if tag_names[id].nil?
+      inline_tags = []
+      inline_tags << "Enema" if text.include? "Enema"
+      inline_tags << "Perenterol" if text.include? "perenterol"
+      inline_tags << "probiotic" if text.include? "probiotic"
+      # return text
+    end
+
     tag_names[id] ||= []
     associated_tags = tag_names[id][1]
   else
@@ -240,7 +286,7 @@ end
 def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_names, food_records)
   if line.nil?
     puts "Error: line is empty"
-    return next_mode, next_submode, prev_timestamp, prev_scale
+    return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
   # assign values
@@ -254,19 +300,23 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
 
   # guard against header rows
   if mode == nil
-    return next_mode, next_submode, prev_timestamp, prev_scale
+    return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
   # guard against empty ache, gut, mood records
   if [:ache, :gut, :mood].include?(mode) && tracking_value.empty?
     # puts [timestamp_tracking[0...16], mode, submode].join(' | ')
-    puts "Error: empty record"
+    puts "Skipping: Empty scale record [#{mode}]"
     puts line
-    return next_mode, next_submode, prev_timestamp, prev_scale
+    return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
-  # timestamp
   next_timestamp = timestamp(timestamp_tracking)
+
+  if !(next_timestamp >= prev_timestamp) && prev_timestamp != 'holder'
+    puts "Error: records are not in ascending order. PREV [#{prev_timestamp}] NEXT [#{next_timestamp}]"
+    exit
+  end
 
   # brististol_scale
   next_bristol_scale = bristol_scale(tracking_value)
@@ -278,16 +328,16 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
   next_text = text(next_mode, tracking_id, tracking_text, tag_names)
 
   # tags
-  next_tags = tags(next_mode, tracking_id, tracking_tags, tag_names)
+  next_tags = tags(next_mode, tracking_id, tracking_tags, tag_names, tracking_text)
 
   # weight
-  next_weight = weight(tracking_text)
+  next_weight = weight(tracking_text) if mode == :weight
 
   if food_again
-    # puts "Searching... (#{food_records.count}) records for [#{food_again}]"
+    # puts "[AGAIN]   Searching... (#{food_records.count}) records for [#{food_again}]"
     food_records.reverse.each do |food_name, food_tags|
       if food_name.downcase.include? food_again
-        # puts "Found: [#{food_name}]"
+        # puts "[AGAIN]   Found: [#{food_name}]"
         next_text = "#{food_name}"
         next_tags = food_tags
         food_records = []
@@ -296,47 +346,56 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     end
   end
 
+  if next_mode == :food && next_tags.empty?
+    # puts "Skipping: [#{next_mode}] #{next_timestamp} #{next_text} [No tags]"
+    return next_mode, next_submode, prev_timestamp, prev_scale, food_records
+  end
+
+  if ![:gut, :mood, :ache].include?(next_mode) && next_mode == prev_mode && next_timestamp == prev_timestamp
+    puts "Duplicate: [#{next_mode}] #{next_timestamp}"
+  end
+
   lines = []
   case mode
   when :bm
     lines << <<-END
-      |     "type": "#{next_mode}",
-      |     "timestamp": "#{timestamp(timestamp_tracking)}",
-      |     "bristol-scale": #{next_bristol_scale},
-      |     "tags": #{next_tags}
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{timestamp(timestamp_tracking)}",
+      |       "bristol-scale": #{next_bristol_scale},
+      |       "tags": #{next_tags}
     END
   when :gut, :ache, :mood
     if next_submode != prev_submode && next_mode == prev_mode && next_timestamp == prev_timestamp
       lines << <<-END
-        |     "type": "#{next_mode}",
-        |     "timestamp": "#{next_timestamp}",
-        |     "#{prev_submode}": #{prev_scale},
-        |     "#{next_submode}": #{next_scale},
-        |     "tags": #{next_tags}
+        |       "type": "#{next_mode}",
+        |       "timestamp": "#{next_timestamp}",
+        |       "#{prev_submode}": #{prev_scale},
+        |       "#{next_submode}": #{next_scale},
+        |       "tags": #{next_tags}
       END
       merged_properties = true
     else
       lines << <<-END
-        |     "type": "#{next_mode}",
-        |     "timestamp": "#{next_timestamp}",
-        |     "#{next_submode}": #{next_scale},
-        |     "tags": #{next_tags}
+        |       "type": "#{next_mode}",
+        |       "timestamp": "#{next_timestamp}",
+        |       "#{next_submode}": #{next_scale},
+        |       "tags": #{next_tags}
       END
     end
   when :medication
     lines << <<-END.gsub(/^%m\|/, '\n')
-      |     "type": "#{next_mode}",
-      |     "timestamp": "#{next_timestamp}",
-      |     "medication-type": "#{next_submode}",
-      |     "text": "#{next_text}",
-      |     "tags": #{next_tags}
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{next_timestamp}",
+      |       "medication-type": "#{next_submode}",
+      |       "text": "#{next_text}",
+      |       "tags": #{next_tags}
     END
   when :weight
     lines << <<-END
-      |     "type": "#{next_mode}",
-      |     "timestamp": "#{next_timestamp}",
-      |     "weight": #{next_weight},
-      |     "tags": #{next_tags}
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{next_timestamp}",
+      |       "weight": #{next_weight},
+      |       "tags": #{next_tags}
     END
   when :food
     size = "null"
@@ -345,24 +404,24 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     risk = "null"
     risk = "2" if next_text.downcase.include? "questionable"
     lines << <<-END
-      |     "type": "#{next_mode}",
-      |     "timestamp": "#{next_timestamp}",
-      |     "text": "#{next_text}",
-      |     "size": #{size},
-      |     "risk": #{risk},
-      |     "tags": #{next_tags}
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{next_timestamp}",
+      |       "text": "#{next_text}",
+      |       "size": #{size},
+      |       "risk": #{risk},
+      |       "tags": #{next_tags}
     END
     food_records << [next_text, next_tags]
   else # :note
     lines << <<-END
-      |     "type": "#{next_mode}",
-      |     "timestamp": "#{next_timestamp}",
-      |     "text": "#{next_text}",
-      |     "tags": #{next_tags}
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{next_timestamp}",
+      |       "text": "#{next_text}",
+      |       "tags": #{next_tags}
     END
   end
 
-  return next_mode, next_submode, next_timestamp, next_scale, lines, merged_properties
+  return next_mode, next_submode, next_timestamp, next_scale, food_records, lines, merged_properties
 end
 
 #
@@ -388,35 +447,41 @@ end
 File.readlines(TRACKING_MEAL_ITEMS_TSV_FILENAME).each do |line|
   parts = line.split(/\t/)
 
+  next if parts[0] == 'Realmidstring'
+
   id = parts[1]
   name = parts[7]
   name = name.match(/\"?([^"]*)\"?/i).to_a[1] # remove quotes
 
+  custom_tags = parts[4]
+  untranslated_tags = parts[3]
+
   tags = []
-  if !parts[4].empty?
-    custom_food_item_ids = parts[4]
+  if !custom_tags.empty?
+    custom_food_item_ids = custom_tags
     custom_food_item_ids = custom_food_item_ids.split(" ★ ")
 
     custom_food_item_ids.map do |item_id|
       tag_names[item_id] ||= []
       tags << tag_names[item_id][1]
     end
-  elsif !parts[3].empty?
-    tags = parts[3]
-    tags = tags.split(" ★ ")
-    tags.collect! { |tag| tag.match(/\"?([^"]*)\"?/i).to_a[1] }
-    translated_tags = []
-    for tag in tags
+  end
+
+  if !untranslated_tags.empty?
+    # tags = untranslated_tags
+    untranslated_tags = untranslated_tags.split(" ★ ")
+    untranslated_tags.collect! { |tag| tag.match(/\"?([^"]*)\"?/i).to_a[1] }
+    # translated_tags = []
+    for tag in untranslated_tags
       # # store untranslated tags for google translate
       # next if all_tags[tag]
       # all_tags[tag] = all_tags.values.last + 1
 
       puts "Error: missing translation for [#{tag}]" if !TAG_TRANSLATIONS[tag]
       safe_tag = TAG_TRANSLATIONS[tag] || tag
-      translated_tags << safe_tag
+      # translated_tags << safe_tag
+      tags << safe_tag
     end
-    tags = translated_tags
-
   end
 
   tag_names[id] = [name, tags.compact] if tag_names[id].nil? || tag_names[id].empty?
@@ -448,8 +513,9 @@ open(OUTPUT_FILENAME, 'w') do |output_file|
   next_lines = nil
 
   output_file << <<-END.gsub(/^\s+\|/, '')
-    |[
-    |  {
+    |{
+    |  "ibs-records": [
+    |    {
   END
 
   File.readlines(TRACKING_POINTS_TSV_FILENAME).each do |line|
@@ -460,19 +526,20 @@ open(OUTPUT_FILENAME, 'w') do |output_file|
     next_submode,
     next_timestamp,
     next_scale,
+    food_records,
     next_lines,
     merged_properties = process_line(line, next_mode, next_submode, next_timestamp, prev_scale, tag_names, food_records)
 
     if [next_mode, next_timestamp].include?(nil) && !line.include?("Realmidstring")
-      puts "Error missing next_mode or next_timestamp"
-      puts line
+      puts "Error: Missing next_mode or next_timestamp"
+      puts "  #{line}"
     end
 
     if !prev_lines.nil? && !merged_properties
       if !prev_line.nil?
         output_file << <<-END.gsub(/^\s+\|/, '').gsub(/^%m\|/, '\n')
-          |  },
-          |  {
+          |    },
+          |    {
         END
       end
       prev_line = line
@@ -484,9 +551,9 @@ open(OUTPUT_FILENAME, 'w') do |output_file|
     prev_lines = next_lines
   end
 
-
   output_file << <<-END.gsub(/^\s+\|/, '').gsub(/^%m\|/, '\n')
-    |  }
-    |]
+    |    }
+    |  ]
+    |}
   END
 end
