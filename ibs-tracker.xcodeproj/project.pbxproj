@@ -36,7 +36,7 @@
 		B52E466825D01FB700C009EC /* IBSRecord+NoteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E466725D01FB700C009EC /* IBSRecord+NoteRecord.swift */; };
 		B52E466D25D01FF300C009EC /* IBSRecord+WeightRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E466C25D01FF300C009EC /* IBSRecord+WeightRecord.swift */; };
 		B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E467125D0203100C009EC /* IBSRecordType.swift */; };
-		B52E467D25D0207D00C009EC /* IBSRecord+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E467C25D0207D00C009EC /* IBSRecord+Decodable.swift */; };
+		B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */; };
 		B533AC0E25BADAF8009B6290 /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC0D25BADAF8009B6290 /* ItemType.swift */; };
 		B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC1225BADCA3009B6290 /* MedicationShape.swift */; };
 		B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC1725BADCBA009B6290 /* WeightShape.swift */; };
@@ -65,6 +65,8 @@
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21025D728E8009C6285 /* String+Url.swift */; };
+		B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */; };
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
@@ -137,7 +139,7 @@
 		B52E466725D01FB700C009EC /* IBSRecord+NoteRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+NoteRecord.swift"; sourceTree = "<group>"; };
 		B52E466C25D01FF300C009EC /* IBSRecord+WeightRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+WeightRecord.swift"; sourceTree = "<group>"; };
 		B52E467125D0203100C009EC /* IBSRecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecordType.swift; sourceTree = "<group>"; };
-		B52E467C25D0207D00C009EC /* IBSRecord+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+Decodable.swift"; sourceTree = "<group>"; };
+		B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+Codable.swift"; sourceTree = "<group>"; };
 		B533AC0D25BADAF8009B6290 /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		B533AC1225BADCA3009B6290 /* MedicationShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationShape.swift; sourceTree = "<group>"; };
 		B533AC1725BADCBA009B6290 /* WeightShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightShape.swift; sourceTree = "<group>"; };
@@ -164,6 +166,8 @@
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B592C7EE25AFA5A70040E0AC /* records.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = records.json; sourceTree = "<group>"; };
+		B5A5D21025D728E8009C6285 /* String+Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Url.swift"; sourceTree = "<group>"; };
+		B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlTests.swift"; sourceTree = "<group>"; };
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
@@ -263,7 +267,7 @@
 				B533AC0D25BADAF8009B6290 /* ItemType.swift */,
 				B5A5D22125D72E6B009C6285 /* DataSet.swift */,
 				B52E461925CD97FB00C009EC /* IBSRecord.swift */,
-				B52E467C25D0207D00C009EC /* IBSRecord+Decodable.swift */,
+				B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */,
 				B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */,
 				B52E464525D01CA500C009EC /* IBSRecordTypes */,
 				B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */,
@@ -339,6 +343,7 @@
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207E9D25D417CD0019D18F /* String+Error.swift */,
+				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
 			);
 			path = Extensions;
@@ -350,6 +355,14 @@
 				B5E3A8D925AE205D00DAC8DD /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5A5D21825D72B1A009C6285 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B5B3260D25B31DD10023E286 /* Protocols */ = {
@@ -436,6 +449,7 @@
 		B5E3A8E625AE205D00DAC8DD /* ibs-trackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				B5A5D21825D72B1A009C6285 /* Extensions */,
 				B5E3A8E725AE205D00DAC8DD /* ibs_trackerTests.swift */,
 				B5E01A7D25D03B2D00079309 /* Objects */,
 				B5E3A8E925AE205D00DAC8DD /* Info.plist */,
@@ -606,6 +620,7 @@
 			files = (
 				B52E466D25D01FF300C009EC /* IBSRecord+WeightRecord.swift in Sources */,
 				B54EA7A425B21873008C4B74 /* Bristol2Shape.swift in Sources */,
+				B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */,
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
 				B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */,
 				B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */,
@@ -619,7 +634,7 @@
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
-				B52E467D25D0207D00C009EC /* IBSRecord+Decodable.swift in Sources */,
+				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
 				B54EA79F25B21455008C4B74 /* Bristol7Shape.swift in Sources */,
@@ -682,6 +697,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */,
 				B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */,
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
 				B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */,

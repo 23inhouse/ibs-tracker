@@ -15,10 +15,32 @@ struct DataSet {
   }
 }
 
-extension DataSet: Decodable {
+extension DataSet: Codable {
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     ibsRecords = try values.decodeIfPresent([IBSRecord].self, forKey: .ibsRecords) ?? []
+  }
+
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+
+    try container.encodeIfPresent(ibsRecords, forKey: .ibsRecords)
+  }
+}
+
+extension DataSet {
+  static func encode(_ dataSet: DataSet) -> String? {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+
+    do {
+      let data = try encoder.encode(dataSet)
+      return String(data: data, encoding: .utf8)
+    } catch {
+      print("Error: \(error)")
+    }
+
+    return nil
   }
 }
