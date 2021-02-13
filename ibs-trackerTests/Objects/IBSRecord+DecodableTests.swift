@@ -21,7 +21,8 @@ class IBSRecord_DecodableTests: XCTestCase {
   func testDecode() throws {
     let bundle = Bundle(for: type(of: self))
 
-    let ibsRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
+    let ibsRecords = dataSet.ibsRecords
     XCTAssertEqual(ibsRecords.count, 12, "No ibs records imported")
 
     XCTAssertEqual(ibsRecords[0].type, .gut, "Should be a gut record")

@@ -39,7 +39,8 @@ class AppDBTests: XCTestCase {
     continueAfterFailure = false
 
     let bundle = Bundle(for: type(of: self))
-    let importedRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
+    let importedRecords = dataSet.ibsRecords
 
     try appDB.importRecords(importedRecords)
     let exportedRecords = try appDB.exportRecords()
@@ -53,8 +54,8 @@ class AppDBTests: XCTestCase {
 
   func testAppDBImportRecords() throws {
     let bundle = Bundle(for: type(of: self))
-    let allRecords = try bundle.decode([IBSRecord].self, from: "records-to-import.json")
-    try appDB.importRecords(allRecords)
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
+    try appDB.importRecords(dataSet.ibsRecords)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
     XCTAssertEqual(ibsRecordCount, 12, "No ibs records imported")

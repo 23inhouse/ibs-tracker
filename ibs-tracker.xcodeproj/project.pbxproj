@@ -65,6 +65,7 @@
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
@@ -163,6 +164,7 @@
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B592C7EE25AFA5A70040E0AC /* records.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = records.json; sourceTree = "<group>"; };
+		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				B5421F4425BD822C00E8B5AA /* IBSData.swift */,
 				B5421F4C25BD84E900E8B5AA /* DayRecord.swift */,
 				B533AC0D25BADAF8009B6290 /* ItemType.swift */,
+				B5A5D22125D72E6B009C6285 /* DataSet.swift */,
 				B52E461925CD97FB00C009EC /* IBSRecord.swift */,
 				B52E467C25D0207D00C009EC /* IBSRecord+Decodable.swift */,
 				B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */,
@@ -649,6 +652,7 @@
 				B508993D25B36C0B00B1EA03 /* IBSItemView.swift in Sources */,
 				B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
+				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
 				B5421F3B25BCC78300E8B5AA /* ItemTypeDayRowView.swift in Sources */,
 				B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */,
