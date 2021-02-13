@@ -66,6 +66,7 @@ struct SettingsView: View {
           url.fetchJSON() { data in
             AppDB.app.importJSON(data, truncate: truncate)
             DispatchQueue.main.async {
+              appState.reloadRecordsFromSQL()
               isImporting = false
             }
           }
