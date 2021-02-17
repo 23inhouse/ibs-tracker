@@ -8,15 +8,14 @@
 import Foundation
 
 extension Date {
+  static let format = "yyyy-MM-dd HH:mm:ss Z"
   func string(for format: String) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = format
     return formatter.string(from: self)
   }
-}
 
-extension Date {
   func timestampString() -> String {
-    self.string(for: "yyyy-MM-dd HH:mm:ssZ")
+    self.string(for: Date.format)
   }
 }

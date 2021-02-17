@@ -52,7 +52,8 @@ extension IBSRecord: Codable {
 
   static func timestamp(from timestamp: String) throws -> Date {
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
+    formatter.timeZone = TimeZone(identifier: "UTC")
+    formatter.dateFormat = Date.format
     guard let date = formatter.date(from: timestamp) else {
       throw "Couldn't create the date from [\(timestamp)]"
     }

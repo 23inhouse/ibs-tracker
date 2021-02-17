@@ -11,7 +11,7 @@ import XCTest
 class IBSRecord_DecodableTests: XCTestCase {
 
   func testTimestamp() throws {
-    let timestampString = "2020-10-31 21:45:19+00:00"
+    let timestampString = "2020-10-31 21:45:19 +0000"
     let expectDate = Date(timeIntervalSince1970: 1604180719)
 
     let timestamp = try IBSRecord.timestamp(from: timestampString)

@@ -2,19 +2,19 @@
   "ibs-records": [
     {
        "type": "gut",
-       "timestamp": "2020-10-31 21:45:19+00:00",
+       "timestamp": "2020-10-31 21:45:00 +0000",
        "bloating": 2,
        "tags": ["Burping", "Gurgling sound"]
     },
     {
        "type": "gut",
-       "timestamp": "2020-10-31 21:15:00+00:00",
+       "timestamp": "2020-10-31 21:15:00 +0000",
        "bloating": 2,
        "tags": ["Burping"]
     },
     {
        "type": "food",
-       "timestamp": "2020-10-31 21:00:00+00:00",
+       "timestamp": "2020-10-31 21:00:00 +0000",
        "text": "Chips & peanut butter",
        "size": null,
        "risk": null,
@@ -22,45 +22,45 @@
     },
     {
        "type": "ache",
-       "timestamp": "2020-10-31 19:25:00+00:00",
+       "timestamp": "2020-10-31 19:30:00 +0000",
        "headache": 2,
        "tags": ["Pressure-like"]
     },
     {
        "type": "mood",
-       "timestamp": "2020-10-31 19:25:00+00:00",
+       "timestamp": "2020-10-31 19:25:00 +0000",
        "feel": 1,
        "stress": 1,
        "tags": ["I live in Berlin"]
     },
     {
        "type": "medication",
-       "timestamp": "2020-10-31 18:50:59+00:00",
+       "timestamp": "2020-10-31 18:50:00 +0000",
        "medication-type": "antimicrobial",
        "text": "Oregano & garlic tablets",
        "tags": ["Garlic", "Oregano"]
     },
     {
        "type": "bm",
-       "timestamp": "2020-10-31 13:45:00+00:00",
+       "timestamp": "2020-10-31 13:45:00 +0000",
        "bristol-scale": 5,
        "tags": ["Almost sausage"]
     },
     {
        "type": "note",
-       "timestamp": "2020-10-31 10:15:00+00:00",
+       "timestamp": "2020-10-31 10:15:00 +0000",
        "text": "See diary",
        "tags": []
     },
     {
        "type": "bm",
-       "timestamp": "2020-10-31 10:10:00+00:00",
+       "timestamp": "2020-10-31 10:10:00 +0000",
        "bristol-scale": 6,
        "tags": ["Partial evacuation", "Almost sausage"]
     },
     {
        "type": "food",
-       "timestamp": "2020-10-30 18:55:52+00:00",
+       "timestamp": "2020-10-30 18:55:00 +0000",
        "text": "Chips",
        "size": null,
        "risk": null,
@@ -68,13 +68,13 @@
     },
     {
        "type": "weight",
-       "timestamp": "2020-10-28 08:55:11+00:00",
+       "timestamp": "2020-10-28 08:55:00 +0000",
        "weight": 60.8,
        "tags": []
     },
     {
        "type": "ache",
-       "timestamp": "2020-10-23 10:20:22+00:00",
+       "timestamp": "2020-10-23 10:20:00 +0000",
        "bodyache": 2,
        "tags": []
     }

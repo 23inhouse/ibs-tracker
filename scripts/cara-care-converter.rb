@@ -221,7 +221,7 @@ def timestamp(timestamp)
       end
     end
   end
-  timestamp = "#{timestamp[0..15]}:00+00:00"
+  timestamp = "#{timestamp[0..15]}:00 +0000"
 
   return timestamp
 end
