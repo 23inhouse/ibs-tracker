@@ -27,14 +27,14 @@ struct AcheRowView: View {
           if let headache = record.headache {
             PropertyView(
               text: record.headacheText(),
-              scale: headache,
+              scale: headache.rawValue,
               color: ColorCodedContent.scaleColor(for: record.headache)
             )
           }
           if let bodyache = record.bodyache {
             PropertyView(
               text: record.bodyacheText(),
-              scale: bodyache,
+              scale: bodyache.rawValue,
               color: ColorCodedContent.scaleColor(for: record.bodyache)
             )
           }
@@ -46,6 +46,6 @@ struct AcheRowView: View {
 
 struct AcheRowView_Previews: PreviewProvider {
   static var previews: some View {
-    AcheRowView(for: IBSRecord(timestamp: Date(), tags: ["Arthritus"], headache: 3, bodyache: 4))
+    AcheRowView(for: IBSRecord(timestamp: Date(), tags: ["Arthritus"], headache: .moderate, bodyache: .severe))
   }
 }

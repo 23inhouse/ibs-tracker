@@ -8,16 +8,16 @@
 import Foundation
 
 protocol AcheRecord: IBSRecordType {
-  var headache: Int? { get }
-  var bodyache: Int? { get }
-  init(timestamp: Date, tags: [String], headache: Int?, bodyache: Int?)
-  func acheScore() -> Int
+  var headache: Scales? { get }
+  var bodyache: Scales? { get }
+  init(timestamp: Date, tags: [String], headache: Scales?, bodyache: Scales?)
+  func acheScore() -> Scales
   func headacheText() -> String
   func bodyacheText() -> String
 }
 
 extension IBSRecord: AcheRecord {
-  init(timestamp: Date, tags: [String] = [], headache: Int?, bodyache: Int?) {
+  init(timestamp: Date, tags: [String] = [], headache: Scales?, bodyache: Scales?) {
     self.type = .ache
     self.timestamp = timestamp
     self.headache = headache
@@ -25,8 +25,9 @@ extension IBSRecord: AcheRecord {
     self.tags = tags
   }
 
-  func acheScore() -> Int {
-    [headache ?? 0, bodyache ?? 0].max() ?? 0
+  func acheScore() -> Scales {
+    let worstScore = [headache?.rawValue ?? 0, bodyache?.rawValue ?? 0].max()
+    return Scales(rawValue: worstScore ?? -1) ?? .zero
   }
 
   func headacheText() -> String {
@@ -38,8 +39,7 @@ extension IBSRecord: AcheRecord {
       .extreme: "extreme headache",
     ]
 
-    let scaleText = Scales(rawValue: headache ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[headache ?? .zero] ?? ""
   }
 
   func bodyacheText() -> String {
@@ -51,7 +51,6 @@ extension IBSRecord: AcheRecord {
       .extreme: "extreme pain",
     ]
 
-    let scaleText = Scales(rawValue: bodyache ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[bodyache ?? .zero] ?? ""
   }
 }

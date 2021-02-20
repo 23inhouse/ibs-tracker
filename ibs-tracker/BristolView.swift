@@ -23,7 +23,7 @@ struct BristolView: View {
           .stroke(style: strokeStyle)
       }
     }
-    .foregroundColor(ColorCodedContent.bristolColor(for: scale?.rawValue ?? 0))
+    .foregroundColor(ColorCodedContent.bristolColor(for: scale ?? .none))
     .frame(frameSize, frameSize)
   }
 }

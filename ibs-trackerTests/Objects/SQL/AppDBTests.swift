@@ -43,12 +43,13 @@ class AppDBTests: XCTestCase {
     let importedRecords = dataSet.ibsRecords
 
     try appDB.importRecords(importedRecords)
-    let exportedRecords = try appDB.exportRecords()
+    let comparableExportedRecords = try appDB.exportRecords().map { IBSRecord(comparable: $0) }
 
-    XCTAssertEqual(exportedRecords.count, importedRecords.count, "There should be \(importedRecords.count) exported records")
+    XCTAssertEqual(comparableExportedRecords.count, importedRecords.count, "There should be \(importedRecords.count) exported records")
 
     for (i, record) in importedRecords.enumerated() {
-      XCTAssertEqual(exportedRecords[i], record, "The record at index[\(i)] doesn't match")
+      let comparableRecord = IBSRecord(comparable: record)
+      XCTAssertEqual(comparableExportedRecords[i], comparableRecord, "The record at index[\(i)] doesn't match")
     }
   }
 

@@ -18,7 +18,7 @@ struct WeightRowView: View {
     DayRowView(type: .weight, color: .secondary, tags: record.tags) {
       TimestampView(record: record as! IBSRecord)
       if let weight = record.weight {
-        Text(String(format: "%gkg", weight))
+        Text("\(String(describing: weight))kg")
           .font(.body)
           .foregroundColor(.blue)
           .frame(minHeight: 25, alignment: .leading)

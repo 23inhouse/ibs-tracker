@@ -7,18 +7,16 @@
 
 import Foundation
 
-protocol FoodRecord : IBSRecordType {
+protocol FoodRecord: IBSRecordType {
   var text: String? { get }
-  var size: Int? { get }
-  var risk: Int? { get }
-  init(food: String, timestamp: Date, tags: [String], risk: Int?, size: Int?)
+  var size: FoodSizes? { get }
+  var risk: Scales? { get }
+  init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?)
   func FoodScore() -> Int
-  func riskText() -> String
-  func sizeText() -> String
 }
 
 extension IBSRecord: FoodRecord {
-  init(food: String, timestamp: Date, tags: [String] = [], risk: Int?, size: Int?) {
+  init(food: String, timestamp: Date, tags: [String] = [], risk: Scales?, size: FoodSizes?) {
     self.type = .food
     self.timestamp = timestamp
     self.text = food
@@ -28,32 +26,6 @@ extension IBSRecord: FoodRecord {
   }
 
   func FoodScore() -> Int {
-    [risk ?? 0, size ?? 0].max() ?? 0
-  }
-
-  func riskText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no risk at all",
-      .mild: "mildly risky",
-      .moderate: "moderatly risky",
-      .severe: "I should't eat this",
-      .extreme: "I know I can't eat this",
-    ]
-
-    let scaleText = Scales(rawValue: risk ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
-  }
-
-  func sizeText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "Very small meal",
-      .mild: "Small meal",
-      .moderate: "Normal meal size",
-      .severe: "A bit too much",
-      .extreme: "Way to much",
-    ]
-
-    let scaleText = Scales(rawValue: size ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    [risk?.rawValue ?? 0, size?.rawValue ?? 0].max() ?? 0
   }
 }

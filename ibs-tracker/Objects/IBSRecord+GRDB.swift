@@ -14,20 +14,18 @@ extension IBSRecord {
     self.type = ItemType(rawValue: record.type) ?? .none
 
     self.text = record.text
-    self.bristolScale = record.bristolScale
-    self.size = record.size
-    self.risk = record.risk
-    self.bloating = record.bloating
-    self.pain = record.pain
-    self.bodyache = record.bodyache
-    self.headache = record.headache
-    self.feel = record.feel
-    self.stress = record.stress
-    self.medicationType = MedicationType(rawValue: record.medicationType ?? "") ?? .none
+    self.bristolScale = BristolType(rawValue: record.bristolScale ?? -1)
+    self.size = FoodSizes(rawValue: record.size ?? -1)
+    self.risk = Scales(rawValue: record.risk ?? -1)
+    self.bloating = Scales(rawValue: record.bloating ?? -1)
+    self.pain = Scales(rawValue: record.pain ?? -1)
+    self.bodyache = Scales(rawValue: record.bodyache ?? -1)
+    self.headache = Scales(rawValue: record.headache ?? -1)
+    self.feel = MoodType(rawValue: record.feel ?? -1)
+    self.stress = Scales(rawValue: record.stress ?? -1)
+    self.medicationType = MedicationType(rawValue: record.medicationType ?? "") ?? MedicationType.none
     self.weight = record.weight
 
-    if let tags = tags {
-      self.tags = tags
-    }
+    self.tags = tags ?? []
   }
 }

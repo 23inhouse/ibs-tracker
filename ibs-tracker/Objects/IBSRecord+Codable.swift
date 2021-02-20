@@ -33,20 +33,38 @@ extension IBSRecord: Codable {
     type = ItemType(from: typeString)
     let timestampString = try values.decode(String.self, forKey: .timestamp)
     timestamp = try IBSRecord.timestamp(from: timestampString)
-    bristolScale = try values.decodeIfPresent(Int.self, forKey: .bristolScale)
+    if let bristolScaleInt = try values.decodeIfPresent(Int.self, forKey: .bristolScale) {
+      bristolScale = BristolType(rawValue: bristolScaleInt)
+    }
     text = try values.decodeIfPresent(String.self, forKey: .text)
-    size = try values.decodeIfPresent(Int.self, forKey: .size)
-    risk = try values.decodeIfPresent(Int.self, forKey: .risk)
-    pain = try values.decodeIfPresent(Int.self, forKey: .pain)
-    bloating = try values.decodeIfPresent(Int.self, forKey: .bloating)
-    bodyache = try values.decodeIfPresent(Int.self, forKey: .bodyache)
-    headache = try values.decodeIfPresent(Int.self, forKey: .headache)
-    feel = try values.decodeIfPresent(Int.self, forKey: .feel)
-    stress = try values.decodeIfPresent(Int.self, forKey: .stress)
+    if let sizeInt = try values.decodeIfPresent(Int.self, forKey: .size) {
+      size = FoodSizes(rawValue: sizeInt)
+    }
+    if let riskInt = try values.decodeIfPresent(Int.self, forKey: .risk) {
+      risk = Scales(rawValue: riskInt)
+    }
+    if let painInt = try values.decodeIfPresent(Int.self, forKey: .pain) {
+      pain = Scales(rawValue: painInt)
+    }
+    if let bloatingInt = try values.decodeIfPresent(Int.self, forKey: .bloating) {
+      bloating = Scales(rawValue: bloatingInt)
+    }
+    if let bodyacheInt = try values.decodeIfPresent(Int.self, forKey: .bodyache) {
+      bodyache = Scales(rawValue: bodyacheInt)
+    }
+    if let headacheInt = try values.decodeIfPresent(Int.self, forKey: .headache) {
+      headache = Scales(rawValue: headacheInt)
+    }
+    if let feelInt = try values.decodeIfPresent(Int.self, forKey: .feel) {
+      feel = MoodType(rawValue: feelInt)
+    }
+    if let stressInt = try values.decodeIfPresent(Int.self, forKey: .stress) {
+      stress = Scales(rawValue: stressInt)
+    }
     if let medicationTypeString = try values.decodeIfPresent(String.self, forKey: .medicationType) {
       medicationType = MedicationType(from: medicationTypeString)
     }
-    weight = try values.decodeIfPresent(Double.self, forKey: .weight)
+    weight = try values.decodeIfPresent(Decimal.self, forKey: .weight)
     tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
   }
 
@@ -65,18 +83,17 @@ extension IBSRecord: Codable {
 
     try container.encode(type.rawValue, forKey: .type)
     try container.encode(timestamp.timestampString(), forKey: .timestamp)
-    try container.encodeIfPresent(size, forKey: .size)
 
     try container.encodeIfPresent(bristolScale, forKey: .bristolScale)
     try container.encodeIfPresent(text, forKey: .text)
-    try container.encodeIfPresent(size, forKey: .size)
-    try container.encodeIfPresent(risk, forKey: .risk)
-    try container.encodeIfPresent(pain, forKey: .pain)
-    try container.encodeIfPresent(bloating, forKey: .bloating)
-    try container.encodeIfPresent(bodyache, forKey: .bodyache)
-    try container.encodeIfPresent(headache, forKey: .headache)
-    try container.encodeIfPresent(feel, forKey: .feel)
-    try container.encodeIfPresent(stress, forKey: .stress)
+    try container.encodeIfPresent(size?.rawValue, forKey: .size)
+    try container.encodeIfPresent(risk?.rawValue, forKey: .risk)
+    try container.encodeIfPresent(pain?.rawValue, forKey: .pain)
+    try container.encodeIfPresent(bloating?.rawValue, forKey: .bloating)
+    try container.encodeIfPresent(bodyache?.rawValue, forKey: .bodyache)
+    try container.encodeIfPresent(headache?.rawValue, forKey: .headache)
+    try container.encodeIfPresent(feel?.rawValue, forKey: .feel)
+    try container.encodeIfPresent(stress?.rawValue, forKey: .stress)
     try container.encodeIfPresent(medicationType?.rawValue, forKey: .medicationType)
     try container.encodeIfPresent(weight, forKey: .weight)
     try container.encodeIfPresent(tags, forKey: .tags)

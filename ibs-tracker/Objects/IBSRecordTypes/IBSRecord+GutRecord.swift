@@ -8,16 +8,16 @@
 import Foundation
 
 protocol GutRecord : IBSRecordType {
-  var bloating: Int? { get }
-  var pain: Int? { get }
-  init(timestamp: Date, tags: [String], bloating: Int?, pain: Int?)
-  func gutScore() -> Int
+  var bloating: Scales? { get }
+  var pain: Scales? { get }
+  init(timestamp: Date, tags: [String], bloating: Scales?, pain: Scales?)
+  func gutScore() -> Scales
   func bloatingText() -> String
   func gutPainText() -> String
 }
 
 extension IBSRecord: GutRecord {
-  init(timestamp: Date, tags: [String] = [], bloating: Int?, pain: Int?) {
+  init(timestamp: Date, tags: [String] = [], bloating: Scales?, pain: Scales?) {
     self.type = .gut
     self.timestamp = timestamp
     self.bloating = bloating
@@ -25,8 +25,9 @@ extension IBSRecord: GutRecord {
     self.tags = tags
   }
 
-  func gutScore() -> Int {
-    [bloating ?? 0, bodyache ?? 0].max() ?? 0
+  func gutScore() -> Scales {
+    let worstScore = [bloating?.rawValue ?? 0, bodyache?.rawValue ?? 0].max() ?? -1
+    return Scales(rawValue: worstScore) ?? .zero
   }
 
   func bloatingText() -> String {
@@ -38,8 +39,7 @@ extension IBSRecord: GutRecord {
       .extreme: "extreme feeling of bloating",
     ]
 
-    let scaleText = Scales(rawValue: bloating ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[bloating ?? .zero] ?? ""
   }
 
   func gutPainText() -> String {
@@ -51,7 +51,6 @@ extension IBSRecord: GutRecord {
       .extreme: "extreme tummy pain",
     ]
 
-    let scaleText = Scales(rawValue: bodyache ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[bodyache ?? .zero] ?? ""
   }
 }

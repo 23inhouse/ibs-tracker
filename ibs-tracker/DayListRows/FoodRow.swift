@@ -28,6 +28,6 @@ struct FoodRowView: View {
 
 struct FoodRowView_Previews: PreviewProvider {
   static var previews: some View {
-    FoodRowView(for: IBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: 0, size: 0))
+    FoodRowView(for: IBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: .zero, size: .normal))
   }
 }

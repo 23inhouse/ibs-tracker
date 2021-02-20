@@ -10,17 +10,6 @@ import PureSwiftUI
 
 private let strokeStyle = StrokeStyle(lineWidth: 5, lineJoin: .round)
 
-enum BristolType: Int {
-  case b0 = 0
-  case b1 = 1
-  case b2 = 2
-  case b3 = 3
-  case b4 = 4
-  case b5 = 5
-  case b6 = 6
-  case b7 = 7
-}
-
 struct BristolShape: Shape {
 
   var scale: BristolType

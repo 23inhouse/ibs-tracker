@@ -8,16 +8,16 @@
 import Foundation
 
 protocol MoodRecord : IBSRecordType {
-  var feel: Int? { get }
-  var stress: Int? { get }
-  init(timestamp: Date, tags: [String], feel: Int?, stress: Int?)
+  var feel: MoodType? { get }
+  var stress: Scales? { get }
+  init(timestamp: Date, tags: [String], feel: MoodType?, stress: Scales?)
   func moodScore() -> Int
   func feelText() -> String
   func stressText() -> String
 }
 
 extension IBSRecord: MoodRecord {
-  init(timestamp: Date, tags: [String] = [], feel: Int?, stress: Int?) {
+  init(timestamp: Date, tags: [String] = [], feel: MoodType?, stress: Scales?) {
     self.type = .mood
     self.timestamp = timestamp
     self.feel = feel
@@ -26,20 +26,19 @@ extension IBSRecord: MoodRecord {
   }
 
   func moodScore() -> Int {
-    [feel ?? 0, stress ?? 0].max() ?? 0
+    [feel?.rawValue ?? 0, stress?.rawValue ?? 0].max() ?? 0
   }
 
   func feelText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "I feel very good",
-      .mild: "I feel good",
-      .moderate: "I feel so so",
-      .severe: "I don't feel good",
-      .extreme: "I feel awful",
+    let texts: [MoodType: String] = [
+      .great: "I feel very good",
+      .good: "I feel good",
+      .soso: "I feel so so",
+      .bad: "I don't feel good",
+      .awful: "I feel awful",
     ]
 
-    let scaleText = Scales(rawValue: feel ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[feel ?? .none] ?? ""
   }
 
   func stressText() -> String {
@@ -51,8 +50,7 @@ extension IBSRecord: MoodRecord {
       .extreme: "I feel extremely stressed",
     ]
 
-    let scaleText = Scales(rawValue: stress ?? 0)
-    return texts[scaleText ?? .zero] ?? ""
+    return texts[stress ?? .zero] ?? ""
   }
 }
 

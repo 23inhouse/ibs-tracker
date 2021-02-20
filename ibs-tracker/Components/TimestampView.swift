@@ -21,7 +21,7 @@ struct TimestampView: View {
 struct TimestampView_Previews: PreviewProvider {
   static var previews: some View {
     TimestampView(
-      record: IBSRecord(timestamp: Date(), tags: ["Pasta"], headache: 3, bodyache: 4)
+      record: IBSRecord(timestamp: Date(), tags: ["Pasta"], headache: .moderate, bodyache: .severe)
     )
   }
 }

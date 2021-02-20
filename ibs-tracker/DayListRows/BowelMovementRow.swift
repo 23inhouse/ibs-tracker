@@ -15,7 +15,7 @@ struct BowelMovementRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .bm, color: .primary, bristolType: record.bristolType, tags: record.tags) {
+    DayRowView(type: .bm, color: .primary, bristolScale: record.bristolScale, tags: record.tags) {
       TimestampView(record: record as! IBSRecord)
       Text(record.bristolDescription())
         .font(.callout)

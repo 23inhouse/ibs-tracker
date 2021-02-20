@@ -19,6 +19,6 @@ class String_UrlTests: XCTestCase {
     let resources = try url?.resourceValues(forKeys:[.fileSizeKey])
     let fileSize = resources?.fileSize
 
-    XCTAssertEqual(fileSize, 2046, "json file contents should be 2046bytes")
+    XCTAssertEqual(fileSize, 2032, "json file contents should be 2032bytes")
   }
 }

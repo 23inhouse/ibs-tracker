@@ -27,14 +27,14 @@ struct GutSymptomRowView: View {
           if let bloating = record.bloating {
             PropertyView(
               text: record.bloatingText(),
-              scale: bloating,
+              scale: bloating.rawValue,
               color: ColorCodedContent.scaleColor(for: record.bloating)
             )
           }
           if let pain = record.pain {
             PropertyView(
               text: record.gutPainText(),
-              scale: pain,
+              scale: pain.rawValue,
               color: ColorCodedContent.scaleColor(for: record.pain)
             )
           }
@@ -47,11 +47,11 @@ struct GutSymptomRowView: View {
 struct GutSymptomRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack{
-      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 0, pain: 0))
-      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 1, pain: 1))
-      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 2, pain: 2))
-      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 3, pain: 3))
-      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: 4, pain: 4))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: .zero, pain: .zero))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: .mild, pain: .mild))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: .moderate, pain: .moderate))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: .severe, pain: .severe))
+      GutSymptomRowView(for: IBSRecord(timestamp: Date(), tags: ["Gurgling sound"], bloating: .extreme, pain: .extreme))
     }
   }
 }

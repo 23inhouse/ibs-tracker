@@ -26,7 +26,7 @@ struct ColorCodedContent {
     return .secondary
   }
 
-  static func scaleColor(for scale: Int?) -> Color {
+  static func scaleColor(for scale: Scales?) -> Color {
     let colors: [Scales: Color] = [
       .zero: .green,
       .mild: .yellow,
@@ -36,11 +36,10 @@ struct ColorCodedContent {
     ]
 
     guard let scale = scale else { return .primary }
-    let color = Scales(rawValue: scale)
-    return colors[color ?? .zero] ?? .primary
+    return colors[scale] ?? .primary
   }
 
-  static func bristolColor(for scale: Int) -> Color {
+  static func bristolColor(for scale: BristolType) -> Color {
     let colors: [BristolType: Color] = [
       .b0: .red,
       .b1: .orange,
@@ -52,11 +51,10 @@ struct ColorCodedContent {
       .b7: .red,
     ]
 
-    let color = BristolType(rawValue: scale)
-    return colors[color ?? .b1] ?? .secondary
+    return colors[scale] ?? .secondary
   }
 
-  static func moodColor(for scale: Int?) -> Color {
+  static func moodColor(for scale: MoodType?) -> Color {
     let colors: [MoodType: Color] = [
       .great: .green,
       .good: .green,
@@ -66,7 +64,6 @@ struct ColorCodedContent {
     ]
 
     guard let scale = scale else { return .secondary }
-    let color = MoodType(rawValue: scale)
-    return colors[color ?? .soso] ?? .secondary
+    return colors[scale] ?? .secondary
   }
 }

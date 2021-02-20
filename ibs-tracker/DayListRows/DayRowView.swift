@@ -16,9 +16,9 @@ struct DayRowView<Content>: View where Content: View {
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
-  init(type: ItemType, color: Color, bristolType: BristolType? = nil, tags: [String]? = [], @ViewBuilder content: @escaping () -> Content) {
+  init(type: ItemType, color: Color, bristolScale: BristolType? = nil, tags: [String]? = [], @ViewBuilder content: @escaping () -> Content) {
     self.type = type
-    self.bristolType = bristolType ?? .b4
+    self.bristolType = bristolScale ?? .b4
     self.color = color
     self.content = content
     self.tags = tags ?? []

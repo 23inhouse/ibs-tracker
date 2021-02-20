@@ -33,13 +33,13 @@ struct ItemTypeDayRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack {
       ItemTypeDayRowView(record: IBSRecord(bristolScale: 3, timestamp: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: IBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: 2, size: 4))
+      ItemTypeDayRowView(record: IBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: .mild, size: .large))
       ItemTypeDayRowView(record: IBSRecord(note: "A custome note", timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(medication: "Vitamin", type: .probiotic, timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(weight: 60, timestamp: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], bloating: 1, pain: 2))
-      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], headache: 2, bodyache: 3))
-      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], feel: 4, stress: 5))
+      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], bloating: .mild, pain: .moderate))
+      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], headache: .moderate, bodyache: .severe))
+      ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], feel: .awful, stress: .extreme))
     }
   }
 }

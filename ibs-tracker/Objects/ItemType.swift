@@ -30,6 +30,20 @@ enum ItemType: String {
 
 extension ItemType: CaseIterable {}
 
+enum BristolType: Int {
+  case none = -1
+  case b0 = 0
+  case b1 = 1
+  case b2 = 2
+  case b3 = 3
+  case b4 = 4
+  case b5 = 5
+  case b6 = 6
+  case b7 = 7
+}
+
+extension BristolType: Encodable {}
+
 enum MedicationType: String {
   case analgesic
   case antibiotic
@@ -39,8 +53,14 @@ enum MedicationType: String {
   case suppliment
   case vitamin
   case other
+  case none
 
   init(from value: String?) {
+    guard value != nil else {
+      self = .none
+      return
+    }
+
     if let item = MedicationType(rawValue: value ?? "") {
       self = item
     } else {
@@ -51,12 +71,12 @@ enum MedicationType: String {
 }
 
 enum Scales: Int {
+  case none = -1
   case zero = 0
   case mild = 1
   case moderate = 2
   case severe = 3
   case extreme = 4
-  case none
 
   init(from value: Int?) {
     if let item = Scales(rawValue: value ?? -1) {
@@ -69,19 +89,37 @@ enum Scales: Int {
 }
 
 enum MoodType: Int {
+  case none = -1
   case great = 0
   case good = 1
   case soso = 2
   case bad = 3
   case awful = 4
-  case none
 
-  init(from value: Int?) {
+  init?(from value: Int?) {
     if let item = MoodType(rawValue: value ?? -1) {
       self = item
     } else {
       print("Error: mood record type [\(String(describing: value))] out of range")
-      self = .none
+      return nil
+    }
+  }
+}
+
+enum FoodSizes: Int {
+  case none = -1
+  case tiny = 0
+  case small = 1
+  case normal = 2
+  case large = 3
+  case huge = 4
+
+  init?(from value: Int?) {
+    if let item = FoodSizes(rawValue: value ?? -1) {
+      self = item
+    } else {
+      print("Error: food record size [\(String(describing: value))] out of range")
+      return nil
     }
   }
 }

@@ -27,7 +27,7 @@ struct SQLIBSRecord {
   var feel: Int?
   var stress: Int?
   var medicationType: String?
-  var weight: Double?
+  var weight: Decimal?
 
   var createdAt: Date? = Date()
   var updatedAt: Date? = Date()
@@ -39,15 +39,15 @@ extension SQLIBSRecord: Importable {
     self.type = record.type.rawValue
 
     self.text = record.text
-    self.bristolScale = record.bristolScale
-    self.size = record.size
-    self.risk = record.risk
-    self.bloating = record.bloating
-    self.pain = record.pain
-    self.bodyache = record.bodyache
-    self.headache = record.headache
-    self.feel = record.feel
-    self.stress = record.stress
+    self.bristolScale = record.bristolScale?.rawValue
+    self.size = record.size?.rawValue
+    self.risk = record.risk?.rawValue
+    self.bloating = record.bloating?.rawValue
+    self.pain = record.pain?.rawValue
+    self.bodyache = record.bodyache?.rawValue
+    self.headache = record.headache?.rawValue
+    self.feel = record.feel?.rawValue
+    self.stress = record.stress?.rawValue
     self.medicationType = record.medicationType?.rawValue
     self.weight = record.weight
   }
