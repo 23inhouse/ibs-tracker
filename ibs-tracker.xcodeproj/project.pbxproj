@@ -27,6 +27,7 @@
 		B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */; };
 		B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */; };
 		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
+		B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207F0325D606310019D18F /* Date+Nearest.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
 		B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */; };
@@ -65,6 +66,7 @@
 		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */; };
 		B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */; };
 		B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */; };
 		B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */; };
@@ -134,6 +136,7 @@
 		B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+DecodableTests.swift"; sourceTree = "<group>"; };
 		B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDB.swift"; sourceTree = "<group>"; };
 		B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDatePicker.swift; sourceTree = "<group>"; };
+		B5207F0325D606310019D18F /* Date+Nearest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Nearest.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
 		B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+BMRecord.swift"; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 		B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+Records.swift"; sourceTree = "<group>"; };
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
+		B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+NearestTests.swift"; sourceTree = "<group>"; };
 		B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIActivityViewController.swift; sourceTree = "<group>"; };
 		B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitBridge.swift; sourceTree = "<group>"; };
@@ -342,6 +346,7 @@
 			children = (
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
+				B5207F0325D606310019D18F /* Date+Nearest.swift */,
 				B5207E9D25D417CD0019D18F /* String+Error.swift */,
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
@@ -371,6 +376,7 @@
 		B5A5D21825D72B1A009C6285 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */,
 				B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */,
 			);
 			path = Extensions;
@@ -638,6 +644,7 @@
 				B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */,
 				B533AC0E25BADAF8009B6290 /* ItemType.swift in Sources */,
 				B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */,
+				B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */,
 				B5E9D50B25B6343700E52387 /* DayRowView.swift in Sources */,
 				B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */,
 				B54EA7B125B24275008C4B74 /* Bristol1Shape.swift in Sources */,
@@ -717,6 +724,7 @@
 				B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */,
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
 				B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */,
+				B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
