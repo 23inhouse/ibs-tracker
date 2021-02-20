@@ -26,6 +26,7 @@
 		B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9D25D417CD0019D18F /* String+Error.swift */; };
 		B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */; };
 		B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */; };
+		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
 		B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */; };
@@ -65,6 +66,8 @@
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */; };
+		B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */; };
 		B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21025D728E8009C6285 /* String+Url.swift */; };
 		B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */; };
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
@@ -129,6 +132,7 @@
 		B5207E9D25D417CD0019D18F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+DecodableTests.swift"; sourceTree = "<group>"; };
 		B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDB.swift"; sourceTree = "<group>"; };
+		B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDatePicker.swift; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
 		B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+BMRecord.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B592C7EE25AFA5A70040E0AC /* records.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = records.json; sourceTree = "<group>"; };
+		B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIActivityViewController.swift; sourceTree = "<group>"; };
+		B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitBridge.swift; sourceTree = "<group>"; };
 		B5A5D21025D728E8009C6285 /* String+Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Url.swift"; sourceTree = "<group>"; };
 		B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlTests.swift"; sourceTree = "<group>"; };
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
@@ -357,6 +363,16 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B5A5D1FF25D70A12009C6285 /* UIKitBridge */ = {
+			isa = PBXGroup;
+			children = (
+				B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */,
+				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
+				B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */,
+			);
+			path = UIKitBridge;
+			sourceTree = "<group>";
+		};
 		B5A5D21825D72B1A009C6285 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +448,7 @@
 				B592C7B825AF9E590040E0AC /* Extensions */,
 				B58197C525AF7CB50080A6B8 /* data */,
 				B592C7F925AFAAE30040E0AC /* Supporting Files */,
+				B5A5D1FF25D70A12009C6285 /* UIKitBridge */,
 				B5E3A8DB25AE205D00DAC8DD /* Preview Content */,
 				B5E3A8DE25AE205D00DAC8DD /* Info.plist */,
 			);
@@ -624,6 +641,7 @@
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
 				B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */,
 				B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */,
+				B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */,
 				B533AC0E25BADAF8009B6290 /* ItemType.swift in Sources */,
 				B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */,
 				B5E9D50B25B6343700E52387 /* DayRowView.swift in Sources */,
@@ -637,6 +655,7 @@
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
+				B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */,
 				B54EA79F25B21455008C4B74 /* Bristol7Shape.swift in Sources */,
 				B5E9D53725B64D5900E52387 /* PropertyView.swift in Sources */,
 				B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */,
@@ -658,6 +677,7 @@
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
 				B52E465425D01DFA00C009EC /* IBSRecord+FoodRecord.swift in Sources */,
 				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
+				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
 				B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */,
