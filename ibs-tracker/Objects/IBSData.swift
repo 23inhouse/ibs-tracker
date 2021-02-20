@@ -9,14 +9,23 @@ import Foundation
 
 class IBSData: ObservableObject {
   @Published var dayRecords: [DayRecord]
+
+  static var current = IBSData(.current)
+
   private var allRecords: [IBSRecord] {
     didSet {
       self.dayRecords = IBSData.groupByDay(allRecords)
     }
   }
 
-  init() {
-    self.allRecords = IBSData.loadRecordsFromSQL()
+  private var appDB: AppDB
+
+  init(_ appDB: AppDB = .current) {
+    guard !(ibs_trackerApp.isTestRunning() && appDB != .test) else {
+      fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
+    }
+    self.appDB = appDB
+    self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
     self.dayRecords = IBSData.groupByDay(allRecords)
   }
 }
@@ -24,7 +33,7 @@ class IBSData: ObservableObject {
 extension IBSData {
   static func loadRecordsFromSQL() -> [IBSRecord] {
     do {
-      return try AppDB.app.exportRecords()
+      return try AppDB.current.exportRecords()
     } catch {
       print("Error: Couldn't load records from sql: \(error)")
     }
@@ -71,7 +80,7 @@ extension IBSData {
   }
 
   func reloadRecordsFromSQL() {
-    allRecords = IBSData.loadRecordsFromSQL()
+    allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
   }
 }
 
@@ -108,5 +117,14 @@ private extension IBSData {
     }
 
     return dayRecords
+  }
+
+  static func loadRecordsFromSQL(appDB: AppDB) -> [IBSRecord] {
+    do {
+      return try appDB.exportRecords()
+    } catch {
+      print("Error: Couldn't load records from sql: \(error)")
+    }
+    return []
   }
 }

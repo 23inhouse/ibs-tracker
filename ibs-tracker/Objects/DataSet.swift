@@ -32,7 +32,7 @@ extension DataSet: Codable {
 extension DataSet {
   static func jsonFileUrl() -> URL? {
     do {
-      let records: [IBSRecord] = try AppDB.app.exportRecords()
+      let records: [IBSRecord] = try AppDB.current.exportRecords()
       let dataSet = DataSet(ibsRecords: records)
       return DataSet.encode(dataSet)?.url(path: "export.json")
     } catch {

@@ -10,10 +10,11 @@ import GRDB
 
 struct AppDB {
   let dbWriter: DatabaseWriter
-  private let environment: Environment
-
-  static let app = makeShared(.app)
+  static let current: AppDB = ibs_trackerApp.isTestRunning() ? test : app
   static let test = makeShared(.test)
+
+  private let environment: Environment
+  private static let app = makeShared(.app)
 
   enum Environment {
     case test
@@ -40,6 +41,12 @@ struct AppDB {
     }
 
     return migrator
+  }
+}
+
+extension AppDB: Equatable {
+  static func == (lhs: AppDB, rhs: AppDB) -> Bool {
+    lhs.environment == rhs.environment
   }
 }
 

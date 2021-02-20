@@ -28,7 +28,7 @@ struct ibs_trackerApp: App {
     WindowGroup {
       if loadApp {
         ContentView()
-          .environmentObject(IBSData())
+          .environmentObject(IBSData.current)
       } else {
         ZStack {}
       }

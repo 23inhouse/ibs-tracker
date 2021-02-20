@@ -64,7 +64,7 @@ struct SettingsView: View {
         Button(action: {
           isImporting = true
           url.fetchJSON() { data in
-            AppDB.app.importJSON(data, truncate: truncate)
+            AppDB.current.importJSON(data, truncate: truncate)
             DispatchQueue.main.async {
               appState.reloadRecordsFromSQL()
               isImporting = false
