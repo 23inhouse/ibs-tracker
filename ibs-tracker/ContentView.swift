@@ -60,20 +60,6 @@ struct ReportView: View {
   }
 }
 
-struct SettingsView: View {
-  var body: some View {
-    NavigationView {
-      Text("Settings")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          ToolbarItem(placement: .principal) {
-            Text("Settings")
-          }
-        }
-    }
-  }
-}
-
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()

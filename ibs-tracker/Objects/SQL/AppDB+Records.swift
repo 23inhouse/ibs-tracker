@@ -5,6 +5,7 @@
 //  Created by Benjamin Lewis on 2/2/21.
 //
 
+import Foundation
 import GRDB
 
 extension AppDB {
@@ -20,6 +21,19 @@ extension AppDB {
       let tagIDs = ibsTags[recordID] ?? []
       let tagNames:[String] = tagIDs.compactMap { tagID in tags[tagID] }
       return IBSRecord(from: record, tags: tagNames)
+    }
+  }
+
+  func importJSON(_ data: Data, truncate: Bool = false) {
+    let jsonDecoder = JSONDecoder()
+    do {
+      let dataSet = try jsonDecoder.decode(DataSet.self, from: data)
+      if truncate {
+        try truncateRecords()
+      }
+      try importRecords(dataSet.ibsRecords)
+    } catch {
+      print("Error: \(error)")
     }
   }
 

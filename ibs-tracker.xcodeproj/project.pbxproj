@@ -66,11 +66,13 @@
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C7EF25AFA5A70040E0AC /* records.json in Resources */ = {isa = PBXBuildFile; fileRef = B592C7EE25AFA5A70040E0AC /* records.json */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */; };
 		B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */; };
 		B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */; };
 		B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21025D728E8009C6285 /* String+Url.swift */; };
 		B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */; };
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
+		B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
@@ -170,11 +172,13 @@
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B592C7EE25AFA5A70040E0AC /* records.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = records.json; sourceTree = "<group>"; };
+		B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIActivityViewController.swift; sourceTree = "<group>"; };
 		B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitBridge.swift; sourceTree = "<group>"; };
 		B5A5D21025D728E8009C6285 /* String+Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Url.swift"; sourceTree = "<group>"; };
 		B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlTests.swift"; sourceTree = "<group>"; };
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
+		B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FetchJSON.swift"; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207E9D25D417CD0019D18F /* String+Error.swift */,
+				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
 			);
@@ -438,6 +443,7 @@
 				B5E3A8D725AE205B00DAC8DD /* ContentView.swift */,
 				B5EE367825BC863000DC9D74 /* DayView.swift */,
 				B5EE367325BC85C600DC9D74 /* SearchView.swift */,
+				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
@@ -654,6 +660,7 @@
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
+				B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
 				B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */,
 				B54EA79F25B21455008C4B74 /* Bristol7Shape.swift in Sources */,
@@ -705,6 +712,7 @@
 				B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */,
 				B5207E9125D3E7530019D18F /* AppDB+MutablePersistableRecord.swift in Sources */,
 				B52E465E25D01EFE00C009EC /* IBSRecord+MedicationRecord.swift in Sources */,
+				B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */,
 				B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */,
 				B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */,
 				B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */,

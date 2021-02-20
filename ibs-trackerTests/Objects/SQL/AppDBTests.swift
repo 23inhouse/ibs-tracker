@@ -52,6 +52,24 @@ class AppDBTests: XCTestCase {
     }
   }
 
+  func testAppDBImportJSON() throws {
+    let bundle = Bundle(for: type(of: self))
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
+    _ = DataSet.encode(dataSet)!.url(path: "records-to-be-imported.json")
+
+    let data = "records-to-be-imported.json".dataAtPath()!
+    appDB.importJSON(data)
+
+    let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
+    XCTAssertEqual(ibsRecordCount, 12, "No ibs records imported")
+
+    let ibsTagRecordCount = try appDB.countRecords(in: SQLIBSTagRecord.self)
+    XCTAssertEqual(ibsTagRecordCount, 13, "No ibs-tag records imported")
+
+    let tagRecordCount = try appDB.countRecords(in: SQLTagRecord.self)
+    XCTAssertEqual(tagRecordCount, 10, "No tag records imported")
+  }
+
   func testAppDBImportRecords() throws {
     let bundle = Bundle(for: type(of: self))
     let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
