@@ -5,6 +5,7 @@
 //  Created by Benjamin Lewis on 10/2/21.
 //
 
+import Foundation
 import GRDB
 
 extension AppDB {
@@ -14,9 +15,9 @@ extension AppDB {
     }
   }
 
-  func deleteRecords<T>(in table: T.Type, ids: [Int64]) throws where T: MutablePersistableRecord {
+  func deleteRecords<T>(in _: T.Type, ids: [Int64]) throws where T: MutablePersistableRecord {
     try dbWriter.write { db in
-      _ = try table.deleteAll(db, keys: ids)
+      _ = try T.deleteAll(db, keys: ids)
     }
   }
 
@@ -35,8 +36,17 @@ extension AppDB {
   func selectRecord<T>(in _: T.Type, of type: String, named name: String) throws -> QueryInterfaceRequest<T>.RowDecoder? where T: FetchableRecord & TableRecord {
     try dbWriter.read { db in
       let request = T
-        .select([Column("ID"), Column("type"), Column("name")])
         .filter(key: ["type": type, "name": name])
+        .limit(1)
+
+      return try request.fetchOne(db)
+    }
+  }
+
+  func selectRecord<T>(in _: T.Type, of type: String, at timestamp: Date) throws -> QueryInterfaceRequest<T>.RowDecoder? where T: FetchableRecord & TableRecord & MutablePersistableRecord {
+    try dbWriter.read { db in
+      let request = T
+        .filter(key: ["type": type, "timestamp": timestamp])
         .limit(1)
 
       return try request.fetchOne(db)

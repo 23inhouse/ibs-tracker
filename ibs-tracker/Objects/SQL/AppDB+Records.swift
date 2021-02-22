@@ -41,26 +41,7 @@ extension AppDB {
     let sortedRecords = allRecords.sorted { $0.timestamp < $1.timestamp }
 
     for record in sortedRecords {
-      var sqlRecord = SQLIBSRecord(from: record)
-      let recordID = try insertRecord(&sqlRecord)
-
-      for tagName in record.tags {
-        var tagID: Int64?
-
-        do {
-          var sqlTagRecord = SQLTagRecord(type: sqlRecord.type, name: tagName)
-          tagID = try insertRecord(&sqlTagRecord)
-        } catch {
-          tagID = try selectRecord(in: SQLTagRecord.self, of: sqlRecord.type, named: tagName)?.ID
-        }
-
-        guard tagID != nil else {
-          throw "No tagID found or inserted for tag named [\(tagName)]"
-        }
-
-        var sqlIBSTagRecord = SQLIBSTagRecord(ibsID: recordID, tagID: tagID!)
-        _ = try insertRecord(&sqlIBSTagRecord)
-      }
+      try record.insertSQL(into: self)
     }
   }
 
@@ -69,13 +50,23 @@ extension AppDB {
     try deleteAllRecords(in: SQLIBSRecord.self)
     try deleteAllRecords(in: SQLTagRecord.self)
   }
+
+  func ibsTagIDs(ibsID: Int64) throws -> [Int64?] {
+    return try dbWriter.read { db in
+      let request = SQLIBSTagRecord
+        .select([Column("ID"), Column("ibsID"), Column("tagID")])
+        .filter(Column("ibsID") == ibsID)
+
+      return try request.fetchAll(db).map { $0.ID }
+    }
+  }
 }
 
 private extension AppDB {
   func ibsRecords() throws -> [SQLIBSRecord] {
     return try dbWriter.read { db in
       let request = SQLIBSRecord
-        .order(Column("timestamp").desc)
+        .order([Column("timestamp").desc, Column("type").desc])
 
       return try request.fetchAll(db)
     }

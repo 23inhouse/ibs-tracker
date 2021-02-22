@@ -28,4 +28,59 @@ extension IBSRecord {
 
     self.tags = tags ?? []
   }
+
+  func deleteSQL(into appDB: AppDB) throws {
+    let sqlIBSRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: type.rawValue, at: timestamp)
+    guard let recordID = sqlIBSRecord?.ID else { throw "Can't find record" }
+
+    _ = try appDB.deleteRecords(in: SQLIBSRecord.self, ids: [recordID])
+  }
+
+  func insertSQL(into appDB: AppDB) throws {
+    var sqlIBSRecord = SQLIBSRecord(from: self)
+    _ = try appDB.insertRecord(&sqlIBSRecord)
+    try updateTags(into: appDB, for: sqlIBSRecord)
+  }
+
+  func updateSQL(into appDB: AppDB, timestamp originalTimestamp: Date) throws {
+    let sqlSelectedRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: type.rawValue, at: originalTimestamp)
+    guard var sqlIBSRecord = sqlSelectedRecord else {
+      throw "Error: Couldn't select the record"
+    }
+    guard let recordID = sqlIBSRecord.ID else {
+      throw "Error: Record has no ID"
+    }
+
+    sqlIBSRecord.update(from: self)
+
+    try appDB.saveRecord(&sqlIBSRecord)
+
+    let sqlIBSTagIDs = try appDB.ibsTagIDs(ibsID: recordID)
+    try appDB.deleteRecords(in: SQLIBSTagRecord.self, ids: sqlIBSTagIDs.compactMap { $0 })
+    try updateTags(into: appDB, for: sqlIBSRecord)
+  }
+}
+
+private extension IBSRecord {
+  func updateTags(into appDB: AppDB, for sqlIBSRecord: SQLIBSRecord) throws {
+    guard let recordID = sqlIBSRecord.ID else { return }
+
+    for tagName in tags {
+      var tagID: Int64?
+
+      do {
+        var sqlTagRecord = SQLTagRecord(type: sqlIBSRecord.type, name: tagName)
+        tagID = try appDB.insertRecord(&sqlTagRecord)
+      } catch {
+        tagID = try appDB.selectRecord(in: SQLTagRecord.self, of: sqlIBSRecord.type, named: tagName)?.ID
+      }
+
+      guard tagID != nil else {
+        throw "No tagID found or inserted for tag named [\(tagName)]"
+      }
+
+      var sqlIBSTagRecord = SQLIBSTagRecord(ibsID: recordID, tagID: tagID!)
+      _ = try appDB.insertRecord(&sqlIBSTagRecord)
+    }
+  }
 }

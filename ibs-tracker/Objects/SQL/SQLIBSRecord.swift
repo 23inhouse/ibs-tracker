@@ -110,6 +110,32 @@ extension SQLIBSRecord: Migratable {
 
       t.column("createdAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
       t.column("updatedAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
+
+      t.uniqueKey(["timestamp", "type"])
     }
+
+    try db.create(index: "timestamp-type", on: "IBSRecords", columns: ["timestamp", "type"])
+  }
+}
+
+extension SQLIBSRecord {
+  mutating func update(from record: IBSRecord) {
+    timestamp = record.timestamp
+    type = record.type.rawValue
+
+    text = record.text
+    bristolScale = record.bristolScale?.rawValue
+    size = record.size?.rawValue
+    risk = record.risk?.rawValue
+    bloating = record.bloating?.rawValue
+    pain = record.pain?.rawValue
+    bodyache = record.bodyache?.rawValue
+    headache = record.headache?.rawValue
+    feel = record.feel?.rawValue
+    stress = record.stress?.rawValue
+    medicationType = record.medicationType?.rawValue
+    weight = record.weight
+
+    updatedAt = Date()
   }
 }
