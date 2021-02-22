@@ -23,6 +23,22 @@ struct IBSRecord {
   var medicationType: MedicationType?
   var weight: Decimal?
   var tags: [String] = []
+
+  static let foodRiskTexts: [Scales: String] = [
+    .zero: "no risk at all",
+    .mild: "mildly risky",
+    .moderate: "moderatly risky",
+    .severe: "I should't eat this",
+    .extreme: "I know I can't eat this",
+  ]
+
+  static let foodSizeTexts: [FoodSizes: String] = [
+    .tiny: "tiny portion",
+    .small: "small portion",
+    .normal: "normal portion",
+    .large: "large portion",
+    .huge: "huge portion",
+  ]
 }
 
 extension IBSRecord: Hashable {}
@@ -44,5 +60,21 @@ extension IBSRecord {
     self.medicationType = other.medicationType ?? MedicationType.none
     self.weight = other.weight
     self.tags = other.tags.sorted().map { $0.lowercased() }
+  }
+
+  func weightedValue(count: Int, maxCount: Int, yesterday: Date, daysOfInterest: Int = 42) -> Int {
+    let secondsPerDay: Double = 86400
+    let yesterdayInterval = yesterday.timeIntervalSinceReferenceDate
+    let timestampInterval = timestamp.timeIntervalSinceReferenceDate
+
+    let interval: TimeInterval = yesterdayInterval - timestampInterval
+    let daysSince = Int(interval / secondsPerDay)
+
+    let factor = Double(daysOfInterest * daysOfInterest)
+
+    var value: Int = 0
+    value += Int(factor - Double(daysSince * daysSince)) // curved so value decreases rapidly as the age aproaches daysOfInterest
+    value += Int(Double(count).squareRoot() / Double(maxCount).squareRoot() * factor / 2) // curved so values decrease slowly as the count decreases
+    return value
   }
 }

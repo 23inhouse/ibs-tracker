@@ -29,6 +29,8 @@ class IBSData: ObservableObject {
 
   private var appDB: AppDB
 
+  lazy private var recentFoodRecords: [IBSRecord] = recentRecords(of: .food)
+
   init(_ appDB: AppDB = .current) {
     guard !(ibs_trackerApp.isTestRunning() && appDB != .test) else {
       fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
@@ -40,52 +42,18 @@ class IBSData: ObservableObject {
 }
 
 extension IBSData {
-  static func loadRecordsFromSQL() -> [IBSRecord] {
+  func isAvailable(timestamp: Date) -> Bool {
     do {
-      return try AppDB.current.exportRecords()
+      let record = try appDB.selectRecord(in: SQLIBSRecord.self, at: timestamp)
+      return record == nil
     } catch {
-      print("Error: Couldn't load records from sql: \(error)")
+      print("Error: Couldn't select the record at [\(timestamp)]")
     }
-    return []
+    return false
   }
 
-  func recent(_ type: ItemType, recordsToDisplay: Int = 60) -> [IBSRecord] {
-    let preSortedTypedRecords = allRecords
-      .filter { $0.type == type }
-      .sorted { $0.timestamp > $1.timestamp }
-
-    let recordsCounted = preSortedTypedRecords.reduce(into: [IBSRecord: Int]()) {
-      $0[$1, default: 0] += 1
-    }
-
-    let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    let secondsPerDay: Double = 86400
-
-    func weightedValue(record: IBSRecord, count: Int, maxCount: Int) -> Int {
-      let interval: TimeInterval = yesterday.timeIntervalSinceReferenceDate - record.timestamp.timeIntervalSinceReferenceDate
-      let daysSince = Int(interval / secondsPerDay)
-
-      let daysOfInterest = 42 // any records in the last 42 days
-
-      let factor = Double(daysOfInterest * daysOfInterest)
-      var value: Int = 0
-      value += Int(factor - Double(daysSince * daysSince)) // curved so value decreases rapidly as with age aproaching daysOfInterest
-      value += Int(Double(count).squareRoot() / Double(maxCount).squareRoot() * factor / 2) // curved so values decrease slowly as the count decreases
-      return value
-    }
-
-    let maxCount = recordsCounted.map { $1 }.max() ?? 0
-    let sortedRecords = recordsCounted
-      .sorted {
-        let lhsValue = weightedValue(record: $0.0, count: $0.1, maxCount: maxCount)
-        let rhsValue = weightedValue(record: $1.0, count: $1.1, maxCount: maxCount)
-        return lhsValue > rhsValue
-      }
-
-    let topResults = sortedRecords
-      .map { $0.0 }.prefix(recordsToDisplay)
-
-    return Array(topResults)
+  func recentRecords(of type: ItemType, recordsToDisplay: Int = 60) -> [IBSRecord] {
+    Array(recentFoodRecords.prefix(recordsToDisplay))
   }
 
   func reloadRecordsFromSQL() {
@@ -135,5 +103,29 @@ private extension IBSData {
       print("Error: Couldn't load records from sql: \(error)")
     }
     return []
+  }
+
+  func recentRecords(of type: ItemType) -> [IBSRecord] {
+    print("recentRecords of [\(type)]")
+    let preSortedTypedRecords = allRecords
+      .filter { $0.type == type }
+      .sorted { $0.timestamp > $1.timestamp }
+
+    let recordsCounted = preSortedTypedRecords.reduce(into: [IBSRecord: (count: Int, record: IBSRecord)]()) {
+      let key = IBSRecord(comparable: $1)
+      $0[key, default: (0, $1)].count += 1
+    }
+
+    let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+
+    let maxCount = recordsCounted.map { $1.count }.max() ?? 0
+    let sortedRecords = recordsCounted
+      .sorted {
+        let lhsValue = $0.1.record.weightedValue(count: $0.1.count, maxCount: maxCount, yesterday: yesterday)
+        let rhsValue = $1.1.record.weightedValue(count: $1.1.count, maxCount: maxCount, yesterday: yesterday)
+        return lhsValue > rhsValue
+      }
+
+    return sortedRecords.map { $0.1.record }
   }
 }

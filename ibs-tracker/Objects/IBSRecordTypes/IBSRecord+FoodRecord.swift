@@ -13,6 +13,8 @@ protocol FoodRecord: IBSRecordType {
   var risk: Scales? { get }
   init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?)
   func FoodScore() -> Int
+  func riskText() -> String
+  func sizeText() -> String
 }
 
 extension IBSRecord: FoodRecord {
@@ -27,5 +29,13 @@ extension IBSRecord: FoodRecord {
 
   func FoodScore() -> Int {
     [risk?.rawValue ?? 0, size?.rawValue ?? 0].max() ?? 0
+  }
+
+  func riskText() -> String {
+    return IBSRecord.foodRiskTexts[risk ?? .zero] ?? ""
+  }
+
+  func sizeText() -> String {
+    return IBSRecord.foodSizeTexts[size ?? .none] ?? ""
   }
 }

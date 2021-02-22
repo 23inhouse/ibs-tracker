@@ -70,7 +70,7 @@ enum MedicationType: String {
   }
 }
 
-enum Scales: Int {
+enum Scales: Int, CaseIterable {
   case none = -1
   case zero = 0
   case mild = 1
@@ -106,7 +106,7 @@ enum MoodType: Int {
   }
 }
 
-enum FoodSizes: Int {
+enum FoodSizes: Int, CaseIterable {
   case none = -1
   case tiny = 0
   case small = 1
