@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DayView: View {
   @EnvironmentObject private var appState: IBSData
-  @State private var date: Date = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date()
+  @State private var date: Date = Calendar.current.date(byAdding: .hour, value: -5, to: Date()) ?? Date()
 
   var records: [IBSRecord] {
     let dayRecord = appState.dayRecords
