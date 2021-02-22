@@ -114,6 +114,7 @@ extension SQLIBSRecord: Migratable {
       t.uniqueKey(["timestamp", "type"])
     }
 
+    try db.create(index: "timestamp", on: "IBSRecords", columns: ["timestamp"], unique: false)
     try db.create(index: "timestamp-type", on: "IBSRecords", columns: ["timestamp", "type"])
   }
 }

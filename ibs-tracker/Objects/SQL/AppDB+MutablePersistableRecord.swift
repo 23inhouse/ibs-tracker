@@ -52,4 +52,14 @@ extension AppDB {
       return try request.fetchOne(db)
     }
   }
+
+  func selectRecord<T>(in _: T.Type, at timestamp: Date) throws -> QueryInterfaceRequest<T>.RowDecoder? where T: FetchableRecord & TableRecord & MutablePersistableRecord {
+    try dbWriter.read { db in
+      let request = T
+        .filter(Column("timestamp") == timestamp)
+        .limit(1)
+
+      return try request.fetchOne(db)
+    }
+  }
 }

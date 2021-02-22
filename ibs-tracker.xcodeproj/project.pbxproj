@@ -26,6 +26,7 @@
 		B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E9D25D417CD0019D18F /* String+Error.swift */; };
 		B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */; };
 		B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */; };
+		B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EF625D5E9420019D18F /* FoodFormView.swift */; };
 		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
 		B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207F0325D606310019D18F /* Date+Nearest.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
@@ -48,6 +49,7 @@
 		B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4425BD822C00E8B5AA /* IBSData.swift */; };
 		B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4C25BD84E900E8B5AA /* DayRecord.swift */; };
 		B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F5125BD8D9400E8B5AA /* Date+String.swift */; };
+		B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */; };
 		B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */; };
 		B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */; };
 		B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */; };
@@ -65,6 +67,8 @@
 		B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */; };
 		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
 		B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */; };
+		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
+		B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */ = {isa = PBXBuildFile; fileRef = B57B8B0D25DD21940030D758 /* records-recent-food.json */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
 		B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */; };
@@ -136,6 +140,7 @@
 		B5207E9D25D417CD0019D18F /* String+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Error.swift"; sourceTree = "<group>"; };
 		B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+DecodableTests.swift"; sourceTree = "<group>"; };
 		B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDB.swift"; sourceTree = "<group>"; };
+		B5207EF625D5E9420019D18F /* FoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFormView.swift; sourceTree = "<group>"; };
 		B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDatePicker.swift; sourceTree = "<group>"; };
 		B5207F0325D606310019D18F /* Date+Nearest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Nearest.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
@@ -158,6 +163,7 @@
 		B5421F4425BD822C00E8B5AA /* IBSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSData.swift; sourceTree = "<group>"; };
 		B5421F4C25BD84E900E8B5AA /* DayRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecord.swift; sourceTree = "<group>"; };
 		B5421F5125BD8D9400E8B5AA /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ModifierIf.swift"; sourceTree = "<group>"; };
 		B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol4Shape.swift; sourceTree = "<group>"; };
 		B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol3Shape.swift; sourceTree = "<group>"; };
 		B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol5Shape.swift; sourceTree = "<group>"; };
@@ -174,6 +180,8 @@
 		B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+Records.swift"; sourceTree = "<group>"; };
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
 		B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDBTests.swift"; sourceTree = "<group>"; };
+		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
+		B57B8B0D25DD21940030D758 /* records-recent-food.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "records-recent-food.json"; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+NearestTests.swift"; sourceTree = "<group>"; };
 		B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -294,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				B5207E8825D297E90019D18F /* records-to-import.json */,
+				B57B8B0D25DD21940030D758 /* records-recent-food.json */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -353,6 +362,7 @@
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
+				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -399,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				B5E01A7E25D03B2D00079309 /* SQL */,
+				B57B8B0525DD18C20030D758 /* IBSDataTests.swift */,
 				B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */,
 				B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */,
 			);
@@ -445,6 +456,7 @@
 				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
+				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
 				B508994E25B3728E00B1EA03 /* DayListRows */,
 				B508993225B366D600B1EA03 /* TypeShapes */,
@@ -621,6 +633,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5207E8925D297E90019D18F /* records-to-import.json in Resources */,
+				B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +702,8 @@
 				B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */,
 				B533AC1D25BAE9D7009B6290 /* MedicationRow.swift in Sources */,
 				B5207E7525D19DA50019D18F /* Importable.swift in Sources */,
+				B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */,
+				B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */,
 				B508993D25B36C0B00B1EA03 /* IBSItemView.swift in Sources */,
 				B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
@@ -727,6 +742,7 @@
 				B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */,
 				B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */,
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
+				B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */,
 				B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */,
 				B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */,
 			);

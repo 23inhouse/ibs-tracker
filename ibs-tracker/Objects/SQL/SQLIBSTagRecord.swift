@@ -47,9 +47,10 @@ extension SQLIBSTagRecord: Migratable {
       t.autoIncrementedPrimaryKey("ID")
 
       t.column("ibsID", .integer).notNull().indexed()
-        .references("IBSRecords")
+        .references("IBSRecords", onDelete: .cascade)
       t.column("tagID", .integer).notNull().indexed()
-        .references("IBSTags")
+        .references("IBSTags", onDelete: .cascade)
+      t.uniqueKey(["ibsID", "tagID"])
 
       t.column("createdAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
       t.column("updatedAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
