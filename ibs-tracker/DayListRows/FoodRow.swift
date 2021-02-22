@@ -15,13 +15,15 @@ struct FoodRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .food, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
-      Text(record.text ?? "No meal name recorded")
-        .font(.callout)
-        .lineLimit(2)
-        .foregroundColor(.secondary)
-        .frame(minHeight: 25, alignment: .leading)
+    NavigationLink(destination: FoodFormView(for: record)) {
+      DayRowView(type: .food, color: .secondary, tags: record.tags) {
+        TimestampView(record: record as! IBSRecord)
+        Text(record.text ?? "No meal name recorded")
+          .font(.callout)
+          .lineLimit(2)
+          .foregroundColor(.secondary)
+          .frame(minHeight: 25, alignment: .leading)
+      }
     }
   }
 }
