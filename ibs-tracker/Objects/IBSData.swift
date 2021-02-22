@@ -7,7 +7,16 @@
 
 import Foundation
 
+enum Tabs {
+  case day
+  case search
+  case add
+  case report
+  case settings
+}
+
 class IBSData: ObservableObject {
+  @Published var tabSelection: Tabs = .day
   @Published var dayRecords: [DayRecord]
 
   static var current = IBSData(.current)

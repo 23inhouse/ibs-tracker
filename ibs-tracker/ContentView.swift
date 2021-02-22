@@ -9,6 +9,7 @@ import SwiftUI
 import PureSwiftUI
 
 struct ContentView: View {
+  @EnvironmentObject private var appState: IBSData
   var body: some View {
     mainTabView()
   }
@@ -16,32 +17,37 @@ struct ContentView: View {
 
 private extension ContentView {
   func mainTabView() -> some View {
-    TabView {
-      DayView()
-        .tabItem {
-          Image(systemName: "equal.square")
-          Text("Today")
-        }
-      SearchView()
-        .tabItem {
-          Image(systemName: "magnifyingglass")
-          Text("Search")
-        }
-      ActionGridView()
-        .tabItem {
-          Image(systemName: "plus.circle")
-          Text("Add")
-        }
-      ReportView()
-        .tabItem {
-          Image(systemName: "chart.bar")
-          Text("Report")
-        }
+    TabView(selection: $appState.tabSelection) {
       SettingsView()
         .tabItem {
           Image(systemName: "gearshape")
           Text("Settings")
         }
+        .tag(Tabs.settings)
+      DayView()
+        .tabItem {
+          Image(systemName: "equal.square")
+          Text("Today")
+        }
+        .tag(Tabs.day)
+      ActionGridView()
+        .tabItem {
+          Image(systemName: "plus.circle")
+          Text("Add")
+        }
+        .tag(Tabs.add)
+      ReportView()
+        .tabItem {
+          Image(systemName: "chart.bar")
+          Text("Report")
+        }
+        .tag(Tabs.report)
+      SearchView()
+        .tabItem {
+          Image(systemName: "magnifyingglass")
+          Text("Search")
+        }
+        .tag(Tabs.search)
     }
   }
 }
