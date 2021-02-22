@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FoodFormView: View {
+  @Environment(\.presentationMode) private var presentation
   @EnvironmentObject private var appState: IBSData
 
   @State private var name: String = ""
@@ -126,6 +127,7 @@ struct FoodFormView: View {
         delete {
           DispatchQueue.main.async {
             appState.tabSelection = .day
+            presentation.wrappedValue.dismiss()
           }
         }
       },
@@ -139,6 +141,7 @@ struct FoodFormView: View {
         insertOrUpdate {
           DispatchQueue.main.async {
             appState.tabSelection = .day
+            presentation.wrappedValue.dismiss()
           }
         }
       }) {
