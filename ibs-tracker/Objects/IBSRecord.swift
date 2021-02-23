@@ -47,17 +47,17 @@ extension IBSRecord {
   init(comparable other: IBSRecord) {
     self.type = other.type
     self.timestamp = Date.init(timeIntervalSinceReferenceDate: 0)
-    self.bristolScale = other.bristolScale ?? BristolType.none
+    self.bristolScale = other.bristolScale
     self.text = other.text?.lowercased()
     self.size = nil
     self.risk = nil
-    self.pain = other.pain ?? Scales.none
-    self.bloating = other.bloating ?? Scales.none
-    self.bodyache = other.bodyache ?? Scales.none
-    self.headache = other.headache ?? Scales.none
-    self.feel = other.feel ?? MoodType.none
-    self.stress = other.stress ?? Scales.none
-    self.medicationType = other.medicationType ?? MedicationType.none
+    self.pain = other.pain
+    self.bloating = other.bloating
+    self.bodyache = other.bodyache
+    self.headache = other.headache
+    self.feel = other.feel
+    self.stress = other.stress
+    self.medicationType = other.medicationType
     self.weight = other.weight
     self.tags = other.tags.sorted().map { $0.lowercased() }
   }

@@ -70,6 +70,7 @@
 		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
 		B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */ = {isa = PBXBuildFile; fileRef = B57B8B0D25DD21940030D758 /* records-recent-food.json */; };
 		B57C88E325E40F4D0060FE13 /* AppDB+RecordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */; };
+		B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
 		B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */; };
@@ -184,6 +185,7 @@
 		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
 		B57B8B0D25DD21940030D758 /* records-recent-food.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "records-recent-food.json"; sourceTree = "<group>"; };
 		B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+RecordsTests.swift"; sourceTree = "<group>"; };
+		B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+OptionalValue.swift"; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+NearestTests.swift"; sourceTree = "<group>"; };
 		B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
+				B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */,
 				B5207E9D25D417CD0019D18F /* String+Error.swift */,
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
@@ -671,6 +674,7 @@
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
+				B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */,
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,

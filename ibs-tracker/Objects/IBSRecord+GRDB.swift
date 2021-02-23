@@ -68,15 +68,17 @@ private extension IBSRecord {
     for tagName in tags {
       var tagID: Int64?
 
+      let validTagName = tagName.replacingOccurrences(of: "|", with: "--")
+
       do {
-        var sqlTagRecord = SQLTagRecord(type: sqlIBSRecord.type, name: tagName)
+        var sqlTagRecord = SQLTagRecord(type: sqlIBSRecord.type, name: validTagName)
         tagID = try appDB.insertRecord(&sqlTagRecord)
       } catch {
-        tagID = try appDB.selectRecord(in: SQLTagRecord.self, of: sqlIBSRecord.type, named: tagName)?.ID
+        tagID = try appDB.selectRecord(in: SQLTagRecord.self, of: sqlIBSRecord.type, named: validTagName)?.ID
       }
 
       guard tagID != nil else {
-        throw "No tagID found or inserted for tag named [\(tagName)]"
+        throw "No tagID found or inserted for tag named [\(validTagName)]"
       }
 
       var sqlIBSTagRecord = SQLIBSTagRecord(ibsID: recordID, tagID: tagID!)

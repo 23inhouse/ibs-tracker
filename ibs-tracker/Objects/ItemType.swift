@@ -31,7 +31,6 @@ enum ItemType: String {
 extension ItemType: CaseIterable {}
 
 enum BristolType: Int {
-  case none = -1
   case b0 = 0
   case b1 = 1
   case b2 = 2
@@ -77,15 +76,6 @@ enum Scales: Int, CaseIterable {
   case moderate = 2
   case severe = 3
   case extreme = 4
-
-  init(from value: Int?) {
-    if let item = Scales(rawValue: value ?? -1) {
-      self = item
-    } else {
-      print("Error: scale record type out of range")
-      self = .none
-    }
-  }
 }
 
 enum MoodType: Int {
@@ -95,15 +85,6 @@ enum MoodType: Int {
   case soso = 2
   case bad = 3
   case awful = 4
-
-  init?(from value: Int?) {
-    if let item = MoodType(rawValue: value ?? -1) {
-      self = item
-    } else {
-      print("Error: mood record type [\(String(describing: value))] out of range")
-      return nil
-    }
-  }
 }
 
 enum FoodSizes: Int, CaseIterable {
@@ -113,13 +94,4 @@ enum FoodSizes: Int, CaseIterable {
   case normal = 2
   case large = 3
   case huge = 4
-
-  init?(from value: Int?) {
-    if let item = FoodSizes(rawValue: value ?? -1) {
-      self = item
-    } else {
-      print("Error: food record size [\(String(describing: value))] out of range")
-      return nil
-    }
-  }
 }
