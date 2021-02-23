@@ -39,19 +39,18 @@ struct ColorCodedContent {
     return colors[scale] ?? .primary
   }
 
-  static func bristolColor(for scale: BristolType) -> Color {
-    let colors: [BristolType: Color] = [
-      .b0: .red,
-      .b1: .orange,
-      .b2: .yellow,
-      .b3: .green,
-      .b4: .green,
-      .b5: .yellow,
-      .b6: .orange,
-      .b7: .red,
-    ]
-
-    return colors[scale] ?? .secondary
+  static func bristolColor(for scale: BristolType?) -> Color {
+    guard let scale = scale else { return .secondary }
+    switch scale {
+    case .b0: return .red
+    case .b1: return .orange
+    case .b2: return .yellow
+    case .b3: return .green
+    case .b4: return .green
+    case .b5: return .yellow
+    case .b6: return .orange
+    case .b7: return .red
+    }
   }
 
   static func moodColor(for scale: MoodType?) -> Color {

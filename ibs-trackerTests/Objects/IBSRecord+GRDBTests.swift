@@ -108,4 +108,36 @@ class IBSRecord_GRDBTests: XCTestCase {
     let newIBSRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
     XCTAssertEqual(newIBSRecordCount, 1, "There should still only be 1 record")
   }
+
+  func testValidTagNames() throws {
+    let invalidTags = ["Very|Good", "You|had|to|be|there"]
+    let validTags = ["Very--Good", "You--had--to--be--there"]
+
+    var calender = Calendar.current
+    calender.timeZone = TimeZone(abbreviation: "UTC")!
+    let date = calender.startOfDay(for: Date())
+    let ibsRecord = IBSRecord(bristolScale: 3, timestamp: date, tags: invalidTags)
+    try ibsRecord.insertSQL(into: appDB)
+
+    let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
+    XCTAssertEqual(ibsRecordCount, 1, "There should be 1 record")
+
+    let insertedRecords = try appDB.exportRecords()
+
+    XCTAssertEqual(insertedRecords.count, 1, "There should be 1 record")
+
+    var exportedRecord = insertedRecords.first!
+    XCTAssertEqual(exportedRecord.tags, validTags, "The tags should have the pipes removed")
+
+    exportedRecord.tags = invalidTags
+
+    try exportedRecord.updateSQL(into: appDB, timestamp: exportedRecord.timestamp)
+
+    let updatedRecords = try appDB.exportRecords()
+
+    XCTAssertEqual(updatedRecords.count, 1, "There should be 1 record")
+
+    exportedRecord = updatedRecords.first!
+    XCTAssertEqual(exportedRecord.tags, validTags, "The tags should have the pipes removed")
+  }
 }

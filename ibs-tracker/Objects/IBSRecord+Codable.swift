@@ -29,41 +29,19 @@ extension IBSRecord: Codable {
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    let typeString = try values.decode(String.self, forKey: .type)
-    type = ItemType(from: typeString)
-    let timestampString = try values.decode(String.self, forKey: .timestamp)
-    timestamp = try IBSRecord.timestamp(from: timestampString)
-    if let bristolScaleInt = try values.decodeIfPresent(Int.self, forKey: .bristolScale) {
-      bristolScale = BristolType(rawValue: bristolScaleInt)
-    }
+    type = ItemType(from: try values.decode(String.self, forKey: .type))
+    timestamp = try IBSRecord.timestamp(from: try values.decode(String.self, forKey: .timestamp))
+    bristolScale = BristolType(optionalValue: try values.decodeIfPresent(Int.self, forKey: .bristolScale))
     text = try values.decodeIfPresent(String.self, forKey: .text)
-    if let sizeInt = try values.decodeIfPresent(Int.self, forKey: .size) {
-      size = FoodSizes(rawValue: sizeInt)
-    }
-    if let riskInt = try values.decodeIfPresent(Int.self, forKey: .risk) {
-      risk = Scales(rawValue: riskInt)
-    }
-    if let painInt = try values.decodeIfPresent(Int.self, forKey: .pain) {
-      pain = Scales(rawValue: painInt)
-    }
-    if let bloatingInt = try values.decodeIfPresent(Int.self, forKey: .bloating) {
-      bloating = Scales(rawValue: bloatingInt)
-    }
-    if let bodyacheInt = try values.decodeIfPresent(Int.self, forKey: .bodyache) {
-      bodyache = Scales(rawValue: bodyacheInt)
-    }
-    if let headacheInt = try values.decodeIfPresent(Int.self, forKey: .headache) {
-      headache = Scales(rawValue: headacheInt)
-    }
-    if let feelInt = try values.decodeIfPresent(Int.self, forKey: .feel) {
-      feel = MoodType(rawValue: feelInt)
-    }
-    if let stressInt = try values.decodeIfPresent(Int.self, forKey: .stress) {
-      stress = Scales(rawValue: stressInt)
-    }
-    if let medicationTypeString = try values.decodeIfPresent(String.self, forKey: .medicationType) {
-      medicationType = MedicationType(from: medicationTypeString)
-    }
+    size = FoodSizes(optionalValue: try values.decodeIfPresent(Int.self, forKey: .size))
+    risk = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .risk))
+    pain = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .pain))
+    bloating = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .bloating))
+    bodyache = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .bodyache))
+    headache = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .headache))
+    feel = MoodType(optionalValue: try values.decodeIfPresent(Int.self, forKey: .feel))
+    stress = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .stress))
+    medicationType = MedicationType(optionalValue: try values.decodeIfPresent(String.self, forKey: .medicationType))
     weight = try values.decodeIfPresent(Decimal.self, forKey: .weight)
     tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
   }

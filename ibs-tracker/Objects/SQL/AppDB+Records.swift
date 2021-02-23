@@ -10,18 +10,7 @@ import GRDB
 
 extension AppDB {
   func exportRecords() throws -> [IBSRecord] {
-    let tags = try tagRecords().reduce(into: [Int64: String]()) { $0[$1.ID!] = $1.name }
-
-    let ibsTags = try ibsTagRecords().reduce(into: [Int64: [Int64]]()) {
-      $0[$1.ibsID, default: []].append($1.tagID)
-    }
-
-    return try ibsRecords().map { record in
-      let recordID = record.ID ?? 0
-      let tagIDs = ibsTags[recordID] ?? []
-      let tagNames:[String] = tagIDs.compactMap { tagID in tags[tagID] }
-      return IBSRecord(from: record, tags: tagNames)
-    }
+    return try ibsRecordsWithTags()
   }
 
   func importJSON(_ data: Data, truncate: Bool = false) {
@@ -63,30 +52,54 @@ extension AppDB {
 }
 
 private extension AppDB {
-  func ibsRecords() throws -> [SQLIBSRecord] {
+  func ibsRecordsWithTags() throws -> [IBSRecord] {
+    let sql = """
+      SELECT IBSRecords.*, (
+          SELECT GROUP_CONCAT(IBSTags.name, '|') AS tags
+          FROM IBSTagRecords
+          JOIN IBSTags
+          ON IBSTags.ID = IBSTagRecords.tagID
+          WHERE IBSTagRecords.ibsID = IBSRecords.ID
+          ORDER BY IBSTagRecords.updatedAt ASC
+        ) as tags
+      FROM IBSRecords
+      ORDER BY timestamp DESC
+    """
     return try dbWriter.read { db in
-      let request = SQLIBSRecord
-        .order([Column("timestamp").desc, Column("type").desc])
+      let rows = try Row.fetchAll(db, sql: sql)
+      var calender = Calendar.current
+      calender.timeZone = TimeZone(abbreviation: "UTC")!
+      return try rows.map { row in
+        let timestamp = String(row["timestamp"])
+        let components = timestamp.components(separatedBy: CharacterSet.decimalDigits.inverted)
+        let year = Int(components[0])
+        let month = Int(components[1])
+        let day = Int(components[2])
+        let hour = Int(components[3])
+        let minute = Int(components[4])
+        guard let date = calender.date(from: DateComponents(year: year, month: month, day: day, hour: hour, minute: minute)) else {
+          throw "Couldn't create the date"
+        }
 
-      return try request.fetchAll(db)
-    }
-  }
-
-  func ibsTagRecords() throws -> [SQLIBSTagRecord] {
-    return try dbWriter.read { db in
-      let request = SQLIBSTagRecord
-        .select([Column("ibsID"), Column("tagID")])
-
-      return try request.fetchAll(db)
-    }
-  }
-
-  func tagRecords() throws -> [SQLTagRecord] {
-    return try dbWriter.read { db in
-      let request = SQLTagRecord
-        .select([Column("ID"), Column("type"), Column("name")])
-
-      return try request.fetchAll(db)
+        let ibsRecord = IBSRecord(
+          type: ItemType(rawValue: row["type"]) ?? .none,
+          timestamp: date,
+          bristolScale: BristolType(optionalValue: row["bristolScale"]),
+          text: row["text"],
+          size: FoodSizes(optionalValue: row["size"]),
+          risk: Scales(optionalValue: row["risk"]),
+          pain: Scales(optionalValue: row["pain"]),
+          bloating: Scales(optionalValue: row["bloating"]),
+          bodyache: Scales(optionalValue: row["bodyache"]),
+          headache: Scales(optionalValue: row["headache"]),
+          feel: MoodType(optionalValue: row["feel"]),
+          stress: Scales(optionalValue: row["stress"]),
+          medicationType: MedicationType(optionalValue: row["medicationType"]),
+          weight: row["weight"] != nil ? Decimal(floatLiteral: row["weight"]) : nil,
+          tags: String(row["tags"] ?? "").components(separatedBy: "|").filter { $0 != ""}
+        )
+        return ibsRecord
+      }
     }
   }
 }
