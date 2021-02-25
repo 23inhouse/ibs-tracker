@@ -25,6 +25,7 @@ struct AppDB {
     self.dbWriter = dbWriter
     self.environment = environment
     try migrator.migrate(dbWriter)
+    try loadTags(.food)
   }
 
   private var migrator: DatabaseMigrator {
@@ -41,6 +42,25 @@ struct AppDB {
     }
 
     return migrator
+  }
+
+  func loadTags(_ type: ItemType) throws {
+    guard environment != .test else { return }
+    guard try countRecords(in: SQLTagRecord.self) == 0 else { return }
+
+    let type = type.rawValue
+    guard let foodTagsURL = Bundle.main.url(forResource: "\(type)-tags", withExtension: "txt") else { return }
+    guard let foodTagsString = try? String(contentsOf: foodTagsURL) else { return }
+    let foodTags = foodTagsString.components(separatedBy: .newlines).filter { $0.isNotEmpty }
+    for foodTag in foodTags {
+      var tagRecord = SQLTagRecord(type: type, name: foodTag)
+      _ = try insertRecord(&tagRecord)
+    }
+
+    try dbWriter.read { db in
+      let count = try SQLTagRecord.fetchCount(db)
+      print("Inserted [\(count)] \(type) tags")
+    }
   }
 }
 

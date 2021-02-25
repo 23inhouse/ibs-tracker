@@ -98,6 +98,7 @@
 		B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */; };
 		B5E9D54A25B7001200E52387 /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54925B7001200E52387 /* NoteRow.swift */; };
 		B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54E25B71D2500E52387 /* NoteShape.swift */; };
+		B5ED341825E7C46B0029B274 /* food-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5ED341725E7C46B0029B274 /* food-tags.txt */; };
 		B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */; };
 		B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367325BC85C600DC9D74 /* SearchView.swift */; };
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
@@ -218,6 +219,7 @@
 		B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Case.swift"; sourceTree = "<group>"; };
 		B5E9D54925B7001200E52387 /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		B5E9D54E25B71D2500E52387 /* NoteShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShape.swift; sourceTree = "<group>"; };
+		B5ED341725E7C46B0029B274 /* food-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "food-tags.txt"; sourceTree = "<group>"; };
 		B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarFilterIconView.swift; sourceTree = "<group>"; };
 		B5EE367325BC85C600DC9D74 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		B554CE3325D02D4200E2EE17 /* SQL */ = {
 			isa = PBXGroup;
 			children = (
+				B5ED341C25E7C4740029B274 /* data */,
 				B554CE3425D02D4200E2EE17 /* AppDB.swift */,
 				B5207E9525D3E7AE0019D18F /* AppDB+Idable.swift */,
 				B5207E9025D3E7530019D18F /* AppDB+MutablePersistableRecord.swift */,
@@ -505,6 +508,14 @@
 			path = "ibs-trackerUITests";
 			sourceTree = "<group>";
 		};
+		B5ED341C25E7C4740029B274 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				B5ED341725E7C46B0029B274 /* food-tags.txt */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		B5EE367D25BC872200DC9D74 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,6 +640,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5ED341825E7C46B0029B274 /* food-tags.txt in Resources */,
 				B5E3A8DD25AE205D00DAC8DD /* Preview Assets.xcassets in Resources */,
 				B5E3A8DA25AE205D00DAC8DD /* Assets.xcassets in Resources */,
 			);
