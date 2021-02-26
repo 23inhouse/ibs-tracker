@@ -39,8 +39,6 @@ struct FoodFormView: View {
     get { foodRecord != nil }
   }
 
-  private var editableTags: [String] { tags }
-
   private var foodRecord: FoodRecord? = nil
 
   private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !isEditingTags }
@@ -59,14 +57,14 @@ struct FoodFormView: View {
         let availableTag = $0.lowercased()
         return
           nameIsCompleted &&
-          !editableTags.contains($0) &&
+          !tags.contains($0) &&
           (
             availableTag.contains(newTag.lowercased()) ||
               name.split(separator: " ").filter {
                 let word = String($0.lowercased())
                 return
                   word.count > 2 &&
-                  editableTags.filter { $0.lowercased().contains(word) }.isEmpty &&
+                  tags.filter { $0.lowercased().contains(word) }.isEmpty &&
                   (availableTag.contains(word) || word.contains(availableTag))
               }.isNotEmpty
           )
@@ -86,9 +84,9 @@ struct FoodFormView: View {
       Section {
         UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, isFirstResponder: nameIsFirstResponder, onCommit: commitName)
 
-        List { editableTagList }
+        List { EditableTagList(tags: $tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
-        List { suggestedTagList }
+        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $tags, newTag: $newTag) }
       }
 
       Section {
@@ -125,25 +123,6 @@ struct FoodFormView: View {
       .onChange(of: timestamp) { value in
         timestamp = value
       }
-  }
-
-  private var editableTagList: some View {
-    ForEach(tags.indices, id: \.self) { i in
-      if editableTags.indices.contains(i) {
-        HStack {
-          TextField("", text: Binding(
-            get: { self.tags[i] },
-            set: { self.tags[i] = $0 }
-          ))
-
-          Button(action: {
-            tags.remove(at: i)
-          }, label: {
-            Image(systemName: "xmark.circle")
-          })
-        }
-      }
-    }
   }
 
   private var insertOrUpdateButtonSection: some View {
@@ -208,17 +187,6 @@ struct FoodFormView: View {
       ForEach(FoodSizes.allCases, id: \.self) { foodSize in
         Text(FoodSizes.descriptions[foodSize]?.capitalized ?? "")
           .tag(foodSize)
-      }
-    }
-  }
-
-  private var suggestedTagList: some View {
-    List {
-      ForEach(suggestedTags, id: \.self) { value in
-        Button(value) {
-          tags.append(value)
-          newTag = ""
-        }
       }
     }
   }

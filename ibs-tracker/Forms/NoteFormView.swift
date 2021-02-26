@@ -31,8 +31,6 @@ struct NoteFormView: View {
     get { noteRecord != nil }
   }
 
-  private var editableTags: [String] { tags }
-
   private var noteRecord: NoteRecord? = nil
 
   private var suggestedTags: [String] {
@@ -40,7 +38,7 @@ struct NoteFormView: View {
       appState.tags(for: .note).filter {
         let availableTag = $0.lowercased()
         return
-          !editableTags.contains($0) &&
+          !tags.contains($0) &&
           availableTag.contains(newTag.lowercased())
     }
   }
@@ -57,9 +55,9 @@ struct NoteFormView: View {
       }
 
       Section {
-        List { editableTagList }
+        List { EditableTagList(tags: $tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $newTag, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
-        List { suggestedTagList }
+        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $tags, newTag: $newTag) }
       }
 
       if text.isNotEmpty {
@@ -86,25 +84,6 @@ struct NoteFormView: View {
     .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 
-  private var editableTagList: some View {
-    ForEach(tags.indices, id: \.self) { i in
-      if editableTags.indices.contains(i) {
-        HStack {
-          TextField("", text: Binding(
-            get: { self.tags[i] },
-            set: { self.tags[i] = $0 }
-          ))
-
-          Button(action: {
-            tags.remove(at: i)
-          }, label: {
-            Image(systemName: "xmark.circle")
-          })
-        }
-      }
-    }
-  }
-
   private var insertOrUpdateButtonSection: some View {
     Section {
       Button(action: {
@@ -129,17 +108,6 @@ struct NoteFormView: View {
         .listRowBackground(Color.secondary)
         .opacity(0.8)
         .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
-    }
-  }
-
-  private var suggestedTagList: some View {
-    List {
-      ForEach(suggestedTags, id: \.self) { value in
-        Button(value) {
-          tags.append(value)
-          newTag = ""
-        }
-      }
     }
   }
 
