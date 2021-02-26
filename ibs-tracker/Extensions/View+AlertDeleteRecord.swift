@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-  func alert(delete record: IBSRecord?, appState: IBSData, isPresented: Binding<Bool>, completionHandler: @escaping () -> Void) -> some View {
+  func alert(delete record: IBSRecordType?, appState: IBSData, isPresented: Binding<Bool>, completionHandler: @escaping () -> Void) -> some View {
     alert(isPresented: isPresented) {
       Alert(
         title: Text("Are you sure?"),

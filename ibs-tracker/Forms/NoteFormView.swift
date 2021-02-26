@@ -20,18 +20,20 @@ struct NoteFormView: View {
   @State private var isEditingTags: Bool = false
 
   init(for noteRecord: NoteRecord? = nil) {
-    self.noteRecord = noteRecord
     guard let record = noteRecord else { return }
+    self.editableRecord = noteRecord
     self._text = State(initialValue: record.text ?? "")
     self._timestamp = State(initialValue: record.timestamp)
     self._tags = State(initialValue: record.tags)
   }
 
-  private var editMode: Bool {
-    get { noteRecord != nil }
-  }
+  private var editMode: Bool { editableRecord != nil }
+  private var editableRecord: IBSRecordType? = nil
 
-  private var noteRecord: NoteRecord? = nil
+  private var record: IBSRecord? {
+    guard let timestamp = timestamp else { return nil }
+    return IBSRecord(note: text, timestamp: timestamp.nearest(5, .minute), tags: tags)
+  }
 
   private var suggestedTags: [String] {
     return
@@ -61,8 +63,7 @@ struct NoteFormView: View {
       }
 
       if text.isNotEmpty {
-        insertOrUpdateButtonSection
-          .disabled(!isValidTimestamp)
+        SaveButtonSection(name: "Note", record: record, isValidTimestamp: isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
       DatePickerSectionView(timestamp: $timestamp, isValidTimestamp: $isValidTimestamp)
@@ -75,7 +76,7 @@ struct NoteFormView: View {
     .toolbar {
       DeleteRecordToolbarItem(editMode: editMode, showAlert: $showAlert)
     }
-    .alert(delete: noteRecord as? IBSRecord, appState: appState, isPresented: $showAlert) {
+    .alert(delete: editableRecord, appState: appState, isPresented: $showAlert) {
       DispatchQueue.main.async {
         appState.tabSelection = .day
         presentation.wrappedValue.dismiss()
@@ -84,59 +85,12 @@ struct NoteFormView: View {
     .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 
-  private var insertOrUpdateButtonSection: some View {
-    Section {
-      Button(action: {
-        insertOrUpdate {
-          DispatchQueue.main.async {
-            appState.tabSelection = .day
-            presentation.wrappedValue.dismiss()
-          }
-        }
-      }) {
-        Text(editMode ? "Update note" : "Add note")
-          .frame(maxWidth: .infinity)
-      }
-    }
-    .modifierIf(isValidTimestamp) {
-      $0
-        .listRowBackground(Color.blue)
-        .foregroundColor(.white)
-    }
-    .modifierIf(!isValidTimestamp) {
-      $0
-        .listRowBackground(Color.secondary)
-        .opacity(0.8)
-        .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
-    }
-  }
-
   private func addNewTag() {
     let answer = newTag.trimmingCharacters(in: .whitespacesAndNewlines)
     guard answer.count > 0 else { return }
 
     tags.append(answer)
     newTag = ""
-  }
-
-  private func insertOrUpdate(completionHandler: @escaping () -> Void) {
-    completionHandler()
-
-    DispatchQueue.global(qos: .userInteractive).async {
-      do {
-        guard let timestamp = timestamp else { return }
-        let record = IBSRecord(note: text, timestamp: timestamp.nearest(5, .minute), tags: tags)
-
-        if let noteRecord = noteRecord {
-          try record.updateSQL(into: AppDB.current, timestamp: noteRecord.timestamp)
-        } else {
-          try record.insertSQL(into: AppDB.current)
-        }
-        DispatchQueue.main.async { appState.reloadRecordsFromSQL() }
-      } catch {
-        print("Error: \(error)")
-      }
-    }
   }
 
   private func showTagSuggestions(_ isEditing: Bool) {

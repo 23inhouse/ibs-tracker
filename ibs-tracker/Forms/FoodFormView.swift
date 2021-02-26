@@ -25,8 +25,8 @@ struct FoodFormView: View {
   @State private var tagIsFirstResponder: Bool = false
 
   init(for foodRecord: FoodRecord? = nil) {
-    self.foodRecord = foodRecord
     guard let record = foodRecord else { return }
+    self.editableRecord = record
     self._name = State(initialValue: record.text ?? "")
     self._timestamp = State(initialValue: record.timestamp)
     self._size = State(initialValue: record.size ?? .none)
@@ -35,11 +35,8 @@ struct FoodFormView: View {
     self._nameIsCompleted = State(initialValue: true)
   }
 
-  private var editMode: Bool {
-    get { foodRecord != nil }
-  }
-
-  private var foodRecord: FoodRecord? = nil
+  private var editMode: Bool { editableRecord != nil }
+  private var editableRecord: IBSRecordType? = nil
 
   private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !isEditingTags }
 
@@ -49,6 +46,11 @@ struct FoodFormView: View {
 
   private var recentFoods: [IBSRecord] {
     appState.recentRecords(of: .food)
+  }
+
+  private var record: IBSRecord? {
+    guard let timestamp = timestamp else { return nil }
+    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: tags, risk: risk, size: size)
   }
 
   private var suggestedTags: [String] {
@@ -95,8 +97,7 @@ struct FoodFormView: View {
       }
 
       if name.isNotEmpty && tags.isNotEmpty {
-        insertOrUpdateButtonSection
-          .disabled(!isValidTimestamp)
+        SaveButtonSection(name: "Meal", record: record, isValidTimestamp: isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
       DatePickerSectionView(timestamp: $timestamp, isValidTimestamp: $isValidTimestamp)
@@ -109,7 +110,7 @@ struct FoodFormView: View {
     .toolbar {
       DeleteRecordToolbarItem(editMode: editMode, showAlert: $showAlert)
     }
-    .alert(delete: foodRecord as? IBSRecord, appState: appState, isPresented: $showAlert) {
+    .alert(delete: editableRecord, appState: appState, isPresented: $showAlert) {
       DispatchQueue.main.async {
         appState.tabSelection = .day
         presentation.wrappedValue.dismiss()
@@ -123,34 +124,6 @@ struct FoodFormView: View {
       .onChange(of: timestamp) { value in
         timestamp = value
       }
-  }
-
-  private var insertOrUpdateButtonSection: some View {
-    Section {
-      Button(action: {
-        insertOrUpdate {
-          DispatchQueue.main.async {
-            appState.tabSelection = .day
-            presentation.wrappedValue.dismiss()
-          }
-        }
-      }) {
-        Text(editMode ? "Update meal" : "Add meal")
-          .frame(maxWidth: .infinity)
-      }
-    }
-    .modifierIf(isValidTimestamp) {
-      $0
-        .listRowBackground(Color.blue)
-        .foregroundColor(.white)
-    }
-    .modifierIf(!isValidTimestamp) {
-      $0
-        .listRowBackground(Color.secondary)
-        .opacity(0.8)
-        .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
-    }
-
   }
 
   private var recentFoodSection: some View {
@@ -205,26 +178,6 @@ struct FoodFormView: View {
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
-    }
-  }
-
-  private func insertOrUpdate(completionHandler: @escaping () -> Void) {
-    completionHandler()
-
-    DispatchQueue.global(qos: .userInteractive).async {
-      do {
-        guard let timestamp = timestamp else { return }
-        let record = IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: tags, risk: risk, size: size)
-
-        if let foodRecord = foodRecord {
-          try record.updateSQL(into: AppDB.current, timestamp: foodRecord.timestamp)
-        } else {
-          try record.insertSQL(into: AppDB.current)
-        }
-        DispatchQueue.main.async { appState.reloadRecordsFromSQL() }
-      } catch {
-        print("Error: \(error)")
-      }
     }
   }
 

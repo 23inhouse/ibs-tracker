@@ -10,4 +10,6 @@ import Foundation
 protocol IBSRecordType {
   var timestamp: Date { get }
   var tags: [String] { get }
+
+  func deleteSQL(into appDB: AppDB) throws
 }

@@ -88,6 +88,7 @@
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
 		B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675725E9955A004E0895 /* SuggestedTagList.swift */; };
+		B5D9676025E99C20004E0895 /* SaveButtonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675F25E99C20004E0895 /* SaveButtonSection.swift */; };
 		B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E01A7F25D03B2D00079309 /* AppDBTests.swift */; };
 		B5E3A8D625AE205B00DAC8DD /* ibs_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */; };
 		B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D725AE205B00DAC8DD /* ContentView.swift */; };
@@ -212,6 +213,7 @@
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
 		B5D9675725E9955A004E0895 /* SuggestedTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTagList.swift; sourceTree = "<group>"; };
+		B5D9675F25E99C20004E0895 /* SaveButtonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButtonSection.swift; sourceTree = "<group>"; };
 		B5E01A7F25D03B2D00079309 /* AppDBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDBTests.swift; sourceTree = "<group>"; };
 		B5E3A8D225AE205B00DAC8DD /* ibs-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ibs-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibs_trackerApp.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				B5ED344625E91D2C0029B274 /* DatePickerSectionView.swift */,
 				B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */,
 				B5D9675225E984B0004E0895 /* EditableTagList.swift */,
+				B5D9675F25E99C20004E0895 /* SaveButtonSection.swift */,
 				B5D9675725E9955A004E0895 /* SuggestedTagList.swift */,
 			);
 			path = Shared;
@@ -788,6 +791,7 @@
 				B508993525B3672200B1EA03 /* BowelMovementShape.swift in Sources */,
 				B533AC2225BAEC36009B6290 /* WeightRow.swift in Sources */,
 				B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */,
+				B5D9676025E99C20004E0895 /* SaveButtonSection.swift in Sources */,
 				B508995325B3945800B1EA03 /* GutShape.swift in Sources */,
 				B54EA7AC25B23E6D008C4B74 /* Bristol6Shape.swift in Sources */,
 				B5E9D52925B63CC200E52387 /* RowIconView.swift in Sources */,
