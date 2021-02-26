@@ -11,37 +11,32 @@ struct FoodFormView: View {
   @Environment(\.presentationMode) private var presentation
   @EnvironmentObject private var appState: IBSData
 
+  @StateObject private var viewModel = FormViewModel()
   @State private var name: String = ""
-  @State private var timestamp: Date?
-  @State private var isValidTimestamp: Bool = true
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
-  @State private var tags = [String]()
-  @State private var newTag = ""
   @State private var recentFoodSelection: IBSRecord?
-  @State private var showAlert: Bool = false
   @State private var nameIsCompleted: Bool = false
-  @State private var isEditingTags: Bool = false
   @State private var tagIsFirstResponder: Bool = false
 
   init(for foodRecord: FoodRecord? = nil) {
     guard let record = foodRecord else { return }
     self.editableRecord = record
+    let vm = FormViewModel(timestamp: record.timestamp, tags: record.tags)
+    self._viewModel = StateObject(wrappedValue: vm)
     self._name = State(initialValue: record.text ?? "")
-    self._timestamp = State(initialValue: record.timestamp)
     self._size = State(initialValue: record.size ?? .none)
     self._risk = State(initialValue: record.risk ?? .none)
-    self._tags = State(initialValue: record.tags)
     self._nameIsCompleted = State(initialValue: true)
   }
 
   private var editMode: Bool { editableRecord != nil }
   private var editableRecord: IBSRecordType? = nil
 
-  private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !isEditingTags }
+  private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !viewModel.isEditingTags }
 
   private var recentFoodPlaceholder: String {
-    name.isEmpty && tags.isEmpty ? "Choose from recent meals" : "Replace with recent meal"
+    name.isEmpty && viewModel.tags.isEmpty ? "Choose from recent meals" : "Replace with recent meal"
   }
 
   private var recentFoods: [IBSRecord] {
@@ -49,8 +44,8 @@ struct FoodFormView: View {
   }
 
   private var record: IBSRecord? {
-    guard let timestamp = timestamp else { return nil }
-    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: tags, risk: risk, size: size)
+    guard let timestamp = viewModel.timestamp else { return nil }
+    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size)
   }
 
   private var suggestedTags: [String] {
@@ -59,14 +54,14 @@ struct FoodFormView: View {
         let availableTag = $0.lowercased()
         return
           nameIsCompleted &&
-          !tags.contains($0) &&
+          !viewModel.tags.contains($0) &&
           (
-            availableTag.contains(newTag.lowercased()) ||
+            availableTag.contains(viewModel.newTag.lowercased()) ||
               name.split(separator: " ").filter {
                 let word = String($0.lowercased())
                 return
                   word.count > 2 &&
-                  tags.filter { $0.lowercased().contains(word) }.isEmpty &&
+                  viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
                   (availableTag.contains(word) || word.contains(availableTag))
               }.isNotEmpty
           )
@@ -74,7 +69,7 @@ struct FoodFormView: View {
   }
 
   private var tagPlaceholder: String {
-    tags.isEmpty ? "Add ingredient" : "Add another ingredient"
+    viewModel.tags.isEmpty ? "Add ingredient" : "Add another ingredient"
   }
 
   var body: some View {
@@ -86,9 +81,9 @@ struct FoodFormView: View {
       Section {
         UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, isFirstResponder: nameIsFirstResponder, onCommit: commitName)
 
-        List { EditableTagList(tags: $tags) }
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
-        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $tags, newTag: $newTag) }
+        List { EditableTagList(tags: $viewModel.tags) }
+        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
 
       Section {
@@ -96,21 +91,20 @@ struct FoodFormView: View {
         riskPicker
       }
 
-      if name.isNotEmpty && tags.isNotEmpty {
-        SaveButtonSection(name: "Meal", record: record, isValidTimestamp: isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
+      if name.isNotEmpty && viewModel.tags.isNotEmpty {
+        SaveButtonSection(name: "Meal", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
-      DatePickerSectionView(timestamp: $timestamp, isValidTimestamp: $isValidTimestamp)
+      DatePickerSectionView(timestamp: $viewModel.timestamp, isValidTimestamp: $viewModel.isValidTimestamp)
     }
     .onAppear() {
-      guard timestamp == nil else { return }
-      timestamp = Date().nearest(5, .minute)
+      viewModel.setCurrentTimestamp()
     }
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      DeleteRecordToolbarItem(editMode: editMode, showAlert: $showAlert)
+      DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
     }
-    .alert(delete: editableRecord, appState: appState, isPresented: $showAlert) {
+    .alert(delete: editableRecord, appState: appState, isPresented: $viewModel.showAlert) {
       DispatchQueue.main.async {
         appState.tabSelection = .day
         presentation.wrappedValue.dismiss()
@@ -120,9 +114,9 @@ struct FoodFormView: View {
   }
 
   private var datePicker: some View {
-    UIKitBridge.SwiftUIDatePicker(selection: $timestamp, range: nil, minuteInterval: 5)
-      .onChange(of: timestamp) { value in
-        timestamp = value
+    UIKitBridge.SwiftUIDatePicker(selection: $viewModel.timestamp, range: nil, minuteInterval: 5)
+      .onChange(of: viewModel.timestamp) { value in
+        viewModel.timestamp = value
       }
   }
 
@@ -139,7 +133,7 @@ struct FoodFormView: View {
       .onChange(of: recentFoodSelection) { record in
         guard let record = record else { return }
         name = record.text ?? ""
-        tags = record.tags
+        viewModel.tags = record.tags
         recentFoodSelection = nil
       }
     }
@@ -164,14 +158,6 @@ struct FoodFormView: View {
     }
   }
 
-  private func addNewTag() {
-    let answer = newTag.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard answer.count > 0 else { return }
-
-    tags.append(answer)
-    newTag = ""
-  }
-
   private func commitName() {
     nameIsCompleted = true
     tagIsFirstResponder = true
@@ -179,10 +165,6 @@ struct FoodFormView: View {
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
     }
-  }
-
-  private func showTagSuggestions(_ isEditing: Bool) {
-    isEditingTags = isEditing
   }
 }
 

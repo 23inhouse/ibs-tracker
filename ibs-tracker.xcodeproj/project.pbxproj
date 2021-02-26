@@ -49,6 +49,7 @@
 		B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4425BD822C00E8B5AA /* IBSData.swift */; };
 		B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F4C25BD84E900E8B5AA /* DayRecord.swift */; };
 		B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5421F5125BD8D9400E8B5AA /* Date+String.swift */; };
+		B5456BB225E9AC9A009432DD /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456BB125E9AC9A009432DD /* FormViewModel.swift */; };
 		B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */; };
 		B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */; };
 		B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */; };
@@ -176,6 +177,7 @@
 		B5421F4425BD822C00E8B5AA /* IBSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSData.swift; sourceTree = "<group>"; };
 		B5421F4C25BD84E900E8B5AA /* DayRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecord.swift; sourceTree = "<group>"; };
 		B5421F5125BD8D9400E8B5AA /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
+		B5456BB125E9AC9A009432DD /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ModifierIf.swift"; sourceTree = "<group>"; };
 		B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol4Shape.swift; sourceTree = "<group>"; };
 		B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol3Shape.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		B5ED342925E8DA3D0029B274 /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				B5456BB125E9AC9A009432DD /* FormViewModel.swift */,
 				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
@@ -788,6 +791,7 @@
 				B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */,
 				B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */,
 				B52E466325D01F8000C009EC /* IBSRecord+MoodRecord.swift in Sources */,
+				B5456BB225E9AC9A009432DD /* FormViewModel.swift in Sources */,
 				B508993525B3672200B1EA03 /* BowelMovementShape.swift in Sources */,
 				B533AC2225BAEC36009B6290 /* WeightRow.swift in Sources */,
 				B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */,
