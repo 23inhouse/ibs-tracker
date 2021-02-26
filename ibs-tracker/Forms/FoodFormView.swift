@@ -109,17 +109,14 @@ struct FoodFormView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        if editMode {
-          Button(action: {
-            showAlert = true
-          }, label: {
-            Image(systemName: "trash")
-          })
-        }
+      DeleteRecordToolbarItem(editMode: editMode, showAlert: $showAlert)
+    }
+    .alert(delete: foodRecord as? IBSRecord, appState: appState, isPresented: $showAlert) {
+      DispatchQueue.main.async {
+        appState.tabSelection = .day
+        presentation.wrappedValue.dismiss()
       }
     }
-    .alert(isPresented: $showAlert) { deleteAlert }
     .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 
@@ -128,22 +125,6 @@ struct FoodFormView: View {
       .onChange(of: timestamp) { value in
         timestamp = value
       }
-  }
-
-  private var deleteAlert: Alert {
-    Alert(
-      title: Text("Are you sure?"),
-      message: Text("This will delete the item"),
-      primaryButton: .default (Text("OK")) {
-        delete {
-          DispatchQueue.main.async {
-            appState.tabSelection = .day
-            presentation.wrappedValue.dismiss()
-          }
-        }
-      },
-      secondaryButton: .cancel()
-    )
   }
 
   private var editableTagList: some View {
@@ -256,22 +237,6 @@ struct FoodFormView: View {
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
-    }
-  }
-
-  private func delete(completionHandler: () -> Void) {
-    completionHandler()
-
-    DispatchQueue.global(qos: .utility).async {
-      do {
-        guard let record = foodRecord as? IBSRecord else { return }
-        try record.deleteSQL(into: AppDB.current)
-        DispatchQueue.main.async {
-          appState.reloadRecordsFromSQL()
-        }
-      } catch {
-        print("Error: \(error)")
-      }
     }
   }
 

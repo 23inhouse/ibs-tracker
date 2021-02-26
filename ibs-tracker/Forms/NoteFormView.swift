@@ -75,34 +75,15 @@ struct NoteFormView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        if editMode {
-          Button(action: {
-            showAlert = true
-          }, label: {
-            Image(systemName: "trash")
-          })
-        }
+      DeleteRecordToolbarItem(editMode: editMode, showAlert: $showAlert)
+    }
+    .alert(delete: noteRecord as? IBSRecord, appState: appState, isPresented: $showAlert) {
+      DispatchQueue.main.async {
+        appState.tabSelection = .day
+        presentation.wrappedValue.dismiss()
       }
     }
-    .alert(isPresented: $showAlert) { deleteAlert }
     .gesture(DragGesture().onChanged { _ in endEditing(true) })
-  }
-
-  private var deleteAlert: Alert {
-    Alert(
-      title: Text("Are you sure?"),
-      message: Text("This will delete the item"),
-      primaryButton: .default (Text("OK")) {
-        delete {
-          DispatchQueue.main.async {
-            appState.tabSelection = .day
-            presentation.wrappedValue.dismiss()
-          }
-        }
-      },
-      secondaryButton: .cancel()
-    )
   }
 
   private var editableTagList: some View {
@@ -168,22 +149,6 @@ struct NoteFormView: View {
 
     tags.append(answer)
     newTag = ""
-  }
-
-  private func delete(completionHandler: () -> Void) {
-    completionHandler()
-
-    DispatchQueue.global(qos: .utility).async {
-      do {
-        guard let record = noteRecord as? IBSRecord else { return }
-        try record.deleteSQL(into: AppDB.current)
-        DispatchQueue.main.async {
-          appState.reloadRecordsFromSQL()
-        }
-      } catch {
-        print("Error: \(error)")
-      }
-    }
   }
 
   private func insertOrUpdate(completionHandler: @escaping () -> Void) {

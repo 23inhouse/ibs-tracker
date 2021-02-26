@@ -84,6 +84,8 @@
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
+		B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */; };
+		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E01A7F25D03B2D00079309 /* AppDBTests.swift */; };
 		B5E3A8D625AE205B00DAC8DD /* ibs_trackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */; };
 		B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8D725AE205B00DAC8DD /* ContentView.swift */; };
@@ -204,6 +206,8 @@
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
+		B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AlertDeleteRecord.swift"; sourceTree = "<group>"; };
+		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5E01A7F25D03B2D00079309 /* AppDBTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDBTests.swift; sourceTree = "<group>"; };
 		B5E3A8D225AE205B00DAC8DD /* ibs-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ibs-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3A8D525AE205B00DAC8DD /* ibs_trackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibs_trackerApp.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
+				B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */,
 				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
 			);
@@ -542,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				B5ED344625E91D2C0029B274 /* DatePickerSectionView.swift */,
+				B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -716,6 +722,7 @@
 				B52E466825D01FB700C009EC /* IBSRecord+NoteRecord.swift in Sources */,
 				B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */,
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
+				B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */,
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
 				B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */,
@@ -743,6 +750,7 @@
 				B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */,
 				B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */,
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
+				B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */,
 				B554CE3925D02D4200E2EE17 /* SQLIBSRecord.swift in Sources */,
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
