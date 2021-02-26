@@ -41,12 +41,14 @@ struct NoteRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .note, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
-      Text(text)
-        .font(font)
-        .foregroundColor(.secondary)
-        .frame(minHeight: 25, alignment: .leading)
+    NavigationLink(destination: NoteFormView(for: record)) {
+      DayRowView(type: .note, color: .secondary, tags: record.tags) {
+        TimestampView(record: record as! IBSRecord)
+        Text(text)
+          .font(font)
+          .foregroundColor(.secondary)
+          .frame(minHeight: 25, alignment: .leading)
+      }
     }
   }
 }

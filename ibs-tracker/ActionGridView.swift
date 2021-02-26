@@ -13,7 +13,7 @@ struct ActionGridView: View {
       VStack {
         HStack {
           IBSItemView(shape: TypeShape(type: .weight), text: "Weight")
-          IBSItemView(shape: TypeShape(type: .note), text: "Notes")
+          ActionNavigationLink(type: .note, text: "Notes") { NoteFormView() }
         }
         .padding(.leading)
         .padding(.trailing)
@@ -33,21 +33,18 @@ struct ActionGridView: View {
         .padding(.trailing)
 
         HStack {
-          NavigationLink(destination: FoodFormView()) {
-            IBSItemView(shape: TypeShape(type: .food), text: "Food")
-              .navigationBarTitleDisplayMode(.inline)
-              .toolbar {
-                ToolbarItem(placement: .principal) {
-                  Text("Add a meal")
-                }
-              }
-          }
+          ActionNavigationLink(type: .food, text: "Food") { FoodFormView() }
           IBSItemView(shape: TypeShape(type: .bm), text: "Stool")
         }
         .padding(.leading)
         .padding(.trailing)
       }
-      .navigationTitle("Add record")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          Text("Add record")
+        }
+      }
     }
   }
 }

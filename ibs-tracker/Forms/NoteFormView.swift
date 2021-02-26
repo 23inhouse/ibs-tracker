@@ -1,106 +1,72 @@
 //
-//  FoodFormView.swift
+//  NoteFormView.swift
 //  ibs-tracker
 //
-//  Created by Benjamin Lewis on 11/2/21.
+//  Created by Benjamin Lewis on 26/2/21.
 //
 
 import SwiftUI
 
-struct FoodFormView: View {
+struct NoteFormView: View {
   @Environment(\.presentationMode) private var presentation
   @EnvironmentObject private var appState: IBSData
 
-  @State private var name: String = ""
+  @State private var text: String = ""
   @State private var timestamp: Date? {
     didSet {
       isValidTimestamp = isValid(timestamp: timestamp)
     }
   }
-  @State private var size: FoodSizes = .none
-  @State private var risk: Scales = .none
   @State private var tags = [String]()
   @State private var newTag = ""
-  @State private var recentFoodSelection: IBSRecord?
   @State private var showAlert: Bool = false
   @State private var isValidTimestamp: Bool = true
-  @State private var nameIsCompleted: Bool = false
   @State private var isEditingTags: Bool = false
-  @State private var tagIsFirstResponder: Bool = false
 
-  init(for foodRecord: FoodRecord? = nil) {
-    self.foodRecord = foodRecord
-    guard let record = foodRecord else { return }
-    self._name = State(initialValue: record.text ?? "")
+  init(for noteRecord: NoteRecord? = nil) {
+    self.noteRecord = noteRecord
+    guard let record = noteRecord else { return }
+    self._text = State(initialValue: record.text ?? "")
     self._timestamp = State(initialValue: record.timestamp)
-    self._size = State(initialValue: record.size ?? .none)
-    self._risk = State(initialValue: record.risk ?? .none)
     self._tags = State(initialValue: record.tags)
-    self._nameIsCompleted = State(initialValue: true)
   }
 
   private var editMode: Bool {
-    get { foodRecord != nil }
+    get { noteRecord != nil }
   }
 
   private var editableTags: [String] { tags }
 
-  private var foodRecord: FoodRecord? = nil
-
-  private var recentFoodPlaceholder: String {
-    name.isEmpty && tags.isEmpty ? "Choose from recent meals" : "Replace with recent meal"
-  }
-
-  private var recentFoods: [IBSRecord] {
-    appState.recentRecords(of: .food)
-  }
-
-  private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !isEditingTags }
+  private var noteRecord: NoteRecord? = nil
 
   private var suggestedTags: [String] {
     return
-      appState.tags(for: .food).filter {
+      appState.tags(for: .note).filter {
         let availableTag = $0.lowercased()
         return
-          nameIsCompleted &&
           !editableTags.contains($0) &&
-          (
-            availableTag.contains(newTag.lowercased()) ||
-              name.split(separator: " ").filter {
-                let word = String($0.lowercased())
-                return
-                  word.count > 2 &&
-                  editableTags.filter { $0.lowercased().contains(word) }.isEmpty &&
-                  (availableTag.contains(word) || word.contains(availableTag))
-              }.isNotEmpty
-          )
+          availableTag.contains(newTag.lowercased())
     }
   }
 
   private var tagPlaceholder: String {
-    tags.isEmpty ? "Add ingredient" : "Add another ingredient"
+    tags.isEmpty ? "Add tag" : "Add another tag"
   }
 
   var body: some View {
     Form {
-      if recentFoods.isNotEmpty {
-        recentFoodSection
+      Section {
+        TextEditor(text: $text)
+          .frame(height: 200)
       }
 
       Section {
-        UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, isFirstResponder: nameIsFirstResponder, onCommit: commitName)
-
         List { editableTagList }
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
+        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $newTag, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
         List { suggestedTagList }
       }
 
-      Section {
-        sizePicker
-        riskPicker
-      }
-
-      if name.isNotEmpty && tags.isNotEmpty {
+      if text.isNotEmpty {
         insertOrUpdateButtonSection
           .disabled(!isValidTimestamp)
       }
@@ -186,7 +152,7 @@ struct FoodFormView: View {
           }
         }
       }) {
-        Text(editMode ? "Update meal" : "Add meal")
+        Text(editMode ? "Update note" : "Add note")
           .frame(maxWidth: .infinity)
       }
     }
@@ -202,44 +168,6 @@ struct FoodFormView: View {
         .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
     }
 
-  }
-
-  private var recentFoodSection: some View {
-    Section {
-      Picker(recentFoodPlaceholder, selection: $recentFoodSelection) {
-        ForEach(recentFoods, id: \.self) { record in
-          VStack(alignment: .leading) {
-            Text(record.text ?? "")
-            TagCloudView(tags: record.tags)
-          }.tag(record as IBSRecord?)
-        }
-      }
-      .onChange(of: recentFoodSelection) { record in
-        guard let record = record else { return }
-        name = record.text ?? ""
-        tags = record.tags
-        recentFoodSelection = nil
-      }
-    }
-  }
-
-  private var riskPicker: some View {
-    Picker("Risk", selection: $risk) {
-      ForEach(Scales.allCases, id: \.self) { scale in
-        VStack(alignment: .leading) {
-          Text(Scales.foodRiskDescriptions[scale]?.capitalized ?? "")
-        }.tag(scale)
-      }
-    }
-  }
-
-  private var sizePicker: some View {
-    Picker("Size", selection: $size) {
-      ForEach(FoodSizes.allCases, id: \.self) { foodSize in
-        Text(FoodSizes.descriptions[foodSize]?.capitalized ?? "")
-          .tag(foodSize)
-      }
-    }
   }
 
   private var suggestedTagList: some View {
@@ -261,21 +189,12 @@ struct FoodFormView: View {
     newTag = ""
   }
 
-  private func commitName() {
-    nameIsCompleted = true
-    tagIsFirstResponder = true
-    name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
-      tagIsFirstResponder = false
-    }
-  }
-
   private func delete(completionHandler: () -> Void) {
     completionHandler()
 
     DispatchQueue.global(qos: .utility).async {
       do {
-        guard let record = foodRecord as? IBSRecord else { return }
+        guard let record = noteRecord as? IBSRecord else { return }
         try record.deleteSQL(into: AppDB.current)
         DispatchQueue.main.async {
           appState.reloadRecordsFromSQL()
@@ -292,10 +211,10 @@ struct FoodFormView: View {
     DispatchQueue.global(qos: .userInteractive).async {
       do {
         guard let timestamp = timestamp else { return }
-        let record = IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: tags, risk: risk, size: size)
+        let record = IBSRecord(note: text, timestamp: timestamp.nearest(5, .minute), tags: tags)
 
-        if let foodRecord = foodRecord {
-          try record.updateSQL(into: AppDB.current, timestamp: foodRecord.timestamp)
+        if let noteRecord = noteRecord {
+          try record.updateSQL(into: AppDB.current, timestamp: noteRecord.timestamp)
         } else {
           try record.insertSQL(into: AppDB.current)
         }
@@ -317,9 +236,9 @@ struct FoodFormView: View {
   }
 }
 
-struct FoodFormView_Previews: PreviewProvider {
+struct NoteFormView_Previews: PreviewProvider {
   static var previews: some View {
-    FoodFormView()
+    NoteFormView()
       .environmentObject(IBSData())
   }
 }

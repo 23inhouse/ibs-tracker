@@ -101,6 +101,8 @@
 		B5E9D54A25B7001200E52387 /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54925B7001200E52387 /* NoteRow.swift */; };
 		B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54E25B71D2500E52387 /* NoteShape.swift */; };
 		B5ED341825E7C46B0029B274 /* food-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5ED341725E7C46B0029B274 /* food-tags.txt */; };
+		B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED342A25E8DA760029B274 /* NoteFormView.swift */; };
+		B5ED343325E8DAEE0029B274 /* ActionNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */; };
 		B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */; };
 		B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367325BC85C600DC9D74 /* SearchView.swift */; };
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
@@ -224,6 +226,8 @@
 		B5E9D54925B7001200E52387 /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		B5E9D54E25B71D2500E52387 /* NoteShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShape.swift; sourceTree = "<group>"; };
 		B5ED341725E7C46B0029B274 /* food-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "food-tags.txt"; sourceTree = "<group>"; };
+		B5ED342A25E8DA760029B274 /* NoteFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFormView.swift; sourceTree = "<group>"; };
+		B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNavigationLink.swift; sourceTree = "<group>"; };
 		B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarFilterIconView.swift; sourceTree = "<group>"; };
 		B5EE367325BC85C600DC9D74 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
@@ -471,9 +475,9 @@
 				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
-				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
 				B508994E25B3728E00B1EA03 /* DayListRows */,
+				B5ED342925E8DA3D0029B274 /* Forms */,
 				B508993225B366D600B1EA03 /* TypeShapes */,
 				B54EA78D25B1C46B008C4B74 /* BristolShapes */,
 				B5B3260D25B31DD10023E286 /* Protocols */,
@@ -522,9 +526,19 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		B5ED342925E8DA3D0029B274 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
+				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
 		B5EE367D25BC872200DC9D74 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */,
 				B508993C25B36C0B00B1EA03 /* IBSItemView.swift */,
 				B5E9D52825B63CC200E52387 /* RowIconView.swift */,
 				B5E9D53625B64D5900E52387 /* PropertyView.swift */,
@@ -689,6 +703,7 @@
 				B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */,
 				B54EA7B125B24275008C4B74 /* Bristol1Shape.swift in Sources */,
 				B52E466825D01FB700C009EC /* IBSRecord+NoteRecord.swift in Sources */,
+				B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */,
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
@@ -704,6 +719,7 @@
 				B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */,
 				B5E9D54A25B7001200E52387 /* NoteRow.swift in Sources */,
 				B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */,
+				B5ED343325E8DAEE0029B274 /* ActionNavigationLink.swift in Sources */,
 				B508996325B4A79600B1EA03 /* AcheShape.swift in Sources */,
 				B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */,
 				B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */,
