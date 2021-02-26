@@ -91,6 +91,8 @@
 		B5E3A8DD25AE205D00DAC8DD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5E3A8DC25AE205D00DAC8DD /* Preview Assets.xcassets */; };
 		B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8E725AE205D00DAC8DD /* ibs_trackerTests.swift */; };
 		B5E3A8F325AE205D00DAC8DD /* ibs_trackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3A8F225AE205D00DAC8DD /* ibs_trackerUITests.swift */; };
+		B5E5914C25E57D4C00AE3DD1 /* SwiftUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */; };
+		B5E5915425E6748700AE3DD1 /* View+EndEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */; };
 		B5E9D50B25B6343700E52387 /* DayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D50A25B6343700E52387 /* DayRowView.swift */; };
 		B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D51E25B6355700E52387 /* TimestampView.swift */; };
 		B5E9D52925B63CC200E52387 /* RowIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D52825B63CC200E52387 /* RowIconView.swift */; };
@@ -212,6 +214,8 @@
 		B5E3A8EE25AE205D00DAC8DD /* ibs-trackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ibs-trackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E3A8F225AE205D00DAC8DD /* ibs_trackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ibs_trackerUITests.swift; sourceTree = "<group>"; };
 		B5E3A8F425AE205D00DAC8DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextField.swift; sourceTree = "<group>"; };
+		B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EndEditing.swift"; sourceTree = "<group>"; };
 		B5E9D50A25B6343700E52387 /* DayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRowView.swift; sourceTree = "<group>"; };
 		B5E9D51E25B6355700E52387 /* TimestampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampView.swift; sourceTree = "<group>"; };
 		B5E9D52825B63CC200E52387 /* RowIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowIconView.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
+				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
 			);
 			path = Extensions;
@@ -387,8 +392,9 @@
 			isa = PBXGroup;
 			children = (
 				B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */,
-				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
 				B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */,
+				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
+				B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */,
 			);
 			path = UIKitBridge;
 			sourceTree = "<group>";
@@ -743,11 +749,13 @@
 				B5E9D52925B63CC200E52387 /* RowIconView.swift in Sources */,
 				B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */,
 				B5207E9125D3E7530019D18F /* AppDB+MutablePersistableRecord.swift in Sources */,
+				B5E5915425E6748700AE3DD1 /* View+EndEditing.swift in Sources */,
 				B52E465E25D01EFE00C009EC /* IBSRecord+MedicationRecord.swift in Sources */,
 				B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */,
 				B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */,
 				B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */,
 				B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */,
+				B5E5914C25E57D4C00AE3DD1 /* SwiftUITextField.swift in Sources */,
 				B5207E5C25D18D240019D18F /* Migratable.swift in Sources */,
 				B554CE3825D02D4200E2EE17 /* AppDB.swift in Sources */,
 			);
