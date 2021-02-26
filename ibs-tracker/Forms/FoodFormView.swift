@@ -12,18 +12,14 @@ struct FoodFormView: View {
   @EnvironmentObject private var appState: IBSData
 
   @State private var name: String = ""
-  @State private var timestamp: Date? {
-    didSet {
-      isValidTimestamp = isValid(timestamp: timestamp)
-    }
-  }
+  @State private var timestamp: Date?
+  @State private var isValidTimestamp: Bool = true
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
   @State private var tags = [String]()
   @State private var newTag = ""
   @State private var recentFoodSelection: IBSRecord?
   @State private var showAlert: Bool = false
-  @State private var isValidTimestamp: Bool = true
   @State private var nameIsCompleted: Bool = false
   @State private var isEditingTags: Bool = false
   @State private var tagIsFirstResponder: Bool = false
@@ -105,14 +101,7 @@ struct FoodFormView: View {
           .disabled(!isValidTimestamp)
       }
 
-      Section {
-        datePicker
-      }
-      .modifierIf(!isValidTimestamp) {
-        $0
-          .listRowBackground(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
-          .opacity(0.8)
-      }
+      DatePickerSectionView(timestamp: $timestamp, isValidTimestamp: $isValidTimestamp)
     }
     .onAppear() {
       guard timestamp == nil else { return }
@@ -304,12 +293,6 @@ struct FoodFormView: View {
         print("Error: \(error)")
       }
     }
-  }
-
-  private func isValid(timestamp: Date?) -> Bool {
-    guard let timestamp = timestamp else { return false }
-
-    return appState.isAvailable(timestamp: timestamp)
   }
 
   private func showTagSuggestions(_ isEditing: Bool) {

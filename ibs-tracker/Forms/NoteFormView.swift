@@ -12,15 +12,11 @@ struct NoteFormView: View {
   @EnvironmentObject private var appState: IBSData
 
   @State private var text: String = ""
-  @State private var timestamp: Date? {
-    didSet {
-      isValidTimestamp = isValid(timestamp: timestamp)
-    }
-  }
+  @State private var timestamp: Date?
+  @State private var isValidTimestamp: Bool = true
   @State private var tags = [String]()
   @State private var newTag = ""
   @State private var showAlert: Bool = false
-  @State private var isValidTimestamp: Bool = true
   @State private var isEditingTags: Bool = false
 
   init(for noteRecord: NoteRecord? = nil) {
@@ -71,14 +67,7 @@ struct NoteFormView: View {
           .disabled(!isValidTimestamp)
       }
 
-      Section {
-        datePicker
-      }
-      .modifierIf(!isValidTimestamp) {
-        $0
-          .listRowBackground(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
-          .opacity(0.8)
-      }
+      DatePickerSectionView(timestamp: $timestamp, isValidTimestamp: $isValidTimestamp)
     }
     .onAppear() {
       guard timestamp == nil else { return }
@@ -98,13 +87,6 @@ struct NoteFormView: View {
     }
     .alert(isPresented: $showAlert) { deleteAlert }
     .gesture(DragGesture().onChanged { _ in endEditing(true) })
-  }
-
-  private var datePicker: some View {
-    UIKitBridge.SwiftUIDatePicker(selection: $timestamp, range: nil, minuteInterval: 5)
-      .onChange(of: timestamp) { value in
-        timestamp = value
-      }
   }
 
   private var deleteAlert: Alert {
@@ -167,7 +149,6 @@ struct NoteFormView: View {
         .opacity(0.8)
         .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
     }
-
   }
 
   private var suggestedTagList: some View {
@@ -223,12 +204,6 @@ struct NoteFormView: View {
         print("Error: \(error)")
       }
     }
-  }
-
-  private func isValid(timestamp: Date?) -> Bool {
-    guard let timestamp = timestamp else { return false }
-
-    return appState.isAvailable(timestamp: timestamp)
   }
 
   private func showTagSuggestions(_ isEditing: Bool) {
