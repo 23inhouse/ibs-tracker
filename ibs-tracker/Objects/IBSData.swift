@@ -59,6 +59,16 @@ extension IBSData {
   func reloadRecordsFromSQL() {
     allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
   }
+
+  func tags(for type: ItemType) -> [String] {
+    var tags: [SQLTagRecord?] = []
+    do {
+      tags = try appDB.selectRecords(in: SQLTagRecord.self, of: type)
+    } catch {
+      print("Error: Couldn't load records from sql: \(error)")
+    }
+    return tags.map { $0!.name }
+  }
 }
 
 private extension IBSData {

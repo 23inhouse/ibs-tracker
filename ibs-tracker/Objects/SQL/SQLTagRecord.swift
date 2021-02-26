@@ -55,5 +55,6 @@ extension SQLTagRecord: Migratable {
     }
 
     try db.create(index: "name-type", on: "IBSTags", columns: ["name", "type"])
+    try db.create(index: "type", on: "IBSTags", columns: ["type"], unique: false)
   }
 }

@@ -62,4 +62,13 @@ extension AppDB {
       return try request.fetchOne(db)
     }
   }
+
+  func selectRecords<T>(in _: T.Type, of type: ItemType) throws -> [QueryInterfaceRequest<T>.RowDecoder?] where T: FetchableRecord & TableRecord & MutablePersistableRecord {
+    try dbWriter.read { db in
+      let request = T
+        .filter(Column("type") == type.rawValue)
+
+      return try request.fetchAll(db)
+    }
+  }
 }

@@ -24,6 +24,8 @@ struct FoodFormView: View {
   @State private var recentFoodSelection: IBSRecord?
   @State private var showAlert: Bool = false
   @State private var isValidTimestamp: Bool = true
+  @State private var nameIsCompleted: Bool = false
+  @State private var isEditingTags: Bool = false
 
   init(for foodRecord: FoodRecord? = nil) {
     self.foodRecord = foodRecord
@@ -55,6 +57,29 @@ struct FoodFormView: View {
     appState.recentRecords(of: .food)
   }
 
+  private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !isEditingTags }
+
+  private var ingredientIsFirstResponder: Bool { nameIsCompleted }
+
+  private var suggestedTags: [String] {
+    return
+      appState.tags(for: .food).filter {
+        let availableTag = $0.lowercased()
+        return
+          !tagList.contains($0) &&
+          (
+            availableTag.contains(newTag.lowercased()) ||
+              name.split(separator: " ").filter {
+                let word = String($0.lowercased())
+                return
+                  word.count > 2 &&
+                  tagList.filter { $0.lowercased().contains(word) }.isEmpty &&
+                  (availableTag.contains(word) || word.contains(availableTag))
+              }.isNotEmpty
+          )
+    }
+  }
+
   var body: some View {
     Form {
       if recentFoods.isNotEmpty {
@@ -62,15 +87,20 @@ struct FoodFormView: View {
       }
 
       Section {
-        TextField("Meal name. e.g. Pizza", text: $name)
-
-        if tags.isNotEmpty {
-          Text("Ingredients")
-            .foregroundColor(.secondary)
-        }
+        UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, isFirstResponder: nameIsFirstResponder, onCommit: commitName)
 
         List { listItems }
-        TextField(ingredientPlaceholder, text: $newTag, onCommit: addNewTag)
+        UIKitBridge.SwiftUITextField(ingredientPlaceholder, text: $newTag, isFirstResponder: ingredientIsFirstResponder, onEditingChanged: showTagSuggestions, onCommit: addNewTag)
+        if isEditingTags || suggestedTags.isNotEmpty  {
+          List {
+            ForEach(suggestedTags, id: \.self) { value in
+              Button(value) {
+                tags.append(value)
+                newTag = ""
+              }
+            }
+          }
+        }
       }
 
       Section {
@@ -110,6 +140,7 @@ struct FoodFormView: View {
       }
     }
     .alert(isPresented: $showAlert) { deleteAlert }
+    .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 
   private var datePicker: some View {
@@ -228,6 +259,14 @@ struct FoodFormView: View {
     newTag = ""
   }
 
+  private func commitName() {
+    nameIsCompleted = true
+    name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
+      nameIsCompleted = false
+    }
+  }
+
   private func delete(completionHandler: () -> Void) {
     completionHandler()
 
@@ -268,6 +307,10 @@ struct FoodFormView: View {
     guard let timestamp = timestamp else { return false }
 
     return appState.isAvailable(timestamp: timestamp)
+  }
+
+  private func showTagSuggestions(_ isEditing: Bool) {
+    isEditingTags = isEditing
   }
 }
 
