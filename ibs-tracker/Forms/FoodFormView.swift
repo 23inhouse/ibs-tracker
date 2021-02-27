@@ -73,7 +73,7 @@ struct FoodFormView: View {
   }
 
   var body: some View {
-    Form {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) {
       if recentFoods.isNotEmpty {
         recentFoodSection
       }
@@ -94,23 +94,7 @@ struct FoodFormView: View {
       if name.isNotEmpty && viewModel.tags.isNotEmpty {
         SaveButtonSection(name: "Meal", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
-
-      DatePickerSectionView(timestamp: $viewModel.timestamp, isValidTimestamp: $viewModel.isValidTimestamp)
     }
-    .onAppear() {
-      viewModel.setCurrentTimestamp()
-    }
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
-    }
-    .alert(delete: editableRecord, appState: appState, isPresented: $viewModel.showAlert) {
-      DispatchQueue.main.async {
-        appState.tabSelection = .day
-        presentation.wrappedValue.dismiss()
-      }
-    }
-    .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 
   private var datePicker: some View {
@@ -142,9 +126,8 @@ struct FoodFormView: View {
   private var riskPicker: some View {
     Picker("Risk", selection: $risk) {
       ForEach(Scales.allCases, id: \.self) { scale in
-        VStack(alignment: .leading) {
-          Text(Scales.foodRiskDescriptions[scale]?.capitalized ?? "")
-        }.tag(scale)
+        Text(Scales.foodRiskDescriptions[scale]?.capitalized ?? "")
+          .tag(scale)
       }
     }
   }
