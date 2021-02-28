@@ -28,6 +28,7 @@ struct ibs_trackerApp: App {
     WindowGroup {
       if loadApp {
         ContentView()
+          .onAppear { UIView.setAnimationsEnabled(false) }
           .environmentObject(IBSData.current)
       } else {
         ZStack {}
