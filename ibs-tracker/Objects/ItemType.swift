@@ -54,16 +54,15 @@ enum MedicationType: String {
   case other
   case none
 
-  init(from value: String?) {
-    guard value != nil else {
-      self = .none
-      return
+  init?(from value: String?) {
+    guard let value = value else {
+      return nil
     }
 
-    if let item = MedicationType(rawValue: value ?? "") {
+    if let item = MedicationType(rawValue: value) {
       self = item
     } else {
-      print("Error: medication record type [\(String(describing: value))] out of range")
+      print("Error: medication record type [\(value)] out of range")
       self = .other
     }
   }

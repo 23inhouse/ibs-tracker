@@ -41,7 +41,7 @@ extension IBSRecord: Codable {
     headache = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .headache))
     feel = MoodType(optionalValue: try values.decodeIfPresent(Int.self, forKey: .feel))
     stress = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .stress))
-    medicationType = MedicationType(optionalValue: try values.decodeIfPresent(String.self, forKey: .medicationType))
+    medicationType = MedicationType(from: try values.decodeIfPresent(String.self, forKey: .medicationType))
     weight = try values.decodeIfPresent(Decimal.self, forKey: .weight)
     tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
   }
