@@ -205,7 +205,7 @@ struct FoodFormView: View {
     Picker("Risk", selection: $risk) {
       ForEach(Scales.allCases, id: \.self) { scale in
         VStack(alignment: .leading) {
-          Text(IBSRecord.foodRiskTexts[scale]?.capitalized ?? "")
+          Text(Scales.foodRiskDescriptions[scale]?.capitalized ?? "")
         }.tag(scale)
       }
     }
@@ -214,7 +214,7 @@ struct FoodFormView: View {
   private var sizePicker: some View {
     Picker("Size", selection: $size) {
       ForEach(FoodSizes.allCases, id: \.self) { foodSize in
-        Text(IBSRecord.foodSizeTexts[foodSize]?.capitalized ?? "")
+        Text(FoodSizes.descriptions[foodSize]?.capitalized ?? "")
           .tag(foodSize)
       }
     }

@@ -31,26 +31,10 @@ extension IBSRecord: GutRecord {
   }
 
   func bloatingText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no bloating at all",
-      .mild: "mild feeling of bloating",
-      .moderate: "moderate feeling of bloating",
-      .severe: "severe feeling of bloating",
-      .extreme: "extreme feeling of bloating",
-    ]
-
-    return texts[bloating ?? .zero] ?? ""
+    return Scales.bloatingDescriptions[bloating ?? .zero] ?? ""
   }
 
   func gutPainText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no tummy pain at all",
-      .mild: "mild tummy pain",
-      .moderate: "moderate tummy pain",
-      .severe: "severe tummy pain",
-      .extreme: "extreme tummy pain",
-    ]
-
-    return texts[bodyache ?? .zero] ?? ""
+    return Scales.gutPainDescriptions[bodyache ?? .zero] ?? ""
   }
 }

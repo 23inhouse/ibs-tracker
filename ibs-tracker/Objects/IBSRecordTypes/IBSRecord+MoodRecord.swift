@@ -30,27 +30,11 @@ extension IBSRecord: MoodRecord {
   }
 
   func feelText() -> String {
-    let texts: [MoodType: String] = [
-      .great: "I feel very good",
-      .good: "I feel good",
-      .soso: "I feel so so",
-      .bad: "I don't feel good",
-      .awful: "I feel awful",
-    ]
-
-    return texts[feel ?? .none] ?? ""
+    return MoodType.descriptions[feel ?? .none] ?? ""
   }
 
   func stressText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no stressed at all",
-      .mild: "I feel a little stress",
-      .moderate: "I feel somewhat stressed",
-      .severe: "I feel really stressed",
-      .extreme: "I feel extremely stressed",
-    ]
-
-    return texts[stress ?? .zero] ?? ""
+    return Scales.stressDescriptions[stress ?? .zero] ?? ""
   }
 }
 

@@ -32,10 +32,10 @@ extension IBSRecord: FoodRecord {
   }
 
   func riskText() -> String {
-    return IBSRecord.foodRiskTexts[risk ?? .zero] ?? ""
+    return Scales.foodRiskDescriptions[risk ?? .zero] ?? ""
   }
 
   func sizeText() -> String {
-    return IBSRecord.foodSizeTexts[size ?? .none] ?? ""
+    return FoodSizes.descriptions[size ?? .none] ?? ""
   }
 }

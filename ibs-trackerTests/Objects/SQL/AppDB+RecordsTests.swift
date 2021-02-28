@@ -89,7 +89,7 @@ class AppDB_RecordsTests: XCTestCase {
       let datetime = Date.init(timeIntervalSinceReferenceDate: Double($0) * 300)
       let randomTag = String((0..<10).map{ _ in "ab".randomElement()! })
       return IBSRecord(
-        bristolScale: 4,
+        bristolScale: .b4,
         timestamp: datetime,
         tags: ["No wiping required", "Ghosty", randomTag]
       )

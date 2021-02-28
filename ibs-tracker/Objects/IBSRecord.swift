@@ -23,22 +23,6 @@ struct IBSRecord {
   var medicationType: MedicationType?
   var weight: Decimal?
   var tags: [String] = []
-
-  static let foodRiskTexts: [Scales: String] = [
-    .zero: "no risk at all",
-    .mild: "mildly risky",
-    .moderate: "moderatly risky",
-    .severe: "I should't eat this",
-    .extreme: "I know I can't eat this",
-  ]
-
-  static let foodSizeTexts: [FoodSizes: String] = [
-    .tiny: "tiny portion",
-    .small: "small portion",
-    .normal: "normal portion",
-    .large: "large portion",
-    .huge: "huge portion",
-  ]
 }
 
 extension IBSRecord: Hashable {}

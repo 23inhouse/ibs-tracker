@@ -32,7 +32,7 @@ struct ItemTypeDayRowView: View {
 struct ItemTypeDayRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack {
-      ItemTypeDayRowView(record: IBSRecord(bristolScale: 3, timestamp: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(bristolScale: .b3, timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: .mild, size: .large))
       ItemTypeDayRowView(record: IBSRecord(note: "A custome note", timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(medication: "Vitamin", type: .probiotic, timestamp: Date(), tags: ["tag"]))

@@ -19,7 +19,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   }
 
   func testDeleteSQL() throws {
-    let ibsRecord = IBSRecord(bristolScale: 4, timestamp: Date())
+    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: Date())
     try ibsRecord.insertSQL(into: appDB)
 
     try ibsRecord.deleteSQL(into: appDB)
@@ -29,7 +29,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   }
 
   func testInsertSQL() throws {
-    let ibsRecord = IBSRecord(bristolScale: 4, timestamp: Date())
+    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: Date())
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -38,10 +38,10 @@ class IBSRecord_GRDBTests: XCTestCase {
 
   func testInsertSQLInvalid() throws {
     let date = Date()
-    let ibsRecord = IBSRecord(bristolScale: 4, timestamp: date)
+    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: date)
     try ibsRecord.insertSQL(into: appDB)
 
-    let invalidIBSRecord = IBSRecord(bristolScale: 3, timestamp: date)
+    let invalidIBSRecord = IBSRecord(bristolScale: .b3, timestamp: date)
 
     XCTAssertThrowsError(try invalidIBSRecord.insertSQL(into: appDB), "Should throw an error")
 
@@ -54,7 +54,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     let originalBristolScale = BristolType.b4
     let newBristolScale = BristolType.b3
 
-    var ibsRecord = IBSRecord(bristolScale: originalBristolScale.rawValue, timestamp: Date())
+    var ibsRecord = IBSRecord(bristolScale: originalBristolScale, timestamp: Date())
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -82,7 +82,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   func testUpdateSQLChangeTheTimestamp() throws {
     let recordTypeStrng = ItemType.bm.rawValue
 
-    var ibsRecord = IBSRecord(bristolScale: 3, timestamp: Date())
+    var ibsRecord = IBSRecord(bristolScale: .b3, timestamp: Date())
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -116,7 +116,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     var calender = Calendar.current
     calender.timeZone = TimeZone(abbreviation: "UTC")!
     let date = calender.startOfDay(for: Date())
-    let ibsRecord = IBSRecord(bristolScale: 3, timestamp: date, tags: invalidTags)
+    let ibsRecord = IBSRecord(bristolScale: .b3, timestamp: date, tags: invalidTags)
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)

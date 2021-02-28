@@ -31,26 +31,10 @@ extension IBSRecord: AcheRecord {
   }
 
   func headacheText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no headache at all",
-      .mild: "mild headache",
-      .moderate: "moderate headache",
-      .severe: "severe headache",
-      .extreme: "extreme headache",
-    ]
-
-    return texts[headache ?? .zero] ?? ""
+    return Scales.headAcheDescriptions[headache ?? .zero] ?? ""
   }
 
   func bodyacheText() -> String {
-    let texts: [Scales: String] = [
-      .zero: "no pain at all",
-      .mild: "mild pain",
-      .moderate: "moderate pain",
-      .severe: "severe pain",
-      .extreme: "extreme pain",
-    ]
-
-    return texts[bodyache ?? .zero] ?? ""
+    return Scales.bodyAcheDescriptions[bodyache ?? .zero] ?? ""
   }
 }
