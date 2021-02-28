@@ -33,8 +33,6 @@ struct FoodFormView: View {
   private var editMode: Bool { editableRecord != nil }
   private var editableRecord: IBSRecordType? = nil
 
-  private var nameIsFirstResponder: Bool { name.isEmpty && !nameIsCompleted && !viewModel.isEditingTags }
-
   private var recentFoodPlaceholder: String {
     name.isEmpty && viewModel.tags.isEmpty ? "Choose from recent meals" : "Replace with recent meal"
   }
@@ -79,7 +77,7 @@ struct FoodFormView: View {
       }
 
       Section {
-        UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, isFirstResponder: nameIsFirstResponder, onCommit: commitName)
+        UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, onCommit: commitName)
 
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
