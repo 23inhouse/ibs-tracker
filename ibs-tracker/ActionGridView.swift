@@ -34,7 +34,7 @@ struct ActionGridView: View {
 
         HStack {
           ActionNavigationLink(type: .food, text: "Food") { FoodFormView() }
-          IBSItemView(shape: TypeShape(type: .bm), text: "Stool")
+          ActionNavigationLink(type: .bm, text: "Poop") { BMFormView() }
         }
         .padding(.leading)
         .padding(.trailing)

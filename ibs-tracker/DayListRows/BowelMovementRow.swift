@@ -15,13 +15,15 @@ struct BowelMovementRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .bm, color: .primary, bristolScale: record.bristolScale, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
-      Text(record.bristolDescription())
-        .font(.callout)
-        .foregroundColor(.secondary)
-        .frame(height: 25, alignment: .leading)
-        .lineLimit(1)
+    NavigationLink(destination: BMFormView(for: record)) {
+      DayRowView(type: .bm, color: .primary, bristolScale: record.bristolScale, tags: record.tags) {
+        TimestampView(record: record as! IBSRecord)
+        Text(record.bristolDescription())
+          .font(.callout)
+          .foregroundColor(.secondary)
+          .frame(height: 25, alignment: .leading)
+          .lineLimit(1)
+      }
     }
   }
 }

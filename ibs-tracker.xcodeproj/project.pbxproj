@@ -89,6 +89,7 @@
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
+		B5B4D2AE25EB9E9E000D7D23 /* BMFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */; };
 		B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25725ED04F400A5027C /* records-day-two-days.json */; };
 		B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25825ED04F400A5027C /* records-day-one-only.json */; };
 		B5BCF28525EE421A00F88D01 /* String+CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */; };
@@ -222,6 +223,7 @@
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
+		B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMFormView.swift; sourceTree = "<group>"; };
 		B5B9E25725ED04F400A5027C /* records-day-two-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-two-days.json"; sourceTree = "<group>"; };
 		B5B9E25825ED04F400A5027C /* records-day-one-only.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-one-only.json"; sourceTree = "<group>"; };
 		B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirstLetter.swift"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 			children = (
 				B5456BB125E9AC9A009432DD /* FormViewModel.swift */,
 				B5456BC225E9B618009432DD /* FormView.swift */,
+				B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */,
 				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
@@ -764,6 +767,7 @@
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
 				B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */,
+				B5B4D2AE25EB9E9E000D7D23 /* BMFormView.swift in Sources */,
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,

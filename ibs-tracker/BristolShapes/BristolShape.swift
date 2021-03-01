@@ -11,7 +11,6 @@ import PureSwiftUI
 private let strokeStyle = StrokeStyle(lineWidth: 5, lineJoin: .round)
 
 struct BristolShape: Shape {
-
   var scale: BristolType
 
   let bristols: [BristolType: Pathable] = [
