@@ -20,7 +20,7 @@ extension AppDB {
       if truncate {
         try truncateRecords()
       }
-      try loadTags(.food)
+      try loadAllTags()
       try importRecords(dataSet.ibsRecords)
     } catch {
       print("Error: \(error)")

@@ -15,6 +15,15 @@ extension AppDB {
     }
   }
 
+  func countRecords<T>(in _: T.Type, of type: String) throws -> Int where T: MutablePersistableRecord {
+    try dbWriter.write { db in
+      let request = T
+        .filter(Column("type") == type)
+
+      return try request.fetchCount(db)
+    }
+  }
+
   func deleteRecords<T>(in _: T.Type, ids: [Int64]) throws where T: MutablePersistableRecord {
     try dbWriter.write { db in
       _ = try T.deleteAll(db, keys: ids)

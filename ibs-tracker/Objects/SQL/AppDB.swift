@@ -25,7 +25,7 @@ struct AppDB {
     self.dbWriter = dbWriter
     self.environment = environment
     try migrator.migrate(dbWriter)
-    try loadTags(.food)
+    try loadAllTags()
   }
 
   private var migrator: DatabaseMigrator {
@@ -44,22 +44,13 @@ struct AppDB {
     return migrator
   }
 
-  func loadTags(_ type: ItemType) throws {
-    guard environment != .test else { return }
-    guard try countRecords(in: SQLTagRecord.self) == 0 else { return }
-
-    let type = type.rawValue
-    guard let foodTagsURL = Bundle.main.url(forResource: "\(type)-tags", withExtension: "txt") else { return }
-    guard let foodTagsString = try? String(contentsOf: foodTagsURL) else { return }
-    let foodTags = foodTagsString.components(separatedBy: .newlines).filter { $0.isNotEmpty }
-    for foodTag in foodTags {
-      var tagRecord = SQLTagRecord(type: type, name: foodTag)
-      _ = try insertRecord(&tagRecord)
-    }
-
-    try dbWriter.read { db in
-      let count = try SQLTagRecord.fetchCount(db)
-      print("Inserted [\(count)] \(type) tags")
+  func loadAllTags() throws {
+    do {
+      try loadTags(.bm)
+      try loadTags(.food)
+    } catch {
+      print(error)
+      throw error
     }
   }
 }
@@ -70,8 +61,8 @@ extension AppDB: Equatable {
   }
 }
 
-extension AppDB {
-  private static func makeShared(_ environment: Environment) -> AppDB {
+private extension AppDB {
+  static func makeShared(_ environment: Environment) -> AppDB {
     do {
       let url: URL = try FileManager.default
         .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -83,6 +74,33 @@ extension AppDB {
       return appDB
     } catch {
       fatalError("Unresolved error \(error)")
+    }
+  }
+}
+
+private extension AppDB {
+  func loadTags(_ type: ItemType) throws {
+    guard environment != .test else { return }
+
+    let type = type.rawValue
+
+    guard try countRecords(in: SQLTagRecord.self, of: type) == 0 else { return }
+    guard let tagsURL = Bundle.main.url(forResource: "\(type)-tags", withExtension: "txt") else {
+      throw "Can't find the file URL named: [\(type)-tags.txt]"
+    }
+    guard let tagsString = try? String(contentsOf: tagsURL) else {
+      throw "Can't read the contents of [\(type)-tags.txt]"
+    }
+
+    let tags = tagsString.components(separatedBy: .newlines).filter { $0.isNotEmpty }
+    for tag in tags {
+      var tagRecord = SQLTagRecord(type: type, name: tag)
+      _ = try insertRecord(&tagRecord)
+    }
+
+    try dbWriter.read { db in
+      let count = try SQLTagRecord.fetchCount(db)
+      print("Inserted [\(count)] \(type) tags")
     }
   }
 }
