@@ -30,6 +30,7 @@ struct ibs_trackerApp: App {
         ContentView()
           .onAppear { UIView.setAnimationsEnabled(false) }
           .environmentObject(IBSData.current)
+          .navigationViewStyle(StackNavigationViewStyle())
       } else {
         ZStack {}
       }
