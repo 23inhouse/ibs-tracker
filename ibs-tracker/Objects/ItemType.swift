@@ -39,6 +39,12 @@ enum BMColor: String, CaseIterable {
   case yellow
 }
 
+extension BMColor: OptionalValue {
+  var optionalValue: String? {
+    self == .none ? nil : rawValue
+  }
+}
+
 enum BMEvacuation: String, CaseIterable {
   case none = ""
   case partial
@@ -51,6 +57,12 @@ enum BMEvacuation: String, CaseIterable {
   ]
 }
 
+extension BMEvacuation: OptionalValue {
+  var optionalValue: String? {
+    self == .none ? nil : rawValue
+  }
+}
+
 enum BMSmell: String, CaseIterable {
   case none
   case foul
@@ -61,6 +73,12 @@ enum BMSmell: String, CaseIterable {
     .foul: "Foul smelling",
     .sweet: "Sweet smelling",
   ]
+}
+
+extension BMSmell: OptionalValue {
+  var optionalValue: String? {
+    rawValue == "" ? nil : rawValue
+  }
 }
 
 enum BristolType: Int {
@@ -86,6 +104,11 @@ enum BristolType: Int {
 }
 
 extension BristolType: Encodable {}
+extension BristolType: OptionalValue {
+  var optionalValue: Int? {
+    self == .b0 ? nil : rawValue
+  }
+}
 extension BristolType: Strideable {
   typealias Stride = Int
 
@@ -121,6 +144,12 @@ extension FoodSizes: Sliderable {
   }
 }
 
+extension FoodSizes: OptionalValue {
+  var optionalValue: Int? {
+    self == .none ? nil : rawValue
+  }
+}
+
 enum MedicationType: String {
   case analgesic
   case antibiotic
@@ -146,6 +175,12 @@ enum MedicationType: String {
   }
 }
 
+extension MedicationType: OptionalValue {
+  var optionalValue: String? {
+    self == .none ? nil : rawValue
+  }
+}
+
 enum MoodType: Int {
   case none = -1
   case great = 0
@@ -161,6 +196,12 @@ enum MoodType: Int {
     .bad: "I don't feel good",
     .awful: "I feel awful",
   ]
+}
+
+extension MoodType: OptionalValue {
+  var optionalValue: Int? {
+    self == .none ? nil : rawValue
+  }
 }
 
 enum Scales: Int, CaseIterable {
@@ -247,5 +288,11 @@ enum Scales: Int, CaseIterable {
 extension Scales: Sliderable {
   var scaleColor: Color {
     ColorCodedContent.scaleColor(for: self, default: .secondary)
+  }
+}
+
+extension Scales: OptionalValue {
+  var optionalValue: Int? {
+    self == .none ? nil : rawValue
   }
 }
