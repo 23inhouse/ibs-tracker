@@ -75,32 +75,41 @@ private extension IBSData {
   static func groupByDay(_ records: [IBSRecord]) -> [DayRecord] {
     let sortedRecords = records.sorted { $0.timestamp > $1.timestamp }
 
-    guard let firstJSONRecord = sortedRecords.first else { return [] }
+    guard sortedRecords.count > 0 else { return [] }
 
     let keyStringFormat = "yyyy-MM-dd"
+    let count = sortedRecords.count
+    var i = 0
+    var dayRecords: [DayRecord] = []
     var currentIBSRecords: [IBSRecord] = []
-    var previousKeyString: String? = DayRecord.keyDate(for: firstJSONRecord.timestamp)?.string(for: keyStringFormat)
+    var previousKeyString: String?
     var previousKeyDate: Date?
 
-    var dayRecords: [DayRecord] = []
+    repeat {
+      let record = sortedRecords[i]
+      i += 1
 
-    for record in sortedRecords {
       guard let keyString = DayRecord.keyDate(for: record.timestamp)?.string(for: keyStringFormat) else { continue }
       guard let keyDate = DayRecord.keyDate(for: record.timestamp) else { continue }
 
-      if keyString == previousKeyString {
-        currentIBSRecords.append(record)
-      } else {
-        if currentIBSRecords.isNotEmpty && previousKeyDate != nil {
-          let dayRecord = DayRecord(date: previousKeyDate!, ibsRecords: currentIBSRecords)
+      if keyString != previousKeyString {
+        if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
+          let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
           dayRecords.append(dayRecord)
         }
 
         currentIBSRecords = []
       }
 
+      currentIBSRecords.append(record)
+
       previousKeyString = keyString
       previousKeyDate = keyDate
+    } while i < count
+
+    if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
+      let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
+      dayRecords.append(dayRecord)
     }
 
     return dayRecords

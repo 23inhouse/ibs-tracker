@@ -1,0 +1,20 @@
+{
+  "ibs-records": [
+    {
+       "type": "food",
+       "timestamp": "2020-10-30 20:55:00 +0000",
+       "text": "Chips",
+       "size": null,
+       "risk": null,
+       "tags": ["Potato chips"]
+    },
+    {
+       "type": "food",
+       "timestamp": "2020-10-30 19:55:00 +0000",
+       "text": "Chips",
+       "size": null,
+       "risk": null,
+       "tags": ["Potato chips"]
+    }
+  ]
+}

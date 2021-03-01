@@ -86,6 +86,8 @@
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
+		B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25725ED04F400A5027C /* records-day-two-days.json */; };
+		B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25825ED04F400A5027C /* records-day-one-only.json */; };
 		B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
@@ -213,6 +215,8 @@
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
+		B5B9E25725ED04F400A5027C /* records-day-two-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-two-days.json"; sourceTree = "<group>"; };
+		B5B9E25825ED04F400A5027C /* records-day-one-only.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-one-only.json"; sourceTree = "<group>"; };
 		B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AlertDeleteRecord.swift"; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
@@ -331,8 +335,10 @@
 		B5207E8725D297BC0019D18F /* data */ = {
 			isa = PBXGroup;
 			children = (
-				B5207E8825D297E90019D18F /* records-to-import.json */,
+				B5B9E25825ED04F400A5027C /* records-day-one-only.json */,
+				B5B9E25725ED04F400A5027C /* records-day-two-days.json */,
 				B57B8B0D25DD21940030D758 /* records-recent-food.json */,
+				B5207E8825D297E90019D18F /* records-to-import.json */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -702,7 +708,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */,
 				B5207E8925D297E90019D18F /* records-to-import.json in Resources */,
+				B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */,
 				B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
