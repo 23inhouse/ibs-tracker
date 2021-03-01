@@ -15,6 +15,12 @@ extension IBSRecord {
 
     self.text = record.text
     self.bristolScale = BristolType(rawValue: record.bristolScale ?? -1)
+    self.color = BMColor(rawValue: record.color ?? "") ?? BMColor.none
+    self.pressure = Scales(rawValue: record.pressure ?? -1)
+    self.smell = BMSmell(rawValue: record.smell ?? "") ?? BMSmell.none
+    self.evacuation = BMEvacuation(rawValue: record.evacuation ?? "") ?? BMEvacuation.none
+    self.dryness = Scales(rawValue: record.dryness ?? -1)
+    self.wetness = Scales(rawValue: record.wetness ?? -1)
     self.size = FoodSizes(rawValue: record.size ?? -1)
     self.risk = Scales(rawValue: record.risk ?? -1)
     self.bloating = Scales(rawValue: record.bloating ?? -1)

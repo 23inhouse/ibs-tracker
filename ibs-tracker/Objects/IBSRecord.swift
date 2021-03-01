@@ -11,6 +11,12 @@ struct IBSRecord {
   var type: ItemType
   var timestamp: Date
   var bristolScale: BristolType?
+  var color: BMColor?
+  var pressure: Scales?
+  var smell: BMSmell?
+  var evacuation: BMEvacuation?
+  var dryness: Scales?
+  var wetness: Scales?
   var text: String?
   var size: FoodSizes?
   var risk: Scales?
@@ -32,6 +38,12 @@ extension IBSRecord {
     self.type = other.type
     self.timestamp = Date.init(timeIntervalSinceReferenceDate: 0)
     self.bristolScale = other.bristolScale
+    self.color = other.color
+    self.pressure = other.pressure
+    self.smell = other.smell
+    self.evacuation = other.evacuation
+    self.dryness = other.dryness
+    self.wetness = other.wetness
     self.text = other.text?.lowercased()
     self.size = nil
     self.risk = nil

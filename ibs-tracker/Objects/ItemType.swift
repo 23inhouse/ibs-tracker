@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ItemType: String {
+enum ItemType: String, CaseIterable {
   case ache
   case bm
   case food
@@ -28,7 +28,40 @@ enum ItemType: String {
   }
 }
 
-extension ItemType: CaseIterable {}
+enum BMColor: String, CaseIterable {
+  case none = ""
+  case black
+  case brown
+  case green
+  case orange
+  case red
+  case white
+  case yellow
+}
+
+enum BMEvacuation: String, CaseIterable {
+  case none = ""
+  case partial
+  case full
+
+  static let descriptions: [BMEvacuation: String] = [
+    .none: "",
+    .partial: "Partial",
+    .full: "Full",
+  ]
+}
+
+enum BMSmell: String, CaseIterable {
+  case none
+  case foul
+  case sweet
+
+  static let descriptions: [BMSmell: String] = [
+    .none: "",
+    .foul: "Foul smelling",
+    .sweet: "Sweet smelling",
+  ]
+}
 
 enum BristolType: Int {
   case b0 = 0
@@ -154,6 +187,14 @@ enum Scales: Int, CaseIterable {
     .extreme: "extreme pain",
   ]
 
+  static let drynessDescriptions: [Scales: String] = [
+    .zero: "not dry",
+    .mild: "not too dry",
+    .moderate: "a bit dry",
+    .severe: "very dry",
+    .extreme: "extremely dry",
+  ]
+
   static let foodRiskDescriptions: [Scales: String] = [
     .zero: "no risk at all",
     .mild: "mildly risky",
@@ -178,12 +219,28 @@ enum Scales: Int, CaseIterable {
     .extreme: "extreme headache",
   ]
 
+  static let pressureDescriptions: [Scales: String] = [
+    .zero: "no pressure",
+    .mild: "mild pressure",
+    .moderate: "moderate pressure",
+    .severe: "severe pressure",
+    .extreme: "extreme pressure",
+  ]
+
   static let stressDescriptions: [Scales: String] = [
     .zero: "no stressed at all",
     .mild: "I feel a little stress",
     .moderate: "I feel somewhat stressed",
     .severe: "I feel really stressed",
     .extreme: "I feel extremely stressed",
+  ]
+
+  static let wetnessDescriptions: [Scales: String] = [
+    .zero: "not wet",
+    .mild: "not too wet",
+    .moderate: "a bit wet",
+    .severe: "very wet",
+    .extreme: "extremely wet",
   ]
 }
 

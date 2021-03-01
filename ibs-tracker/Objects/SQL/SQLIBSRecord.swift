@@ -18,6 +18,12 @@ struct SQLIBSRecord {
 
   var text: String?
   var bristolScale: Int?
+  var color: String?
+  var pressure: Int?
+  var smell: String?
+  var evacuation: String?
+  var dryness: Int?
+  var wetness: Int?
   var size: Int?
   var risk: Int?
   var bloating: Int?
@@ -40,6 +46,12 @@ extension SQLIBSRecord: Importable {
 
     self.text = record.text
     self.bristolScale = record.bristolScale?.rawValue
+    self.color = record.color?.rawValue
+    self.pressure = record.pressure?.rawValue
+    self.smell = record.smell?.rawValue
+    self.evacuation = record.evacuation?.rawValue
+    self.dryness = record.dryness?.rawValue
+    self.wetness = record.wetness?.rawValue
     self.size = record.size?.rawValue
     self.risk = record.risk?.rawValue
     self.bloating = record.bloating?.rawValue
@@ -62,6 +74,12 @@ extension SQLIBSRecord: Codable {
 
     static let text = Column(CodingKeys.text)
     static let bristolScale = Column(CodingKeys.bristolScale)
+    static let color = Column(CodingKeys.color)
+    static let pressure = Column(CodingKeys.pressure)
+    static let smell = Column(CodingKeys.smell)
+    static let evacuation = Column(CodingKeys.evacuation)
+    static let dryness = Column(CodingKeys.dryness)
+    static let wetness = Column(CodingKeys.wetness)
     static let size = Column(CodingKeys.size)
     static let risk = Column(CodingKeys.risk)
     static let bloating = Column(CodingKeys.bloating)
@@ -97,6 +115,12 @@ extension SQLIBSRecord: Migratable {
 
       t.column("text", .text)
       t.column("bristolScale", .integer)
+      t.column("color", .text)
+      t.column("pressure", .integer)
+      t.column("smell", .text)
+      t.column("evacuation", .text)
+      t.column("dryness", .integer)
+      t.column("wetness", .integer)
       t.column("size", .integer)
       t.column("risk", .integer)
       t.column("bloating", .integer)
@@ -126,6 +150,12 @@ extension SQLIBSRecord {
 
     text = record.text
     bristolScale = record.bristolScale?.rawValue
+    color = record.color?.rawValue
+    pressure = record.pressure?.rawValue
+    smell = record.smell?.rawValue
+    evacuation = record.evacuation?.rawValue
+    dryness = record.dryness?.rawValue
+    wetness = record.wetness?.rawValue
     size = record.size?.rawValue
     risk = record.risk?.rawValue
     bloating = record.bloating?.rawValue

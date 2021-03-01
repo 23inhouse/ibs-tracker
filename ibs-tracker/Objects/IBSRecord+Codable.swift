@@ -12,6 +12,12 @@ extension IBSRecord: Codable {
     case type
     case timestamp
     case bristolScale = "bristol-scale"
+    case color
+    case pressure
+    case smell
+    case evacuation
+    case dryness
+    case wetness
     case text
     case size
     case risk
@@ -32,6 +38,12 @@ extension IBSRecord: Codable {
     type = ItemType(from: try values.decode(String.self, forKey: .type))
     timestamp = try IBSRecord.timestamp(from: try values.decode(String.self, forKey: .timestamp))
     bristolScale = BristolType(optionalValue: try values.decodeIfPresent(Int.self, forKey: .bristolScale))
+    color = BMColor(optionalValue: try values.decodeIfPresent(String.self, forKey: .color))
+    pressure = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .pressure))
+    smell = BMSmell(optionalValue: try values.decodeIfPresent(String.self, forKey: .smell))
+    evacuation = BMEvacuation(optionalValue: try values.decodeIfPresent(String.self, forKey: .evacuation))
+    dryness = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .dryness))
+    wetness = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .wetness))
     text = try values.decodeIfPresent(String.self, forKey: .text)
     size = FoodSizes(optionalValue: try values.decodeIfPresent(Int.self, forKey: .size))
     risk = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .risk))
@@ -63,6 +75,12 @@ extension IBSRecord: Codable {
     try container.encode(timestamp.timestampString(), forKey: .timestamp)
 
     try container.encodeIfPresent(bristolScale, forKey: .bristolScale)
+    try container.encodeIfPresent(color?.rawValue, forKey: .color)
+    try container.encodeIfPresent(pressure?.rawValue, forKey: .pressure)
+    try container.encodeIfPresent(smell?.rawValue, forKey: .smell)
+    try container.encodeIfPresent(evacuation?.rawValue, forKey: .evacuation)
+    try container.encodeIfPresent(dryness?.rawValue, forKey: .dryness)
+    try container.encodeIfPresent(wetness?.rawValue, forKey: .wetness)
     try container.encodeIfPresent(text, forKey: .text)
     try container.encodeIfPresent(size?.rawValue, forKey: .size)
     try container.encodeIfPresent(risk?.rawValue, forKey: .risk)
