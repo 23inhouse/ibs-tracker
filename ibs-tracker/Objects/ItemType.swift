@@ -5,7 +5,7 @@
 //  Created by Benjamin Lewis on 22/1/21.
 //
 
-import Foundation
+import SwiftUI
 
 enum ItemType: String {
   case ache
@@ -80,6 +80,12 @@ enum FoodSizes: Int, CaseIterable {
     .large: "large portion",
     .huge: "huge portion",
   ]
+}
+
+extension FoodSizes: Sliderable {
+  var scaleColor: Color {
+    ColorCodedContent.foodColor(for: self, default: .secondary)
+  }
 }
 
 enum MedicationType: String {
@@ -179,4 +185,10 @@ enum Scales: Int, CaseIterable {
     .severe: "I feel really stressed",
     .extreme: "I feel extremely stressed",
   ]
+}
+
+extension Scales: Sliderable {
+  var scaleColor: Color {
+    ColorCodedContent.scaleColor(for: self, default: .secondary)
+  }
 }

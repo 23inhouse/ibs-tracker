@@ -26,7 +26,7 @@ struct ColorCodedContent {
     return .secondary
   }
 
-  static func scaleColor(for scale: Scales?) -> Color {
+  static func scaleColor(for scale: Scales?, default defaultColor: Color = .primary) -> Color {
     let colors: [Scales: Color] = [
       .zero: .green,
       .mild: .yellow,
@@ -35,8 +35,8 @@ struct ColorCodedContent {
       .extreme: .purple
     ]
 
-    guard let scale = scale else { return .primary }
-    return colors[scale] ?? .primary
+    guard let scale = scale else { return defaultColor }
+    return colors[scale] ?? defaultColor
   }
 
   static func bristolColor(for scale: BristolType?) -> Color {
@@ -52,6 +52,20 @@ struct ColorCodedContent {
     case .b7: return .red
     }
   }
+
+  static func foodColor(for scale: FoodSizes?, default defaultColor: Color = .primary) -> Color {
+    let colors: [FoodSizes: Color] = [
+      .tiny: .green,
+      .small: .green,
+      .normal: .yellow,
+      .large: .red,
+      .huge: .purple
+    ]
+
+    guard let scale = scale else { return defaultColor }
+    return colors[scale] ?? defaultColor
+  }
+
 
   static func moodColor(for scale: MoodType?) -> Color {
     let colors: [MoodType: Color] = [
