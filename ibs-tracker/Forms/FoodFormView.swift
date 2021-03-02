@@ -85,8 +85,8 @@ struct FoodFormView: View {
       }
 
       Section {
-        sizePicker
-        riskPicker
+        ScaleSlider($size, "Size", descriptions: FoodSizes.descriptions)
+        ScaleSlider($risk, "Risk", descriptions: Scales.foodRiskDescriptions)
       }
 
       if name.isNotEmpty && viewModel.tags.isNotEmpty {
@@ -117,24 +117,6 @@ struct FoodFormView: View {
         name = record.text ?? ""
         viewModel.tags = record.tags
         recentFoodSelection = nil
-      }
-    }
-  }
-
-  private var riskPicker: some View {
-    Picker("Risk", selection: $risk) {
-      ForEach(Scales.allCases, id: \.self) { scale in
-        Text(Scales.foodRiskDescriptions[scale]?.capitalized ?? "")
-          .tag(scale)
-      }
-    }
-  }
-
-  private var sizePicker: some View {
-    Picker("Size", selection: $size) {
-      ForEach(FoodSizes.allCases, id: \.self) { foodSize in
-        Text(FoodSizes.descriptions[foodSize]?.capitalized ?? "")
-          .tag(foodSize)
       }
     }
   }
