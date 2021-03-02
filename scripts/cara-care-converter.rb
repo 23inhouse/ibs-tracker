@@ -126,6 +126,56 @@ TAG_TRANSLATIONS = {
   "Kiwi" => "Kiwi fruit",
   "Rosenkohl" => "Brussels sprouts",
   "Sauerkraut" => "Sauerkraut",
+  "Zucchini" => "Zucchini",
+  "Fisch" => "Fish",
+  "Gurke" => "Gherkin",
+  "Zitrone" => "Lemon",
+  "Dinkelkeks" => "Spelt cracker",
+}
+
+FOOD_TAGS_TO_REMOVE = [
+  "Foul smelling",
+  "Sweet smelling",
+
+  "Partial evacuation",
+  "Full evacuation",
+
+  "No too wet", # (Not too wet)
+  "A bit wet",
+  "Very wet",
+
+  "Not too dry",
+  "A bit dry",
+  "Very dry",
+
+  "No pressure",
+  "Hardly any pressure",
+  "A bit of pressure",
+  "Medium pressure",
+  "Huge pressure",
+  "Extreme pressure",
+
+  "Black",
+  "White",
+  "Green",
+  "Red",
+  "Orange",
+  "Yellow",
+
+  "Urgent",
+  "Mostly liquid",
+  "Undigested spinach",
+  "Mr whippy",
+]
+
+CARA_CARE_DATA_ERRORS = {
+  "2020-10-21 09:10:00 +0000" => [:gut, :next],
+  "2020-10-23 18:05:00 +0000" => [:medication, :next],
+  "2021-01-06 15:25:00 +0000" => [:note, :prev],
+  "2021-01-09 18:35:00 +0000" => [:food, :next],
+  "2021-01-24 08:10:00 +0000" => [:note, :next],
+  "2021-01-24 19:20:00 +0000" => [:food, :prev],
+  "2021-02-05 22:20:00 +0000" => [:food, :prev],
 }
 
 def mode(tracking_id, tracking_type, tracking_text, tag_names)
@@ -307,7 +357,6 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
   if [:ache, :gut, :mood].include?(mode) && tracking_value.empty?
     # puts [timestamp_tracking[0...16], mode, submode].join(' | ')
     puts "Skipping: Empty scale record [#{mode}]"
-    puts line
     return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
@@ -316,6 +365,18 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
   if !(next_timestamp >= prev_timestamp) && prev_timestamp != 'holder'
     puts "Error: records are not in ascending order. PREV [#{prev_timestamp}] NEXT [#{next_timestamp}]"
     exit
+  end
+
+  if CARA_CARE_DATA_ERRORS[next_timestamp] == [next_mode, :prev] && prev_timestamp != next_timestamp
+    puts "Erroneous data: Skipping Prev [#{next_timestamp}] [#{next_mode}]"
+    return prev_mode, prev_submode, prev_timestamp, prev_scale, food_records
+    # return next_mode, next_submode, prev_timestamp, prev_scale, food_records
+  end
+
+  if CARA_CARE_DATA_ERRORS[next_timestamp] == [next_mode, :next] && prev_timestamp == next_timestamp
+    puts "Erroneous data: Skipping Next [#{next_timestamp}] [#{next_mode}]"
+    return next_mode, next_submode, next_timestamp, prev_scale, food_records
+    # return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
   # brististol_scale
@@ -351,17 +412,50 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
-  if ![:gut, :mood, :ache].include?(next_mode) && next_mode == prev_mode && next_timestamp == prev_timestamp
+  if ![:gut, :mood, :ache].include?(next_mode) && next_timestamp == prev_timestamp
     puts "Duplicate: [#{next_mode}] #{next_timestamp}"
   end
 
   lines = []
   case mode
   when :bm
+    smell = "null"
+    smell = '"sweet"' if next_tags.include? "Sweet smelling"
+    smell = '"foul"' if next_tags.include? "Foul smelling"
+    color = "null"
+    color = '"yellow"' if next_tags.include? "Yellow"
+    pressure = "null"
+    pressure = "1" if next_tags.include? "Hardly any pressure"
+    pressure = "1" if next_tags.include? "A bit of pressure"
+    pressure = "2" if next_tags.include? "Medium pressure"
+    pressure = "3" if next_tags.include?("Huge pressure") || next_tags.include?("Urgent")
+    pressure = "4" if next_tags.include? "Extreme pressure"
+    evacuation = "null"
+    evacuation = '"partial"' if next_tags.include? "Partial evacuation"
+    evacuation = '"full"' if next_tags.include? "Full evacuation"
+    wetness = "null"
+    wetness = "1" if next_tags.include? "No too wet"
+    wetness = "2" if next_tags.include? "A bit wet"
+    wetness = "3" if next_tags.include? "Very wet"
+    wetness = "3" if next_tags.include? "Mostly liquid"
+    dryness = "null"
+    dryness = "1" if next_tags.include? "Not too dry"
+    dryness = "2" if next_tags.include? "A bit dry"
+    dryness = "3" if next_tags.include? "Very dry"
+
+    next_tags << "Undigested leafy" if next_tags.include? "Undigested spinach"
+    next_tags << "Mr Whippy" if next_tags.include? "Mr whippy"
+    next_tags = next_tags - FOOD_TAGS_TO_REMOVE
     lines << <<-END
       |       "type": "#{next_mode}",
       |       "timestamp": "#{timestamp(timestamp_tracking)}",
       |       "bristol-scale": #{next_bristol_scale},
+      |       "smell": #{smell},
+      |       "color": #{color},
+      |       "pressure": #{pressure},
+      |       "evacuation": #{evacuation},
+      |       "wetness": #{wetness},
+      |       "dryness": #{dryness},
       |       "tags": #{next_tags}
     END
   when :gut, :ache, :mood
@@ -532,7 +626,6 @@ open(OUTPUT_FILENAME, 'w') do |output_file|
 
     if [next_mode, next_timestamp].include?(nil) && !line.include?("Realmidstring")
       puts "Error: Missing next_mode or next_timestamp"
-      puts "  #{line}"
     end
 
     if !prev_lines.nil? && !merged_properties
