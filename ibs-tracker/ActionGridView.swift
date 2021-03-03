@@ -12,7 +12,7 @@ struct ActionGridView: View {
     NavigationView {
       VStack {
         HStack {
-          IBSItemView(shape: TypeShape(type: .weight), text: "Weight")
+          ActionNavigationLink(type: .weight, text: "Weight") { WeightFormView() }
           ActionNavigationLink(type: .note, text: "Notes") { NoteFormView() }
         }
         .padding(.leading)

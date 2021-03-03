@@ -18,12 +18,14 @@ enum Tabs {
 class IBSData: ObservableObject {
   @Published var tabSelection: Tabs = .day
   @Published var dayRecords: [DayRecord]
+  @Published var lastWeight: Decimal
 
   static var current = IBSData(.current)
 
   private var allRecords: [IBSRecord] {
     didSet {
       self.dayRecords = IBSData.groupByDay(allRecords)
+      self.lastWeight = IBSData.lastWeight(allRecords)
     }
   }
 
@@ -38,6 +40,7 @@ class IBSData: ObservableObject {
     self.appDB = appDB
     self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
     self.dayRecords = IBSData.groupByDay(allRecords)
+    self.lastWeight = IBSData.lastWeight(allRecords)
   }
 }
 
@@ -113,6 +116,13 @@ private extension IBSData {
     }
 
     return dayRecords
+  }
+
+  static func lastWeight(_ records: [IBSRecord]) -> Decimal {
+    records
+      .filter { $0.type == .weight }
+      .sorted { $0.timestamp < $1.timestamp }
+      .last?.weight ?? 0
   }
 
   static func loadRecordsFromSQL(appDB: AppDB) -> [IBSRecord] {

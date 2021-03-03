@@ -15,13 +15,15 @@ struct WeightRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .weight, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
-      if let weight = record.weight {
-        Text("\(String(describing: weight))kg")
-          .font(.body)
-          .foregroundColor(.blue)
-          .frame(minHeight: 25, alignment: .leading)
+    NavigationLink(destination: WeightFormView(for: record)) {
+      DayRowView(type: .weight, color: .secondary, tags: record.tags) {
+        TimestampView(record: record as! IBSRecord)
+        if let weight = record.weight {
+          Text("\(String(describing: weight))kg")
+            .font(.body)
+            .foregroundColor(.blue)
+            .frame(minHeight: 25, alignment: .leading)
+        }
       }
     }
   }

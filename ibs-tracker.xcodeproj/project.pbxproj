@@ -16,6 +16,7 @@
 		B508996325B4A79600B1EA03 /* AcheShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508996225B4A79600B1EA03 /* AcheShape.swift */; };
 		B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508997625B4ABF400B1EA03 /* AcheRow.swift */; };
 		B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */; };
+		B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EB725EFB442005583AB /* WeightFormView.swift */; };
 		B5207E5C25D18D240019D18F /* Migratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E5B25D18D240019D18F /* Migratable.swift */; };
 		B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */; };
 		B5207E7525D19DA50019D18F /* Importable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E7425D19DA50019D18F /* Importable.swift */; };
@@ -152,6 +153,7 @@
 		B508996225B4A79600B1EA03 /* AcheShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheShape.swift; sourceTree = "<group>"; };
 		B508997625B4ABF400B1EA03 /* AcheRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheRow.swift; sourceTree = "<group>"; };
 		B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodedContent.swift; sourceTree = "<group>"; };
+		B51F5EB725EFB442005583AB /* WeightFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormView.swift; sourceTree = "<group>"; };
 		B5207E5B25D18D240019D18F /* Migratable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migratable.swift; sourceTree = "<group>"; };
 		B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLIBSTagRecord.swift; sourceTree = "<group>"; };
 		B5207E7425D19DA50019D18F /* Importable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importable.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */,
 				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
+				B51F5EB725EFB442005583AB /* WeightFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
 			);
 			path = Forms;
@@ -811,6 +814,7 @@
 				B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */,
 				B508993D25B36C0B00B1EA03 /* IBSItemView.swift in Sources */,
 				B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */,
+				B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
