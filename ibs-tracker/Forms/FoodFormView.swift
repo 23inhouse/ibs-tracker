@@ -72,16 +72,16 @@ struct FoodFormView: View {
 
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) {
-      if recentFoods.isNotEmpty {
-        recentFoodSection
-      }
-
       Section {
         UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, onCommit: commitName)
 
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
+      }
+
+      if recentFoods.isNotEmpty {
+        recentFoodSection
       }
 
       Section {
