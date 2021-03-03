@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MoodRecord : IBSRecordType {
+protocol MoodRecord: IBSRecordType {
   var feel: MoodType? { get }
   var stress: Scales? { get }
   init(timestamp: Date, tags: [String], feel: MoodType?, stress: Scales?)

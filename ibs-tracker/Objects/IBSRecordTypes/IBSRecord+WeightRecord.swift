@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WeightRecord : IBSRecordType {
+protocol WeightRecord: IBSRecordType {
   var weight: Decimal? { get }
   init(weight: Decimal, timestamp: Date, tags: [String])
 }

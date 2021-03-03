@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GutRecord : IBSRecordType {
+protocol GutRecord: IBSRecordType {
   var bloating: Scales? { get }
   var pain: Scales? { get }
   init(timestamp: Date, tags: [String], bloating: Scales?, pain: Scales?)

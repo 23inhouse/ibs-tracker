@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MedicationRecord : IBSRecordType {
+protocol MedicationRecord: IBSRecordType {
   var text: String? { get }
   var medicationType: MedicationType? { get }
   init(medication text: String, type medicationType: MedicationType, timestamp: Date, tags: [String])

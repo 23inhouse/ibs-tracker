@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NoteRecord : IBSRecordType {
+protocol NoteRecord: IBSRecordType {
   var text: String? { get }
   init(note text: String, timestamp: Date, tags: [String])
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BMRecord : IBSRecordType {
+protocol BMRecord: IBSRecordType {
   var bristolScale: BristolType? { get }
   var color: BMColor? { get }
   var pressure: Scales? { get }
