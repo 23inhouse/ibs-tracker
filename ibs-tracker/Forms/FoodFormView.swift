@@ -95,13 +95,6 @@ struct FoodFormView: View {
     }
   }
 
-  private var datePicker: some View {
-    UIKitBridge.SwiftUIDatePicker(selection: $viewModel.timestamp, range: nil, minuteInterval: 5)
-      .onChange(of: viewModel.timestamp) { value in
-        viewModel.timestamp = value
-      }
-  }
-
   private var recentFoodSection: some View {
     Section {
       Picker(recentFoodPlaceholder, selection: $recentFoodSelection) {

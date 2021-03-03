@@ -29,7 +29,7 @@ class FormViewModel: ObservableObject {
     newTag = ""
   }
 
-  func setCurrentTimestamp() {
+  func initializeTimestamp() {
     guard timestamp == nil else { return }
     timestamp = Date().nearest(5, .minute)
   }

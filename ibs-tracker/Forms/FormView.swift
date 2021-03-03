@@ -27,10 +27,10 @@ struct FormView<Content: View>: View {
     Form {
       content
 
-      DatePickerSectionView(timestamp: $viewModel.timestamp, isValidTimestamp: $viewModel.isValidTimestamp)
+      DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
     }
     .onAppear() {
-      viewModel.setCurrentTimestamp()
+      viewModel.initializeTimestamp()
     }
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
