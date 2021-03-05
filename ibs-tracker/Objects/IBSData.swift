@@ -31,8 +31,6 @@ class IBSData: ObservableObject {
 
   private var appDB: AppDB
 
-  lazy private var recentFoodRecords: [IBSRecord] = recentRecords(of: .food)
-
   init(_ appDB: AppDB = .current) {
     guard !(ibs_trackerApp.isTestRunning() && appDB != .test) else {
       fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
@@ -56,7 +54,7 @@ extension IBSData {
   }
 
   func recentRecords(of type: ItemType, recordsToDisplay: Int = 60) -> [IBSRecord] {
-    Array(recentFoodRecords.prefix(recordsToDisplay))
+    Array(recentRecords(of: type).prefix(recordsToDisplay))
   }
 
   func reloadRecordsFromSQL() {

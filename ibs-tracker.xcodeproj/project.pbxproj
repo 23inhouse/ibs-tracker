@@ -19,6 +19,7 @@
 		B5151EA225F4CFF3003B9F59 /* records-to-encode.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA125F4CFF3003B9F59 /* records-to-encode.json */; };
 		B5151EAA25F4D6DF003B9F59 /* records-to-import-unchanging.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */; };
 		B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EB725EFB442005583AB /* WeightFormView.swift */; };
+		B51F5EBD25EFC282005583AB /* MedicationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EBC25EFC282005583AB /* MedicationFormView.swift */; };
 		B5207E5C25D18D240019D18F /* Migratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E5B25D18D240019D18F /* Migratable.swift */; };
 		B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */; };
 		B5207E7525D19DA50019D18F /* Importable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E7425D19DA50019D18F /* Importable.swift */; };
@@ -32,6 +33,7 @@
 		B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EF625D5E9420019D18F /* FoodFormView.swift */; };
 		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
 		B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207F0325D606310019D18F /* Date+Nearest.swift */; };
+		B524AC2725F5ACD000F1E83A /* Array+MedicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
 		B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */; };
@@ -158,6 +160,7 @@
 		B5151EA125F4CFF3003B9F59 /* records-to-encode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-encode.json"; sourceTree = "<group>"; };
 		B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-import-unchanging.json"; sourceTree = "<group>"; };
 		B51F5EB725EFB442005583AB /* WeightFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormView.swift; sourceTree = "<group>"; };
+		B51F5EBC25EFC282005583AB /* MedicationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationFormView.swift; sourceTree = "<group>"; };
 		B5207E5B25D18D240019D18F /* Migratable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migratable.swift; sourceTree = "<group>"; };
 		B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLIBSTagRecord.swift; sourceTree = "<group>"; };
 		B5207E7425D19DA50019D18F /* Importable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importable.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 		B5207EF625D5E9420019D18F /* FoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFormView.swift; sourceTree = "<group>"; };
 		B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDatePicker.swift; sourceTree = "<group>"; };
 		B5207F0325D606310019D18F /* Date+Nearest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Nearest.swift"; sourceTree = "<group>"; };
+		B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+MedicationType.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
 		B52E464E25D01DB400C009EC /* IBSRecord+BMRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+BMRecord.swift"; sourceTree = "<group>"; };
@@ -410,6 +414,7 @@
 		B592C7B825AF9E590040E0AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */,
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
@@ -577,6 +582,7 @@
 				B5456BC225E9B618009432DD /* FormView.swift */,
 				B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */,
 				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
+				B51F5EBC25EFC282005583AB /* MedicationFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
 				B51F5EB725EFB442005583AB /* WeightFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
@@ -770,6 +776,7 @@
 				B5E9D50B25B6343700E52387 /* DayRowView.swift in Sources */,
 				B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */,
 				B54EA7B125B24275008C4B74 /* Bristol1Shape.swift in Sources */,
+				B524AC2725F5ACD000F1E83A /* Array+MedicationType.swift in Sources */,
 				B52E466825D01FB700C009EC /* IBSRecord+NoteRecord.swift in Sources */,
 				B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */,
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
@@ -805,6 +812,7 @@
 				B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */,
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
 				B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */,
+				B51F5EBD25EFC282005583AB /* MedicationFormView.swift in Sources */,
 				B554CE3925D02D4200E2EE17 /* SQLIBSRecord.swift in Sources */,
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,

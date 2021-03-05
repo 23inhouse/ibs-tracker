@@ -15,12 +15,14 @@ struct MedicationRowView: View {
   }
 
   var body: some View {
-    DayRowView(type: .medication, color: .secondary, tags: record.tags) {
-      TimestampView(record: record as! IBSRecord)
-      Text(record.text ?? "No name")
-        .font(.callout)
-        .foregroundColor(.secondary)
-        .frame(minHeight: 25, alignment: .leading)
+    NavigationLink(destination: MedicationFormView(for: record)) {
+      DayRowView(type: .medication, color: .secondary, tags: record.tags) {
+        TimestampView(record: record as! IBSRecord)
+        Text(record.text ?? "No name")
+          .font(.callout)
+          .foregroundColor(.secondary)
+          .frame(minHeight: 25, alignment: .leading)
+      }
     }
   }
 }

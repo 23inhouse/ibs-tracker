@@ -163,12 +163,22 @@ extension FoodSizes: OptionalValue {
   }
 }
 
-enum MedicationType: String {
+enum MedicationType: String, CaseIterable {
   case analgesic
   case antibiotic
+  case anticholinergic
+  case antidepressant
+  case antidiarrheal = "Anti-diarrheal"
+  case antifungal
   case antimicrobial
+  case antispasmodic
+  case bileacidbinder = "Bile acid binder"
+  case digestiveenzyme =  "Digestive enzyme"
+  case laxative
+  case mastcellstabilizer = "Mast cell stabilizer"
   case probiotic
   case prokinetic
+  case protonpumpinhibitor = "Proton pump inhibitor"
   case suppliment
   case vitamin
   case other

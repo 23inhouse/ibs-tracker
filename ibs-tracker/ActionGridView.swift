@@ -20,7 +20,7 @@ struct ActionGridView: View {
 
         HStack {
           IBSItemView(shape: TypeShape(type: .mood), text: "Mood/stress")
-          IBSItemView(shape: TypeShape(type: .medication), text: "Medication")
+          ActionNavigationLink(type: .medication, text: "medicaiton") { MedicationFormView() }
         }
         .padding(.leading)
         .padding(.trailing)
