@@ -38,6 +38,7 @@ MEDICATION_NAMES = [
   "tablet",
   "vitamin",
   "ibuprofen",
+  "enema",
 ]
 
 TAG_TRANSLATIONS = {
@@ -165,7 +166,6 @@ FOOD_TAGS_TO_REMOVE = [
   "Urgent",
   "Mostly liquid",
   "Undigested spinach",
-  "Mr whippy",
 ]
 
 CARA_CARE_DATA_ERRORS = {
@@ -231,15 +231,17 @@ def medication?(text)
     mode = :medication
     if ["oregano", "garlic capsule", "allicin"].any? { |med| text.include? med }
       submode = :antimicrobial
+    elsif ["enema"].any? { |med| text.include? med }
+      submode = :other
     elsif ["perenterol", "probiotic"].any? { |med| text.include? med }
       submode = :probiotic
     elsif ["iberogast"].any? { |med| text.include? med }
       submode = :prokinetic
-    elsif ["glutamine", ].any? { |med| text.include? med }
+    elsif ["glutamine"].any? { |med| text.include? med }
       submode = :suppliment
-    elsif ["vitamin", ].any? { |med| text.include? med }
+    elsif ["vitamin"].any? { |med| text.include? med }
       submode = :vitamin
-    elsif ["ibuprofen", ].any? { |med| text.include? med }
+    elsif ["ibuprofen"].any? { |med| text.include? med }
       submode = :analgesic
     end
   end
@@ -310,10 +312,19 @@ end
 def tags(mode, id, tags, tag_names, text)
   if [:food, :medication].include? mode
     if tag_names[id].nil?
+      text = text.downcase
       inline_tags = []
-      inline_tags << "Enema" if text.include? "Enema"
-      inline_tags << "Perenterol" if text.include? "perenterol"
-      inline_tags << "probiotic" if text.include? "probiotic"
+      inline_tags << "Enema" if text.include? "enema"
+      inline_tags << "Saccharomyces boulardii" if text.include? "perenterol"
+      if text.downcase.include?("bifidobacterium") ||
+        text.downcase.include?("lactobacillus") ||
+        text.downcase.include?("probiotic")
+        inline_tags << "Bifidobacterium"
+        inline_tags << "Lactobacillus"
+      end
+      inline_tags << "Allicin" if text.include? "garlic"
+      inline_tags << "Oregano" if text.include? "oregano"
+      inline_tags << "L-Glutamine" if text.include? "l-glutamine"
       # return text
     end
 
@@ -477,12 +488,66 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
       END
     end
   when :medication
+    medication_type = [next_submode]
+
+    drops = next_text.scan /( (\d+ drops))/
+    if drops.first && drops.first.first
+      next_text.slice! drops.first.first
+      next_tags << drops.last.last
+    end
+
+    next_text = "Ibuprofen" if next_text == "Ibuprofen 400"
+    next_text = "Allicin capsule" if next_text == "Allicin 1 capsule"
+    if next_text == "Oregano & garlic tablets - garlic only"
+      next_text = "Allicin capsule"
+      next_tags = ["Allicin"]
+    end
+    next_text = "Oregano & Allicin capsules" if next_text == "Oregano & garlic tablets"
+    next_text = "L-Glutamine & Oregano & Allicin capsules" if next_text == "L-Glutamine & Oregano & garlic tablets"
+    next_text = "L-Glutamine" if next_text == "L-Glutamine 5g"
+    if next_text == "Perenterol tablet"
+      next_text = "Perenterol capsule"
+      next_tags << "Saccharomyces boulardii"
+    end
+
+    if ["Vitamin tablet", "Vitamins"].include? next_text
+      next_text = "Vitamin tablet"
+      next_tags = ["Multi-vitamin"]
+    end
+
+    cleaned_tags = []
+    next_tags.each do |next_tag|
+      next_tag.slice! " capsule" if next_tag.include? " capsule"
+      next_tag = "Allicin" if next_tag == "Garlic"
+      next_tag = "L-Glutamine" if next_tag == "L-glutamine"
+      next_tag = "Vitamin B9" if next_tag == "Vitamin b9"
+      next if next_tag == "Probiotic"
+      cleaned_tags << next_tag
+    end
+    next_tags = cleaned_tags
+
+    next_tags << 'L-Glutamine' if next_text == 'L-Glutamine' && !next_tags.include?('L-Glutamine')
+
+    if next_text.include? "Enema"
+      next_text = "Enema"
+      medication_type << :other
+      enema_with = []
+      enema_with << "L-Glutamine" if next_tags.include? "L-Glutamine"
+      enema_with << "Perenterol" if next_tags.include? "Saccharomyces boulardii"
+      enema_with << "MyBIOTIK" if next_tags.include? "Lactobacillus"
+      next_text = "#{next_text} w/ #{enema_with.join(' & ')}" if !enema_with.empty?
+    end
+
+    medication_type << :suppliment if next_tags.include? "L-Glutamine"
+    medication_type << :probiotic if next_tags.include? "Saccharomyces boulardii"
+    medication_type << :probiotic if next_tags.include? "Lactobacillus"
+
     lines << <<-END.gsub(/^%m\|/, '\n')
       |       "type": "#{next_mode}",
       |       "timestamp": "#{next_timestamp}",
-      |       "medication-type": "#{next_submode}",
+      |       "medication-type": #{medication_type.uniq.map(&:to_s)},
       |       "text": "#{next_text}",
-      |       "tags": #{next_tags}
+      |       "tags": #{next_tags.uniq}
     END
   when :weight
     lines << <<-END
