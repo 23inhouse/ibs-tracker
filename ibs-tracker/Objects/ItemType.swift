@@ -243,8 +243,8 @@ enum Scales: Int, CaseIterable {
 
   static let drynessDescriptions: [Scales: String] = [
     .zero: "not dry",
-    .mild: "not too dry",
-    .moderate: "a bit dry",
+    .mild: "a bit dry",
+    .moderate: "dry",
     .severe: "very dry",
     .extreme: "extremely dry",
   ]
@@ -291,8 +291,8 @@ enum Scales: Int, CaseIterable {
 
   static let wetnessDescriptions: [Scales: String] = [
     .zero: "not wet",
-    .mild: "not too wet",
-    .moderate: "a bit wet",
+    .mild: "a bit wet",
+    .moderate: "wet",
     .severe: "very wet",
     .extreme: "extremely wet",
   ]
