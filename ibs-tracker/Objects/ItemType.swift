@@ -37,6 +37,19 @@ enum BMColor: String, CaseIterable {
   case red
   case white
   case yellow
+
+  var color: Color {
+    switch self {
+    case .none: return .secondary
+    case .black: return .black
+    case .brown: return Color(UIColor.brown)
+    case .green: return .green
+    case .orange: return .orange
+    case .red: return .red
+    case .white: return .white
+    case .yellow: return .yellow
+    }
+  }
 }
 
 extension BMColor: OptionalValue {
@@ -64,7 +77,7 @@ extension BMEvacuation: OptionalValue {
 }
 
 enum BMSmell: String, CaseIterable {
-  case none
+  case none = ""
   case foul
   case sweet
 

@@ -75,10 +75,10 @@ struct BMFormView: View {
 
       Section {
         evacuationPicker
+        smellPicker
       }
 
       Section {
-        smellPicker
         colorPicker
       }
 
@@ -115,21 +115,48 @@ struct BMFormView: View {
         }
       }
     }
+    .listRowBackground(color == .none ? Color(UIColor(red: 0, green: 0, blue: 0, alpha: 0)) : color.color)
   }
 
   private var colorPicker: some View {
-    Picker("Color", selection: $color) {
-      ForEach(BMColor.allCases, id: \.self) { color in
-        Text(color.rawValue.capitalized)
-          .tag(color)
+    VStack {
+      Text(color == .none ? "Color" : color.rawValue.capitalized)
+        .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, alignment: .leading)
+      HStack {
+        ForEach(BMColor.allCases, id: \.self) { color in
+            if color != .none {
+              Circle()
+                .strokeBorder(Color.secondary, lineWidth: 1)
+                .background(Circle().fill(color.color))
+                .scaledToFit()
+                .onTapGesture {
+                  self.color = color
+                }
+            }
+        }
+        ZStack {
+          Color.white
+            .scaledToFit()
+            .opacity(0)
+          Image(systemName: "xmark.circle")
+            .foregroundColor(.secondary)
+            .scaledToFit()
+            .onTapGesture {
+              self.color = .none
+            }
+        }
+
       }
     }
+    .listRowBackground(color == .none ? Color(UIColor(red: 0, green: 0, blue: 0, alpha: 0)) : color.color)
   }
 
   private var evacuationPicker: some View {
     VStack {
       Text("\(BMEvacuation.descriptions[evacuation]?.capitalized ?? "") Evacuation")
         .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, alignment: .leading)
       Picker("Evacuation", selection: $evacuation) {
         ForEach(BMEvacuation.allCases, id: \.self) { evacuation in
           Text(evacuation.rawValue.capitalized)
@@ -141,11 +168,17 @@ struct BMFormView: View {
   }
 
   private var smellPicker: some View {
-    Picker("Smell", selection: $smell) {
-      ForEach(BMSmell.allCases, id: \.self) { smell in
-        Text(BMSmell.descriptions[smell]?.capitalized ?? "")
-          .tag(smell)
+    VStack {
+      Text("Smell")
+        .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, alignment: .leading)
+      Picker("Smell", selection: $smell) {
+        ForEach(BMSmell.allCases, id: \.self) { smell in
+          Text(smell.rawValue.capitalized)
+            .tag(smell)
+        }
       }
+      .pickerStyle(SegmentedPickerStyle())
     }
   }
 
