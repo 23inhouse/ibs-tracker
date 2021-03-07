@@ -12,13 +12,13 @@ class String_UrlTests: XCTestCase {
   func testUrl() throws {
     let bundle = Bundle(for: type(of: self))
 
-    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-import-unchanging.json")
     let jsonString = DataSet.encode(dataSet)
     let url = jsonString?.url(path: "export.json")
 
     let resources = try url?.resourceValues(forKeys:[.fileSizeKey])
     let fileSize = resources?.fileSize
 
-    XCTAssertEqual(fileSize, 2032, "json file contents should be 2032bytes")
+    XCTAssertEqual(fileSize, 165, "json file contents should be 165 bytes")
   }
 }

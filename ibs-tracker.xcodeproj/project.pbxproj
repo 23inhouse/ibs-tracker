@@ -16,6 +16,7 @@
 		B508996325B4A79600B1EA03 /* AcheShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508996225B4A79600B1EA03 /* AcheShape.swift */; };
 		B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508997625B4ABF400B1EA03 /* AcheRow.swift */; };
 		B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */; };
+		B5151EAA25F4D6DF003B9F59 /* records-to-import-unchanging.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */; };
 		B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EB725EFB442005583AB /* WeightFormView.swift */; };
 		B5207E5C25D18D240019D18F /* Migratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E5B25D18D240019D18F /* Migratable.swift */; };
 		B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */; };
@@ -153,6 +154,7 @@
 		B508996225B4A79600B1EA03 /* AcheShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheShape.swift; sourceTree = "<group>"; };
 		B508997625B4ABF400B1EA03 /* AcheRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheRow.swift; sourceTree = "<group>"; };
 		B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodedContent.swift; sourceTree = "<group>"; };
+		B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-import-unchanging.json"; sourceTree = "<group>"; };
 		B51F5EB725EFB442005583AB /* WeightFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormView.swift; sourceTree = "<group>"; };
 		B5207E5B25D18D240019D18F /* Migratable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migratable.swift; sourceTree = "<group>"; };
 		B5207E6F25D19D3D0019D18F /* SQLIBSTagRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLIBSTagRecord.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				B5B9E25725ED04F400A5027C /* records-day-two-days.json */,
 				B57B8B0D25DD21940030D758 /* records-recent-food.json */,
 				B5207E8825D297E90019D18F /* records-to-import.json */,
+				B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */,
+				B5151EAA25F4D6DF003B9F59 /* records-to-import-unchanging.json in Resources */,
 				B5207E8925D297E90019D18F /* records-to-import.json in Resources */,
 				B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */,
 				B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */,
