@@ -26,7 +26,7 @@ struct IBSRecord {
   var headache: Scales?
   var feel: MoodType?
   var stress: Scales?
-  var medicationType: MedicationType?
+  var medicationType: [MedicationType]?
   var weight: Decimal?
   var tags: [String] = []
 }

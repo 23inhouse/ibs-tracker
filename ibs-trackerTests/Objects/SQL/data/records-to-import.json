@@ -36,9 +36,9 @@
     {
        "type": "medication",
        "timestamp": "2020-10-31 18:50:00 +0000",
-       "medication-type": "antimicrobial",
-       "text": "Oregano & garlic tablets",
-       "tags": ["Garlic", "Oregano"]
+       "medication-type": ["antimicrobial"],
+       "text": "Oregano & Allicin capsules",
+       "tags": ["Allicin", "Oregano"]
     },
     {
        "type": "bm",

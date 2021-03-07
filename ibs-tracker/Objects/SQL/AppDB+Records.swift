@@ -82,6 +82,7 @@ private extension AppDB {
           throw "Couldn't create the date"
         }
 
+        let medicationTypes = String(row["medicationType"] ?? "").split(separator: "|").filter { $0 != "" }
         let ibsRecord = IBSRecord(
           type: ItemType(rawValue: row["type"]) ?? .none,
           timestamp: date,
@@ -101,7 +102,7 @@ private extension AppDB {
           headache: Scales(optionalValue: row["headache"]),
           feel: MoodType(optionalValue: row["feel"]),
           stress: Scales(optionalValue: row["stress"]),
-          medicationType: MedicationType(optionalValue: row["medicationType"]),
+          medicationType: row["medicationType"] != nil ? medicationTypes.map { MedicationType(optionalValue: String($0))! } : nil,
           weight: row["weight"] != nil ? Decimal(floatLiteral: row["weight"]) : nil,
           tags: String(row["tags"] ?? "").components(separatedBy: "|").filter { $0 != ""}
         )

@@ -60,7 +60,7 @@ extension SQLIBSRecord: Importable {
     self.headache = record.headache?.rawValue
     self.feel = record.feel?.rawValue
     self.stress = record.stress?.rawValue
-    self.medicationType = record.medicationType?.rawValue
+    self.medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
     self.weight = record.weight
   }
 }
@@ -164,7 +164,7 @@ extension SQLIBSRecord {
     headache = record.headache?.rawValue
     feel = record.feel?.rawValue
     stress = record.stress?.rawValue
-    medicationType = record.medicationType?.rawValue
+    medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
     weight = record.weight
 
     updatedAt = Date()

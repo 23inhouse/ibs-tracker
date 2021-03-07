@@ -53,7 +53,8 @@ extension IBSRecord: Codable {
     headache = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .headache))
     feel = MoodType(optionalValue: try values.decodeIfPresent(Int.self, forKey: .feel))
     stress = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .stress))
-    medicationType = MedicationType(from: try values.decodeIfPresent(String.self, forKey: .medicationType))
+    let medicationTypes = try values.decodeIfPresent([String].self, forKey: .medicationType)
+    medicationType = medicationTypes?.map { MedicationType(from: $0) ?? .other }
     weight = try values.decodeIfPresent(Decimal.self, forKey: .weight)
     tags = try values.decodeIfPresent([String].self, forKey: .tags) ?? []
   }
@@ -90,7 +91,9 @@ extension IBSRecord: Codable {
     try container.encodeIfPresent(headache?.optionalValue, forKey: .headache)
     try container.encodeIfPresent(feel?.optionalValue, forKey: .feel)
     try container.encodeIfPresent(stress?.optionalValue, forKey: .stress)
-    try container.encodeIfPresent(medicationType?.optionalValue, forKey: .medicationType)
+    if let medicationTypeData = medicationType {
+      try container.encode(medicationTypeData, forKey: .medicationType)
+    }
     try container.encodeIfPresent(weight, forKey: .weight)
     try container.encodeIfPresent(tags, forKey: .tags)
   }

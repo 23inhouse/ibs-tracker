@@ -188,6 +188,7 @@ enum MedicationType: String {
   }
 }
 
+extension MedicationType: Encodable {}
 extension MedicationType: OptionalValue {
   var optionalValue: String? {
     self == .none ? nil : rawValue

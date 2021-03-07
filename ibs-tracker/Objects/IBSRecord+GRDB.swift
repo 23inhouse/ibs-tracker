@@ -29,7 +29,8 @@ extension IBSRecord {
     self.headache = Scales(optionalValue: record.headache)
     self.feel = MoodType(optionalValue: record.feel)
     self.stress = Scales(optionalValue: record.stress)
-    self.medicationType = MedicationType(optionalValue: record.medicationType)
+    let medicationTypes = record.medicationType?.split(separator: "|") ?? []
+    self.medicationType = medicationTypes.map { MedicationType(optionalValue: String($0))! }
     self.weight = record.weight
 
     self.tags = tags ?? []

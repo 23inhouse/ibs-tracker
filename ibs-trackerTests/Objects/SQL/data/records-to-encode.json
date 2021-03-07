@@ -1,0 +1,110 @@
+{
+  "ibs-records" : [
+    {
+      "tags" : [
+        "Burping",
+        "Gurgling sound"
+      ],
+      "bloating" : 2,
+      "timestamp" : "2020-10-31 22:45:00 +0100",
+      "type" : "gut"
+    },
+    {
+      "tags" : [
+        "Burping"
+      ],
+      "bloating" : 2,
+      "timestamp" : "2020-10-31 22:15:00 +0100",
+      "type" : "gut"
+    },
+    {
+      "tags" : [
+        "Peanut butter",
+        "Potato chips"
+      ],
+      "timestamp" : "2020-10-31 22:00:00 +0100",
+      "type" : "food",
+      "text" : "Chips & peanut butter"
+    },
+    {
+      "headache" : 2,
+      "timestamp" : "2020-10-31 20:30:00 +0100",
+      "tags" : [
+        "Pressure-like"
+      ],
+      "type" : "ache"
+    },
+    {
+      "stress" : 1,
+      "timestamp" : "2020-10-31 20:25:00 +0100",
+      "tags" : [
+        "I live in Berlin"
+      ],
+      "type" : "mood",
+      "feel" : 1
+    },
+    {
+      "tags" : [
+        "Allicin",
+        "L-Glutamine",
+        "Oregano"
+      ],
+      "timestamp" : "2020-10-31 19:50:00 +0100",
+      "medication-type" : [
+        "antimicrobial",
+        "suppliment"
+      ],
+      "type" : "medication",
+      "text" : "L-Glutamine & Oregano & Allicin capsules"
+    },
+    {
+      "bristol-scale" : 5,
+      "tags" : [
+        "Almost sausage"
+      ],
+      "timestamp" : "2020-10-31 14:45:00 +0100",
+      "type" : "bm"
+    },
+    {
+      "tags" : [
+
+      ],
+      "timestamp" : "2020-10-31 11:15:00 +0100",
+      "type" : "note",
+      "text" : "See diary"
+    },
+    {
+      "bristol-scale" : 6,
+      "tags" : [
+        "Partial evacuation",
+        "Almost sausage"
+      ],
+      "timestamp" : "2020-10-31 11:10:00 +0100",
+      "type" : "bm"
+    },
+    {
+      "tags" : [
+        "Potato chips"
+      ],
+      "timestamp" : "2020-10-30 19:55:00 +0100",
+      "type" : "food",
+      "text" : "Chips"
+    },
+    {
+      "tags" : [
+
+      ],
+      "timestamp" : "2020-10-28 09:55:00 +0100",
+      "weight" : 60.8,
+      "type" : "weight"
+    },
+    {
+      "bodyache" : 2,
+      "tags" : [
+
+      ],
+      "timestamp" : "2020-10-23 12:20:00 +0200",
+      "type" : "ache"
+    }
+  ]
+}

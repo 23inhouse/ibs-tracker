@@ -41,7 +41,7 @@ class IBSRecord_DecodableTests: XCTestCase {
     XCTAssertEqual(ibsRecords[4].stress, .mild, "Stress should equal mild")
 
     XCTAssertEqual(ibsRecords[5].type, .medication, "Should be a medication record")
-    XCTAssertEqual(ibsRecords[5].medicationType, .antimicrobial, "Medication type should equal antimicrobial")
+    XCTAssertEqual(ibsRecords[5].medicationType, [.antimicrobial], "Medication type should equal antimicrobial")
 
     XCTAssertEqual(ibsRecords[6].type, .bm, "Should be a bm record")
     XCTAssertEqual(ibsRecords[6].bristolScale, .b5, "Bristol scale should equal b5")
@@ -64,4 +64,18 @@ class IBSRecord_DecodableTests: XCTestCase {
     let tagRecords = Array(Set(ibsRecords.flatMap { $0.tags }))
     XCTAssertEqual(tagRecords.count, 10, "No tag records imported")
   }
+
+  func testEncode() throws {
+    let bundle = Bundle(for: type(of: self))
+
+    guard let filepath = bundle.path(forResource: "records-to-encode.json", ofType: "") else { throw "Can't open file" }
+    let expectedJSON = try String(contentsOfFile: filepath)
+    let trimmedExpectedJSON = expectedJSON.trimmingCharacters(in: .whitespacesAndNewlines)
+
+    let dataSet = try bundle.decode(DataSet.self, from: "records-to-encode.json")
+    guard let encodedJSON = DataSet.encode(dataSet) else { throw "Couldn't encode json" }
+
+    XCTAssertEqual(encodedJSON, trimmedExpectedJSON, "JSON contents don't match")
+  }
+
 }
