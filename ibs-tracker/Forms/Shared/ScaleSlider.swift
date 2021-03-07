@@ -7,9 +7,19 @@
 
 import SwiftUI
 
+struct SizePreferenceKey: PreferenceKey {
+  typealias Value = CGSize
+  static var defaultValue: Value = .zero
+
+  static func reduce(value: inout Value, nextValue: () -> Value) {
+    value = nextValue()
+  }
+}
+
 struct ScaleSlider<T: Sliderable>: View {
   @State private var slider: Double = 0
   @State private var titleColor: Color = .secondary
+  @State private var sliderWidth: CGFloat = 0
 
   @Binding private var scale: T
   private var title: String
@@ -25,24 +35,48 @@ struct ScaleSlider<T: Sliderable>: View {
 
   private var description: String {
     guard let scale = sliderSliderable else {
-      $slider.wrappedValue = -1
+      slider = -1
       return defaultTitle
     }
+
     return descriptions[scale]?.capitalizeFirstLetter() ?? defaultTitle
   }
 
   private var sliderSliderable: T? { T(rawValue: Int(slider)) }
 
-
   var body: some View {
     VStack {
-      Text(description)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundColor(titleColor)
+      ZStack {
+        Text(description)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .foregroundColor(titleColor)
+          .background(
+            GeometryReader { proxy in
+              Color.clear.preference(key: SizePreferenceKey.self, value: proxy.size)
+            }
+          )
+      }
+      .onPreferenceChange(SizePreferenceKey.self) { preferences in
+        sliderWidth = preferences.width
+      }
       Slider(value: $slider, in: -1...4, step: 0.1)
+        .accentColor(titleColor)
+        .gesture(
+          DragGesture()
+            .onChanged { gesture in
+              let movement = gesture.location.width
+              let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
+              guard abs(translation - slider) < 1.0 else { return }
+              slider = translation
+            }
+            .onEnded { gesture in
+              let movement = gesture.location.width
+              let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
+              scale = T(rawValue: Int(translation))!
+            }
+        )
         .onChange(of: slider, perform: { value in
-          let scale = T(rawValue: Int(value))!
-          $scale.wrappedValue = scale
+          guard let scale = T(rawValue: Int(value)) else { return }
           titleColor = scale.scaleColor
         })
         .onAppear {
