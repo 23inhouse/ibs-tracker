@@ -51,10 +51,11 @@ struct FoodFormView: View {
       appState.tags(for: .food).filter {
         let availableTag = $0.lowercased()
         return
-          nameIsCompleted &&
           !viewModel.tags.contains($0) &&
           (
             availableTag.contains(viewModel.newTag.lowercased()) ||
+            (
+              nameIsCompleted &&
               name.split(separator: " ").filter {
                 let word = String($0.lowercased())
                 return
@@ -62,7 +63,8 @@ struct FoodFormView: View {
                   viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
                   (availableTag.contains(word) || word.contains(availableTag))
               }.isNotEmpty
-          )
+            )
+        )
     }
   }
 
