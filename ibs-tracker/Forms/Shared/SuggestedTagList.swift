@@ -13,12 +13,10 @@ struct SuggestedTagList: View {
   @Binding var newTag: String
 
   var body: some View {
-    List {
-      ForEach(suggestedTags, id: \.self) { value in
-        Button(value) {
-          tags.append(value)
-          newTag = ""
-        }
+    ForEach(suggestedTags, id: \.self) { value in
+      Button(value) {
+        tags.append(value)
+        newTag = ""
       }
     }
   }
