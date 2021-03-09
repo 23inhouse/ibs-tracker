@@ -31,10 +31,10 @@ extension IBSRecord: AcheRecord {
   }
 
   func headacheText() -> String {
-    return Scales.headAcheDescriptions[headache ?? .zero] ?? ""
+    return Scales.headacheDescriptions[headache ?? .zero] ?? ""
   }
 
   func bodyacheText() -> String {
-    return Scales.bodyAcheDescriptions[bodyache ?? .zero] ?? ""
+    return Scales.bodyacheDescriptions[bodyache ?? .zero] ?? ""
   }
 }

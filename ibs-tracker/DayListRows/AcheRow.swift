@@ -15,28 +15,30 @@ struct AcheRowView: View {
   }
 
   var body: some View {
-    DayRowView(
-      type: .ache,
-      color: ColorCodedContent.scaleColor(for: record.acheScore()),
-      tags: record.tags
-    ) {
-      HStack(alignment: .top, spacing: 5) {
-        TimestampView(record: record as! IBSRecord)
-        Spacer()
-        VStack(alignment: .trailing, spacing: 5) {
-          if let headache = record.headache {
-            PropertyView(
-              text: record.headacheText(),
-              scale: headache.rawValue,
-              color: ColorCodedContent.scaleColor(for: record.headache)
-            )
-          }
-          if let bodyache = record.bodyache {
-            PropertyView(
-              text: record.bodyacheText(),
-              scale: bodyache.rawValue,
-              color: ColorCodedContent.scaleColor(for: record.bodyache)
-            )
+    NavigationLink(destination: AcheFormView(for: record)) {
+      DayRowView(
+        type: .ache,
+        color: ColorCodedContent.scaleColor(for: record.acheScore()),
+        tags: record.tags
+      ) {
+        HStack(alignment: .top, spacing: 5) {
+          TimestampView(record: record as! IBSRecord)
+          Spacer()
+          VStack(alignment: .trailing, spacing: 5) {
+            if let headache = record.headache {
+              PropertyView(
+                text: record.headacheText(),
+                scale: headache.rawValue,
+                color: ColorCodedContent.scaleColor(for: record.headache)
+              )
+            }
+            if let bodyache = record.bodyache {
+              PropertyView(
+                text: record.bodyacheText(),
+                scale: bodyache.rawValue,
+                color: ColorCodedContent.scaleColor(for: record.bodyache)
+              )
+            }
           }
         }
       }

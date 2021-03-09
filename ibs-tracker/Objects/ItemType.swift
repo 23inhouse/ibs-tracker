@@ -250,7 +250,7 @@ enum Scales: Int, CaseIterable {
     .extreme: "extreme feeling of bloating",
   ]
 
-  static let bodyAcheDescriptions: [Scales: String] = [
+  static let bodyacheDescriptions: [Scales: String] = [
     .zero: "no pain at all",
     .mild: "mild pain",
     .moderate: "moderate pain",
@@ -282,7 +282,7 @@ enum Scales: Int, CaseIterable {
     .extreme: "extreme tummy pain",
   ]
 
-  static let headAcheDescriptions: [Scales: String] = [
+  static let headacheDescriptions: [Scales: String] = [
     .zero: "no headache at all",
     .mild: "mild headache",
     .moderate: "moderate headache",

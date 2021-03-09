@@ -93,7 +93,7 @@ struct ScaleSlider_Previews: PreviewProvider {
       Section {
         ScaleSlider(Binding.constant(.none), "Gut pain", descriptions: Scales.gutPainDescriptions)
         ScaleSlider(Binding.constant(.zero), "Bloating", descriptions: Scales.bloatingDescriptions)
-        ScaleSlider(Binding.constant(.mild), "Body ache", descriptions: Scales.bodyAcheDescriptions)
+        ScaleSlider(Binding.constant(.mild), "Body ache", descriptions: Scales.bodyacheDescriptions)
         ScaleSlider(Binding.constant(.moderate), "Dryness", descriptions: Scales.drynessDescriptions)
         ScaleSlider(Binding.constant(.severe), "Wetness", descriptions: Scales.wetnessDescriptions)
         ScaleSlider(Binding.constant(.extreme), "Risk", descriptions: Scales.foodRiskDescriptions)
