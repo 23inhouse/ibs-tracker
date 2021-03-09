@@ -23,28 +23,30 @@ struct MoodRowView: View {
   }
 
   var body: some View {
-    DayRowView(
-      type: .mood,
-      color: ColorCodedContent.worstColor(moodColor, stressColor),
-      tags: record.tags
-    ) {
-      HStack(alignment: .top, spacing: 0) {
-        TimestampView(record: record as! IBSRecord)
-        Spacer()
-        VStack(alignment: .trailing, spacing: 4) {
-          if let feel = record.feel {
-            PropertyView(
-              text: record.feelText(),
-              scale: feel.rawValue,
-              color: moodColor
-            )
-          }
-          if let stress = record.stress {
-            PropertyView(
-              text: record.stressText(),
-              scale: stress.rawValue,
-              color: stressColor
-            )
+    NavigationLink(destination: MoodFormView(for: record)) {
+      DayRowView(
+        type: .mood,
+        color: ColorCodedContent.worstColor(moodColor, stressColor),
+        tags: record.tags
+      ) {
+        HStack(alignment: .top, spacing: 0) {
+          TimestampView(record: record as! IBSRecord)
+          Spacer()
+          VStack(alignment: .trailing, spacing: 4) {
+            if let feel = record.feel {
+              PropertyView(
+                text: record.feelText(),
+                scale: feel.rawValue,
+                color: moodColor
+              )
+            }
+            if let stress = record.stress {
+              PropertyView(
+                text: record.stressText(),
+                scale: stress.rawValue,
+                color: stressColor
+              )
+            }
           }
         }
       }

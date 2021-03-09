@@ -222,6 +222,12 @@ enum MoodType: Int {
   ]
 }
 
+extension MoodType: Sliderable {
+  var scaleColor: Color {
+    ColorCodedContent.moodColor(for: self, default: .secondary)
+  }
+}
+
 extension MoodType: OptionalValue {
   var optionalValue: Int? {
     self == .none ? nil : rawValue

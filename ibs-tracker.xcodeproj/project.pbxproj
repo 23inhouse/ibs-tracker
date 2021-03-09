@@ -76,6 +76,7 @@
 		B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */; };
 		B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */; };
 		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
+		B55CAAB525F8154B00EAD6DA /* MoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */; };
 		B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAC725F82A0600EAD6DA /* TagToggle.swift */; };
 		B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */; };
 		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
@@ -220,6 +221,7 @@
 		B554CE3525D02D4200E2EE17 /* SQLIBSRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLIBSRecord.swift; sourceTree = "<group>"; };
 		B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+Records.swift"; sourceTree = "<group>"; };
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
+		B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodFormView.swift; sourceTree = "<group>"; };
 		B55CAAC725F82A0600EAD6DA /* TagToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagToggle.swift; sourceTree = "<group>"; };
 		B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDBTests.swift"; sourceTree = "<group>"; };
 		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				B5207EF625D5E9420019D18F /* FoodFormView.swift */,
 				B50738EC25F7C66A0069FB50 /* GutFormView.swift */,
 				B51F5EBC25EFC282005583AB /* MedicationFormView.swift */,
+				B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
 				B51F5EB725EFB442005583AB /* WeightFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
@@ -873,6 +876,7 @@
 				B52E465E25D01EFE00C009EC /* IBSRecord+MedicationRecord.swift in Sources */,
 				B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */,
 				B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */,
+				B55CAAB525F8154B00EAD6DA /* MoodFormView.swift in Sources */,
 				B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */,
 				B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */,
 				B5E5914C25E57D4C00AE3DD1 /* SwiftUITextField.swift in Sources */,
