@@ -15,28 +15,30 @@ struct GutSymptomRowView: View {
   }
 
   var body: some View {
-    DayRowView(
-      type: .gut,
-      color: ColorCodedContent.scaleColor(for: record.gutScore()),
-      tags: record.tags
-    ) {
-      HStack(alignment: .top, spacing: 0) {
-        TimestampView(record: record as! IBSRecord)
-        Spacer()
-        VStack(alignment: .trailing, spacing: 4) {
-          if let bloating = record.bloating {
-            PropertyView(
-              text: record.bloatingText(),
-              scale: bloating.rawValue,
-              color: ColorCodedContent.scaleColor(for: record.bloating)
-            )
-          }
-          if let pain = record.pain {
-            PropertyView(
-              text: record.gutPainText(),
-              scale: pain.rawValue,
-              color: ColorCodedContent.scaleColor(for: record.pain)
-            )
+    NavigationLink(destination: GutFormView(for: record)) {
+      DayRowView(
+        type: .gut,
+        color: ColorCodedContent.scaleColor(for: record.gutScore()),
+        tags: record.tags
+      ) {
+        HStack(alignment: .top, spacing: 0) {
+          TimestampView(record: record as! IBSRecord)
+          Spacer()
+          VStack(alignment: .trailing, spacing: 4) {
+            if let bloating = record.bloating {
+              PropertyView(
+                text: record.bloatingText(),
+                scale: bloating.rawValue,
+                color: ColorCodedContent.scaleColor(for: record.bloating)
+              )
+            }
+            if let pain = record.pain {
+              PropertyView(
+                text: record.gutPainText(),
+                scale: pain.rawValue,
+                color: ColorCodedContent.scaleColor(for: record.pain)
+              )
+            }
           }
         }
       }

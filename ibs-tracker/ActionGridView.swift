@@ -26,7 +26,7 @@ struct ActionGridView: View {
         .padding(.trailing)
 
         HStack {
-          IBSItemView(shape: TypeShape(type: .gut), text: "Bloating/pain")
+          ActionNavigationLink(type: .gut, text: "Bloating/pain") { GutFormView() }
           IBSItemView(shape: TypeShape(type: .ache), text: "Pain/aches")
         }
         .padding(.leading)
