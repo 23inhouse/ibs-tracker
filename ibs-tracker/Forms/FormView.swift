@@ -12,43 +12,45 @@ struct FormView<Content: View>: View {
   @EnvironmentObject private var appState: IBSData
 
   @ObservedObject private var viewModel: FormViewModel
-  private let content: Content
+  private let content: (ScrollViewProxy) -> Content
 
   private var editMode: Bool { editableRecord != nil }
   private var editableRecord: IBSRecordType? = nil
 
-  init(viewModel: FormViewModel, editableRecord: IBSRecordType? = nil, @ViewBuilder content: @escaping () -> Content) {
+  init(viewModel: FormViewModel, editableRecord: IBSRecordType? = nil, @ViewBuilder content: @escaping (ScrollViewProxy) -> Content) {
     self._viewModel = ObservedObject(initialValue: viewModel)
-    self.content = content()
+    self.content = content
     self.editableRecord = editableRecord
   }
 
   var body: some View {
-    Form {
-      content
+    ScrollViewReader { scroller in
+      Form {
+        content(scroller)
 
-      DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
-    }
-    .onAppear() {
-      viewModel.initializeTimestamp()
-    }
-    .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
-    }
-    .alert(delete: editableRecord, appState: appState, isPresented: $viewModel.showAlert) {
-      DispatchQueue.main.async {
-        appState.tabSelection = .day
-        presentation.wrappedValue.dismiss()
+        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
       }
+      .onAppear() {
+        viewModel.initializeTimestamp()
+      }
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
+      }
+      .alert(delete: editableRecord, appState: appState, isPresented: $viewModel.showAlert) {
+        DispatchQueue.main.async {
+          appState.tabSelection = .day
+          presentation.wrappedValue.dismiss()
+        }
+      }
+      .gesture(DragGesture().onChanged { _ in endEditing(true) })
     }
-    .gesture(DragGesture().onChanged { _ in endEditing(true) })
   }
 }
 
 struct FormView_Previews: PreviewProvider {
   static var previews: some View {
-    FormView(viewModel: FormViewModel()) {
+    FormView(viewModel: FormViewModel()) { _ in
       FoodFormView()
     }
     .environmentObject(IBSData())

@@ -68,7 +68,7 @@ struct BMFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         bristolTypePicker
       }
@@ -91,8 +91,11 @@ struct BMFormView: View {
       Section {
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+          .onTapGesture { scroller.scrollToTags() }
+          .onChange(of: viewModel.newTag) { _ in scroller.scrollToTags() }
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
+      .id(ScrollViewProxy.tagAnchor())
 
       if bristolScale != nil {
         SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)

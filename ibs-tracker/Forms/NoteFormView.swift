@@ -45,7 +45,7 @@ struct NoteFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         TextEditor(text: $text)
           .frame(height: 200)
@@ -54,8 +54,11 @@ struct NoteFormView: View {
       Section {
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+          .onTapGesture { scroller.scrollToTags() }
+          .onChange(of: viewModel.newTag) { _ in scroller.scrollToTags() }
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
+      .id(ScrollViewProxy.tagAnchor())
 
       if text.isNotEmpty {
         SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)

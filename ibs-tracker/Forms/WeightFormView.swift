@@ -49,7 +49,7 @@ struct WeightFormView: View {
   }()
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         Picker("Weight", selection: $weight) {
           ForEach(weights, id: \.self) { weight in
@@ -69,8 +69,11 @@ struct WeightFormView: View {
       Section {
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+          .onTapGesture { scroller.scrollToTags() }
+          .onChange(of: viewModel.newTag) { _ in scroller.scrollToTags() }
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
+      .id(ScrollViewProxy.tagAnchor())
     }
   }
 }

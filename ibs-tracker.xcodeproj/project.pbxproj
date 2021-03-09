@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50738E225F76F800069FB50 /* ScrollViewProxy+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50738E125F76F800069FB50 /* ScrollViewProxy+Tags.swift */; };
 		B508993525B3672200B1EA03 /* BowelMovementShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508993425B3672200B1EA03 /* BowelMovementShape.swift */; };
 		B508993D25B36C0B00B1EA03 /* IBSItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508993C25B36C0B00B1EA03 /* IBSItemView.swift */; };
 		B508994225B36CCA00B1EA03 /* TypeShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508994125B36CCA00B1EA03 /* TypeShape.swift */; };
@@ -148,6 +149,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B50738E125F76F800069FB50 /* ScrollViewProxy+Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollViewProxy+Tags.swift"; sourceTree = "<group>"; };
 		B508993425B3672200B1EA03 /* BowelMovementShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementShape.swift; sourceTree = "<group>"; };
 		B508993C25B36C0B00B1EA03 /* IBSItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSItemView.swift; sourceTree = "<group>"; };
 		B508994125B36CCA00B1EA03 /* TypeShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeShape.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
 				B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */,
+				B50738E125F76F800069FB50 /* ScrollViewProxy+Tags.swift */,
 				B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */,
 				B5207E9D25D417CD0019D18F /* String+Error.swift */,
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
@@ -785,6 +788,7 @@
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
 				B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */,
+				B50738E225F76F800069FB50 /* ScrollViewProxy+Tags.swift in Sources */,
 				B5B4D2AE25EB9E9E000D7D23 /* BMFormView.swift in Sources */,
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,

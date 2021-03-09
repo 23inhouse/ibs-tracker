@@ -19,6 +19,8 @@ struct FoodFormView: View {
   @State private var nameIsCompleted: Bool = false
   @State private var tagIsFirstResponder: Bool = false
 
+  let tagAutoScrollLimit = 3
+
   init(for foodRecord: FoodRecord? = nil) {
     guard let record = foodRecord else { return }
     self.editableRecord = record
@@ -73,7 +75,7 @@ struct FoodFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         UIKitBridge.SwiftUITextField("Meal name. e.g. Pizza", text: $name, onCommit: commitName)
 
@@ -81,9 +83,12 @@ struct FoodFormView: View {
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
           .onTapGesture {
             commitName()
+            scrollToTags(scroller: scroller)
           }
+          .onChange(of: viewModel.newTag) { _ in scrollToTags(scroller: scroller) }
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
+      .id(ScrollViewProxy.tagAnchor())
 
       if recentFoods.isNotEmpty {
         recentFoodSection
@@ -125,6 +130,13 @@ struct FoodFormView: View {
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
+    }
+  }
+
+  private func scrollToTags(scroller: ScrollViewProxy) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      guard viewModel.tags.count < tagAutoScrollLimit else { return }
+      scroller.scrollToTags()
     }
   }
 }

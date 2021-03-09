@@ -16,6 +16,9 @@ struct MedicationFormView: View {
   @State private var nameIsCompleted: Bool = false
   @State private var medicationTypes: [MedicationType] = []
   @State private var recentMedicationSelection: IBSRecord?
+  @State private var showAllTags: Bool = false
+
+  let tagAutoScrollLimit = 3
 
   init(for medicationRecord: MedicationRecord? = nil) {
     guard let record = medicationRecord else { return }
@@ -53,6 +56,7 @@ struct MedicationFormView: View {
         return
           !viewModel.tags.contains($0) &&
           (
+            showAllTags ||
             availableTag.contains(viewModel.newTag.lowercased()) ||
             (
               nameIsCompleted &&
@@ -73,7 +77,7 @@ struct MedicationFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) {
+    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         if recentMedications.isNotEmpty {
           recentMedicationSection
@@ -98,8 +102,14 @@ struct MedicationFormView: View {
       Section {
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+          .gesture(TapGesture(count: 2).onEnded { showAllTags = true })
+          .simultaneousGesture(TapGesture().onEnded { scrollToTags(scroller: scroller) })
+          .onChange(of: viewModel.newTag) { _ in scrollToTags(scroller: scroller) }
+          .onChange(of: viewModel.tags) { _ in showAllTags = false }
+
         List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
       }
+      .id(ScrollViewProxy.tagAnchor())
 
       if name.isNotEmpty && medicationTypes.isNotEmpty {
         SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
@@ -130,6 +140,13 @@ struct MedicationFormView: View {
   private func commitName() {
     nameIsCompleted = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  private func scrollToTags(scroller: ScrollViewProxy) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      guard viewModel.tags.count < tagAutoScrollLimit else { return }
+      scroller.scrollToTags()
+    }
   }
 }
 
