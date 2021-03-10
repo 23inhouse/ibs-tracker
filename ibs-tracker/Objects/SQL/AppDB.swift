@@ -46,8 +46,10 @@ struct AppDB {
 
   func loadAllTags() throws {
     do {
-      try loadTags(.bm)
-      try loadTags(.food)
+      for type in ItemType.allCases {
+        guard type != .none else { continue }
+        try loadTags(type)
+      }
     } catch {
       print(error)
       throw error

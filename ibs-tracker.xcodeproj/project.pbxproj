@@ -87,6 +87,12 @@
 		B57DB80425EBFDA400CC4A0A /* bm-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B57DB80325EBFDA400CC4A0A /* bm-tags.txt */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
+		B596882B25F922A400288744 /* weight-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882325F922A400288744 /* weight-tags.txt */; };
+		B596882C25F922A400288744 /* gut-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882425F922A400288744 /* gut-tags.txt */; };
+		B596882D25F922A400288744 /* ache-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882525F922A400288744 /* ache-tags.txt */; };
+		B596882E25F922A400288744 /* note-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882625F922A400288744 /* note-tags.txt */; };
+		B596882F25F922A400288744 /* mood-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882725F922A400288744 /* mood-tags.txt */; };
+		B596883125F922A400288744 /* medication-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882925F922A400288744 /* medication-tags.txt */; };
 		B5A1CA2925EEB5FD006C77CA /* Sliderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A1CA2825EEB5FD006C77CA /* Sliderable.swift */; };
 		B5A2647D25DFE7B300AF197C /* Date+NearestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */; };
 		B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */; };
@@ -233,6 +239,12 @@
 		B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+OptionalValue.swift"; sourceTree = "<group>"; };
 		B57DB80325EBFDA400CC4A0A /* bm-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bm-tags.txt"; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
+		B596882325F922A400288744 /* weight-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "weight-tags.txt"; sourceTree = "<group>"; };
+		B596882425F922A400288744 /* gut-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gut-tags.txt"; sourceTree = "<group>"; };
+		B596882525F922A400288744 /* ache-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ache-tags.txt"; sourceTree = "<group>"; };
+		B596882625F922A400288744 /* note-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "note-tags.txt"; sourceTree = "<group>"; };
+		B596882725F922A400288744 /* mood-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mood-tags.txt"; sourceTree = "<group>"; };
+		B596882925F922A400288744 /* medication-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "medication-tags.txt"; sourceTree = "<group>"; };
 		B5A1CA2825EEB5FD006C77CA /* Sliderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sliderable.swift; sourceTree = "<group>"; };
 		B5A2647C25DFE7B300AF197C /* Date+NearestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+NearestTests.swift"; sourceTree = "<group>"; };
 		B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -585,8 +597,14 @@
 		B5ED341C25E7C4740029B274 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				B596882525F922A400288744 /* ache-tags.txt */,
 				B57DB80325EBFDA400CC4A0A /* bm-tags.txt */,
 				B5ED341725E7C46B0029B274 /* food-tags.txt */,
+				B596882425F922A400288744 /* gut-tags.txt */,
+				B596882925F922A400288744 /* medication-tags.txt */,
+				B596882725F922A400288744 /* mood-tags.txt */,
+				B596882625F922A400288744 /* note-tags.txt */,
+				B596882325F922A400288744 /* weight-tags.txt */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -749,10 +767,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B596882C25F922A400288744 /* gut-tags.txt in Resources */,
+				B596883125F922A400288744 /* medication-tags.txt in Resources */,
 				B57DB80425EBFDA400CC4A0A /* bm-tags.txt in Resources */,
 				B5ED341825E7C46B0029B274 /* food-tags.txt in Resources */,
+				B596882B25F922A400288744 /* weight-tags.txt in Resources */,
+				B596882F25F922A400288744 /* mood-tags.txt in Resources */,
 				B5E3A8DD25AE205D00DAC8DD /* Preview Assets.xcassets in Resources */,
+				B596882E25F922A400288744 /* note-tags.txt in Resources */,
 				B5E3A8DA25AE205D00DAC8DD /* Assets.xcassets in Resources */,
+				B596882D25F922A400288744 /* ache-tags.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

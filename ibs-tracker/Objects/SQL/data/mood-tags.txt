@@ -1,0 +1,44 @@
+Active
+Annoyed
+Anxious
+Angry
+Brain fog
+Calm
+Chilly
+Depressed
+Dizzy
+Excited
+Fatigued
+Frustrated
+Hopeless
+In love
+In thoughts
+Grouchy
+Empty
+Hungover
+Lonely
+Melancholic
+Nervous
+Panicked
+Restless
+Sensitive
+Short tempered
+Sick
+Stiff
+Tired
+Worried
+Bored
+Creative
+Energized
+Exhausted
+Happy
+Inspired
+Lost
+Over-tired
+Overwhelmed
+Overworked
+Pressured
+Productive
+Relaxed
+Relieved
+Struggling
