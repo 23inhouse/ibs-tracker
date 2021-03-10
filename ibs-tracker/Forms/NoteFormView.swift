@@ -14,6 +14,8 @@ struct NoteFormView: View {
   @StateObject private var viewModel = FormViewModel()
   @State private var text: String = ""
 
+  @State private var showAllTags: Bool = false
+
   init(for noteRecord: NoteRecord? = nil) {
     guard let record = noteRecord else { return }
     self.editableRecord = noteRecord
@@ -32,12 +34,17 @@ struct NoteFormView: View {
 
   private var suggestedTags: [String] {
     return
-      appState.tags(for: .note).filter {
+      appState.tags(for: .note)
+      .sorted()
+      .filter {
         let availableTag = $0.lowercased()
         return
           !viewModel.tags.contains($0) &&
-          availableTag.contains(viewModel.newTag.lowercased())
-    }
+          (
+            showAllTags ||
+              availableTag.contains(viewModel.newTag.lowercased())
+          )
+      }
   }
 
   private var tagPlaceholder: String {
@@ -51,14 +58,7 @@ struct NoteFormView: View {
           .frame(height: 200)
       }
 
-      Section {
-        List { EditableTagList(tags: $viewModel.tags) }
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
-          .onTapGesture { scroller.scrollToTags() }
-          .onChange(of: viewModel.newTag) { _ in scroller.scrollToTags() }
-        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
-      }
-      .id(ScrollViewProxy.tagAnchor())
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
 
       if text.isNotEmpty {
         SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)

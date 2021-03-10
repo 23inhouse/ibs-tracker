@@ -20,7 +20,8 @@ struct BMFormView: View {
   @State private var smell: BMSmell = .none
   @State private var wetness: Scales = .none
 
-  @State private var scale: Double = 0
+  @State private var showAllTags: Bool = false
+
 
   init(for bmRecord: BMRecord? = nil) {
     guard let record = bmRecord else { return }
@@ -52,15 +53,16 @@ struct BMFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .bm)
+      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return
           !viewModel.tags.contains($0) &&
           (
-            availableTag.contains(viewModel.newTag.lowercased()) ||
-              viewModel.newTag.isEmpty
+            showAllTags ||
+              availableTag.contains(viewModel.newTag.lowercased())
           )
-    }
+      }
   }
 
   private var tagPlaceholder: String {
@@ -88,14 +90,7 @@ struct BMFormView: View {
         ScaleSlider($dryness, "Dryness", descriptions: Scales.drynessDescriptions)
       }
 
-      Section {
-        List { EditableTagList(tags: $viewModel.tags) }
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
-          .onTapGesture { scroller.scrollToTags() }
-          .onChange(of: viewModel.newTag) { _ in scroller.scrollToTags() }
-        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
-      }
-      .id(ScrollViewProxy.tagAnchor())
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
 
       if bristolScale != nil {
         SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)

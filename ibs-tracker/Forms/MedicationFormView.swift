@@ -16,6 +16,7 @@ struct MedicationFormView: View {
   @State private var nameIsCompleted: Bool = false
   @State private var medicationTypes: [MedicationType] = []
   @State private var recentMedicationSelection: IBSRecord?
+
   @State private var showAllTags: Bool = false
 
   let tagAutoScrollLimit = 3
@@ -51,7 +52,9 @@ struct MedicationFormView: View {
 
   private var suggestedTags: [String] {
     return
-      appState.tags(for: .medication).filter {
+      appState.tags(for: .medication)
+      .sorted()
+      .filter {
         let availableTag = $0.lowercased()
         return
           !viewModel.tags.contains($0) &&
@@ -70,10 +73,6 @@ struct MedicationFormView: View {
             )
         )
     }
-  }
-
-  private var tagPlaceholder: String {
-    viewModel.tags.isEmpty ? "Add tag" : "Add another tag"
   }
 
   var body: some View {
@@ -99,17 +98,7 @@ struct MedicationFormView: View {
         }
       }
 
-      Section {
-        List { EditableTagList(tags: $viewModel.tags) }
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
-          .gesture(TapGesture(count: 2).onEnded { showAllTags = true })
-          .simultaneousGesture(TapGesture().onEnded { scrollToTags(scroller: scroller) })
-          .onChange(of: viewModel.newTag) { _ in scrollToTags(scroller: scroller) }
-          .onChange(of: viewModel.tags) { _ in showAllTags = false }
-
-        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag) }
-      }
-      .id(ScrollViewProxy.tagAnchor())
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
 
       if name.isNotEmpty && medicationTypes.isNotEmpty {
         SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
@@ -140,13 +129,6 @@ struct MedicationFormView: View {
   private func commitName() {
     nameIsCompleted = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-  }
-
-  private func scrollToTags(scroller: ScrollViewProxy) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-      guard viewModel.tags.count < tagAutoScrollLimit else { return }
-      scroller.scrollToTags()
-    }
   }
 }
 
