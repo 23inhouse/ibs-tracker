@@ -16,6 +16,9 @@ struct WeightFormView: View {
 
   @State private var showAllTags: Bool = false
 
+  private let maxWeight: Decimal = 140.1
+  private let minWeight: Decimal = 40
+
   init(for weightRecord: WeightRecord? = nil) {
     guard let record = weightRecord else { return }
     self.editableRecord = weightRecord
@@ -47,9 +50,9 @@ struct WeightFormView: View {
       }
   }
 
-  private var weights: [Decimal] = {
-    Array(stride(from: Decimal(10), to: Decimal(444), by: 0.1))
-  }()
+  private var weights: [Decimal] {
+    Array(stride(from: minWeight, to: maxWeight, by: 0.1))
+  }
 
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
