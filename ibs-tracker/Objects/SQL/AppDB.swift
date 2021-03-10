@@ -100,9 +100,8 @@ private extension AppDB {
       _ = try insertRecord(&tagRecord)
     }
 
-    try dbWriter.read { db in
-      let count = try SQLTagRecord.fetchCount(db)
-      print("Inserted [\(count)] \(type) tags")
-    }
+
+    let count = try countRecords(in: SQLTagRecord.self, of: type)
+    print("Inserted [\(count)] \(type) tags")
   }
 }

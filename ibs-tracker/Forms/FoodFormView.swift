@@ -52,7 +52,9 @@ struct FoodFormView: View {
 
   private var suggestedTags: [String] {
     return
-      appState.tags(for: .food).filter {
+      appState.tags(for: .food)
+      .sorted()
+      .filter {
         let availableTag = $0.lowercased()
         return
           !viewModel.tags.contains($0) &&

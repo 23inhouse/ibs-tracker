@@ -132,6 +132,14 @@ TAG_TRANSLATIONS = {
   "Gurke" => "Gherkin",
   "Zitrone" => "Lemon",
   "Dinkelkeks" => "Spelt cracker",
+  "Pak Choi" => "Mangold",
+  "Tee (sonstige)" => "Tea (other)",
+  "Sojasprossen" => "Bean sprouts",
+  "Cashewkerne" => "Cashew nuts",
+  "Haselnüsse" => "Hazelnuts",
+  "Macadamianüsse" => "Macadamia nuts",
+  "Walnüsse" => "Walnuts",
+  "Gewürzmischungen mit Knoblauch und Zwiebeln" => "Spice mix w/ onions & garlic",
 }
 
 FOOD_TAGS_TO_REMOVE = [
@@ -176,6 +184,7 @@ CARA_CARE_DATA_ERRORS = {
   "2021-01-24 08:10:00 +0000" => [:note, :next],
   "2021-01-24 19:20:00 +0000" => [:food, :prev],
   "2021-02-05 22:20:00 +0000" => [:food, :prev],
+  "2021-03-08 21:05:00 +0000" => [:food, :prev],
 }
 
 def mode(tracking_id, tracking_type, tracking_text, tag_names)
@@ -380,14 +389,12 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
 
   if CARA_CARE_DATA_ERRORS[next_timestamp] == [next_mode, :prev] && prev_timestamp != next_timestamp
     puts "Erroneous data: Skipping Prev [#{next_timestamp}] [#{next_mode}]"
-    return prev_mode, prev_submode, prev_timestamp, prev_scale, food_records
-    # return next_mode, next_submode, prev_timestamp, prev_scale, food_records
+    return next_mode, next_submode, next_timestamp, prev_scale, food_records
   end
 
   if CARA_CARE_DATA_ERRORS[next_timestamp] == [next_mode, :next] && prev_timestamp == next_timestamp
     puts "Erroneous data: Skipping Next [#{next_timestamp}] [#{next_mode}]"
     return next_mode, next_submode, next_timestamp, prev_scale, food_records
-    # return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
   # brististol_scale
@@ -423,8 +430,10 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     return next_mode, next_submode, prev_timestamp, prev_scale, food_records
   end
 
-  if ![:gut, :mood, :ache].include?(next_mode) && next_timestamp == prev_timestamp
-    puts "Duplicate: [#{next_mode}] #{next_timestamp}"
+  if ![:gut, :mood, :ache].include?(next_mode) && next_timestamp == prev_timestamp && !CARA_CARE_DATA_ERRORS[next_timestamp]
+    puts
+    puts "DUPLICATE !!!: [#{next_mode}] #{next_timestamp} !!!"
+    puts
   end
 
   lines = []
@@ -562,13 +571,22 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     size = "5" if next_text.downcase.include? "huge"
     risk = "null"
     risk = "2" if next_text.downcase.include? "questionable"
+    risk = "4" if next_text.downcase.include? "risky"
+
+    cleaned_tags = []
+    next_tags.each do |next_tag|
+      next_tag = "Gherkin" if next_tag == "Pickled cucumbers"
+      cleaned_tags << next_tag
+    end
+    next_tags = cleaned_tags
+
     lines << <<-END
       |       "type": "#{next_mode}",
       |       "timestamp": "#{next_timestamp}",
       |       "text": "#{next_text}",
       |       "size": #{size},
       |       "risk": #{risk},
-      |       "tags": #{next_tags}
+      |       "tags": #{next_tags.uniq}
     END
     food_records << [next_text, next_tags]
   else # :note
@@ -636,7 +654,11 @@ File.readlines(TRACKING_MEAL_ITEMS_TSV_FILENAME).each do |line|
       # next if all_tags[tag]
       # all_tags[tag] = all_tags.values.last + 1
 
-      puts "Error: missing translation for [#{tag}]" if !TAG_TRANSLATIONS[tag]
+      if !TAG_TRANSLATIONS[tag]
+        puts
+        puts "Error: MISSING TRANSLATION !!! [#{tag}] !!!"
+        puts
+      end
       safe_tag = TAG_TRANSLATIONS[tag] || tag
       # translated_tags << safe_tag
       tags << safe_tag

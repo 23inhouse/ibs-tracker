@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
   @EnvironmentObject private var appState: IBSData
 
-  @State private var url = "https://gist.githubusercontent.com/23inhouse/d66aeb52ce44fdf61ab7f36f89509ec3/raw/9e53195aba24645aad58c253b8dff340d2631ebf/import.json"
+  @State private var url = "https://gist.githubusercontent.com/23inhouse/d66aeb52ce44fdf61ab7f36f89509ec3/raw/159233baed2ab2db955530d1e62b3b804caf5202/import.json"
   @State private var truncate = false
 
   @State private var isImporting = false
