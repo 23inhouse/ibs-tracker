@@ -75,6 +75,7 @@
 		B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */; };
 		B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */; };
 		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
+		B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAC725F82A0600EAD6DA /* TagToggle.swift */; };
 		B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */; };
 		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
 		B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */ = {isa = PBXBuildFile; fileRef = B57B8B0D25DD21940030D758 /* records-recent-food.json */; };
@@ -216,6 +217,7 @@
 		B554CE3525D02D4200E2EE17 /* SQLIBSRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLIBSRecord.swift; sourceTree = "<group>"; };
 		B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+Records.swift"; sourceTree = "<group>"; };
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
+		B55CAAC725F82A0600EAD6DA /* TagToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagToggle.swift; sourceTree = "<group>"; };
 		B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDBTests.swift"; sourceTree = "<group>"; };
 		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
 		B57B8B0D25DD21940030D758 /* records-recent-food.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "records-recent-food.json"; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				B5D9675F25E99C20004E0895 /* SaveButtonSection.swift */,
 				B554067225ED51AD00793BB5 /* ScaleSlider.swift */,
 				B5D9675725E9955A004E0895 /* SuggestedTagList.swift */,
+				B55CAAC725F82A0600EAD6DA /* TagToggle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
 				B5421F3B25BCC78300E8B5AA /* ItemTypeDayRowView.swift in Sources */,
+				B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */,
 				B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */,
 				B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */,
 				B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */,
