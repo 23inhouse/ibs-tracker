@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ActionNavigationLink<Destination: View>: View {
-  private let destination: Destination
+  private let destination: () -> Destination
   private let type: ItemType
   private let text: String
 
   init(type: ItemType, text: String, @ViewBuilder destination: @escaping () -> Destination) {
-    self.destination = destination()
+    self.destination = destination
     self.type = type
     self.text = text
   }
 
   var body: some View {
-    NavigationLink(destination: destination) {
+    NavigationLink(destination: LazyView(destination())) {
       IBSItemView(shape: TypeShape(type: type), text: text)
     }
   }
