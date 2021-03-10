@@ -100,6 +100,7 @@
 		B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25725ED04F400A5027C /* records-day-two-days.json */; };
 		B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25825ED04F400A5027C /* records-day-one-only.json */; };
 		B5BCF28525EE421A00F88D01 /* String+CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */; };
+		B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */; };
 		B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
@@ -241,6 +242,7 @@
 		B5B9E25725ED04F400A5027C /* records-day-two-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-two-days.json"; sourceTree = "<group>"; };
 		B5B9E25825ED04F400A5027C /* records-day-one-only.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-one-only.json"; sourceTree = "<group>"; };
 		B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirstLetter.swift"; sourceTree = "<group>"; };
+		B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldSection.swift; sourceTree = "<group>"; };
 		B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AlertDeleteRecord.swift"; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				B5D9675F25E99C20004E0895 /* SaveButtonSection.swift */,
 				B554067225ED51AD00793BB5 /* ScaleSlider.swift */,
 				B5D9675725E9955A004E0895 /* SuggestedTagList.swift */,
+				B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */,
 				B55CAAC725F82A0600EAD6DA /* TagToggle.swift */,
 			);
 			path = Shared;
@@ -824,6 +827,7 @@
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
 				B52E465425D01DFA00C009EC /* IBSRecord+FoodRecord.swift in Sources */,
+				B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */,
 				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
 				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,

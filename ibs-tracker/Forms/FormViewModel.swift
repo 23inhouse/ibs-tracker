@@ -5,7 +5,7 @@
 //  Created by Benjamin Lewis on 26/2/21.
 //
 
-import Foundation
+import SwiftUI
 
 class FormViewModel: ObservableObject {
   @Published var timestamp: Date?
@@ -21,6 +21,8 @@ class FormViewModel: ObservableObject {
     self.tags = tags
   }
 
+  private let tagAutoScrollLimit = 3
+
   func addNewTag() {
     let cleanedTag = newTag.trimmingCharacters(in: .whitespacesAndNewlines)
     guard cleanedTag.count > 0 else { return }
@@ -32,6 +34,14 @@ class FormViewModel: ObservableObject {
   func initializeTimestamp() {
     guard timestamp == nil else { return }
     timestamp = Date().nearest(5, .minute)
+  }
+
+  func scrollToTags(scroller: ScrollViewProxy) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
+      guard let self = self else { return }
+      guard self.tags.count < self.tagAutoScrollLimit else { return }
+      scroller.scrollToTags()
+    }
   }
 
   func showTagSuggestions(_ isEditing: Bool) {
