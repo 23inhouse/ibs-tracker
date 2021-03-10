@@ -125,6 +125,7 @@
 		B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */; };
 		B5E9D54A25B7001200E52387 /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54925B7001200E52387 /* NoteRow.swift */; };
 		B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D54E25B71D2500E52387 /* NoteShape.swift */; };
+		B5E9D95425F8F913007B9573 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9D95325F8F913007B9573 /* LazyView.swift */; };
 		B5ED341825E7C46B0029B274 /* food-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5ED341725E7C46B0029B274 /* food-tags.txt */; };
 		B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED342A25E8DA760029B274 /* NoteFormView.swift */; };
 		B5ED343325E8DAEE0029B274 /* ActionNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */; };
@@ -276,6 +277,7 @@
 		B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Case.swift"; sourceTree = "<group>"; };
 		B5E9D54925B7001200E52387 /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		B5E9D54E25B71D2500E52387 /* NoteShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShape.swift; sourceTree = "<group>"; };
+		B5E9D95325F8F913007B9573 /* LazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		B5ED341725E7C46B0029B274 /* food-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "food-tags.txt"; sourceTree = "<group>"; };
 		B5ED342A25E8DA760029B274 /* NoteFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFormView.swift; sourceTree = "<group>"; };
 		B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNavigationLink.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
+				B5E9D95325F8F913007B9573 /* LazyView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
 				B508994E25B3728E00B1EA03 /* DayListRows */,
 				B5ED342925E8DA3D0029B274 /* Forms */,
@@ -821,6 +824,7 @@
 				B508996325B4A79600B1EA03 /* AcheShape.swift in Sources */,
 				B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */,
 				B5456BC325E9B618009432DD /* FormView.swift in Sources */,
+				B5E9D95425F8F913007B9573 /* LazyView.swift in Sources */,
 				B5E3A8D825AE205B00DAC8DD /* ContentView.swift in Sources */,
 				B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */,
 				B54EA7C325B250AB008C4B74 /* TagCloudView.swift in Sources */,
