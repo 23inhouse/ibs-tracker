@@ -15,7 +15,7 @@ struct AcheRowView: View {
   }
 
   var body: some View {
-    NavigationLink(destination: AcheFormView(for: record)) {
+    LazyNavigationLink(destination: AcheFormView(for: record)) {
       DayRowView(
         type: .ache,
         color: ColorCodedContent.scaleColor(for: record.acheScore()),

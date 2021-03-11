@@ -139,6 +139,7 @@
 		B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */; };
 		B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367325BC85C600DC9D74 /* SearchView.swift */; };
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
+		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
 		B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */; };
 		B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */; };
 /* End PBXBuildFile section */
@@ -297,6 +298,7 @@
 		B5EE366525BC724C00DC9D74 /* ToolBarFilterIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarFilterIconView.swift; sourceTree = "<group>"; };
 		B5EE367325BC85C600DC9D74 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
 		B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodShape.swift; sourceTree = "<group>"; };
 		B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -550,6 +552,7 @@
 				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
+				B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */,
 				B5E9D95325F8F913007B9573 /* LazyView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
 				B508994E25B3728E00B1EA03 /* DayListRows */,
@@ -836,6 +839,7 @@
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
 				B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */,
+				B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
 				B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */,
 				B54EA79F25B21455008C4B74 /* Bristol7Shape.swift in Sources */,

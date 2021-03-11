@@ -15,7 +15,7 @@ struct BowelMovementRowView: View {
   }
 
   var body: some View {
-    NavigationLink(destination: BMFormView(for: record)) {
+    LazyNavigationLink(destination: BMFormView(for: record)) {
       DayRowView(type: .bm, color: .primary, bristolScale: record.bristolScale, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         Text(record.bristolDescription())

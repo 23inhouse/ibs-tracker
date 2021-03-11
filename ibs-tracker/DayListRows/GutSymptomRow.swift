@@ -15,7 +15,7 @@ struct GutSymptomRowView: View {
   }
 
   var body: some View {
-    NavigationLink(destination: GutFormView(for: record)) {
+    LazyNavigationLink(destination: GutFormView(for: record)) {
       DayRowView(
         type: .gut,
         color: ColorCodedContent.scaleColor(for: record.gutScore()),

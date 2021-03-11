@@ -23,7 +23,7 @@ struct MoodRowView: View {
   }
 
   var body: some View {
-    NavigationLink(destination: MoodFormView(for: record)) {
+    LazyNavigationLink(destination: MoodFormView(for: record)) {
       DayRowView(
         type: .mood,
         color: ColorCodedContent.worstColor(moodColor, stressColor),

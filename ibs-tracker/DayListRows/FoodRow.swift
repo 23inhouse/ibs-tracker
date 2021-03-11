@@ -15,7 +15,7 @@ struct FoodRowView: View {
   }
 
   var body: some View {
-    NavigationLink(destination: FoodFormView(for: record)) {
+    LazyNavigationLink(destination: FoodFormView(for: record)) {
       DayRowView(type: .food, color: .secondary, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         Text(record.text ?? "No meal name recorded")
