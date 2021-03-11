@@ -142,6 +142,10 @@
 		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
 		B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30725FB4FAD00D92621 /* Utilities.swift */; };
 		B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30C25FB6CC700D92621 /* AppIconView.swift */; };
+		B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */; };
+		B5FCC32525FB914400D92621 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */; };
+		B5FCC33025FBB44400D92621 /* UITextView+CurrentHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */; };
+		B5FCC33825FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */; };
 		B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */; };
 		B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */; };
 /* End PBXBuildFile section */
@@ -303,6 +307,10 @@
 		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
 		B5FCC30725FB4FAD00D92621 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B5FCC30C25FB6CC700D92621 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
+		B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextView.swift; sourceTree = "<group>"; };
+		B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
+		B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+CurrentHeight.swift"; sourceTree = "<group>"; };
+		B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+NSTextStorageDelegate.swift"; sourceTree = "<group>"; };
 		B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodShape.swift; sourceTree = "<group>"; };
 		B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -457,6 +465,9 @@
 				B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */,
 				B5A5D21025D728E8009C6285 /* String+Url.swift */,
 				B5E9D53E25B6558300E52387 /* StringProtocol+Case.swift */,
+				B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */,
+				B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */,
+				B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */,
 				B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */,
 				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
@@ -481,6 +492,7 @@
 				B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */,
 				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
 				B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */,
+				B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */,
 			);
 			path = UIKitBridge;
 			sourceTree = "<group>";
@@ -844,6 +856,7 @@
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
+				B5FCC33825FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift in Sources */,
 				B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */,
 				B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
@@ -867,6 +880,7 @@
 				B508994225B36CCA00B1EA03 /* TypeShape.swift in Sources */,
 				B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */,
 				B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */,
+				B5FCC32525FB914400D92621 /* UITextView+Placeholder.swift in Sources */,
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
 				B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */,
 				B51F5EBD25EFC282005583AB /* MedicationFormView.swift in Sources */,
@@ -877,6 +891,7 @@
 				B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */,
 				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
 				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
+				B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
 				B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */,
@@ -915,6 +930,7 @@
 				B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */,
 				B5207E9125D3E7530019D18F /* AppDB+MutablePersistableRecord.swift in Sources */,
 				B5E5915425E6748700AE3DD1 /* View+EndEditing.swift in Sources */,
+				B5FCC33025FBB44400D92621 /* UITextView+CurrentHeight.swift in Sources */,
 				B50738ED25F7C66A0069FB50 /* GutFormView.swift in Sources */,
 				B52E465E25D01EFE00C009EC /* IBSRecord+MedicationRecord.swift in Sources */,
 				B5A5D1FB25D6F0A8009C6285 /* SettingsView.swift in Sources */,

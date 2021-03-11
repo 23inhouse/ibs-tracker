@@ -32,13 +32,14 @@ extension UIKitBridge {
     func makeUIView(context: UIViewRepresentableContext<SwiftUITextField>) -> UITextField {
       let textField = UITextField(frame: .zero)
       textField.delegate = context.coordinator
+      textField.text = text
       textField.placeholder = title
       return textField
     }
 
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<SwiftUITextField>) {
-      uiView.placeholder = title
       uiView.text = text
+      uiView.placeholder = title
 
       guard isFirstResponder else { return }
 
