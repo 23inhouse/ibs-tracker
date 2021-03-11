@@ -16,9 +16,6 @@ struct WeightFormView: View {
 
   @State private var showAllTags: Bool = false
 
-  private let maxWeight: Decimal = 140.1
-  private let minWeight: Decimal = 40
-
   init(for weightRecord: WeightRecord? = nil) {
     guard let record = weightRecord else { return }
     self.editableRecord = weightRecord
@@ -50,24 +47,15 @@ struct WeightFormView: View {
       }
   }
 
-  private var weights: [Decimal] {
-    Array(stride(from: minWeight, to: maxWeight, by: 0.1))
-  }
-
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
-        Picker("Weight", selection: $weight) {
-          ForEach(weights, id: \.self) { weight in
-            Text("\(String(describing: weight))")
-              .tag(weight)
+        WeightPicker(weight: $weight)
+          .pickerStyle(InlinePickerStyle())
+          .onAppear {
+            guard !editMode else { return }
+            weight = appState.lastWeight
           }
-        }
-        .pickerStyle(InlinePickerStyle())
-        .onAppear {
-          guard !editMode else { return }
-          weight = appState.lastWeight
-        }
       }
 
       SaveButtonSection(name: "Weight", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
@@ -81,5 +69,25 @@ struct WeightFormView_Previews: PreviewProvider {
   static var previews: some View {
     WeightFormView()
       .environmentObject(IBSData())
+  }
+}
+
+struct WeightPicker: View {
+  @Binding var weight: Decimal
+
+  private let maxWeight: Decimal = 140.1
+  private let minWeight: Decimal = 40
+
+  private var weights: [Decimal] {
+    return Array(stride(from: minWeight, to: maxWeight, by: 0.1))
+  }
+
+  var body: some View {
+    Picker("Weight", selection: $weight) {
+      ForEach(weights, id: \.self) { weight in
+        Text("\(String(describing: weight))")
+          .tag(weight)
+      }
+    }
   }
 }
