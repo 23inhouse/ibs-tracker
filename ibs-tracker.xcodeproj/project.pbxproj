@@ -140,6 +140,7 @@
 		B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367325BC85C600DC9D74 /* SearchView.swift */; };
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
 		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
+		B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30725FB4FAD00D92621 /* Utilities.swift */; };
 		B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */; };
 		B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */; };
 /* End PBXBuildFile section */
@@ -299,6 +300,7 @@
 		B5EE367325BC85C600DC9D74 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
+		B5FCC30725FB4FAD00D92621 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodShape.swift; sourceTree = "<group>"; };
 		B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -464,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				B5E3A8D925AE205D00DAC8DD /* Assets.xcassets */,
+				B5FCC30725FB4FAD00D92621 /* Utilities.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				B554067325ED51AD00793BB5 /* ScaleSlider.swift in Sources */,
 				B5E9D52925B63CC200E52387 /* RowIconView.swift in Sources */,
 				B5207E7025D19D3D0019D18F /* SQLIBSTagRecord.swift in Sources */,
+				B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */,
 				B5207E9125D3E7530019D18F /* AppDB+MutablePersistableRecord.swift in Sources */,
 				B5E5915425E6748700AE3DD1 /* View+EndEditing.swift in Sources */,
 				B50738ED25F7C66A0069FB50 /* GutFormView.swift in Sources */,
