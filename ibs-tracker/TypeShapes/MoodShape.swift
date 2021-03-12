@@ -13,21 +13,24 @@ private let PainShapeLayoutConfig = LayoutGuideConfig.grid(columns: 24, rows: 24
 
 struct MoodShape: Shape {
   var showControlPoints: Bool = false
+  var isLighting: Bool = true
 
   func path(in rect: CGRect) -> Path {
     var p = Path()
     let g = PainShapeLayoutConfig.layout(in: rect)
 
-    // lightning top
-    p.move(g[15, 4])
-    p.line(g[10, 7])
-    p.line(g[12, 8])
-    p.line(g[9, 11])
+    if isLighting {
+      // lightning top
+      p.move(g[15, 4])
+      p.line(g[10, 7])
+      p.line(g[12, 8])
+      p.line(g[9, 11])
 
-    // lightning bottom
-    p.line(g[14, 8])
-    p.line(g[12, 7])
-    p.closeSubpath()
+      // lightning bottom
+      p.line(g[14, 8])
+      p.line(g[12, 7])
+      p.closeSubpath()
+    }
 
     // head
     p.move(g[17, 24])

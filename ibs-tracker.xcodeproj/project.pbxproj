@@ -141,6 +141,7 @@
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
 		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
 		B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30725FB4FAD00D92621 /* Utilities.swift */; };
+		B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30C25FB6CC700D92621 /* AppIconView.swift */; };
 		B5FE7F8B25BB6AFD00D0F0EC /* MoodShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */; };
 		B5FE7F9925BB733E00D0F0EC /* MoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */; };
 /* End PBXBuildFile section */
@@ -301,6 +302,7 @@
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
 		B5FCC30725FB4FAD00D92621 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		B5FCC30C25FB6CC700D92621 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
 		B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodShape.swift; sourceTree = "<group>"; };
 		B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -467,6 +469,7 @@
 			children = (
 				B5E3A8D925AE205D00DAC8DD /* Assets.xcassets */,
 				B5FCC30725FB4FAD00D92621 /* Utilities.swift */,
+				B5FCC30C25FB6CC700D92621 /* AppIconView.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				B5E5914C25E57D4C00AE3DD1 /* SwiftUITextField.swift in Sources */,
 				B5207E5C25D18D240019D18F /* Migratable.swift in Sources */,
 				B554CE3825D02D4200E2EE17 /* AppDB.swift in Sources */,
+				B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
