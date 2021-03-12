@@ -39,13 +39,14 @@ struct SettingsView: View {
         lodingButton($isExporting, text: "Export JSON", icon: "square.and.arrow.up") {
           isExporting = true
           DispatchQueue.main.async {
-            let jsonFileUrl = DataSet.jsonFileUrl()
-            activityViewController.share(any: jsonFileUrl!)
+            if let jsonFileUrl = DataSet.jsonFileUrl() {
+              self.activityViewController.share(any: jsonFileUrl)
+            }
             isExporting = false
           }
         }
         activityViewController
-      }
+      }.id(UUID())
     }
   }
 
