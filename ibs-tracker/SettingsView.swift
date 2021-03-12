@@ -14,17 +14,15 @@ struct SettingsView: View {
   @State private var truncate = false
 
   @State private var isImporting = false
+  @State private var isExporting = false
 
-  let activityViewController = UIKitBridge.SwiftUIActivityViewController()
-  private var jsonFileUrl: URL? = DataSet.jsonFileUrl()
+  private let activityViewController = UIKitBridge.SwiftUIActivityViewController()
 
   var body: some View {
     NavigationView {
       Form {
         importSection
-        if jsonFileUrl != nil {
-          exportSection
-        }
+        exportSection
       }
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -38,13 +36,12 @@ struct SettingsView: View {
   private var exportSection: some View {
     Section {
       ZStack {
-        Button(action: {
-          activityViewController.share(any: jsonFileUrl!)
-        }) {
-          HStack {
-            Image(systemName:"square.and.arrow.up")
-            Text("Export JSON")
-            Spacer()
+        lodingButton($isExporting, text: "Export JSON", icon: "square.and.arrow.up") {
+          isExporting = true
+          DispatchQueue.main.async {
+            let jsonFileUrl = DataSet.jsonFileUrl()
+            activityViewController.share(any: jsonFileUrl!)
+            isExporting = false
           }
         }
         activityViewController
@@ -56,24 +53,30 @@ struct SettingsView: View {
     Section {
       TextField("JSON URL with the DataSet", text: $url)
       Toggle("Delete existing records", isOn: $truncate)
-      if isImporting {
+      lodingButton($isImporting, text: "Import JSON from URL", icon: "square.and.arrow.down") {
+        isImporting = true
+        url.fetchJSON() { data in
+          AppDB.current.importJSON(data, truncate: truncate)
+          DispatchQueue.main.async {
+            appState.reloadRecordsFromSQL()
+            isImporting = false
+          }
+        }
+      }
+    }
+  }
+
+  private func lodingButton(_ loading: Binding<Bool>, text: String, icon: String, action: @escaping () -> Void) -> some View {
+    Group {
+      if loading.wrappedValue {
         ProgressView()
           .frame(maxWidth: .infinity)
           .progressViewStyle(CircularProgressViewStyle())
       } else {
-        Button(action: {
-          isImporting = true
-          url.fetchJSON() { data in
-            AppDB.current.importJSON(data, truncate: truncate)
-            DispatchQueue.main.async {
-              appState.reloadRecordsFromSQL()
-              isImporting = false
-            }
-          }
-        }) {
+        Button(action: action) {
           HStack {
-            Image(systemName:"square.and.arrow.down")
-            Text("Import JSON from URL")
+            Image(systemName: icon)
+            Text(text)
             Spacer()
           }
         }
