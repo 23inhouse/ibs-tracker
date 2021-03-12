@@ -11,35 +11,9 @@ struct SearchView: View {
   @EnvironmentObject private var appState: IBSData
   @State private var filter: ItemType? = nil
 
-  var records: [DayRecord] {
-    guard let filter = filter else { return appState.dayRecords }
-
-    let dayRecords: [DayRecord?] = appState.dayRecords.map {
-      let ibsRecords = $0.ibsRecords.filter {
-        $0.type == filter
-      }
-      if ibsRecords.isNotEmpty {
-        return DayRecord(date: $0.date, ibsRecords: ibsRecords)
-      }
-      return nil
-    }
-    return dayRecords.compactMap { $0 }
-  }
-
   var body: some View {
     NavigationView {
-      List {
-        ForEach(records) { dayRecord in
-          let dateString = dayRecord.date.string(for: "dd MMM YYYY")
-          Section(header: Text(dateString)) {
-            ForEach(dayRecord.ibsRecords, id: \.self) { record in
-              ItemTypeDayRowView(record: record)
-              .listRowInsets(EdgeInsets())
-            }
-          }
-        }
-      }
-      .id(UUID())
+      SearchList(filter: $filter)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -85,5 +59,40 @@ struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
     SearchView()
       .environmentObject(IBSData())
+  }
+}
+
+struct SearchList: View {
+  @EnvironmentObject private var appState: IBSData
+  @Binding var filter: ItemType?
+
+  var records: [DayRecord] {
+    guard let filter = filter else { return appState.dayRecords }
+
+    let dayRecords: [DayRecord?] = appState.dayRecords.map {
+      let ibsRecords = $0.ibsRecords.filter {
+        $0.type == filter
+      }
+      if ibsRecords.isNotEmpty {
+        return DayRecord(date: $0.date, ibsRecords: ibsRecords)
+      }
+      return nil
+    }
+    return dayRecords.compactMap { $0 }
+  }
+
+  var body: some View {
+    List {
+      ForEach(records) { dayRecord in
+        let dateString = dayRecord.date.string(for: "dd MMM YYYY")
+        Section(header: Text(dateString)) {
+          ForEach(dayRecord.ibsRecords, id: \.self) { record in
+            ItemTypeDayRowView(record: record)
+            .listRowInsets(EdgeInsets())
+          }
+        }
+      }
+    }
+    .id(UUID())
   }
 }
