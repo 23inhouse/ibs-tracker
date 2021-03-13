@@ -30,17 +30,6 @@ extension DataSet: Codable {
 }
 
 extension DataSet {
-  static func jsonFileUrl() -> URL? {
-    do {
-      let records: [IBSRecord] = try AppDB.current.exportRecords()
-      let dataSet = DataSet(ibsRecords: records)
-      return DataSet.encode(dataSet)?.url(path: "export.json")
-    } catch {
-      print("Error: \(error)")
-    }
-    return nil
-  }
-
   static func encode(_ dataSet: DataSet) -> String? {
     let encoder = JSONEncoder()
     encoder.outputFormatting = .prettyPrinted
@@ -52,6 +41,30 @@ extension DataSet {
       print("Error: \(error)")
     }
 
+    return nil
+  }
+
+  static func jsonFileUrl() -> URL? {
+    do {
+      let records: [IBSRecord] = try AppDB.current.exportRecords()
+      let dataSet = DataSet(ibsRecords: records)
+      return DataSet.encode(dataSet)?.url(path: "export.json")
+    } catch {
+      print("Error: \(error)")
+    }
+    return nil
+  }
+
+  static func pdfFileUrl() -> URL? {
+    do {
+      throw "pdfFileUrl"
+//      let records: [DayRecord] = try AppDB.current.exportRecords()
+//
+//      let pdf = PDF(ibsRecords: records)
+//      return try PDF.encode(pdf, path: "export.pdf")
+    } catch {
+      print("Error: \(error)")
+    }
     return nil
   }
 }

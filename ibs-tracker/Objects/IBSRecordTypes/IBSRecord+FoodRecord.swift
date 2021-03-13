@@ -14,6 +14,7 @@ protocol FoodRecord: IBSRecordType {
   var medicinal: Bool? { get }
   init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?, medicinal: Bool)
   func FoodScore() -> Int
+  func foodDescription() -> String
   func riskText() -> String
   func sizeText() -> String
 }
@@ -33,8 +34,15 @@ extension IBSRecord: FoodRecord {
     [risk?.rawValue ?? 0, size?.rawValue ?? 0].max() ?? 0
   }
 
+  func foodDescription() -> String {
+    var modifiers = [riskText(), sizeText()].filter { $0 != "" }.joined(separator: " & ")
+    modifiers = modifiers != "" ? "(\(modifiers))" : ""
+    let name = text ?? ""
+    return modifiers != "" ? "\(modifiers) \(name)" : name
+  }
+
   func riskText() -> String {
-    return Scales.foodRiskDescriptions[risk ?? .zero] ?? ""
+    return Scales.foodRiskDescriptions[risk ?? .none] ?? ""
   }
 
   func sizeText() -> String {

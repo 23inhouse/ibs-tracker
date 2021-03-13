@@ -12,6 +12,7 @@ protocol SkinRecord: IBSRecordType {
   var condition: Scales? { get }
   init(condition: Scales, timestamp: Date, text: String?, tags: [String])
   func skinScore() -> Scales
+  func skinDescription() -> String
   func skinText() -> String
 }
 
@@ -26,6 +27,11 @@ extension IBSRecord: SkinRecord {
 
   func skinScore() -> Scales {
     return Scales(rawValue: condition?.rawValue ?? 0) ?? .none
+  }
+
+  func skinDescription() -> String {
+    let preText = text != nil ? "\(text!) is in " : ""
+    return "\(preText)\(skinText())"
   }
 
   func skinText() -> String {

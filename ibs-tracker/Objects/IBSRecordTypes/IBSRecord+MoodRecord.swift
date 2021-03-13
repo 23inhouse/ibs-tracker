@@ -12,6 +12,7 @@ protocol MoodRecord: IBSRecordType {
   var stress: Scales? { get }
   init(timestamp: Date, tags: [String], feel: MoodType?, stress: Scales?)
   func moodScore() -> MoodType
+  func moodDescription() -> String
   func feelText() -> String
   func stressText() -> String
 }
@@ -30,11 +31,17 @@ extension IBSRecord: MoodRecord {
     return MoodType(optionalValue: worstScore) ?? .none
   }
 
+  func moodDescription() -> String {
+    [feelText(), stressText()].filter { $0 != "" }.joined(separator: " & ")
+  }
+
   func feelText() -> String {
-    return MoodType.descriptions[feel ?? .none] ?? ""
+    guard let feel = feel else { return "" }
+    return MoodType.descriptions[feel]!
   }
 
   func stressText() -> String {
-    return Scales.stressDescriptions[stress ?? .none] ?? ""
+    guard let stress = stress else { return "" }
+    return Scales.stressDescriptions[stress]!
   }
 }

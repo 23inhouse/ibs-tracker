@@ -65,6 +65,10 @@
 		B5456BC325E9B618009432DD /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456BC225E9B618009432DD /* FormView.swift */; };
 		B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */; };
 		B54CFA9826061A5100492F9B /* Array+ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CFA9726061A5100492F9B /* Array+ItemType.swift */; };
+		B54DF2F625FD1F330028086D /* SwiftUIPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DF2F525FD1F330028086D /* SwiftUIPDFView.swift */; };
+		B54DF2FB25FD21070028086D /* PDFReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DF2FA25FD21070028086D /* PDFReportView.swift */; };
+		B54DF30025FD26EE0028086D /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DF2FF25FD26EE0028086D /* PDF.swift */; };
+		B54DF30825FD29EF0028086D /* Data+Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DF30725FD29EF0028086D /* Data+Url.swift */; };
 		B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */; };
 		B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */; };
 		B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */; };
@@ -232,6 +236,10 @@
 		B5456BC225E9B618009432DD /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ModifierIf.swift"; sourceTree = "<group>"; };
 		B54CFA9726061A5100492F9B /* Array+ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ItemType.swift"; sourceTree = "<group>"; };
+		B54DF2F525FD1F330028086D /* SwiftUIPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPDFView.swift; sourceTree = "<group>"; };
+		B54DF2FA25FD21070028086D /* PDFReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReportView.swift; sourceTree = "<group>"; };
+		B54DF2FF25FD26EE0028086D /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
+		B54DF30725FD29EF0028086D /* Data+Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Url.swift"; sourceTree = "<group>"; };
 		B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol4Shape.swift; sourceTree = "<group>"; };
 		B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol3Shape.swift; sourceTree = "<group>"; };
 		B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol5Shape.swift; sourceTree = "<group>"; };
@@ -396,6 +404,7 @@
 				B5421F4C25BD84E900E8B5AA /* DayRecord.swift */,
 				B533AC0D25BADAF8009B6290 /* ItemType.swift */,
 				B5A5D22125D72E6B009C6285 /* DataSet.swift */,
+				B54DF2FF25FD26EE0028086D /* PDF.swift */,
 				B52E461925CD97FB00C009EC /* IBSRecord.swift */,
 				B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */,
 				B5207EDC25D54CD10019D18F /* IBSRecord+GRDB.swift */,
@@ -473,6 +482,7 @@
 				B54CFA9726061A5100492F9B /* Array+ItemType.swift */,
 				B555747526009779005E92FB /* Binding+Dismiss.swift */,
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
+				B54DF30725FD29EF0028086D /* Data+Url.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
 				B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */,
@@ -507,6 +517,7 @@
 				B5A5D20825D70A7B009C6285 /* UIKitBridge.swift */,
 				B5A5D20025D70A60009C6285 /* SwiftUIActivityViewController.swift */,
 				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
+				B54DF2F525FD1F330028086D /* SwiftUIPDFView.swift */,
 				B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */,
 				B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */,
 			);
@@ -584,6 +595,7 @@
 				B5EE367825BC863000DC9D74 /* DayView.swift */,
 				B5EE367325BC85C600DC9D74 /* SearchView.swift */,
 				B5A5D1FA25D6F0A8009C6285 /* SettingsView.swift */,
+				B54DF2FA25FD21070028086D /* PDFReportView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
 				B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */,
@@ -876,6 +888,7 @@
 				B52E465925D01E5D00C009EC /* IBSRecord+GutRecord.swift in Sources */,
 				B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */,
 				B508994A25B3708C00B1EA03 /* FoodShape.swift in Sources */,
+				B54DF30025FD26EE0028086D /* PDF.swift in Sources */,
 				B5FCC33825FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift in Sources */,
 				B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */,
 				B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */,
@@ -899,6 +912,7 @@
 				B54EA7D625B25959008C4B74 /* BristolShape.swift in Sources */,
 				B508994225B36CCA00B1EA03 /* TypeShape.swift in Sources */,
 				B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */,
+				B54DF2FB25FD21070028086D /* PDFReportView.swift in Sources */,
 				B5207EDD25D54CD10019D18F /* IBSRecord+GRDB.swift in Sources */,
 				B5FCC32525FB914400D92621 /* UITextView+Placeholder.swift in Sources */,
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
@@ -937,8 +951,10 @@
 				B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */,
 				B5109E2326023DCF007CB498 /* SkinFormView.swift in Sources */,
 				B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */,
+				B54DF30825FD29EF0028086D /* Data+Url.swift in Sources */,
 				B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */,
 				B5B3261425B343780023E286 /* BMRow.swift in Sources */,
+				B54DF2F625FD1F330028086D /* SwiftUIPDFView.swift in Sources */,
 				B52E466325D01F8000C009EC /* IBSRecord+MoodRecord.swift in Sources */,
 				B5456BB225E9AC9A009432DD /* FormViewModel.swift in Sources */,
 				B508993525B3672200B1EA03 /* BowelMovementShape.swift in Sources */,

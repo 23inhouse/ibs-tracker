@@ -9,30 +9,14 @@ import SwiftUI
 
 extension UIKitBridge {
   struct SwiftUIActivityViewController: UIViewControllerRepresentable {
-    let activityViewController = ActivityViewController()
+    @Binding var activityItems: [Any]
 
-    func makeUIViewController(context: Context) -> ActivityViewController {
-      activityViewController
+    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<UIKitBridge.SwiftUIActivityViewController>) -> UIActivityViewController {
+      UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
     }
 
-    func updateUIViewController(_ uiViewController: ActivityViewController, context: Context) {
-      //
-    }
-
-    func share(any data: Any) {
-      activityViewController.share(data)
-    }
-  }
-
-  class ActivityViewController: UIViewController {
-    var data: Any!
-
-    @objc func share(_ data: Any) {
-      self.data = data
-      let vc = UIActivityViewController(activityItems: [data], applicationActivities: [])
-      vc.excludedActivityTypes = []
-      present(vc, animated: true, completion: nil)
-      vc.popoverPresentationController?.sourceView = view
-    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<UIKitBridge.SwiftUIActivityViewController>) {}
   }
 }

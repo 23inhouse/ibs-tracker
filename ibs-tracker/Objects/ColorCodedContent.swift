@@ -21,8 +21,8 @@ struct ColorCodedContent {
     return colors[scale] ?? defaultColor
   }
 
-  static func bristolColor(for scale: BristolType?) -> Color {
-    guard let scale = scale else { return .secondary }
+  static func bristolColor(for scale: BristolType?, default defaultColor: Color = .primary) -> Color {
+    guard let scale = scale else { return defaultColor }
     switch scale {
     case .b0: return .red
     case .b1: return .orange

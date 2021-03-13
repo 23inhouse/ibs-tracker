@@ -10,6 +10,7 @@ import Foundation
 protocol WeightRecord: IBSRecordType {
   var weight: Decimal? { get }
   init(weight: Decimal, timestamp: Date, tags: [String])
+  func weightDescription() -> String
 }
 
 extension IBSRecord: WeightRecord {
@@ -18,5 +19,10 @@ extension IBSRecord: WeightRecord {
     self.timestamp = timestamp
     self.weight = weight
     self.tags = tags
+  }
+
+  func weightDescription() -> String {
+    guard let weight = weight else { return "" }
+    return "\(String(describing: weight))kg"
   }
 }

@@ -12,6 +12,7 @@ protocol GutRecord: IBSRecordType {
   var pain: Scales? { get }
   init(timestamp: Date, tags: [String], bloating: Scales?, pain: Scales?)
   func gutScore() -> Scales
+  func gutDescription() -> String
   func bloatingText() -> String
   func gutPainText() -> String
 }
@@ -21,7 +22,7 @@ extension IBSRecord: GutRecord {
     self.type = .gut
     self.timestamp = timestamp
     self.bloating = bloating
-    self.bodyache = pain
+    self.pain = pain
     self.tags = tags
   }
 
@@ -30,11 +31,17 @@ extension IBSRecord: GutRecord {
     return Scales(optionalValue: worstScore) ?? .none
   }
 
+  func gutDescription() -> String {
+    [bloatingText(), gutPainText()].filter { $0 != "" }.joined(separator: " & ")
+  }
+
   func bloatingText() -> String {
-    return Scales.bloatingDescriptions[bloating ?? .none] ?? ""
+    guard let bloating = bloating else { return "" }
+    return Scales.bloatingDescriptions[bloating]!
   }
 
   func gutPainText() -> String {
-    return Scales.gutPainDescriptions[bodyache ?? .none] ?? ""
+    guard let pain = pain else { return "" }
+    return Scales.gutPainDescriptions[pain]!
   }
 }

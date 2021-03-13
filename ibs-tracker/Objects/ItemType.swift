@@ -144,6 +144,7 @@ enum FoodSizes: Int, CaseIterable {
   case huge = 4
 
   static let descriptions: [FoodSizes: String] = [
+    .none: "",
     .tiny: "tiny portion",
     .small: "small portion",
     .normal: "normal portion",
@@ -215,6 +216,7 @@ enum MoodType: Int {
   case awful = 4
 
   static let descriptions: [MoodType: String] = [
+    .none: "",
     .great: "I feel very good",
     .good: "I feel good",
     .soso: "I feel so so",
@@ -244,6 +246,7 @@ enum Scales: Int, CaseIterable {
   case extreme = 4
 
   static let bloatingDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no bloating at all",
     .mild: "mild feeling of bloating",
     .moderate: "moderate feeling of bloating",
@@ -252,6 +255,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let bodyacheDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no pain at all",
     .mild: "mild pain",
     .moderate: "moderate pain",
@@ -260,6 +264,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let drynessDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "not dry",
     .mild: "a bit dry",
     .moderate: "dry",
@@ -268,6 +273,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let foodRiskDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no risk at all",
     .mild: "mildly risky",
     .moderate: "moderatly risky",
@@ -276,6 +282,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let gutPainDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no tummy pain at all",
     .mild: "mild tummy pain",
     .moderate: "moderate tummy pain",
@@ -284,6 +291,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let headacheDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no headache at all",
     .mild: "mild headache",
     .moderate: "moderate headache",
@@ -292,6 +300,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let pressureDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no pressure",
     .mild: "mild pressure",
     .moderate: "moderate pressure",
@@ -308,6 +317,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let stressDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "no stressed at all",
     .mild: "I feel a little stress",
     .moderate: "I feel somewhat stressed",
@@ -316,6 +326,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let wetnessDescriptions: [Scales: String] = [
+    .none: "",
     .zero: "not wet",
     .mild: "a bit wet",
     .moderate: "wet",

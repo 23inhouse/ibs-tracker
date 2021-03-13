@@ -12,6 +12,7 @@ protocol AcheRecord: IBSRecordType {
   var bodyache: Scales? { get }
   init(timestamp: Date, tags: [String], headache: Scales?, bodyache: Scales?)
   func acheScore() -> Scales
+  func acheDescription() -> String
   func headacheText() -> String
   func bodyacheText() -> String
 }
@@ -30,11 +31,17 @@ extension IBSRecord: AcheRecord {
     return Scales(optionalValue: worstScore) ?? .none
   }
 
+  func acheDescription() -> String {
+    [headacheText(), bodyacheText()].filter { $0 != "" }.joined(separator: " & ")
+  }
+
   func headacheText() -> String {
-    return Scales.headacheDescriptions[headache ?? .none] ?? ""
+    guard let headache = headache else { return "" }
+    return Scales.headacheDescriptions[headache]!
   }
 
   func bodyacheText() -> String {
-    return Scales.bodyacheDescriptions[bodyache ?? .none] ?? ""
+    guard let bodyache = bodyache else { return "" }
+    return Scales.bodyacheDescriptions[bodyache]!
   }
 }
