@@ -85,7 +85,7 @@ struct WeightPicker: View {
   var body: some View {
     Picker("Weight", selection: $weight) {
       ForEach(weights, id: \.self) { weight in
-        Text("\(String(describing: weight))")
+        Text("\(String(describing: weight)) kg")
           .tag(weight)
       }
     }
