@@ -16,6 +16,7 @@ struct FoodFormView: View {
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
   @State private var recentFoodSelection: IBSRecord?
+  @State private var isEditingName: Bool = false
   @State private var nameIsCompleted: Bool = false
   @State private var tagIsFirstResponder: Bool = false
 
@@ -51,6 +52,7 @@ struct FoodFormView: View {
   }
 
   private var suggestedTags: [String] {
+    guard !isEditingName else { return [] }
     return
       appState.tags(for: .food)
       .sorted()
@@ -81,7 +83,7 @@ struct FoodFormView: View {
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
-        UIKitBridge.SwiftUITextView("Meal name. e.g. Pizza", text: $name, onCommit: commitName)
+        UIKitBridge.SwiftUITextView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
 
         List { EditableTagList(tags: $viewModel.tags) }
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
@@ -129,12 +131,17 @@ struct FoodFormView: View {
   }
 
   private func commitName() {
+    isEditingName = false
     nameIsCompleted = true
     tagIsFirstResponder = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
     }
+  }
+
+  private func editName(_ isEditing: Bool) {
+    isEditingName = isEditing
   }
 }
 
