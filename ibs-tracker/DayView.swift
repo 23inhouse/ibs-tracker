@@ -9,7 +9,17 @@ import SwiftUI
 
 struct DayView: View {
   @EnvironmentObject private var appState: IBSData
-  @State private var date: Date = Calendar.current.date(byAdding: .hour, value: -5, to: Date()) ?? Date()
+
+  private var date: Date { appState.currentDate }
+
+  private var isShowingToday: Bool {
+    let calendar = Calendar.current
+
+    let displayDate = calendar.dateComponents([.year, .month, .day], from: appState.currentDate)
+    let currentDate = calendar.dateComponents([.year, .month, .day], from: IBSData.currentDate())
+
+    return displayDate == currentDate
+  }
 
   var records: [IBSRecord] {
     let dayRecord = appState.dayRecords
@@ -30,16 +40,26 @@ struct DayView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          Text(dateString())
+          HStack {
+            DatePicker("Current date", selection: $appState.currentDate, displayedComponents: .date)
+              .datePickerStyle(CompactDatePickerStyle())
+              .labelsHidden()
+            Button(action: changeDayToToday) {
+              Image(systemName: "calendar.circle")
+                .padding(5)
+            }
+            .disabled(isShowingToday)
+          }
+          .frame(height: 150, alignment: .trailing)
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: prevDay) {
-            Image(systemName: "chevron.left")
+            Image(systemName: "arrow.backward.circle")
           }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button(action: nextDay) {
-            Image(systemName: "chevron.right")
+            Image(systemName: "arrow.forward.circle")
           }
         }
       }
@@ -56,9 +76,9 @@ struct DayView: View {
         let halfScreenWidth: CGFloat = UIScreen.halfMainWidth
 
         if start.x < end.x && start.x < halfScreenWidth  {
-          self.changeDay(by: -1)
+          prevDay()
         } else if start.x > end.x && start.x > halfScreenWidth {
-          self.changeDay(by: 1)
+          nextDay()
         }
       }
   }
@@ -66,7 +86,11 @@ struct DayView: View {
 
 private extension DayView {
   func changeDay(by days: Int) {
-    date = Calendar.current.date(byAdding: .day, value: days, to: self.date) ?? date
+    appState.currentDate = Calendar.current.date(byAdding: .day, value: days, to: date) ?? date
+  }
+
+  func changeDayToToday() {
+    appState.currentDate = IBSData.currentDate()
   }
 
   func dateString() -> String {

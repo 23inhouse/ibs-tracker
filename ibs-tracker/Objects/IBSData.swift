@@ -19,6 +19,7 @@ class IBSData: ObservableObject {
   @Published var tabSelection: Tabs = .day
   @Published var dayRecords: [DayRecord]
   @Published var lastWeight: Decimal
+  @Published var currentDate: Date
 
   static var current = IBSData(.current)
 
@@ -39,10 +40,15 @@ class IBSData: ObservableObject {
     self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
+    self.currentDate = IBSData.currentDate()
   }
 }
 
 extension IBSData {
+  static func currentDate() -> Date {
+    Calendar.current.date(byAdding: .hour, value: -5, to: Date()) ?? Date()
+  }
+
   func isAvailable(timestamp: Date) -> Bool {
     do {
       let record = try appDB.selectRecord(in: SQLIBSRecord.self, at: timestamp)

@@ -27,7 +27,7 @@ private extension ContentView {
       DayView()
         .tabItem {
           Image(systemName: "equal.square")
-          Text("Today")
+          Text("Day")
         }
         .tag(Tabs.day)
       ActionGridView()

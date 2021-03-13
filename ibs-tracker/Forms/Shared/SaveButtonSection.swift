@@ -24,6 +24,8 @@ struct SaveButtonSection: View {
           DispatchQueue.main.async {
             appState.tabSelection = .day
             presentation.wrappedValue.dismiss()
+            guard let timestamp = record?.timestamp else { return }
+            appState.currentDate = timestamp
           }
         }
       }) {
