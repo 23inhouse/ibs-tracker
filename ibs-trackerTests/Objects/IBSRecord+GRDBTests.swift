@@ -49,6 +49,83 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(ibsRecordCount, 1, "There should be 1 record")
   }
 
+  func testInsertSQLWithNegativeScales() throws {
+    let timestamp = Date()
+
+    let ibsAcheRecord = IBSRecord(timestamp: timestamp, headache: Scales.none, bodyache: Scales.none)
+    try ibsAcheRecord.insertSQL(into: appDB)
+    guard var sqlIBSAcheRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: "ache", at: timestamp) else {
+      throw "Couldn't select the orignal BM record"
+    }
+
+    XCTAssertEqual(sqlIBSAcheRecord.headache, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSAcheRecord.bodyache, nil, "The scale should be nil")
+
+    sqlIBSAcheRecord.update(from: ibsAcheRecord)
+
+    XCTAssertEqual(sqlIBSAcheRecord.headache, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSAcheRecord.bodyache, nil, "The scale should be nil")
+
+    let ibsBMRecord = IBSRecord(bristolScale: nil, timestamp: timestamp, tags: [], color: nil, pressure: Scales.none, smell: nil, evacuation: nil, dryness: Scales.none, wetness: Scales.none)
+    try ibsBMRecord.insertSQL(into: appDB)
+    guard var sqlIBSBMRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsBMRecord.type.rawValue, at: timestamp) else {
+      throw "Couldn't select the orignal BM record"
+    }
+
+    XCTAssertEqual(sqlIBSBMRecord.pressure, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.dryness, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.wetness, nil, "The scale should be nil")
+
+    sqlIBSBMRecord.update(from: ibsBMRecord)
+
+    XCTAssertEqual(sqlIBSBMRecord.pressure, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.dryness, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.wetness, nil, "The scale should be nil")
+
+
+    let ibsGutRecord = IBSRecord(timestamp: timestamp, bloating: Scales.none, pain: Scales.none)
+    try ibsGutRecord.insertSQL(into: appDB)
+    guard var sqlIBSGutRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsGutRecord.type.rawValue, at: timestamp) else {
+      throw "Couldn't select the orignal BM record"
+    }
+
+    XCTAssertEqual(sqlIBSGutRecord.bloating, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSGutRecord.pain, nil, "The scale should be nil")
+
+    sqlIBSGutRecord.update(from: ibsGutRecord)
+
+    XCTAssertEqual(sqlIBSGutRecord.bloating, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSGutRecord.pain, nil, "The scale should be nil")
+
+    let ibsFoodRecord = IBSRecord(food: "Pizza", timestamp: timestamp, risk: Scales.none, size: FoodSizes.none)
+    try ibsFoodRecord.insertSQL(into: appDB)
+    guard var sqlIBSFoodRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsFoodRecord.type.rawValue, at: timestamp) else {
+      throw "Couldn't select the orignal BM record"
+    }
+
+    XCTAssertEqual(sqlIBSFoodRecord.risk, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSFoodRecord.size, nil, "The scale should be nil")
+
+    sqlIBSFoodRecord.update(from: ibsFoodRecord)
+
+    XCTAssertEqual(sqlIBSFoodRecord.risk, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSFoodRecord.size, nil, "The scale should be nil")
+
+    let ibsMoodRecord = IBSRecord(timestamp: timestamp, feel: MoodType.none, stress: Scales.none)
+    try ibsMoodRecord.insertSQL(into: appDB)
+    guard var sqlIBSMoodRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsMoodRecord.type.rawValue, at: timestamp) else {
+      throw "Couldn't select the orignal BM record"
+    }
+
+    XCTAssertEqual(sqlIBSMoodRecord.feel, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSMoodRecord.stress, nil, "The scale should be nil")
+
+    sqlIBSMoodRecord.update(from: ibsMoodRecord)
+
+    XCTAssertEqual(sqlIBSMoodRecord.feel, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSMoodRecord.stress, nil, "The scale should be nil")
+  }
+
   func testUpdateSQL() throws {
     let recordTypeStrng = ItemType.bm.rawValue
     let originalBristolScale = BristolType.b4

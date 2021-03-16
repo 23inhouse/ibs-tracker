@@ -44,24 +44,7 @@ extension SQLIBSRecord: Importable {
     self.timestamp = record.timestamp
     self.type = record.type.rawValue
 
-    self.text = record.text
-    self.bristolScale = record.bristolScale?.rawValue
-    self.color = record.color?.rawValue
-    self.pressure = record.pressure?.rawValue
-    self.smell = record.smell?.rawValue
-    self.evacuation = record.evacuation?.rawValue
-    self.dryness = record.dryness?.rawValue
-    self.wetness = record.wetness?.rawValue
-    self.size = record.size?.rawValue
-    self.risk = record.risk?.rawValue
-    self.bloating = record.bloating?.rawValue
-    self.pain = record.pain?.rawValue
-    self.bodyache = record.bodyache?.rawValue
-    self.headache = record.headache?.rawValue
-    self.feel = record.feel?.rawValue
-    self.stress = record.stress?.rawValue
-    self.medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
-    self.weight = record.weight
+    set(from: record)
   }
 }
 
@@ -145,28 +128,39 @@ extension SQLIBSRecord: Migratable {
 
 extension SQLIBSRecord {
   mutating func update(from record: IBSRecord) {
+    set(from: record)
+    updatedAt = Date()
+  }
+}
+
+private extension SQLIBSRecord {
+  mutating func set(from record: IBSRecord) {
     timestamp = record.timestamp
     type = record.type.rawValue
 
     text = record.text
     bristolScale = record.bristolScale?.rawValue
     color = record.color?.rawValue
-    pressure = record.pressure?.rawValue
+    pressure = nonNegativeOrNil(record.pressure?.rawValue)
     smell = record.smell?.rawValue
     evacuation = record.evacuation?.rawValue
-    dryness = record.dryness?.rawValue
-    wetness = record.wetness?.rawValue
-    size = record.size?.rawValue
-    risk = record.risk?.rawValue
-    bloating = record.bloating?.rawValue
-    pain = record.pain?.rawValue
-    bodyache = record.bodyache?.rawValue
-    headache = record.headache?.rawValue
-    feel = record.feel?.rawValue
-    stress = record.stress?.rawValue
+    dryness = nonNegativeOrNil(record.dryness?.rawValue)
+    wetness = nonNegativeOrNil(record.wetness?.rawValue)
+    size = nonNegativeOrNil(record.size?.rawValue)
+    risk = nonNegativeOrNil(record.risk?.rawValue)
+    bloating = nonNegativeOrNil(record.bloating?.rawValue)
+    pain = nonNegativeOrNil(record.pain?.rawValue)
+    bodyache = nonNegativeOrNil(record.bodyache?.rawValue)
+    headache = nonNegativeOrNil(record.headache?.rawValue)
+    feel = nonNegativeOrNil(record.feel?.rawValue)
+    stress = nonNegativeOrNil(record.stress?.rawValue)
     medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
     weight = record.weight
+  }
 
-    updatedAt = Date()
+  func nonNegativeOrNil(_ value: Int?) -> Int? {
+    guard let value = value else { return nil }
+    guard value >= 0 else { return nil }
+    return value
   }
 }

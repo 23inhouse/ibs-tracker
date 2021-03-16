@@ -39,6 +39,8 @@ struct ScaleSlider<T: Sliderable>: View {
       return defaultTitle
     }
 
+    guard scale.rawValue != -1 else { return defaultTitle }
+
     return descriptions[scale]?.capitalizeFirstLetter() ?? defaultTitle
   }
 
