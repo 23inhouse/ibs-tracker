@@ -39,6 +39,7 @@ MEDICATION_NAMES = [
   "vitamin",
   "ibuprofen",
   "enema",
+  "colonic",
 ]
 
 TAG_TRANSLATIONS = {
@@ -240,7 +241,7 @@ def medication?(text)
     mode = :medication
     if ["oregano", "garlic capsule", "allicin"].any? { |med| text.include? med }
       submode = :antimicrobial
-    elsif ["enema"].any? { |med| text.include? med }
+    elsif ["enema", "colonic"].any? { |med| text.include? med }
       submode = :other
     elsif ["perenterol", "probiotic"].any? { |med| text.include? med }
       submode = :probiotic
@@ -324,6 +325,7 @@ def tags(mode, id, tags, tag_names, text)
       text = text.downcase
       inline_tags = []
       inline_tags << "Enema" if text.include? "enema"
+      inline_tags << "Colonic" if text.include? "colonic"
       inline_tags << "Saccharomyces boulardii" if text.include? "perenterol"
       if text.downcase.include?("bifidobacterium") ||
         text.downcase.include?("lactobacillus") ||
@@ -552,6 +554,7 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     medication_type << :suppliment if next_tags.include? "L-Glutamine"
     medication_type << :probiotic if next_tags.include? "Saccharomyces boulardii"
     medication_type << :probiotic if next_tags.include? "Lactobacillus"
+    medication_type << :other if next_tags.include? "Colonic"
 
     lines << <<-END.gsub(/^%m\|/, '\n')
       |       "type": "#{next_mode}",
