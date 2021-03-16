@@ -23,10 +23,10 @@ struct SaveButtonSection: View {
         insertOrUpdate {
           DispatchQueue.main.async {
             appState.tabSelection = .day
-            presentation.wrappedValue.dismiss()
             guard let timestamp = record?.timestamp else { return }
             appState.currentDate = IBSData.currentDate(for: timestamp)
           }
+          presentation.dismiss(animation: .none)
         }
       }) {
         Text(editMode ? "Update \(name)" : "Add \(name)")
@@ -59,7 +59,9 @@ struct SaveButtonSection: View {
         } else {
           try record.insertSQL(into: AppDB.current)
         }
-        DispatchQueue.main.async { appState.reloadRecordsFromSQL() }
+        DispatchQueue.main.async {
+          withAnimation { appState.reloadRecordsFromSQL() }
+        }
       } catch {
         print("Error: \(error)")
       }

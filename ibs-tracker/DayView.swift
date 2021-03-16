@@ -36,7 +36,6 @@ struct DayView: View {
             .listRowInsets(EdgeInsets())
         }
       }
-      .id(UUID())
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
@@ -64,7 +63,6 @@ struct DayView: View {
         }
       }
       .gesture(swipeGesture)
-      .transition(.move(edge: .bottom))
     }
   }
 

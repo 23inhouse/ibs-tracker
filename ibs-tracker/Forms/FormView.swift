@@ -37,14 +37,33 @@ struct FormView<Content: View>: View {
       .toolbar {
         DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
       }
-      .alert(delete: editableRecord, appState: appState, isPresented: $viewModel.showAlert) {
-        DispatchQueue.main.async {
-          appState.tabSelection = .day
-          presentation.wrappedValue.dismiss()
+      .alert(isPresented: $viewModel.showAlert) {
+        deleteAlert {
+          DispatchQueue.main.async { appState.tabSelection = .day }
+          presentation.dismiss(animation: .none)
+
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            do {
+              guard let editableRecord = editableRecord else { return }
+              try editableRecord.deleteSQL(into: AppDB.current)
+              withAnimation { appState.reloadRecordsFromSQL() }
+            } catch {
+              print("Error: \(error)")
+            }
+          }
         }
       }
       .gesture(DragGesture().onChanged { _ in endEditing(true) })
     }
+  }
+
+  private func deleteAlert(action: @escaping () -> Void) -> Alert {
+    Alert(
+      title: Text("Are you sure?"),
+      message: Text("This will delete the item"),
+      primaryButton: .destructive(Text("OK"), action: action),
+      secondaryButton: .cancel()
+    )
   }
 }
 

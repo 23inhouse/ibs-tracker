@@ -75,6 +75,7 @@
 		B554CE3925D02D4200E2EE17 /* SQLIBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3525D02D4200E2EE17 /* SQLIBSRecord.swift */; };
 		B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */; };
 		B554CE3B25D02D4200E2EE17 /* SQLTagRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */; };
+		B555747626009779005E92FB /* Binding+Dismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = B555747526009779005E92FB /* Binding+Dismiss.swift */; };
 		B555934A25C4AC20003F02BB /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = B555934925C4AC20003F02BB /* GRDB */; };
 		B55CAAB525F8154B00EAD6DA /* MoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */; };
 		B55CAABA25F818B800EAD6DA /* AcheFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAB925F818B800EAD6DA /* AcheFormView.swift */; };
@@ -110,7 +111,6 @@
 		B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25825ED04F400A5027C /* records-day-one-only.json */; };
 		B5BCF28525EE421A00F88D01 /* String+CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */; };
 		B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */; };
-		B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
 		B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675725E9955A004E0895 /* SuggestedTagList.swift */; };
@@ -236,6 +236,7 @@
 		B554CE3525D02D4200E2EE17 /* SQLIBSRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLIBSRecord.swift; sourceTree = "<group>"; };
 		B554CE3625D02D4200E2EE17 /* AppDB+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+Records.swift"; sourceTree = "<group>"; };
 		B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLTagRecord.swift; sourceTree = "<group>"; };
+		B555747526009779005E92FB /* Binding+Dismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Dismiss.swift"; sourceTree = "<group>"; };
 		B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodFormView.swift; sourceTree = "<group>"; };
 		B55CAAB925F818B800EAD6DA /* AcheFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheFormView.swift; sourceTree = "<group>"; };
 		B55CAAC725F82A0600EAD6DA /* TagToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagToggle.swift; sourceTree = "<group>"; };
@@ -269,7 +270,6 @@
 		B5B9E25825ED04F400A5027C /* records-day-one-only.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-one-only.json"; sourceTree = "<group>"; };
 		B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirstLetter.swift"; sourceTree = "<group>"; };
 		B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldSection.swift; sourceTree = "<group>"; };
-		B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AlertDeleteRecord.swift"; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
 		B5D9675725E9955A004E0895 /* SuggestedTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTagList.swift; sourceTree = "<group>"; };
@@ -455,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */,
+				B555747526009779005E92FB /* Binding+Dismiss.swift */,
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
@@ -468,7 +469,6 @@
 				B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */,
 				B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */,
 				B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */,
-				B5D9673F25E96BA5004E0895 /* View+AlertDeleteRecord.swift */,
 				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
 			);
@@ -847,7 +847,6 @@
 				B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */,
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
 				B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */,
-				B5D9674025E96BA5004E0895 /* View+AlertDeleteRecord.swift in Sources */,
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
 				B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */,
@@ -889,6 +888,7 @@
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
 				B52E465425D01DFA00C009EC /* IBSRecord+FoodRecord.swift in Sources */,
 				B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */,
+				B555747626009779005E92FB /* Binding+Dismiss.swift in Sources */,
 				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
 				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
 				B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */,
