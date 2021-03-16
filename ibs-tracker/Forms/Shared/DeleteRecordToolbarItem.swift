@@ -19,6 +19,7 @@ struct DeleteRecordToolbarItem: ToolbarContent {
         }, label: {
           Image(systemName: "trash")
         })
+        .padding(5)
       } else {
         EmptyView()
       }
