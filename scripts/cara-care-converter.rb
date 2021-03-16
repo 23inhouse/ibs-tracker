@@ -141,6 +141,8 @@ TAG_TRANSLATIONS = {
   "Macadamianüsse" => "Macadamia nuts",
   "Walnüsse" => "Walnuts",
   "Gewürzmischungen mit Knoblauch und Zwiebeln" => "Spice mix w/ onions & garlic",
+  "Paprika" => "Paprika",
+  "Muskat" => "Nutmeg",
 }
 
 FOOD_TAGS_TO_REMOVE = [
@@ -178,6 +180,7 @@ FOOD_TAGS_TO_REMOVE = [
 ]
 
 CARA_CARE_DATA_ERRORS = {
+  "2020-09-15 09:30:00 +0000" => [:skin, :next],
   "2020-10-21 09:10:00 +0000" => [:gut, :next],
   "2020-10-23 18:05:00 +0000" => [:medication, :next],
   "2021-01-06 15:25:00 +0000" => [:note, :prev],
@@ -225,6 +228,8 @@ def mode(tracking_id, tracking_type, tracking_text, tag_names)
   elsif tracking_type == "notes"
     if MEDICATION_NAMES.any? { |med| tracking_text.downcase.include? med.downcase }
       mode, submode = medication?(tracking_text)
+    elsif tracking_text.downcase.include? "ulcer"
+      mode = :skin
     elsif tracking_text.include? "kg"
       mode = :weight
     else
@@ -291,13 +296,15 @@ end
 def text(mode, id, text, tag_names)
   if [:food, :medication].include? mode
     if tag_names[id].nil?
-      puts "Warning: No name for [#{id}] in associated_tags using [#{text}]" if !text.include? "Enema"
+      if !text.include?("Enema") && !text.include?("Colonic")
+        puts "Warning: No name for [#{id}] in associated_tags using [#{text}]"
+      end
       return text
     else
       tag_names[id] ||= []
       tag_names[id][0]
     end
-  elsif mode == :note
+  elsif mode == :note || mode == :skin
     text
   end
 end
@@ -317,6 +324,16 @@ end
 
 def weight(tracking_text)
   tracking_text.scan(/[\d\.]+/).first
+end
+
+def condition(tracking_text)
+  tracking_text ||= ""
+  condition = "null"
+  condition = "2" if ["ulcer"].any? { |w| tracking_text.downcase.include? w }
+  condition = "1" if ["tiny", "mini", "small", "flat", "shrank"].any? { |w| tracking_text.downcase.include? w }
+  condition = "3" if ["bigger"].any? { |w| tracking_text.downcase.include? w }
+  condition = "4" if ["sore", "swollen", "second", "big"].any? { |w| tracking_text.downcase.include? w }
+  return condition
 end
 
 def tags(mode, id, tags, tag_names, text)
@@ -413,6 +430,9 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
 
   # weight
   next_weight = weight(tracking_text) if mode == :weight
+
+  # weight
+  next_condition = condition(tracking_text) if mode == :skin
 
   if food_again
     # puts "[AGAIN]   Searching... (#{food_records.count}) records for [#{food_again}]"
@@ -594,6 +614,15 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
       |       "tags": #{next_tags.uniq}
     END
     food_records << [next_text, next_tags]
+  when :skin
+    next_tags = ["Ulcer"] if next_text.downcase.include? "ulcer"
+    lines << <<-END
+      |       "type": "#{next_mode}",
+      |       "timestamp": "#{next_timestamp}",
+      |       "text": "#{next_text}",
+      |       "condition": #{next_condition},
+      |       "tags": #{next_tags}
+    END
   else # :note
     lines << <<-END
       |       "type": "#{next_mode}",
