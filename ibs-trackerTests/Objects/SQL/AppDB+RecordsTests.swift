@@ -45,6 +45,7 @@ class AppDB_RecordsTests: XCTestCase {
       XCTAssertEqual(exportedRecords[i].stress, record.stress, "The record at index[\(i)] doesn't match the stress")
       XCTAssertEqual(exportedRecords[i].medicationType, record.medicationType, "The record at index[\(i)] doesn't match the medicationType")
       XCTAssertEqual(exportedRecords[i].weight, record.weight, "The record at index[\(i)] doesn't match the weight")
+      XCTAssertEqual(exportedRecords[i].condition, record.condition, "The record at index[\(i)] doesn't match the skin condition")
       XCTAssertEqual(exportedRecords[i].tags, record.tags, "The record at index[\(i)] doesn't match the tags")
 
       XCTAssertEqual(exportedRecords[i], record, "The record at index[\(i)] doesn't match")
@@ -60,13 +61,13 @@ class AppDB_RecordsTests: XCTestCase {
     appDB.importJSON(data)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
-    XCTAssertEqual(ibsRecordCount, 12, "No ibs records imported")
+    XCTAssertEqual(ibsRecordCount, 13, "No ibs records imported")
 
     let ibsTagRecordCount = try appDB.countRecords(in: SQLIBSTagRecord.self)
-    XCTAssertEqual(ibsTagRecordCount, 13, "No ibs-tag records imported")
+    XCTAssertEqual(ibsTagRecordCount, 14, "No ibs-tag records imported")
 
     let tagRecordCount = try appDB.countRecords(in: SQLTagRecord.self)
-    XCTAssertEqual(tagRecordCount, 10, "No tag records imported")
+    XCTAssertEqual(tagRecordCount, 11, "No tag records imported")
   }
 
   func testAppDBImportRecords() throws {
@@ -75,13 +76,13 @@ class AppDB_RecordsTests: XCTestCase {
     try appDB.importRecords(dataSet.ibsRecords)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
-    XCTAssertEqual(ibsRecordCount, 12, "No ibs records imported")
+    XCTAssertEqual(ibsRecordCount, 13, "No ibs records imported")
 
     let ibsTagRecordCount = try appDB.countRecords(in: SQLIBSTagRecord.self)
-    XCTAssertEqual(ibsTagRecordCount, 13, "No ibs-tag records imported")
+    XCTAssertEqual(ibsTagRecordCount, 14, "No ibs-tag records imported")
 
     let tagRecordCount = try appDB.countRecords(in: SQLTagRecord.self)
-    XCTAssertEqual(tagRecordCount, 10, "No tag records imported")
+    XCTAssertEqual(tagRecordCount, 11, "No tag records imported")
   }
 
   func testPerformanceExportRecords() throws {

@@ -22,7 +22,7 @@ class IBSRecord_DecodableTests: XCTestCase {
 
     let dataSet = try bundle.decode(DataSet.self, from: "records-to-import.json")
     let ibsRecords = dataSet.ibsRecords
-    XCTAssertEqual(ibsRecords.count, 12, "No ibs records imported")
+    XCTAssertEqual(ibsRecords.count, 13, "No ibs records imported")
 
     XCTAssertEqual(ibsRecords[0].type, .gut, "Should be a gut record")
     XCTAssertEqual(ibsRecords[0].bloating, .moderate, "Bloating should equal moderate")
@@ -61,8 +61,11 @@ class IBSRecord_DecodableTests: XCTestCase {
     XCTAssertEqual(ibsRecords[11].type, .ache, "Should be a ache record")
     XCTAssertEqual(ibsRecords[11].bodyache, .moderate, "Bodyache should equal moderate")
 
+    XCTAssertEqual(ibsRecords[12].type, .skin, "Should be a skin record")
+    XCTAssertEqual(ibsRecords[12].condition, .moderate, "Condition should equal 2")
+
     let tagRecords = Array(Set(ibsRecords.flatMap { $0.tags }))
-    XCTAssertEqual(tagRecords.count, 10, "No tag records imported")
+    XCTAssertEqual(tagRecords.count, 11, "No tag records imported")
   }
 
   func testEncode() throws {

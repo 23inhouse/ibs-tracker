@@ -28,6 +28,7 @@ struct IBSRecord {
   var stress: Scales?
   var medicationType: [MedicationType]?
   var weight: Decimal?
+  var condition: Scales?
   var tags: [String] = []
 }
 
@@ -55,6 +56,7 @@ extension IBSRecord {
     self.stress = other.stress
     self.medicationType = other.medicationType
     self.weight = other.weight
+    self.condition = other.condition
     self.tags = other.tags.sorted().map { $0.lowercased() }
   }
 

@@ -104,6 +104,7 @@ private extension AppDB {
           stress: Scales(optionalValue: row["stress"]),
           medicationType: row["medicationType"] != nil ? medicationTypes.map { MedicationType(optionalValue: String($0))! } : nil,
           weight: row["weight"] != nil ? Decimal(floatLiteral: row["weight"]) : nil,
+          condition: Scales(optionalValue: row["condition"]),
           tags: String(row["tags"] ?? "").components(separatedBy: "|").filter { $0 != ""}
         )
         return ibsRecord

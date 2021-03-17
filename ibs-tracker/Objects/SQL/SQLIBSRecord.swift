@@ -34,6 +34,7 @@ struct SQLIBSRecord {
   var stress: Int?
   var medicationType: String?
   var weight: Decimal?
+  var condition: Int?
 
   var createdAt: Date? = Date()
   var updatedAt: Date? = Date()
@@ -73,6 +74,7 @@ extension SQLIBSRecord: Codable {
     static let stress = Column(CodingKeys.stress)
     static let medicationType = Column(CodingKeys.medicationType)
     static let weight = Column(CodingKeys.weight)
+    static let condition = Column(CodingKeys.condition)
 
     static let createdAt = Column(CodingKeys.createdAt)
     static let updatedAt = Column(CodingKeys.updatedAt)
@@ -114,6 +116,7 @@ extension SQLIBSRecord: Migratable {
       t.column("stress", .integer)
       t.column("medicationType", .text)
       t.column("weight", .double)
+      t.column("condition", .integer)
 
       t.column("createdAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
       t.column("updatedAt", .datetime).notNull().defaults(sql: "CURRENT_TIMESTAMP")
@@ -156,6 +159,7 @@ private extension SQLIBSRecord {
     stress = nonNegativeOrNil(record.stress?.rawValue)
     medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
     weight = record.weight
+    condition = nonNegativeOrNil(record.condition?.rawValue)
   }
 
   func nonNegativeOrNil(_ value: Int?) -> Int? {
