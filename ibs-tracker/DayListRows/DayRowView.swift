@@ -27,10 +27,11 @@ struct DayRowView<Content>: View where Content: View {
   var body: some View {
     HStack(alignment: .top, spacing: 5) {
       iconView
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 3) {
         content()
           .frame(maxWidth: .infinity, alignment: .leading)
         TagCloudView(tags: tags, resize: type != .food)
+          .padding(.top, 3)
       }
       .frame(maxWidth: .infinity)
     }
