@@ -85,6 +85,19 @@ struct ColorCodedContent {
     return colors[scale] ?? .secondary
   }
 
+  static func skinConditionColor(for scale: Scales?, default defaultColor: Color = .primary) -> Color {
+    let colors: [Scales: Color] = [
+      .zero: .green,
+      .mild: .yellow,
+      .moderate: .orange,
+      .severe: .red,
+      .extreme: .purple
+    ]
+
+    guard let scale = scale else { return defaultColor }
+    return colors[scale] ?? .secondary
+  }
+
   static func worstColor(_ colors: [Color]) -> Color {
     return colors.max { (a, b) in worstColor(a, b) == b } ?? .secondary
   }

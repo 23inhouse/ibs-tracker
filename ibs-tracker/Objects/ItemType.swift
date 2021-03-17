@@ -15,6 +15,7 @@ enum ItemType: String, CaseIterable {
   case medication
   case mood
   case note
+  case skin
   case weight
   case none
 
@@ -296,6 +297,14 @@ enum Scales: Int, CaseIterable {
     .moderate: "moderate pressure",
     .severe: "severe pressure",
     .extreme: "extreme pressure",
+  ]
+
+  static let skinConditionDescriptions: [Scales: String] = [
+    .zero: "no skin condition",
+    .mild: "mildly bad condition",
+    .moderate: "moderately bad condition",
+    .severe: "serverely bad condition",
+    .extreme: "extremely bad condition",
   ]
 
   static let stressDescriptions: [Scales: String] = [
