@@ -104,12 +104,11 @@ struct BMFormView: View {
         .foregroundColor(ColorCodedContent.bristolColor(for: bristolScale))
       HStack {
         ForEach(Range(0...7)) { scale in
-          let scale = BristolType(rawValue: Int(scale))
-          BristolView(scale: scale, frameSize: 29.5, foregroundColor: foregroundColor(for: scale))
-            .frame(maxWidth: .infinity)
-            .onTapGesture {
-              bristolScale = scale
-            }
+          if let scale = BristolType(rawValue: Int(scale)) {
+            BristolView(scale: scale, frameSize: 29.5, foregroundColor: foregroundColor(for: scale))
+              .frame(maxWidth: .infinity)
+              .onTapGesture { bristolScale = scale }
+          }
         }
       }
     }

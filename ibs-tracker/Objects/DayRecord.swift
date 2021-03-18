@@ -18,7 +18,6 @@ extension DayRecord {
   // So a record at 2am will be display after the 11pm records
   // In the context of food and ibs 5am is the start of a new day
   static func keyDate(for date: Date) -> Date? {
-    return Calendar.current.date(byAdding: .hour, value: -5, to: date)
+    return IBSData.currentDate(for: date)
   }
-
 }

@@ -14,9 +14,13 @@ struct FoodRowView: View {
     self.record = record
   }
 
+  var foodColor: Color {
+    ColorCodedContent.foodColor(for: record as! IBSRecord)
+  }
+
   var body: some View {
     LazyNavigationLink(destination: FoodFormView(for: record)) {
-      DayRowView(type: .food, color: .secondary, tags: record.tags) {
+      DayRowView(record as! IBSRecord, color: foodColor, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         Group {
           Text(record.text ?? "No meal name recorded")
@@ -36,7 +40,7 @@ struct FoodRowView: View {
             PropertyView(
               text: record.sizeText(),
               scale: size.rawValue,
-              color: ColorCodedContent.foodColor(for: record.size),
+              color: ColorCodedContent.foodSizeColor(for: record.size),
               direction: .leftToRight
             )
           }

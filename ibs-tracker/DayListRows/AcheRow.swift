@@ -14,13 +14,13 @@ struct AcheRowView: View {
     self.record = record
   }
 
+  private var acheColor: Color {
+    ColorCodedContent.scaleColor(for: record.acheScore())
+  }
+
   var body: some View {
     LazyNavigationLink(destination: AcheFormView(for: record)) {
-      DayRowView(
-        type: .ache,
-        color: ColorCodedContent.scaleColor(for: record.acheScore()),
-        tags: record.tags
-      ) {
+      DayRowView(record as! IBSRecord, color: acheColor, tags: record.tags) {
         HStack(alignment: .top, spacing: 5) {
           TimestampView(record: record as! IBSRecord)
           Spacer()

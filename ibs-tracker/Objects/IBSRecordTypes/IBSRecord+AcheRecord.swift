@@ -26,15 +26,15 @@ extension IBSRecord: AcheRecord {
   }
 
   func acheScore() -> Scales {
-    let worstScore = [headache?.rawValue ?? 0, bodyache?.rawValue ?? 0].max()
-    return Scales(rawValue: worstScore ?? -1) ?? .zero
+    let worstScore = [headache?.rawValue ?? -1, bodyache?.rawValue ?? -1].max()
+    return Scales(optionalValue: worstScore) ?? .none
   }
 
   func headacheText() -> String {
-    return Scales.headacheDescriptions[headache ?? .zero] ?? ""
+    return Scales.headacheDescriptions[headache ?? .none] ?? ""
   }
 
   func bodyacheText() -> String {
-    return Scales.bodyacheDescriptions[bodyache ?? .zero] ?? ""
+    return Scales.bodyacheDescriptions[bodyache ?? .none] ?? ""
   }
 }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BristolView: View {
-  let scale: BristolType?
+  let scale: BristolType
   let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
   let frameSize: CGFloat
   let foregroundColor: Color
 
-  init(scale: BristolType?, frameSize: CGFloat = 50, foregroundColor: Color? = nil) {
+  init(scale: BristolType, frameSize: CGFloat = 50, foregroundColor: Color? = nil) {
     self.scale = scale
     self.frameSize = frameSize
     self.foregroundColor = foregroundColor ?? ColorCodedContent.bristolColor(for: scale)
@@ -21,12 +21,12 @@ struct BristolView: View {
 
   var body: some View {
     Group {
-      if [nil, .b0].contains(scale) {
+      if scale == .b0 {
         Image(systemName: "nosign")
           .resizedToFit()
           .padding(frameSize / 6.25)
       } else {
-        BristolShape(scale: scale ?? .b4)
+        BristolShape(scale: scale)
           .stroke(style: strokeStyle)
       }
     }
@@ -38,14 +38,14 @@ struct BristolView: View {
 struct BristolView_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      BristolView(scale: BristolType(rawValue: 0))
-      BristolView(scale: BristolType(rawValue: 1))
-      BristolView(scale: BristolType(rawValue: 2))
-      BristolView(scale: BristolType(rawValue: 3))
-      BristolView(scale: BristolType(rawValue: 4))
-      BristolView(scale: BristolType(rawValue: 5))
-      BristolView(scale: BristolType(rawValue: 6))
-      BristolView(scale: BristolType(rawValue: 7))
+      BristolView(scale: BristolType(rawValue: 0)!)
+      BristolView(scale: BristolType(rawValue: 1)!)
+      BristolView(scale: BristolType(rawValue: 2)!)
+      BristolView(scale: BristolType(rawValue: 3)!)
+      BristolView(scale: BristolType(rawValue: 4)!)
+      BristolView(scale: BristolType(rawValue: 5)!)
+      BristolView(scale: BristolType(rawValue: 6)!)
+      BristolView(scale: BristolType(rawValue: 7)!)
     }
   }
 }

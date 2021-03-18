@@ -16,7 +16,7 @@ struct WeightRowView: View {
 
   var body: some View {
     LazyNavigationLink(destination: WeightFormView(for: record)) {
-      DayRowView(type: .weight, color: .secondary, tags: record.tags) {
+      DayRowView(record as! IBSRecord, color: .secondary, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         if let weight = record.weight {
           Text("\(String(describing: weight))kg")

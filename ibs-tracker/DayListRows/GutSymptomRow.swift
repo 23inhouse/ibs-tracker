@@ -14,13 +14,13 @@ struct GutSymptomRowView: View {
     self.record = record
   }
 
+  private var gutColor: Color {
+    ColorCodedContent.scaleColor(for: record.gutScore())
+  }
+
   var body: some View {
     LazyNavigationLink(destination: GutFormView(for: record)) {
-      DayRowView(
-        type: .gut,
-        color: ColorCodedContent.scaleColor(for: record.gutScore()),
-        tags: record.tags
-      ) {
+      DayRowView(record as! IBSRecord, color: gutColor, tags: record.tags) {
         HStack(alignment: .top, spacing: 0) {
           TimestampView(record: record as! IBSRecord)
           Spacer()

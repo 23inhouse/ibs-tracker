@@ -21,6 +21,7 @@ class IBSData: ObservableObject {
   @Published var lastWeight: Decimal
   @Published var currentDate: Date
 
+  static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
   static var current = IBSData(.current)
 
   private var allRecords: [IBSRecord] {
@@ -46,7 +47,7 @@ class IBSData: ObservableObject {
 
 extension IBSData {
   static func currentDate(for date: Date = Date()) -> Date {
-    Calendar.current.date(byAdding: .hour, value: -5, to: date) ?? date
+    Calendar.current.date(byAdding: .hour, value: -numberOfHoursInMorningIncludedInPreviousDay, to: date) ?? date
   }
 
   func isAvailable(timestamp: Date) -> Bool {

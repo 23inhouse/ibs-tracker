@@ -8,24 +8,6 @@
 import SwiftUI
 
 struct ColorCodedContent {
-  static func worstColor(_ color: Color?, _ other: Color?) -> Color {
-    let rankedColors: [Color] = [
-      .purple,
-      .red,
-      .orange,
-      .yellow,
-      .green
-    ]
-
-    for rankedColor in rankedColors {
-      if [color, other].contains(rankedColor) {
-        return rankedColor
-      }
-    }
-
-    return .secondary
-  }
-
   static func scaleColor(for scale: Scales?, default defaultColor: Color = .primary) -> Color {
     let colors: [Scales: Color] = [
       .zero: .green,
@@ -53,7 +35,15 @@ struct ColorCodedContent {
     }
   }
 
-  static func foodColor(for scale: FoodSizes?, default defaultColor: Color = .primary) -> Color {
+  static func foodColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
+    return worstColor([
+      foodSizeColor(for: record.size, default: defaultColor),
+      scaleColor(for: record.risk, default: defaultColor),
+      foodTimeColor(for: record, default: defaultColor)
+    ])
+  }
+
+  static func foodSizeColor(for scale: FoodSizes?, default defaultColor: Color = .secondary) -> Color {
     let colors: [FoodSizes: Color] = [
       .tiny: .green,
       .small: .green,
@@ -66,6 +56,21 @@ struct ColorCodedContent {
     return colors[scale] ?? defaultColor
   }
 
+  static func foodTimeColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
+    let timestamp = record.timestamp
+    let calendar = Calendar.current
+    let date = IBSData.currentDate(for: timestamp)
+    let hour = calendar.component(.hour, from: date)
+    let eightPMAdjusted = 20 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
+    let ninePMAdjusted = 21 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
+    if hour < eightPMAdjusted {
+      return defaultColor
+    } else if hour < ninePMAdjusted {
+      return .yellow
+    } else {
+      return .red
+    }
+  }
 
   static func moodColor(for scale: MoodType?, default defaultColor: Color = .primary) -> Color {
     let colors: [MoodType: Color] = [
@@ -78,5 +83,27 @@ struct ColorCodedContent {
 
     guard let scale = scale else { return defaultColor }
     return colors[scale] ?? .secondary
+  }
+
+  static func worstColor(_ colors: [Color]) -> Color {
+    return colors.max { (a, b) in worstColor(a, b) == b } ?? .secondary
+  }
+
+  static func worstColor(_ color: Color?, _ other: Color?) -> Color {
+    let rankedColors: [Color] = [
+      .purple,
+      .red,
+      .orange,
+      .yellow,
+      .green
+    ]
+
+    for rankedColor in rankedColors {
+      if [color, other].contains(rankedColor) {
+        return rankedColor
+      }
+    }
+
+    return .secondary
   }
 }

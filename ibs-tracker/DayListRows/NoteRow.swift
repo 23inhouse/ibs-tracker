@@ -42,7 +42,7 @@ struct NoteRowView: View {
 
   var body: some View {
     LazyNavigationLink(destination: NoteFormView(for: record)) {
-      DayRowView(type: .note, color: .secondary, tags: record.tags) {
+      DayRowView(record as! IBSRecord, color: .secondary, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         Text(text)
           .font(font)

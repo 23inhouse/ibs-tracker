@@ -14,21 +14,21 @@ struct MoodRowView: View {
     self.record = record
   }
 
-  var moodColor: Color {
+  private var moodColor: Color {
     ColorCodedContent.moodColor(for: record.feel)
   }
 
-  var stressColor: Color {
+  private var stressColor: Color {
     ColorCodedContent.scaleColor(for: record.stress)
+  }
+
+  private var worstColor: Color {
+    ColorCodedContent.worstColor(moodColor, stressColor)
   }
 
   var body: some View {
     LazyNavigationLink(destination: MoodFormView(for: record)) {
-      DayRowView(
-        type: .mood,
-        color: ColorCodedContent.worstColor(moodColor, stressColor),
-        tags: record.tags
-      ) {
+      DayRowView(record as! IBSRecord, color: worstColor, tags: record.tags) {
         HStack(alignment: .top, spacing: 0) {
           TimestampView(record: record as! IBSRecord)
           Spacer()

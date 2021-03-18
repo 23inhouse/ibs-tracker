@@ -153,7 +153,7 @@ enum FoodSizes: Int, CaseIterable {
 
 extension FoodSizes: Sliderable {
   var scaleColor: Color {
-    ColorCodedContent.foodColor(for: self, default: .secondary)
+    ColorCodedContent.foodSizeColor(for: self, default: .secondary)
   }
 }
 

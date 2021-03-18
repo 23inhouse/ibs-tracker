@@ -26,15 +26,15 @@ extension IBSRecord: GutRecord {
   }
 
   func gutScore() -> Scales {
-    let worstScore = [bloating?.rawValue ?? 0, bodyache?.rawValue ?? 0].max() ?? -1
-    return Scales(rawValue: worstScore) ?? .zero
+    let worstScore = [bloating?.rawValue ?? -1, pain?.rawValue ?? -1].max()
+    return Scales(optionalValue: worstScore) ?? .none
   }
 
   func bloatingText() -> String {
-    return Scales.bloatingDescriptions[bloating ?? .zero] ?? ""
+    return Scales.bloatingDescriptions[bloating ?? .none] ?? ""
   }
 
   func gutPainText() -> String {
-    return Scales.gutPainDescriptions[bodyache ?? .zero] ?? ""
+    return Scales.gutPainDescriptions[bodyache ?? .none] ?? ""
   }
 }

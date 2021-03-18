@@ -16,7 +16,7 @@ struct MedicationRowView: View {
 
   var body: some View {
     LazyNavigationLink(destination: MedicationFormView(for: record)) {
-      DayRowView(type: .medication, color: .secondary, tags: record.tags) {
+      DayRowView(record as! IBSRecord, color: .secondary, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
         Text(record.text ?? "No name")
           .font(.callout)
