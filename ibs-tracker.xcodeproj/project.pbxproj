@@ -110,7 +110,7 @@
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
 		B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
-		B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BowelMovementRow.swift */; };
+		B5B3261425B343780023E286 /* BMRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BMRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
 		B5B4D2AE25EB9E9E000D7D23 /* BMFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */; };
 		B5B9E25925ED04F400A5027C /* records-day-two-days.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25725ED04F400A5027C /* records-day-two-days.json */; };
@@ -275,7 +275,7 @@
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FetchJSON.swift"; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
-		B5B3261325B343780023E286 /* BowelMovementRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowelMovementRow.swift; sourceTree = "<group>"; };
+		B5B3261325B343780023E286 /* BMRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
 		B5B4D2AD25EB9E9E000D7D23 /* BMFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMFormView.swift; sourceTree = "<group>"; };
 		B5B9E25725ED04F400A5027C /* records-day-two-days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-two-days.json"; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 				B5421F3A25BCC78300E8B5AA /* ItemTypeDayRowView.swift */,
 				B5E9D50A25B6343700E52387 /* DayRowView.swift */,
 				B508997625B4ABF400B1EA03 /* AcheRow.swift */,
-				B5B3261325B343780023E286 /* BowelMovementRow.swift */,
+				B5B3261325B343780023E286 /* BMRow.swift */,
 				B5B3261825B343FF0023E286 /* FoodRow.swift */,
 				B508995A25B3A2BF00B1EA03 /* GutSymptomRow.swift */,
 				B533AC1C25BAE9D7009B6290 /* MedicationRow.swift */,
@@ -938,7 +938,7 @@
 				B5109E2326023DCF007CB498 /* SkinFormView.swift in Sources */,
 				B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */,
 				B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */,
-				B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */,
+				B5B3261425B343780023E286 /* BMRow.swift in Sources */,
 				B52E466325D01F8000C009EC /* IBSRecord+MoodRecord.swift in Sources */,
 				B5456BB225E9AC9A009432DD /* FormViewModel.swift in Sources */,
 				B508993525B3672200B1EA03 /* BowelMovementShape.swift in Sources */,

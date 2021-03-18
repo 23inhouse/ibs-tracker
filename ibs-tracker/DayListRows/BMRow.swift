@@ -1,5 +1,5 @@
 //
-//  BowelMovementRowView.swift
+//  BMRow.swift
 //  ibs-tracker
 //
 //  Created by Benjamin Lewis on 16/1/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BowelMovementRowView: View {
+struct BMRowView: View {
   let record: BMRecord
 
   init(for record: BMRecord) {
@@ -30,6 +30,6 @@ struct BowelMovementRowView: View {
 
 struct BowelMovementRowView_Previews: PreviewProvider {
   static var previews: some View {
-    BowelMovementRowView(for: IBSRecord(bristolScale: .b4, timestamp: Date(), tags: ["Almost sausage"]))
+    BMRowView(for: IBSRecord(bristolScale: .b4, timestamp: Date(), tags: ["Almost sausage"]))
   }
 }

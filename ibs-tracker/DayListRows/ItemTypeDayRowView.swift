@@ -13,7 +13,7 @@ struct ItemTypeDayRowView: View {
   var body: some View {
     switch record.type {
     case .ache: AcheRowView(for: record)
-    case .bm: BowelMovementRowView(for: record)
+    case .bm: BMRowView(for: record)
     case .food: FoodRowView(for: record)
     case .gut: GutSymptomRowView(for: record)
     case .medication: MedicationRowView(for: record)
