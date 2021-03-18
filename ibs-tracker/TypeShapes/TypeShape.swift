@@ -22,6 +22,7 @@ struct TypeShape: Shape {
     case .medication: return MedicationShape()
     case .mood: return MoodShape()
     case .note: return NoteShape()
+    case .skin: return SkinShape()
     case .weight: return WeightShape()
     default: return BowelMovementShape()
     }
@@ -48,6 +49,8 @@ struct TypeShape_Previews: PreviewProvider {
       TypeShape(type: .mood)
         .stroke(style: strokeStyle)
       TypeShape(type: .note)
+        .stroke(style: strokeStyle)
+      TypeShape(type: .skin)
         .stroke(style: strokeStyle)
       TypeShape(type: .weight)
         .stroke(style: strokeStyle)

@@ -19,6 +19,10 @@
 		B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508997625B4ABF400B1EA03 /* AcheRow.swift */; };
 		B508998325B5E1D400B1EA03 /* ColorCodedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */; };
 		B5109E14260140A1007CB498 /* skin-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5109E13260140A1007CB498 /* skin-tags.txt */; };
+		B5109E1926023779007CB498 /* IBSRecord+SkinRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5109E1826023779007CB498 /* IBSRecord+SkinRecord.swift */; };
+		B5109E1E26023B17007CB498 /* SkinRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5109E1D26023B17007CB498 /* SkinRow.swift */; };
+		B5109E2326023DCF007CB498 /* SkinFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5109E2226023DCF007CB498 /* SkinFormView.swift */; };
+		B5109E2826024080007CB498 /* SkinShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5109E2726024080007CB498 /* SkinShape.swift */; };
 		B5151EA225F4CFF3003B9F59 /* records-to-encode.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA125F4CFF3003B9F59 /* records-to-encode.json */; };
 		B5151EAA25F4D6DF003B9F59 /* records-to-import-unchanging.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */; };
 		B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EB725EFB442005583AB /* WeightFormView.swift */; };
@@ -181,6 +185,10 @@
 		B508997625B4ABF400B1EA03 /* AcheRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheRow.swift; sourceTree = "<group>"; };
 		B508998225B5E1D300B1EA03 /* ColorCodedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCodedContent.swift; sourceTree = "<group>"; };
 		B5109E13260140A1007CB498 /* skin-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "skin-tags.txt"; sourceTree = "<group>"; };
+		B5109E1826023779007CB498 /* IBSRecord+SkinRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+SkinRecord.swift"; sourceTree = "<group>"; };
+		B5109E1D26023B17007CB498 /* SkinRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinRow.swift; sourceTree = "<group>"; };
+		B5109E2226023DCF007CB498 /* SkinFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinFormView.swift; sourceTree = "<group>"; };
+		B5109E2726024080007CB498 /* SkinShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinShape.swift; sourceTree = "<group>"; };
 		B5151EA125F4CFF3003B9F59 /* records-to-encode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-encode.json"; sourceTree = "<group>"; };
 		B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-import-unchanging.json"; sourceTree = "<group>"; };
 		B51F5EB725EFB442005583AB /* WeightFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormView.swift; sourceTree = "<group>"; };
@@ -355,6 +363,7 @@
 				B533AC1225BADCA3009B6290 /* MedicationShape.swift */,
 				B5FE7F8A25BB6AFD00D0F0EC /* MoodShape.swift */,
 				B5E9D54E25B71D2500E52387 /* NoteShape.swift */,
+				B5109E2726024080007CB498 /* SkinShape.swift */,
 				B533AC1725BADCBA009B6290 /* WeightShape.swift */,
 			);
 			path = TypeShapes;
@@ -372,6 +381,7 @@
 				B533AC1C25BAE9D7009B6290 /* MedicationRow.swift */,
 				B5FE7F9825BB733E00D0F0EC /* MoodRow.swift */,
 				B5E9D54925B7001200E52387 /* NoteRow.swift */,
+				B5109E1D26023B17007CB498 /* SkinRow.swift */,
 				B533AC2125BAEC36009B6290 /* WeightRow.swift */,
 			);
 			path = DayListRows;
@@ -418,6 +428,7 @@
 				B52E465D25D01EFE00C009EC /* IBSRecord+MedicationRecord.swift */,
 				B52E466225D01F8000C009EC /* IBSRecord+MoodRecord.swift */,
 				B52E466725D01FB700C009EC /* IBSRecord+NoteRecord.swift */,
+				B5109E1826023779007CB498 /* IBSRecord+SkinRecord.swift */,
 				B52E466C25D01FF300C009EC /* IBSRecord+WeightRecord.swift */,
 			);
 			path = IBSRecordTypes;
@@ -645,6 +656,7 @@
 				B51F5EBC25EFC282005583AB /* MedicationFormView.swift */,
 				B55CAAB425F8154B00EAD6DA /* MoodFormView.swift */,
 				B5ED342A25E8DA760029B274 /* NoteFormView.swift */,
+				B5109E2226023DCF007CB498 /* SkinFormView.swift */,
 				B51F5EB725EFB442005583AB /* WeightFormView.swift */,
 				B5ED344E25E91DFD0029B274 /* Shared */,
 			);
@@ -834,9 +846,11 @@
 			files = (
 				B52E466D25D01FF300C009EC /* IBSRecord+WeightRecord.swift in Sources */,
 				B54EA7A425B21873008C4B74 /* Bristol2Shape.swift in Sources */,
+				B5109E2826024080007CB498 /* SkinShape.swift in Sources */,
 				B5A1CA2925EEB5FD006C77CA /* Sliderable.swift in Sources */,
 				B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */,
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
+				B5109E1E26023B17007CB498 /* SkinRow.swift in Sources */,
 				B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */,
 				B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */,
 				B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */,
@@ -897,6 +911,7 @@
 				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
 				B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
+				B5109E1926023779007CB498 /* IBSRecord+SkinRecord.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
 				B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */,
 				B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */,
@@ -916,6 +931,7 @@
 				B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */,
 				B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */,
 				B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */,
+				B5109E2326023DCF007CB498 /* SkinFormView.swift in Sources */,
 				B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */,
 				B5EE366625BC724C00DC9D74 /* ToolBarFilterIconView.swift in Sources */,
 				B5B3261425B343780023E286 /* BowelMovementRow.swift in Sources */,

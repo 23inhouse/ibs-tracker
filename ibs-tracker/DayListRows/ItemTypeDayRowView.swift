@@ -19,6 +19,7 @@ struct ItemTypeDayRowView: View {
     case .medication: MedicationRowView(for: record)
     case .mood: MoodRowView(for: record)
     case .note: NoteRowView(for: record)
+    case .skin: SkinRowView(for: record)
     case .weight: WeightRowView(for: record)
     default:
       Text("Unknown type: [\(record.type.rawValue)]")
@@ -40,6 +41,7 @@ struct ItemTypeDayRowView_Previews: PreviewProvider {
       ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], bloating: .mild, pain: .moderate))
       ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], headache: .moderate, bodyache: .severe))
       ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], feel: .awful, stress: .extreme))
+      ItemTypeDayRowView(record: IBSRecord(condition: .moderate, timestamp: Date(), text: "no change", tags: ["Ulcer"]))
     }
   }
 }
