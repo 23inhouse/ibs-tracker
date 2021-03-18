@@ -45,8 +45,8 @@ class IBSData: ObservableObject {
 }
 
 extension IBSData {
-  static func currentDate() -> Date {
-    Calendar.current.date(byAdding: .hour, value: -5, to: Date()) ?? Date()
+  static func currentDate(for date: Date = Date()) -> Date {
+    Calendar.current.date(byAdding: .hour, value: -5, to: date) ?? date
   }
 
   func isAvailable(timestamp: Date) -> Bool {

@@ -25,7 +25,7 @@ struct SaveButtonSection: View {
             appState.tabSelection = .day
             presentation.wrappedValue.dismiss()
             guard let timestamp = record?.timestamp else { return }
-            appState.currentDate = timestamp
+            appState.currentDate = IBSData.currentDate(for: timestamp)
           }
         }
       }) {
