@@ -15,6 +15,7 @@ struct FoodFormView: View {
   @State private var name: String = ""
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
+  @State private var medicinal: Bool = false
   @State private var recentFoodSelection: IBSRecord?
   @State private var isEditingName: Bool = false
   @State private var nameIsCompleted: Bool = false
@@ -32,6 +33,7 @@ struct FoodFormView: View {
     self._name = State(initialValue: record.text ?? "")
     self._size = State(initialValue: record.size ?? .none)
     self._risk = State(initialValue: record.risk ?? .none)
+    self._medicinal = State(initialValue: record.medicinal ?? false)
     self._nameIsCompleted = State(initialValue: true)
   }
 
@@ -48,7 +50,7 @@ struct FoodFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size)
+    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size, medicinal: medicinal)
   }
 
   private var suggestedTags: [String] {
@@ -103,6 +105,7 @@ struct FoodFormView: View {
       Section {
         ScaleSlider($size, "Size", descriptions: FoodSizes.descriptions)
         ScaleSlider($risk, "Risk", descriptions: Scales.foodRiskDescriptions)
+        Toggle("Medicinal", isOn: $medicinal)
       }
 
       if name.isNotEmpty && viewModel.tags.isNotEmpty {

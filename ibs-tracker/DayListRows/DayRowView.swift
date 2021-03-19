@@ -13,6 +13,7 @@ struct DayRowView<Content>: View where Content: View {
   let color: Color?
   let tags: [String]
   let bristolType: BristolType?
+  let medicinal: Bool
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
@@ -22,6 +23,7 @@ struct DayRowView<Content>: View where Content: View {
     self.color = color
     self.tags = tags ?? []
     self.bristolType = record.bristolScale
+    self.medicinal = record.medicinal ?? false
   }
 
   var body: some View {
@@ -46,7 +48,7 @@ struct DayRowView<Content>: View where Content: View {
       if let bristolType = bristolType {
         BristolView(scale: bristolType)
       } else {
-        RowIconView(type: type, color: color)
+        RowIconView(type: type, color: color, medicinal: medicinal)
       }
     }
     .frame(width: 50, alignment: .center)

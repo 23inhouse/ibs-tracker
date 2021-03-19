@@ -57,6 +57,8 @@ struct ColorCodedContent {
   }
 
   static func foodTimeColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
+    let medicinal = record.medicinal ?? false
+    guard !medicinal else { return defaultColor }
     let timestamp = record.timestamp
     let calendar = Calendar.current
     let date = IBSData.currentDate(for: timestamp)
