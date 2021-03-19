@@ -464,7 +464,9 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     dryness = "3" if next_tags.include? "Very dry"
 
     next_tags << "Undigested leafy" if next_tags.include? "Undigested spinach"
-    next_tags << "Mr Whippy" if next_tags.include? "Mr whippy"
+    if i = next_tags.index("Mr whippy")
+      next_tags[i] = "Mr Whippy"
+    end
     next_tags = next_tags - FOOD_TAGS_TO_REMOVE
     lines << <<-END
       |       "type": "#{next_mode}",
