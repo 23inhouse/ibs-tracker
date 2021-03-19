@@ -619,6 +619,7 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     cleaned_tags = []
     next_tags.each do |next_tag|
       next_tag = "Gherkin" if next_tag == "Pickled cucumbers"
+      next_tag = "Spelled or wheat sourdough bread" if next_tag == "Spelled or wheat sourdough bread with a walking time of at least 4.5 hours"
       cleaned_tags << next_tag
     end
     next_tags = cleaned_tags
