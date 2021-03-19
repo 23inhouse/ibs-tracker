@@ -439,7 +439,9 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     food_records.reverse.each do |food_name, food_tags|
       if food_name.downcase.include? food_again
         # puts "[AGAIN]   Found: [#{food_name}]"
-        next_text = "#{food_name}"
+        next_text = food_name.strip
+        next_text = next_text.gsub(' (large)', '')
+        next_text = next_text.gsub(' (Huge bowl)', '')
         next_tags = food_tags
         food_records = []
         break
@@ -592,11 +594,18 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     END
   when :food
     size = "null"
-    size = "4" if next_text.downcase.include? "large"
-    size = "5" if next_text.downcase.include? "huge"
+    size = "3" if next_text.downcase.include? "large"
+    size = "4" if next_text.downcase.include? "huge"
     risk = "null"
     risk = "2" if next_text.downcase.include? "questionable"
-    risk = "4" if next_text.downcase.include? "risky"
+    risk = "3" if next_text.downcase.include? "risky"
+
+    next_text = next_text.strip
+    next_text = next_text.gsub(' (large)', '')
+    next_text = next_text.gsub(' (Huge bowl)', '')
+    next_text = next_text.gsub(' (questionable)', '')
+    next_text = next_text.gsub(' (risky)', '')
+    next_text = next_text.gsub(' (large amount of questionable ingredient)', '')
 
     medicinal = false
     if ["Turmeric tea", "Apple cider vinegar"].any? { |meds| next_text.include? meds }
