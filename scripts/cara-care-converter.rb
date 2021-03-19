@@ -598,6 +598,15 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
     risk = "2" if next_text.downcase.include? "questionable"
     risk = "4" if next_text.downcase.include? "risky"
 
+    medicinal = false
+    if ["Turmeric tea", "Apple cider vinegar"].any? { |meds| next_text.include? meds }
+      medicinal = true
+    end
+
+    if ["Milk"].include? next_text
+      medicinal = true
+    end
+
     cleaned_tags = []
     next_tags.each do |next_tag|
       next_tag = "Gherkin" if next_tag == "Pickled cucumbers"
@@ -611,6 +620,7 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
       |       "text": "#{next_text}",
       |       "size": #{size},
       |       "risk": #{risk},
+      |       "medicinal": #{medicinal},
       |       "tags": #{next_tags.uniq}
     END
     food_records << [next_text, next_tags]
