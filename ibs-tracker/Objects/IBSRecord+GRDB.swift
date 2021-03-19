@@ -33,6 +33,7 @@ extension IBSRecord {
     self.medicationType = medicationTypes.map { MedicationType(optionalValue: String($0))! }
     self.weight = record.weight
     self.condition = Scales(optionalValue: record.condition)
+    self.medicinal = record.medicinal
 
     self.tags = tags ?? []
   }

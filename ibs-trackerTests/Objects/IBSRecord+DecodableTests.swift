@@ -53,7 +53,7 @@ class IBSRecord_DecodableTests: XCTestCase {
     XCTAssertEqual(ibsRecords[8].bristolScale, .b6, "Bristol scale should equal b6")
 
     XCTAssertEqual(ibsRecords[9].type, .food, "Should be a food record")
-    XCTAssertEqual(ibsRecords[9].text, "Chips", "Text should equal Chips")
+    XCTAssertEqual(ibsRecords[9].text, "Turmeric tea", "Text should equal Chips")
 
     XCTAssertEqual(ibsRecords[10].type, .weight, "Should be a weight record")
     XCTAssertEqual(ibsRecords[10].weight, 60.8, "Weight should equal 60.8")
@@ -65,7 +65,7 @@ class IBSRecord_DecodableTests: XCTestCase {
     XCTAssertEqual(ibsRecords[12].condition, .moderate, "Condition should equal 2")
 
     let tagRecords = Array(Set(ibsRecords.flatMap { $0.tags }))
-    XCTAssertEqual(tagRecords.count, 11, "No tag records imported")
+    XCTAssertEqual(tagRecords.count, 12, "No tag records imported")
   }
 
   func testEncode() throws {

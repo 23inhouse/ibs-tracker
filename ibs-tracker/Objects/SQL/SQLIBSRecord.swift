@@ -35,6 +35,7 @@ struct SQLIBSRecord {
   var medicationType: String?
   var weight: Decimal?
   var condition: Int?
+  var medicinal: Bool?
 
   var createdAt: Date? = Date()
   var updatedAt: Date? = Date()
@@ -75,6 +76,7 @@ extension SQLIBSRecord: Codable {
     static let medicationType = Column(CodingKeys.medicationType)
     static let weight = Column(CodingKeys.weight)
     static let condition = Column(CodingKeys.condition)
+    static let medicinal = Column(CodingKeys.medicinal)
 
     static let createdAt = Column(CodingKeys.createdAt)
     static let updatedAt = Column(CodingKeys.updatedAt)
@@ -91,7 +93,7 @@ extension SQLIBSRecord: MutablePersistableRecord {}
 extension SQLIBSRecord: IDable {}
 
 extension SQLIBSRecord: Migratable {
-  static func migrate(_ db: Database) throws {
+  static func initialize(_ db: Database) throws {
     try db.create(table: "IBSRecords") { t in
       t.autoIncrementedPrimaryKey("ID")
 
@@ -127,6 +129,12 @@ extension SQLIBSRecord: Migratable {
     try db.create(index: "timestamp", on: "IBSRecords", columns: ["timestamp"], unique: false)
     try db.create(index: "timestamp-type", on: "IBSRecords", columns: ["timestamp", "type"])
   }
+
+  static func addMedicinalColumn(_ db: Database) throws {
+    try db.alter(table: "IBSRecords") { t in
+      t.add(column: "medicinal", .boolean)
+    }
+  }
 }
 
 extension SQLIBSRecord {
@@ -160,6 +168,7 @@ private extension SQLIBSRecord {
     medicationType = record.medicationType?.map { $0.rawValue }.joined(separator: "|")
     weight = record.weight
     condition = nonNegativeOrNil(record.condition?.rawValue)
+    medicinal = record.medicinal
   }
 
   func nonNegativeOrNil(_ value: Int?) -> Int? {

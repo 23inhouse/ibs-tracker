@@ -36,9 +36,13 @@ struct AppDB {
     }
 
     migrator.registerMigration("v1") { db in
-      try SQLIBSRecord.migrate(db)
-      try SQLTagRecord.migrate(db)
-      try SQLIBSTagRecord.migrate(db)
+      try SQLIBSRecord.initialize(db)
+      try SQLTagRecord.initialize(db)
+      try SQLIBSTagRecord.initialize(db)
+    }
+
+    migrator.registerMigration("v2") { db in
+      try SQLIBSRecord.addMedicinalColumn(db)
     }
 
     return migrator

@@ -42,7 +42,7 @@ extension SQLTagRecord: MutablePersistableRecord {}
 extension SQLTagRecord: IDable {}
 
 extension SQLTagRecord: Migratable {
-  static func migrate(_ db: Database) throws {
+  static func initialize(_ db: Database) throws {
     try db.create(table: "IBSTags") { t in
       t.autoIncrementedPrimaryKey("ID")
 

@@ -8,5 +8,5 @@
 import GRDB
 
 protocol Migratable: MutablePersistableRecord {
-  static func migrate(_ db: Database) throws
+  static func initialize(_ db: Database) throws
 }

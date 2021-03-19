@@ -61,10 +61,11 @@
     {
        "type": "food",
        "timestamp": "2020-10-30 18:55:00 +0000",
-       "text": "Chips",
+       "text": "Turmeric tea",
        "size": null,
        "risk": null,
-       "tags": ["Potato chips"]
+       "medicinal": true,
+       "tags": ["Turmeric"]
     },
     {
        "type": "weight",
