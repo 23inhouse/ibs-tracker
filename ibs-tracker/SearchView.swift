@@ -8,49 +8,70 @@
 import SwiftUI
 
 struct SearchView: View {
+  @Environment(\.colorScheme) var colorScheme
   @EnvironmentObject private var appState: IBSData
-  @State private var filter: ItemType? = nil
+  @State private var filters: [ItemType] = []
+  @State private var showFilters: Bool = false
+  @State private var search: String = ""
+
+  private var filterToggleImage: String {
+    showFilters ? "line.horizontal.3.circle.fill" : "line.horizontal.3.circle"
+  }
+
+  private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
+
+  private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
 
   var body: some View {
     NavigationView {
-      SearchList(filter: $filter)
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .food)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .medication)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .note)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .weight)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .mood)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .ache)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .gut)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          filterButton(for: .bm)
+      ZStack {
+        SearchList(filters: $filters, search: $search)
+        if showFilters {
+          List {
+            ForEach(ItemType.allCases, id: \.self) { itemType in
+              Toggle(isOn: Binding(
+                get: { filters.contains(itemType) },
+                set: { filters.toggle(on: $0, element: itemType)}
+              )) {
+                HStack {
+                  TypeShape(type: itemType)
+                    .stroke(style: strokeStyle)
+                    .foregroundColor(.secondary)
+                    .frame(25)
+                    .padding(5)
+                  Text(itemType.rawValue.capitalized)
+                }
+              }
+            }
+          }
         }
       }
-    }
-  }
-}
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          TextField("Search ...", text: $search)
+            .padding(5)
+            .padding(.leading, 20)
+            .frame(width: 300)
+            .backgroundColor(backgroundColor)
+            .cornerRadius(8)
+            .overlay(
+              HStack {
+                Image(systemName: "magnifyingglass")
+                  .foregroundColor(.secondary)
+                  .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                  .padding(.leading, 4)
 
-private extension SearchView {
-  func filterButton(for filter: ItemType) -> some View {
-    Button(action: {
-      self.filter = self.filter == filter ? nil : filter
-    }) {
-      ToolBarFilterIconView(for: filter, filteredBy: $filter)
+              })
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            showFilters.toggle()
+          } label: {
+            Image(systemName: filterToggleImage)
+          }
+        }
+      }
     }
   }
 }
@@ -64,14 +85,18 @@ struct SearchView_Previews: PreviewProvider {
 
 struct SearchList: View {
   @EnvironmentObject private var appState: IBSData
-  @Binding var filter: ItemType?
+  @Binding var filters: [ItemType]
+  @Binding var search: String
 
   var records: [DayRecord] {
-    guard let filter = filter else { return appState.dayRecords }
+    guard filters.isNotEmpty || search != "" else { return appState.dayRecords }
 
     let dayRecords: [DayRecord?] = appState.dayRecords.map {
       let ibsRecords = $0.ibsRecords.filter {
-        $0.type == filter
+        let content = ($0.text ?? "") + $0.tags.joined(separator: "")
+        return
+          (filters.isEmpty || filters.contains($0.type)) &&
+          (search == "" || content.contains(search))
       }
       if ibsRecords.isNotEmpty {
         return DayRecord(date: $0.date, ibsRecords: ibsRecords)

@@ -64,6 +64,7 @@
 		B5456BB225E9AC9A009432DD /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456BB125E9AC9A009432DD /* FormViewModel.swift */; };
 		B5456BC325E9B618009432DD /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5456BC225E9B618009432DD /* FormView.swift */; };
 		B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */; };
+		B54CFA9826061A5100492F9B /* Array+ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CFA9726061A5100492F9B /* Array+ItemType.swift */; };
 		B54EA78625B1C43A008C4B74 /* Bristol4Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */; };
 		B54EA79225B1DD5B008C4B74 /* Bristol3Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */; };
 		B54EA79A25B20F43008C4B74 /* Bristol5Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */; };
@@ -230,6 +231,7 @@
 		B5456BB125E9AC9A009432DD /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		B5456BC225E9B618009432DD /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ModifierIf.swift"; sourceTree = "<group>"; };
+		B54CFA9726061A5100492F9B /* Array+ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ItemType.swift"; sourceTree = "<group>"; };
 		B54EA78525B1C43A008C4B74 /* Bristol4Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol4Shape.swift; sourceTree = "<group>"; };
 		B54EA79125B1DD5B008C4B74 /* Bristol3Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol3Shape.swift; sourceTree = "<group>"; };
 		B54EA79925B20F43008C4B74 /* Bristol5Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bristol5Shape.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */,
+				B54CFA9726061A5100492F9B /* Array+ItemType.swift */,
 				B555747526009779005E92FB /* Binding+Dismiss.swift */,
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
@@ -924,6 +927,7 @@
 				B52E464F25D01DB400C009EC /* IBSRecord+BMRecord.swift in Sources */,
 				B55CAABA25F818B800EAD6DA /* AcheFormView.swift in Sources */,
 				B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */,
+				B54CFA9826061A5100492F9B /* Array+ItemType.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
