@@ -26,6 +26,8 @@ struct FormView<Content: View>: View {
   var body: some View {
     ScrollViewReader { scroller in
       Form {
+        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
+
         content(scroller)
 
         DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
