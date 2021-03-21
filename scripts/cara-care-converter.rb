@@ -189,6 +189,7 @@ CARA_CARE_DATA_ERRORS = {
   "2021-01-24 19:20:00 +0000" => [:food, :prev],
   "2021-02-05 22:20:00 +0000" => [:food, :prev],
   "2021-03-08 21:05:00 +0000" => [:food, :prev],
+  "2021-03-18 07:00:00 +0000" => [:weight, :prev],
 }
 
 def mode(tracking_id, tracking_type, tracking_text, tag_names)
