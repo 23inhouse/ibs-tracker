@@ -245,6 +245,8 @@ enum Scales: Int, CaseIterable {
   case severe = 3
   case extreme = 4
 
+  static let validCases = Scales.allCases.filter { $0 != .none }
+
   static let bloatingDescriptions: [Scales: String] = [
     .none: "",
     .zero: "no bloating at all",
@@ -333,6 +335,19 @@ enum Scales: Int, CaseIterable {
     .severe: "very wet",
     .extreme: "extremely wet",
   ]
+
+  func label() -> String {
+    let labels: [Scales: String] = [
+      .none: "none",
+      .zero: "none",
+      .mild: "mild",
+      .moderate: "moderate",
+      .severe: "severe",
+      .extreme: "extreme",
+    ]
+
+    return labels[self]!
+  }
 }
 
 extension Scales: Sliderable {

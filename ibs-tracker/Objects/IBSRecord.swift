@@ -78,3 +78,24 @@ extension IBSRecord {
     return value
   }
 }
+
+extension IBSRecord {
+  func graphScore(include included: [ItemType] = [.ache, .bm, .gut, .mood, .skin]) -> Int {
+    guard included.contains(type) else { return Scales.none.rawValue }
+
+    switch type {
+    case .ache:
+      return acheScore().rawValue
+    case .bm:
+      return bmScore().rawValue
+    case .gut:
+      return gutScore().rawValue
+    case .mood:
+      return moodScore().rawValue
+    case .skin:
+      return skinScore().rawValue
+    default:
+      return Scales.none.rawValue
+    }
+  }
+}

@@ -36,32 +36,18 @@ private extension ContentView {
           Text("Add")
         }
         .tag(Tabs.add)
-      ReportView()
+      ChartView()
         .tabItem {
           Image(systemName: "chart.bar.doc.horizontal")
-          Text("Report")
+          Text("Chart")
         }
-        .tag(Tabs.report)
+        .tag(Tabs.chart)
       SearchView()
         .tabItem {
           Image(systemName: "magnifyingglass")
           Text("Search")
         }
         .tag(Tabs.search)
-    }
-  }
-}
-
-struct ReportView: View {
-  var body: some View {
-    NavigationView {
-      Text("Report")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          ToolbarItem(placement: .principal) {
-            Text("Report")
-          }
-        }
     }
   }
 }

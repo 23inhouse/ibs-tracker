@@ -40,7 +40,12 @@
 		B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EF625D5E9420019D18F /* FoodFormView.swift */; };
 		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
 		B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207F0325D606310019D18F /* Date+Nearest.swift */; };
+		B520A98326078C230066ED68 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520A98226078C230066ED68 /* ChartView.swift */; };
 		B520A9C02608BFC40066ED68 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B520A9BF2608BFC40066ED68 /* Charts */; };
+		B520A9CB260A0D180066ED68 /* ColoredColumnChartStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520A9CA260A0D180066ED68 /* ColoredColumnChartStyle.swift */; };
+		B520A9D0260A0DBC0066ED68 /* Array+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520A9CF260A0DBC0066ED68 /* Array+Color.swift */; };
+		B520A9D8260A14410066ED68 /* Array+Chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520A9D7260A14410066ED68 /* Array+Chunked.swift */; };
+		B520A9E0260A28B80066ED68 /* Date+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520A9DF260A28B80066ED68 /* Date+Date.swift */; };
 		B524AC2725F5ACD000F1E83A /* Array+MedicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
@@ -213,6 +218,11 @@
 		B5207EF625D5E9420019D18F /* FoodFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodFormView.swift; sourceTree = "<group>"; };
 		B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDatePicker.swift; sourceTree = "<group>"; };
 		B5207F0325D606310019D18F /* Date+Nearest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Nearest.swift"; sourceTree = "<group>"; };
+		B520A98226078C230066ED68 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		B520A9CA260A0D180066ED68 /* ColoredColumnChartStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredColumnChartStyle.swift; sourceTree = "<group>"; };
+		B520A9CF260A0DBC0066ED68 /* Array+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Color.swift"; sourceTree = "<group>"; };
+		B520A9D7260A14410066ED68 /* Array+Chunked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunked.swift"; sourceTree = "<group>"; };
+		B520A9DF260A28B80066ED68 /* Date+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Date.swift"; sourceTree = "<group>"; };
 		B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+MedicationType.swift"; sourceTree = "<group>"; };
 		B52E461925CD97FB00C009EC /* IBSRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecord.swift; sourceTree = "<group>"; };
 		B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+AcheRecord.swift"; sourceTree = "<group>"; };
@@ -482,11 +492,14 @@
 		B592C7B825AF9E590040E0AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B520A9D7260A14410066ED68 /* Array+Chunked.swift */,
+				B520A9CF260A0DBC0066ED68 /* Array+Color.swift */,
 				B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */,
 				B54CFA9726061A5100492F9B /* Array+ItemType.swift */,
 				B555747526009779005E92FB /* Binding+Dismiss.swift */,
 				B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */,
 				B54DF30725FD29EF0028086D /* Data+Url.swift */,
+				B520A9DF260A28B80066ED68 /* Date+Date.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
 				B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */,
@@ -603,6 +616,7 @@
 				B54DF2FA25FD21070028086D /* PDFReportView.swift */,
 				B54EA7CA25B2587B008C4B74 /* BristolView.swift */,
 				B54EA7BD25B24BB3008C4B74 /* ActionGridView.swift */,
+				B520A98226078C230066ED68 /* ChartView.swift */,
 				B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */,
 				B5E9D95325F8F913007B9573 /* LazyView.swift */,
 				B5EE367D25BC872200DC9D74 /* Components */,
@@ -702,6 +716,7 @@
 			isa = PBXGroup;
 			children = (
 				B5ED343225E8DAEE0029B274 /* ActionNavigationLink.swift */,
+				B520A9CA260A0D180066ED68 /* ColoredColumnChartStyle.swift */,
 				B508993C25B36C0B00B1EA03 /* IBSItemView.swift */,
 				B5E9D52825B63CC200E52387 /* RowIconView.swift */,
 				B5E9D53625B64D5900E52387 /* PropertyView.swift */,
@@ -869,6 +884,7 @@
 				B52E466D25D01FF300C009EC /* IBSRecord+WeightRecord.swift in Sources */,
 				B54EA7A425B21873008C4B74 /* Bristol2Shape.swift in Sources */,
 				B5109E2826024080007CB498 /* SkinShape.swift in Sources */,
+				B520A9CB260A0D180066ED68 /* ColoredColumnChartStyle.swift in Sources */,
 				B5A1CA2925EEB5FD006C77CA /* Sliderable.swift in Sources */,
 				B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */,
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
@@ -880,6 +896,7 @@
 				B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */,
 				B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */,
 				B5E9D50B25B6343700E52387 /* DayRowView.swift in Sources */,
+				B520A9D0260A0DBC0066ED68 /* Array+Color.swift in Sources */,
 				B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */,
 				B54EA7B125B24275008C4B74 /* Bristol1Shape.swift in Sources */,
 				B524AC2725F5ACD000F1E83A /* Array+MedicationType.swift in Sources */,
@@ -937,6 +954,7 @@
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
 				B5109E1926023779007CB498 /* IBSRecord+SkinRecord.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
+				B520A98326078C230066ED68 /* ChartView.swift in Sources */,
 				B508997725B4ABF400B1EA03 /* AcheRow.swift in Sources */,
 				B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */,
 				B533AC1D25BAE9D7009B6290 /* MedicationRow.swift in Sources */,
@@ -953,6 +971,7 @@
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
+				B520A9D8260A14410066ED68 /* Array+Chunked.swift in Sources */,
 				B5421F3B25BCC78300E8B5AA /* ItemTypeDayRowView.swift in Sources */,
 				B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */,
 				B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */,
@@ -988,6 +1007,7 @@
 				B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */,
 				B5E5914C25E57D4C00AE3DD1 /* SwiftUITextField.swift in Sources */,
 				B5207E5C25D18D240019D18F /* Migratable.swift in Sources */,
+				B520A9E0260A28B80066ED68 /* Date+Date.swift in Sources */,
 				B554CE3825D02D4200E2EE17 /* AppDB.swift in Sources */,
 				B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */,
 			);

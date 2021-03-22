@@ -16,6 +16,7 @@ protocol BMRecord: IBSRecordType {
   var dryness: Scales? { get }
   var wetness: Scales? { get }
   init(bristolScale: BristolType?, timestamp: Date, tags: [String], color: BMColor?, pressure: Scales?, smell: BMSmell?, evacuation: BMEvacuation?, dryness: Scales?, wetness: Scales?)
+  func bmScore() -> Scales
   func bristolDescription() -> String
   func colorText() -> String
   func pressureText() -> String
@@ -37,6 +38,45 @@ extension IBSRecord: BMRecord {
     self.dryness = dryness
     self.wetness = wetness
     self.tags = tags
+  }
+
+  func bmScore() -> Scales {
+    let scales = [dryness ?? .none, wetness ?? .none, pressure ?? .none]
+    let worst: Scales = scales.max { a, b in a.rawValue > b.rawValue } ?? .none
+
+    guard let bristolScale = bristolScale else { return .none }
+
+    switch bristolScale {
+    case .b0, .b7:
+      return .extreme
+
+    case .b1, .b6:
+      if evacuation == .partial {
+        return .extreme
+      }
+      return .severe
+
+    case .b2, .b5:
+      if evacuation == .partial {
+        return .severe
+      }
+      if worst.rawValue > Scales.severe.rawValue {
+        return .severe
+      }
+
+      return .moderate
+    case .b3, .b4:
+      if evacuation == .partial {
+        return .moderate
+      }
+      if worst.rawValue > Scales.moderate.rawValue {
+        return .moderate
+      } else if worst.rawValue > Scales.mild.rawValue {
+        return .mild
+      }
+
+      return .zero
+    }
   }
 
   func bristolDescription() -> String {

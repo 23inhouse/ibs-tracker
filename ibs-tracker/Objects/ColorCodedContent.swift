@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct ColorCodedContent {
+  static let rankedColors: [Color] = [
+    .purple,
+    .red,
+    .orange,
+    .yellow,
+    .green
+  ]
+
   static func scaleColor(for scale: Scales?, default defaultColor: Color = .primary) -> Color {
     let colors: [Scales: Color] = [
       .zero: .green,
@@ -105,14 +113,6 @@ struct ColorCodedContent {
   }
 
   static func worstColor(_ color: Color?, _ other: Color?) -> Color {
-    let rankedColors: [Color] = [
-      .purple,
-      .red,
-      .orange,
-      .yellow,
-      .green
-    ]
-
     for rankedColor in rankedColors {
       if [color, other].contains(rankedColor) {
         return rankedColor

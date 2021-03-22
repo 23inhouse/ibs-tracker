@@ -11,15 +11,16 @@ enum Tabs {
   case day
   case search
   case add
-  case report
+  case chart
   case settings
 }
 
 class IBSData: ObservableObject {
-  @Published var tabSelection: Tabs = .day
+  @Published var tabSelection: Tabs = .chart
   @Published var dayRecords: [DayRecord]
   @Published var lastWeight: Decimal
   @Published var currentDate: Date
+  @Published var records: [IBSRecord]
 
   static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
   static var current = IBSData(.current)
@@ -28,6 +29,7 @@ class IBSData: ObservableObject {
     didSet {
       self.dayRecords = IBSData.groupByDay(allRecords)
       self.lastWeight = IBSData.lastWeight(allRecords)
+      self.records = allRecords.reversed()
     }
   }
 
@@ -42,6 +44,7 @@ class IBSData: ObservableObject {
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
     self.currentDate = IBSData.currentDate()
+    self.records = allRecords.reversed()
   }
 }
 
