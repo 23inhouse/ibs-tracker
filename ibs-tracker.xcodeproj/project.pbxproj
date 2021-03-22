@@ -40,6 +40,7 @@
 		B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EF625D5E9420019D18F /* FoodFormView.swift */; };
 		B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */; };
 		B5207F0425D606310019D18F /* Date+Nearest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207F0325D606310019D18F /* Date+Nearest.swift */; };
+		B520A9C02608BFC40066ED68 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B520A9BF2608BFC40066ED68 /* Charts */; };
 		B524AC2725F5ACD000F1E83A /* Array+MedicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524AC2625F5ACD000F1E83A /* Array+MedicationType.swift */; };
 		B52E461A25CD97FB00C009EC /* IBSRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E461925CD97FB00C009EC /* IBSRecord.swift */; };
 		B52E464725D01D4300C009EC /* IBSRecord+AcheRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E464625D01D4300C009EC /* IBSRecord+AcheRecord.swift */; };
@@ -344,6 +345,7 @@
 			files = (
 				B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */,
 				B555934A25C4AC20003F02BB /* GRDB in Frameworks */,
+				B520A9C02608BFC40066ED68 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +731,7 @@
 			packageProductDependencies = (
 				B592C80D25B0F6980040E0AC /* PureSwiftUI */,
 				B555934925C4AC20003F02BB /* GRDB */,
+				B520A9BF2608BFC40066ED68 /* Charts */,
 			);
 			productName = "ibs-tracker";
 			productReference = B5E3A8D225AE205B00DAC8DD /* ibs-tracker.app */;
@@ -804,6 +807,7 @@
 			packageReferences = (
 				B592C80C25B0F6980040E0AC /* XCRemoteSwiftPackageReference "pure-swift-ui" */,
 				B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				B520A9BE2608BFC40066ED68 /* XCRemoteSwiftPackageReference "swiftui-charts" */,
 			);
 			productRefGroup = B5E3A8D325AE205B00DAC8DD /* Products */;
 			projectDirPath = "";
@@ -1314,6 +1318,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B520A9BE2608BFC40066ED68 /* XCRemoteSwiftPackageReference "swiftui-charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:groue/GRDB.swift.git";
@@ -1333,6 +1345,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B520A9BF2608BFC40066ED68 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B520A9BE2608BFC40066ED68 /* XCRemoteSwiftPackageReference "swiftui-charts" */;
+			productName = Charts;
+		};
 		B555934925C4AC20003F02BB /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B555934825C4AC20003F02BB /* XCRemoteSwiftPackageReference "GRDB.swift" */;
