@@ -17,6 +17,7 @@ enum Tabs {
 
 class IBSData: ObservableObject {
   @Published var tabSelection: Tabs = .chart
+  @Published var activeChart: Charts = .symptoms
   @Published var dayRecords: [DayRecord]
   @Published var lastWeight: Decimal
   @Published var currentDate: Date

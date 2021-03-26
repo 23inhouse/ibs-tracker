@@ -32,18 +32,18 @@ struct ColoredColumnChartStyle<Column: View>: ChartStyle {
   }
 
   private func columnChart(in geometry: GeometryProxy, data: [ColoredColumnData]) -> some View {
-    let columnWidth = (geometry.size.width - (CGFloat(data.count - 1) * spacing)) / CGFloat(data.count)
+    let columnWidth = (geometry.width - (CGFloat(data.count - 1) * spacing)) / CGFloat(data.count)
 
     return ZStack(alignment: .bottomLeading) {
       ForEach(data) { element in
         self.column
           .foregroundColor(colors.intermediate(percentage: element.data * 100))
-          .alignmentGuide(.leading, computeValue: { _ in leadingAlignmentGuide(for: element.id, in: geometry.size.width, dataCount: data.count) })
-          .alignmentGuide(.bottom, computeValue: { _ in columnHeight(data: element.data, in: geometry.size.height) })
-          .frame(width: columnWidth, height: columnHeight(data: element.data, in: geometry.size.height))
+          .alignmentGuide(.leading, computeValue: { _ in leadingAlignmentGuide(for: element.id, in: geometry.width, dataCount: data.count) })
+          .alignmentGuide(.bottom, computeValue: { _ in columnHeight(data: element.data, in: geometry.height) })
+          .frame(width: columnWidth, height: columnHeight(data: element.data, in: geometry.height))
       }
     }
-    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .bottom)
+    .frame(width: geometry.width, height: geometry.height, alignment: .bottom)
   }
 
   private func columnHeight(data: CGFloat, in availableHeight: CGFloat) -> CGFloat {
