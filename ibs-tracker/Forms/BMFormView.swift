@@ -22,7 +22,6 @@ struct BMFormView: View {
 
   @State private var showAllTags: Bool = false
 
-
   init(for bmRecord: BMRecord? = nil) {
     guard let record = bmRecord else { return }
     self.editableRecord = bmRecord
@@ -73,6 +72,10 @@ struct BMFormView: View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         bristolTypePicker
+      }
+
+      if bristolScale != nil {
+        SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
       Section {

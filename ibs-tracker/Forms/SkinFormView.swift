@@ -59,13 +59,17 @@ struct SkinFormView: View {
         ScaleSlider($condition, "Condition", descriptions: Scales.skinConditionDescriptions)
         TextEditor(text: $text)
           .frame(height: 100)
+          .onTapGesture {
+            viewModel.scrollTo(1, scroller: scroller)
+          }
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      .id(1)
 
       if condition != .none {
         SaveButtonSection(name: "Skin condition", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
     }
   }
 }

@@ -58,11 +58,11 @@ struct GutFormView: View {
         ScaleSlider($bloating, "Bloating", descriptions: Scales.bloatingDescriptions)
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
-
       if bloating != .none || pain != .none {
         SaveButtonSection(name: "Gut", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+
     }
   }
 }

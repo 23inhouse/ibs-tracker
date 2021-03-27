@@ -82,11 +82,14 @@ struct MedicationFormView: View {
           recentMedicationSection
         }
       }
+      .id(1)
 
       Section {
         UIKitBridge.SwiftUITextField("Medication name. e.g. Metamucil", text: $name, onCommit: commitName)
           .onTapGesture {
             commitName()
+            let scrollId = recentMedications.isNotEmpty ? 1 : 2
+            viewModel.scrollTo(scrollId, scroller: scroller)
           }
         List {
           ForEach(availableMedicationTypes, id: \.self) { medicationType in
@@ -97,12 +100,13 @@ struct MedicationFormView: View {
           }
         }
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      .id(2)
 
       if name.isNotEmpty && medicationTypes.isNotEmpty {
         SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
     }
   }
 

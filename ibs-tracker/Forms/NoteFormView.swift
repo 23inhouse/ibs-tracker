@@ -56,13 +56,17 @@ struct NoteFormView: View {
       Section {
         TextEditor(text: $text)
           .frame(height: 200)
+          .onTapGesture {
+            viewModel.scrollTo(1, scroller: scroller)
+          }
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      .id(1)
 
       if text.isNotEmpty {
         SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
     }
   }
 }

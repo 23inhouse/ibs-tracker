@@ -36,6 +36,14 @@ class FormViewModel: ObservableObject {
     timestamp = Date().nearest(5, .minute)
   }
 
+  func scrollTo(_ id: Int, scroller: ScrollViewProxy) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
+      guard let self = self else { return }
+      guard self.tags.count < self.tagAutoScrollLimit else { return }
+      scroller.scrollTo(id, anchor: .top)
+    }
+  }
+
   func scrollToTags(scroller: ScrollViewProxy) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
       guard let self = self else { return }

@@ -57,12 +57,11 @@ struct MoodFormView: View {
         ScaleSlider($feel, "Mood", descriptions: MoodType.descriptions)
         ScaleSlider($stress, "Stress", descriptions: Scales.stressDescriptions)
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
-
       if stress != .none || feel != .none {
         SaveButtonSection(name: "Mood", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
     }
   }
 }
