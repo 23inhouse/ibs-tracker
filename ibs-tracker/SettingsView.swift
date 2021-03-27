@@ -11,7 +11,7 @@ struct SettingsView: View {
   @Environment(\.presentationMode) private var presentation
   @EnvironmentObject private var appState: IBSData
 
-  @State private var url = "https://gist.githubusercontent.com/23inhouse/d66aeb52ce44fdf61ab7f36f89509ec3/raw/545f344a9d9abd03391b9b33d8b62f5a7d3c3b7e/import.json"
+  @State private var url = "https://gist.githubusercontent.com/23inhouse/d66aeb52ce44fdf61ab7f36f89509ec3/raw/8272d7dafcbeaf8b427d8b8b7ad7e290c0ff9967/import.json"
   @State private var truncate = false
   @State private var includeFood = false
 
