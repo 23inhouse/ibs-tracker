@@ -13,6 +13,15 @@ extension AppDB {
     return try ibsRecordsWithTags()
   }
 
+  func resetRecords() {
+    do {
+      try truncateRecords()
+      try loadAllTags()
+    } catch {
+      print("Error - Can't Reset: \(error)")
+    }
+  }
+
   func importJSON(_ data: Data, truncate: Bool = false) {
     let jsonDecoder = JSONDecoder()
     do {
@@ -23,7 +32,7 @@ extension AppDB {
       try loadAllTags()
       try importRecords(dataSet.ibsRecords)
     } catch {
-      print("Error: \(error)")
+      print("Error - Can't Import: \(error)")
     }
   }
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @Environment(\.presentationMode) private var presentation
   @EnvironmentObject private var appState: IBSData
 
   @State private var url = "https://gist.githubusercontent.com/23inhouse/d66aeb52ce44fdf61ab7f36f89509ec3/raw/545f344a9d9abd03391b9b33d8b62f5a7d3c3b7e/import.json"
@@ -17,6 +18,7 @@ struct SettingsView: View {
   @State private var isImporting = false
   @State private var isExportingJSON = false
   @State private var isExportingPDF = false
+  @State private var isReseting = false
 
   @State private var isSharingJSON = false
   @State private var isSharingPDF = false
@@ -60,7 +62,7 @@ struct SettingsView: View {
 
   private var exportJSONButton: some View {
     ZStack {
-      lodingButton($isExportingJSON, text: "Export JSON", icon: "square.and.arrow.up") {
+      loadingButton($isExportingJSON, text: "Export JSON", icon: "square.and.arrow.up") {
         isExportingJSON = true
         DispatchQueue.main.async {
           if let jsonFileUrl = DataSet.jsonFileUrl() {
@@ -75,7 +77,7 @@ struct SettingsView: View {
 
   private var exportPDFButton: some View {
     ZStack {
-      lodingButton($isExportingPDF, text: "Export PDF", icon: "square.and.arrow.up") {
+      loadingButton($isExportingPDF, text: "Export PDF", icon: "square.and.arrow.up") {
         isExportingPDF = true
         DispatchQueue.main.async {
           let pdf = PDF(dayRecords: appState.dayRecords, includeFood: includeFood)
@@ -97,7 +99,21 @@ struct SettingsView: View {
     Group {
       TextField("JSON URL with the DataSet", text: $url)
       Toggle("Delete existing records", isOn: $truncate)
-      lodingButton($isImporting, text: "Import JSON from URL", icon: "square.and.arrow.down") {
+      loadingButton($isReseting, text: "Reset", icon: "square") {
+        isReseting = true
+      }
+      .alert(isPresented: $isReseting) {
+        deleteAlert {
+          DispatchQueue.main.async {
+            AppDB.current.resetRecords()
+            DispatchQueue.main.async {
+              appState.reloadRecordsFromSQL()
+            }
+            isReseting = false
+          }
+        }
+      }
+      loadingButton($isImporting, text: "Import JSON from URL", icon: "square.and.arrow.down") {
         isImporting = true
         url.fetchJSON() { data in
           AppDB.current.importJSON(data, truncate: truncate)
@@ -110,7 +126,16 @@ struct SettingsView: View {
     }
   }
 
-  private func lodingButton(_ loading: Binding<Bool>, text: String, icon: String, action: @escaping () -> Void) -> some View {
+  private func deleteAlert(action: @escaping () -> Void) -> Alert {
+    Alert(
+      title: Text("Are you sure?"),
+      message: Text("You will lose all you data!"),
+      primaryButton: .destructive(Text("Reset all"), action: action),
+      secondaryButton: .cancel()
+    )
+  }
+
+  private func loadingButton(_ loading: Binding<Bool>, text: String, icon: String, action: @escaping () -> Void) -> some View {
     Group {
       if loading.wrappedValue {
         ProgressView()
