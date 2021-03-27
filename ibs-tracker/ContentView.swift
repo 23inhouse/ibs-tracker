@@ -26,7 +26,7 @@ private extension ContentView {
         .tag(Tabs.settings)
       DayView()
         .tabItem {
-          Image(systemName: "equal.square")
+          Image(systemName: "slider.horizontal.below.rectangle")
           Text("Day")
         }
         .tag(Tabs.day)
@@ -38,7 +38,7 @@ private extension ContentView {
         .tag(Tabs.add)
       ReportView()
         .tabItem {
-          Image(systemName: "chart.bar")
+          Image(systemName: "chart.bar.doc.horizontal")
           Text("Report")
         }
         .tag(Tabs.report)

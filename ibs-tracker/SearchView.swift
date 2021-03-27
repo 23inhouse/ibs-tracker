@@ -68,7 +68,7 @@ struct SearchView: View {
           Button {
             showFilters.toggle()
           } label: {
-            Image(systemName: filterToggleImage)
+            Image(systemName: "slider.horizontal.3")
           }
         }
       }
