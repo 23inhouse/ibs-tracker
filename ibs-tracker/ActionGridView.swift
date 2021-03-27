@@ -24,7 +24,7 @@ struct ActionGridView: View {
         }
 
         PaddedHStack {
-          ActionNavigationLink(type: .mood, text: "Skin") { SkinFormView() }
+          ActionNavigationLink(type: .skin, text: "Skin") { SkinFormView() }
           ActionNavigationLink(type: .weight, text: "Weight") { WeightFormView() }
           ActionNavigationLink(type: .bm, text: "Poop") { BMFormView() }
         }
