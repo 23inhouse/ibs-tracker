@@ -21,6 +21,7 @@ struct SymptomsView: View {
   @State var lastGraphOffset: CGFloat = 0
   @State var graphHeight: CGFloat = 0
   @State var lastRecordInterval: Double = 0
+  @State var timestamps: [Date] = []
 
   private let options: [ItemType] = [.bm, .gut, .ache, .mood, .skin]
   private let strokeStyle = StrokeStyle(lineWidth: 1.0, lineJoin: .round)
@@ -51,42 +52,6 @@ struct SymptomsView: View {
     let firstDate = firstRecord!.timestamp
     let lastDate = lastRecord!.timestamp
     return lastDate.timeIntervalSince(firstDate)
-  }
-
-  private var timestamps: [Date] {
-    guard recordCount > 0 else { return [Date(), Date()] }
-
-    var firstScaledDate: Date
-    var scaledInterval: Double
-
-    let minuteInterval: Double = 60
-    let factor = Double(numberOfColumns - 1)
-
-    let expansion: Double
-    if recordInterval > factor * minuteInterval {
-      expansion = floor(recordInterval / factor)
-    } else if recordInterval > 1 * minuteInterval {
-      expansion = 1
-    } else {
-      expansion = 24 * 5 * minuteInterval
-    }
-
-    let firstDate = firstRecord!.timestamp
-    let expandedFirstDate = firstDate.addingTimeInterval(-expansion)
-    let lastDate = lastRecord!.timestamp
-    let expandedLastDate = lastDate.addingTimeInterval(1)
-    let expandedInterval = expandedLastDate.timeIntervalSince(expandedFirstDate)
-    let offsetDate = expandedFirstDate.addingTimeInterval(expandedInterval / 2)
-
-    scaledInterval = expandedInterval / Double(graphScale)
-    let scaledOffsetDate = offsetDate.addingTimeInterval(TimeInterval(graphOffset))
-
-    firstScaledDate = scaledOffsetDate.addingTimeInterval(-scaledInterval / 2)
-
-    let chunkedInterval = scaledInterval / TimeInterval(numberOfColumns)
-    return (0 ... numberOfColumns).map { i in
-      firstScaledDate.addingTimeInterval(chunkedInterval * Double(i))
-    }
   }
 
   private var records: [IBSRecord] {
@@ -179,6 +144,7 @@ struct SymptomsView: View {
       .onChanged { scale in
         guard let newScale = calcNew(scale: scale) else { return }
         graphScale = newScale
+        timestamps = calcTimestamps()
       }
       .onEnded { _ in lastGraphScale = graphScale }
   }
@@ -189,6 +155,7 @@ struct SymptomsView: View {
         let offset = gesture.translation.y
         guard let newGraphOffset = calcNew(offset: offset) else { return }
         graphOffset = newGraphOffset
+        timestamps = calcTimestamps()
       }
       .onEnded { _ in lastGraphOffset = graphOffset }
   }
@@ -229,6 +196,7 @@ struct SymptomsView: View {
     GeometryReader { geometry in
       GraphView(timestamps: $timestamps, data: data)
         .onAppear {
+          timestamps = calcTimestamps()
           graphSetting(height: geometry.height)
       }
     }
@@ -255,6 +223,42 @@ struct SymptomsView: View {
         .frame(width: verticalAxisWidth, height: verticalAxisHeight)
     }
     .frame(width: verticalAxisWidth)
+  }
+
+  private func calcTimestamps() -> [Date] {
+    guard recordCount > 0 else { return [Date(), Date()] }
+
+    var firstScaledDate: Date
+    var scaledInterval: Double
+
+    let minuteInterval: Double = 60
+    let factor = Double(numberOfColumns - 1)
+
+    let expansion: Double
+    if recordInterval > factor * minuteInterval {
+      expansion = floor(recordInterval / factor)
+    } else if recordInterval > 1 * minuteInterval {
+      expansion = 1
+    } else {
+      expansion = 24 * 5 * minuteInterval
+    }
+
+    let firstDate = firstRecord!.timestamp
+    let expandedFirstDate = firstDate.addingTimeInterval(-expansion)
+    let lastDate = lastRecord!.timestamp
+    let expandedLastDate = lastDate.addingTimeInterval(1)
+    let expandedInterval = expandedLastDate.timeIntervalSince(expandedFirstDate)
+    let offsetDate = expandedFirstDate.addingTimeInterval(expandedInterval / 2)
+
+    scaledInterval = expandedInterval / Double(graphScale)
+    let scaledOffsetDate = offsetDate.addingTimeInterval(TimeInterval(graphOffset))
+
+    firstScaledDate = scaledOffsetDate.addingTimeInterval(-scaledInterval / 2)
+
+    let chunkedInterval = scaledInterval / TimeInterval(numberOfColumns)
+    return (0 ... numberOfColumns).map { i in
+      firstScaledDate.addingTimeInterval(chunkedInterval * Double(i))
+    }
   }
 
   private func isDifferentDate(for index: Int) -> Bool {
@@ -329,6 +333,8 @@ struct SymptomsView: View {
       lastGraphOffset = 0
       lastRecordInterval = recordInterval
     }
+
+    timestamps = calcTimestamps()
 
     guard let height = height else { return }
     graphHeight = height
