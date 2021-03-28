@@ -23,7 +23,6 @@ struct AppIconView: View {
   private var moodStrokeStyle: StrokeStyle { StrokeStyle(lineWidth: moodLineWidth, lineJoin: .round) }
   private var gutStrokeStyle: StrokeStyle { StrokeStyle(lineWidth: gutLineWidth, lineJoin: .round) }
 
-  private var foregroundColor: Color { colorScheme == .dark ? .secondary : .primary }
   var body: some View {
     ZStack {
       MoodShape(isLighting: false)
@@ -39,7 +38,6 @@ struct AppIconView: View {
         .frame(gutSize)
         .offset(x: xOffset, y: -yOffset)
     }
-    .foregroundColor(foregroundColor)
   }
 }
 

@@ -12,6 +12,9 @@ struct ActionGridView: View {
     NavigationView {
       VStack(alignment: .center) {
         Spacer()
+        AppIconView()
+          .foregroundColor(.secondary)
+        Spacer()
         PaddedHStack {
           ActionNavigationLink(type: .note, text: "Notes") { NoteFormView() }
           ActionNavigationLink(type: .medication, text: "medicaiton") { MedicationFormView() }
