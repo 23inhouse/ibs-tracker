@@ -89,6 +89,8 @@ struct SearchList: View {
   @Binding var search: String
 
   var records: [DayRecord] {
+    guard appState.tabSelection == .search else { return [] }
+
     guard filters.isNotEmpty || search != "" else { return appState.dayRecords }
 
     let dayRecords: [DayRecord?] = appState.dayRecords.map {
