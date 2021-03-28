@@ -11,16 +11,17 @@ struct ActionGridView: View {
   var body: some View {
     NavigationView {
       VStack(alignment: .center) {
+        Spacer()
         PaddedHStack {
-          ActionNavigationLink(type: .food, text: "Food") { FoodFormView() }
-          ActionNavigationLink(type: .medication, text: "medicaiton") { MedicationFormView() }
           ActionNavigationLink(type: .note, text: "Notes") { NoteFormView() }
+          ActionNavigationLink(type: .medication, text: "medicaiton") { MedicationFormView() }
+          ActionNavigationLink(type: .food, text: "Food") { FoodFormView() }
         }
 
         PaddedHStack {
-          ActionNavigationLink(type: .gut, text: "Bloating\nPain") { GutFormView() }
-          ActionNavigationLink(type: .ache, text: "Headache\nBody ache") { AcheFormView() }
           ActionNavigationLink(type: .mood, text: "Mood\nStress") { MoodFormView() }
+          ActionNavigationLink(type: .ache, text: "Headache\nBody ache") { AcheFormView() }
+          ActionNavigationLink(type: .gut, text: "Bloating\nPain") { GutFormView() }
         }
 
         PaddedHStack {
@@ -29,6 +30,7 @@ struct ActionGridView: View {
           ActionNavigationLink(type: .bm, text: "Poop") { BMFormView() }
         }
       }
+      .padding(.bottom, 20)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
