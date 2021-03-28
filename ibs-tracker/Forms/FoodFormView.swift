@@ -54,7 +54,7 @@ struct FoodFormView: View {
   }
 
   private var suggestedTags: [String] {
-    guard !isEditingName else { return [] }
+    guard showAllTags || !isEditingName else { return [] }
     return
       appState.tags(for: .food)
       .sorted()
@@ -63,6 +63,7 @@ struct FoodFormView: View {
         return
           !viewModel.tags.contains($0) &&
           (
+            showAllTags ||
             availableTag.contains(viewModel.newTag.lowercased()) ||
             (
               nameIsCompleted &&

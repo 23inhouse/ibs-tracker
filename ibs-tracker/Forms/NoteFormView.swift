@@ -13,6 +13,7 @@ struct NoteFormView: View {
 
   @StateObject private var viewModel = FormViewModel()
   @State private var text: String = ""
+  @State private var isFirstResponder = false
 
   @State private var showAllTags: Bool = false
 
@@ -54,9 +55,10 @@ struct NoteFormView: View {
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
-        TextEditor(text: $text)
-          .frame(height: 200)
+        UIKitBridge.SwiftUITextView("Notes...", text: $text, isFirstResponder: isFirstResponder)
+          .frame(height: 150)
           .onTapGesture {
+            isFirstResponder = true
             viewModel.scrollTo(1, scroller: scroller)
           }
       }
