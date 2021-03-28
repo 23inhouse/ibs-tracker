@@ -121,6 +121,7 @@
 		B5B9E25A25ED04F400A5027C /* records-day-one-only.json in Resources */ = {isa = PBXBuildFile; fileRef = B5B9E25825ED04F400A5027C /* records-day-one-only.json */; };
 		B5BCF28525EE421A00F88D01 /* String+CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */; };
 		B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */; };
+		B5D476EE2610A57100AB466E /* SwiftUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D476ED2610A57100AB466E /* SwiftUITextView.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
 		B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675725E9955A004E0895 /* SuggestedTagList.swift */; };
@@ -152,7 +153,7 @@
 		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
 		B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30725FB4FAD00D92621 /* Utilities.swift */; };
 		B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30C25FB6CC700D92621 /* AppIconView.swift */; };
-		B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */; };
+		B5FCC32025FB90C200D92621 /* SwiftUITextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC31F25FB90C200D92621 /* SwiftUITextFieldView.swift */; };
 		B5FCC32525FB914400D92621 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */; };
 		B5FCC33025FBB44400D92621 /* UITextView+CurrentHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */; };
 		B5FCC33825FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */; };
@@ -290,6 +291,7 @@
 		B5B9E25825ED04F400A5027C /* records-day-one-only.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-day-one-only.json"; sourceTree = "<group>"; };
 		B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirstLetter.swift"; sourceTree = "<group>"; };
 		B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldSection.swift; sourceTree = "<group>"; };
+		B5D476ED2610A57100AB466E /* SwiftUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextView.swift; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
 		B5D9675725E9955A004E0895 /* SuggestedTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTagList.swift; sourceTree = "<group>"; };
@@ -327,7 +329,7 @@
 		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
 		B5FCC30725FB4FAD00D92621 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B5FCC30C25FB6CC700D92621 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
-		B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextView.swift; sourceTree = "<group>"; };
+		B5FCC31F25FB90C200D92621 /* SwiftUITextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextFieldView.swift; sourceTree = "<group>"; };
 		B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 		B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+CurrentHeight.swift"; sourceTree = "<group>"; };
 		B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+NSTextStorageDelegate.swift"; sourceTree = "<group>"; };
@@ -519,7 +521,8 @@
 				B5207EFB25D605FF0019D18F /* SwiftUIDatePicker.swift */,
 				B54DF2F525FD1F330028086D /* SwiftUIPDFView.swift */,
 				B5E5914B25E57D4C00AE3DD1 /* SwiftUITextField.swift */,
-				B5FCC31F25FB90C200D92621 /* SwiftUITextView.swift */,
+				B5FCC31F25FB90C200D92621 /* SwiftUITextFieldView.swift */,
+				B5D476ED2610A57100AB466E /* SwiftUITextView.swift */,
 			);
 			path = UIKitBridge;
 			sourceTree = "<group>";
@@ -926,7 +929,7 @@
 				B555747626009779005E92FB /* Binding+Dismiss.swift in Sources */,
 				B5421F4525BD822C00E8B5AA /* IBSData.swift in Sources */,
 				B5207EFC25D606000019D18F /* SwiftUIDatePicker.swift in Sources */,
-				B5FCC32025FB90C200D92621 /* SwiftUITextView.swift in Sources */,
+				B5FCC32025FB90C200D92621 /* SwiftUITextFieldView.swift in Sources */,
 				B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */,
 				B5109E1926023779007CB498 /* IBSRecord+SkinRecord.swift in Sources */,
 				B5421F4D25BD84E900E8B5AA /* DayRecord.swift in Sources */,
@@ -934,6 +937,7 @@
 				B5207E9625D3E7AE0019D18F /* AppDB+Idable.swift in Sources */,
 				B533AC1D25BAE9D7009B6290 /* MedicationRow.swift in Sources */,
 				B5207E7525D19DA50019D18F /* Importable.swift in Sources */,
+				B5D476EE2610A57100AB466E /* SwiftUITextView.swift in Sources */,
 				B5207EF725D5E9420019D18F /* FoodFormView.swift in Sources */,
 				B54B7B4325E25EC000C388ED /* View+ModifierIf.swift in Sources */,
 				B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */,

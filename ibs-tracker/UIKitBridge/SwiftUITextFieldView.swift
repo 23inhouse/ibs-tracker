@@ -1,14 +1,15 @@
 //
-//  SwiftUITextView.swift
+//  SwiftUITextFieldView.swift
 //  ibs-tracker
 //
-//  Created by Benjamin Lewis on 28/3/21.
+//  Created by Benjamin Lewis on 12/3/21.
 //
 
 import SwiftUI
 
 extension UIKitBridge {
-  struct SwiftUITextView: UIViewRepresentable {
+  struct SwiftUITextFieldView: View {
+    @State var height: CGFloat = 0
     @Binding var text: String
 
     private let isFirstResponder: Bool
@@ -25,11 +26,36 @@ extension UIKitBridge {
       self.onCommit = onCommit
     }
 
+    var body: some View {
+      SwiftUITextFieldViewInner(title, text: $text, height: $height, isFirstResponder: isFirstResponder, onEditingChanged: onEditingChanged, onCommit: onCommit)
+        .frame(height: height)
+    }
+  }
+
+  private struct SwiftUITextFieldViewInner: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var height: CGFloat
+
+    private let isFirstResponder: Bool
+    private let onEditingChanged: ((_ focused: Bool) -> Void)
+    private let onCommit: (() -> Void)
+
+    private var title: String
+
+    init(_ title: String, text: Binding<String>, height: Binding<CGFloat>, isFirstResponder: Bool = false, onEditingChanged: @escaping (Bool) -> Void = { _ in }, onCommit: @escaping () -> Void = {}) {
+      self.title = title
+      self._text = text
+      self._height = height
+      self.isFirstResponder = isFirstResponder
+      self.onEditingChanged = onEditingChanged
+      self.onCommit = onCommit
+    }
+
     func makeCoordinator() -> Coordinator {
       Coordinator(self)
     }
 
-    func makeUIView(context: UIViewRepresentableContext<SwiftUITextView>) -> UITextView {
+    func makeUIView(context: UIViewRepresentableContext<SwiftUITextFieldViewInner>) -> UITextView {
       let textView = UITextView()
       textView.font = UIFont.preferredFont(forTextStyle: .body)
       textView.backgroundColor = .clear
@@ -37,18 +63,15 @@ extension UIKitBridge {
       textView.textContainerInset = .zero
       textView.textContainer.lineFragmentPadding = 0
       textView.returnKeyType = .done
-      textView.text = title
+      textView.text = text
       textView.placeholder = title
-
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-        textView.text = text
-      }
       return textView
     }
 
-    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<SwiftUITextView>) {
+    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<SwiftUITextFieldViewInner>) {
       uiView.placeholder = title
       uiView.text = text
+      height = uiView.currentHeight()
 
       guard isFirstResponder else { return }
 
@@ -60,9 +83,9 @@ extension UIKitBridge {
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
-      var parent: SwiftUITextView
+      var parent: SwiftUITextFieldViewInner
 
-      init(_ autoFocusTextView: SwiftUITextView) {
+      init(_ autoFocusTextView: SwiftUITextFieldViewInner) {
         self.parent = autoFocusTextView
       }
 
@@ -77,6 +100,7 @@ extension UIKitBridge {
 
       func textViewDidChangeSelection(_ textView: UITextView) {
         parent.text = textView.text ?? ""
+        parent.height = textView.currentHeight()
       }
 
       func textViewDidEndEditing(_ textView: UITextView) {
