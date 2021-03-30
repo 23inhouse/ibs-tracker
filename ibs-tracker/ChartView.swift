@@ -18,6 +18,14 @@ enum Charts: String, CaseIterable {
 struct ChartView: View {
   @EnvironmentObject var appState: IBSData
 
+  @State private var sympotomsInclude: [ItemType] = [.bm, .gut, .ache, .mood, .skin]
+  @State private var sympotomsIncludeBMPerDay = true
+  @State private var graphScale: CGFloat = 1
+  @State private var lastGraphScale: CGFloat = 1
+  @State private var graphOffset: CGFloat = 0
+  @State private var lastGraphOffset: CGFloat = 0
+  @State private var lastRecordInterval: Double = 0
+
   private var activeChart: Charts {
     appState.activeChart
   }
@@ -28,7 +36,7 @@ struct ChartView: View {
         Group {
           switch appState.activeChart {
           case .symptoms:
-            SymptomsView()
+            SymptomsView(include: $sympotomsInclude, graphScale: $graphScale, lastGraphScale: $lastGraphScale, graphOffset: $graphOffset, lastGraphOffset: $lastGraphOffset, lastRecordInterval: $lastRecordInterval, includeBMPerDay: $sympotomsIncludeBMPerDay)
           default:
             Text("\(activeChart.rawValue.capitalized)")
           }

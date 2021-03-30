@@ -15,16 +15,17 @@ struct GraphScore {
 struct SymptomsView: View {
   @EnvironmentObject private var appState: IBSData
 
-  @State private var include: [ItemType] = [.bm, .gut, .ache, .mood, .skin]
-  @State private var graphScale: CGFloat = 1
-  @State private var lastGraphScale: CGFloat = 1
-  @State private var graphOffset: CGFloat = 0
-  @State private var lastGraphOffset: CGFloat = 0
-  @State private var graphHeight: CGFloat = 0
-  @State private var lastRecordInterval: Double = 0
   @State private var timestamps: [Date] = []
   @State private var filteredScores: [GraphScore] = []
-  @State private var includeBMPerDay = true
+  @State private var graphHeight: CGFloat = 0
+
+  @Binding var include: [ItemType]
+  @Binding var graphScale: CGFloat
+  @Binding var lastGraphScale: CGFloat
+  @Binding var graphOffset: CGFloat
+  @Binding var lastGraphOffset: CGFloat
+  @Binding var lastRecordInterval: Double
+  @Binding var includeBMPerDay: Bool
 
   private let numberOfColumns = 24
   private let barsPerColumn = 4
@@ -117,7 +118,6 @@ struct SymptomsView: View {
     GeometryReader { geometry in
       SymptomsGraphView(timestamps: $timestamps, filteredScores: $filteredScores, barsPerColumn: barsPerColumn, numberOfColumns: numberOfColumns)
         .onAppear {
-          timestamps = calcTimestamps()
           graphSetting(height: geometry.height)
         }
     }
@@ -300,7 +300,7 @@ private extension SymptomsView {
 
 struct SymptomsView_Previews: PreviewProvider {
   static var previews: some View {
-    SymptomsView()
+    SymptomsView(include: Binding.constant([.bm]), graphScale: Binding.constant(1), lastGraphScale: Binding.constant(1), graphOffset: Binding.constant(0), lastGraphOffset: Binding.constant(0), lastRecordInterval: Binding.constant(0), includeBMPerDay: Binding.constant(true))
       .environmentObject(IBSData())
   }
 }
