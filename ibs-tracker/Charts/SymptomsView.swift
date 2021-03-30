@@ -24,6 +24,7 @@ struct SymptomsView: View {
   @State private var lastRecordInterval: Double = 0
   @State private var timestamps: [Date] = []
   @State private var filteredScores: [GraphScore] = []
+  @State private var includeBMPerDay = true
 
   private let numberOfColumns = 24
   private let barsPerColumn = 4
@@ -101,10 +102,13 @@ struct SymptomsView: View {
   }
 
   private var controls: some View {
-    SymptomsControlsView(include: $include, resetAction: {
+    SymptomsControlsView(include: $include, includeBMPerDay: $includeBMPerDay, resetAction: {
       graphSetting(reset: true)
     })
     .onChange(of: include) { _ in
+      filteredScores = filterScores()
+    }
+    .onChange(of: includeBMPerDay) { _ in
       filteredScores = filterScores()
     }
   }
@@ -115,7 +119,7 @@ struct SymptomsView: View {
         .onAppear {
           timestamps = calcTimestamps()
           graphSetting(height: geometry.height)
-      }
+        }
     }
   }
 
@@ -148,12 +152,63 @@ struct SymptomsView: View {
 
 private extension SymptomsView {
   func filterScores() -> [GraphScore] {
-    return appState.records.compactMap { record in
-      var score = Double(record.graphScore(include: include))
-      if score > 4 { score = 4 }
+    let (constipationRecords, bmsPerDay) = constipationDays()
+    let recordsWithConstipationDays: [IBSRecord] = appState.records + constipationRecords
+    return recordsWithConstipationDays.compactMap { record in
+      let timestamp = record.timestamp
 
-      return score >= 0 ? GraphScore(timestamp: record.timestamp, value: score) : nil
+      var score = Double(record.graphScore(include: include))
+      if record.type == .bm {
+        score = adjustBM(score: score, bmsPerDay: bmsPerDay[timestamp.date()])
+      }
+
+      return score >= 0 ? GraphScore(timestamp: timestamp, value: score) : nil
     }
+    .sorted { $0.timestamp < $1.timestamp }
+  }
+
+  func constipationDays() -> ([IBSRecord], [Date: Int]) {
+    var constipationRecords: [IBSRecord] = []
+    var bmsPerDay: [Date: Int] = [Date: Int]()
+
+    guard includeBMPerDay else { return (constipationRecords, bmsPerDay) }
+
+    for day in appState.dayRecords {
+      let date = day.date.date()
+      let hourOfDay = IBSData.numberOfHoursInMorningIncludedInPreviousDay + 1
+      let interval = Double(hourOfDay * 60 * 60)
+      let timestamp = date.addingTimeInterval(interval)
+      let count = day.ibsRecords.filter { $0.type == .bm && $0.bristolScale!.rawValue > 0 }.count
+      bmsPerDay[date] = count
+
+      if count < 1 {
+        constipationRecords.append(IBSRecord(bristolScale: .b0, timestamp: timestamp))
+      }
+    }
+
+    return (constipationRecords, bmsPerDay)
+  }
+
+  func adjustBM(score initial: Double, bmsPerDay: Int?) -> Double {
+    var score = initial
+    if let bmPerDay = bmsPerDay {
+      if bmPerDay > 6 {
+        score += 4
+      } else if bmPerDay > 5 {
+        score += 3.5
+      } else if bmPerDay > 4 {
+        score += 3
+      } else if bmPerDay > 3 {
+        score += 2
+      } else if bmPerDay > 2 {
+        score += 1
+      } else if bmPerDay > 1 {
+        score += 0.5
+      }
+      if score > 4 { score = 4 }
+    }
+
+    return score
   }
 
   func graphSetting(reset: Bool = false, height: CGFloat? = nil) {
