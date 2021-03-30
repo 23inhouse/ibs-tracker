@@ -23,8 +23,6 @@ struct SymptomsControlsView: View {
       ForEach(options, id: \.self) { itemType in
         TypeShape(type: itemType)
           .stroke(style: strokeStyle)
-          .scaledToFit()
-          .rotate(.degrees(90))
           .frame(25)
           .foregroundColor(include.contains(itemType) ? .blue : .secondary)
           .backgroundColor(backgroundColor)

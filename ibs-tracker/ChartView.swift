@@ -57,9 +57,7 @@ struct ChartView: View {
 
   private func chartIcon(for chart: Charts, active: Bool) -> some View {
     let rotations: [Charts: Double] = [
-      .prediction: 90,
       .symptoms: -90,
-      .overview: 90,
     ]
 
     let rotation = rotations[chart] ?? 0
