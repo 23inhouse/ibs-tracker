@@ -99,11 +99,14 @@
 		B55CAABA25F818B800EAD6DA /* AcheFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAB925F818B800EAD6DA /* AcheFormView.swift */; };
 		B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CAAC725F82A0600EAD6DA /* TagToggle.swift */; };
 		B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */; };
+		B562B82F26127AE000033F97 /* SymptomsVerticalAxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B562B82E26127AE000033F97 /* SymptomsVerticalAxisView.swift */; };
+		B562B83426127B2400033F97 /* SymptomsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B562B83326127B2400033F97 /* SymptomsGraphView.swift */; };
 		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
 		B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */ = {isa = PBXBuildFile; fileRef = B57B8B0D25DD21940030D758 /* records-recent-food.json */; };
 		B57C88E325E40F4D0060FE13 /* AppDB+RecordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */; };
 		B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */; };
 		B57DB80425EBFDA400CC4A0A /* bm-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B57DB80325EBFDA400CC4A0A /* bm-tags.txt */; };
+		B584BBD32612804300FADD1B /* SymptomsControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BBD22612804300FADD1B /* SymptomsControlsView.swift */; };
 		B592C7CE25AF9EAC0040E0AC /* Bundle+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */; };
 		B592C80E25B0F6980040E0AC /* PureSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B592C80D25B0F6980040E0AC /* PureSwiftUI */; };
 		B596882B25F922A400288744 /* weight-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B596882325F922A400288744 /* weight-tags.txt */; };
@@ -277,11 +280,14 @@
 		B55CAAB925F818B800EAD6DA /* AcheFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcheFormView.swift; sourceTree = "<group>"; };
 		B55CAAC725F82A0600EAD6DA /* TagToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagToggle.swift; sourceTree = "<group>"; };
 		B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDBTests.swift"; sourceTree = "<group>"; };
+		B562B82E26127AE000033F97 /* SymptomsVerticalAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsVerticalAxisView.swift; sourceTree = "<group>"; };
+		B562B83326127B2400033F97 /* SymptomsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsGraphView.swift; sourceTree = "<group>"; };
 		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
 		B57B8B0D25DD21940030D758 /* records-recent-food.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "records-recent-food.json"; sourceTree = "<group>"; };
 		B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+RecordsTests.swift"; sourceTree = "<group>"; };
 		B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+OptionalValue.swift"; sourceTree = "<group>"; };
 		B57DB80325EBFDA400CC4A0A /* bm-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bm-tags.txt"; sourceTree = "<group>"; };
+		B584BBD22612804300FADD1B /* SymptomsControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsControlsView.swift; sourceTree = "<group>"; };
 		B592C7CD25AF9EAC0040E0AC /* Bundle+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Decode.swift"; sourceTree = "<group>"; };
 		B596882325F922A400288744 /* weight-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "weight-tags.txt"; sourceTree = "<group>"; };
 		B596882425F922A400288744 /* gut-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gut-tags.txt"; sourceTree = "<group>"; };
@@ -450,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				B520A9F0260E57610066ED68 /* SymptomsView.swift */,
+				B584BBE8261288BC00FADD1B /* Symptomns */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -499,6 +506,16 @@
 				B554CE3725D02D4200E2EE17 /* SQLTagRecord.swift */,
 			);
 			path = SQL;
+			sourceTree = "<group>";
+		};
+		B584BBE8261288BC00FADD1B /* Symptomns */ = {
+			isa = PBXGroup;
+			children = (
+				B584BBD22612804300FADD1B /* SymptomsControlsView.swift */,
+				B562B83326127B2400033F97 /* SymptomsGraphView.swift */,
+				B562B82E26127AE000033F97 /* SymptomsVerticalAxisView.swift */,
+			);
+			path = Symptomns;
 			sourceTree = "<group>";
 		};
 		B592C7B825AF9E590040E0AC /* Extensions */ = {
@@ -958,6 +975,7 @@
 				B5E9D51F25B6355700E52387 /* TimestampView.swift in Sources */,
 				B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */,
 				B51F5EBD25EFC282005583AB /* MedicationFormView.swift in Sources */,
+				B562B83426127B2400033F97 /* SymptomsGraphView.swift in Sources */,
 				B554CE3925D02D4200E2EE17 /* SQLIBSRecord.swift in Sources */,
 				B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */,
 				B5E9D54F25B71D2500E52387 /* NoteShape.swift in Sources */,
@@ -984,12 +1002,14 @@
 				B55CAABA25F818B800EAD6DA /* AcheFormView.swift in Sources */,
 				B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */,
 				B54CFA9826061A5100492F9B /* Array+ItemType.swift in Sources */,
+				B584BBD32612804300FADD1B /* SymptomsControlsView.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
 				B520A9D8260A14410066ED68 /* Array+Chunked.swift in Sources */,
 				B5421F3B25BCC78300E8B5AA /* ItemTypeDayRowView.swift in Sources */,
 				B55CAAC825F82A0600EAD6DA /* TagToggle.swift in Sources */,
+				B562B82F26127AE000033F97 /* SymptomsVerticalAxisView.swift in Sources */,
 				B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */,
 				B5421F5225BD8D9400E8B5AA /* Date+String.swift in Sources */,
 				B5109E2326023DCF007CB498 /* SkinFormView.swift in Sources */,
