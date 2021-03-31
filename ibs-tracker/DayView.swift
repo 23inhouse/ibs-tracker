@@ -30,10 +30,13 @@ struct DayView: View {
 
   var body: some View {
     NavigationView {
-      List {
-        ForEach(records, id: \.self) { record in
-          ItemTypeDayRowView(record: record)
-            .listRowInsets(EdgeInsets())
+      ScrollView {
+        LazyVStack(spacing: 0) {
+          ForEach(records, id: \.self) { record in
+            ItemTypeDayRowView(record: record)
+            Divider()
+              .padding(.horizontal, 10)
+          }
         }
       }
       .navigationBarTitleDisplayMode(.inline)
@@ -62,8 +65,8 @@ struct DayView: View {
           }
         }
       }
-      .gesture(swipeGesture)
     }
+    .gesture(swipeGesture)
   }
 
   var swipeGesture: _EndedGesture<DragGesture> {

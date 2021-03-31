@@ -10,22 +10,37 @@ import SwiftUI
 struct SearchView: View {
   @Environment(\.colorScheme) var colorScheme
   @EnvironmentObject private var appState: IBSData
+
   @State private var filters: [ItemType] = []
   @State private var showFilters: Bool = false
   @State private var search: String = ""
-
-  private var filterToggleImage: String {
-    showFilters ? "line.horizontal.3.circle.fill" : "line.horizontal.3.circle"
-  }
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
   private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
 
+  private var records: [DayRecord] {
+    guard filters.isNotEmpty || search != "" else { return appState.dayRecords }
+
+    let dayRecords: [DayRecord?] = appState.dayRecords.map {
+      let ibsRecords = $0.ibsRecords.filter {
+        let content = ($0.text ?? "") + $0.tags.joined(separator: "")
+        return
+          (filters.isEmpty || filters.contains($0.type)) &&
+          (search == "" || content.contains(search))
+      }
+      if ibsRecords.isNotEmpty {
+        return DayRecord(date: $0.date, ibsRecords: ibsRecords)
+      }
+      return nil
+    }
+    return dayRecords.compactMap { $0 }
+  }
+
   var body: some View {
     NavigationView {
       ZStack {
-        SearchList(filters: $filters, search: $search)
+        SearchList(filters: $filters, search: $search, records: records)
         if showFilters {
           List {
             ForEach(ItemType.allCases, id: \.self) { itemType in
@@ -85,41 +100,27 @@ struct SearchView_Previews: PreviewProvider {
 
 struct SearchList: View {
   @EnvironmentObject private var appState: IBSData
+
   @Binding var filters: [ItemType]
   @Binding var search: String
 
-  var records: [DayRecord] {
-    guard appState.tabSelection == .search else { return [] }
-
-    guard filters.isNotEmpty || search != "" else { return appState.dayRecords }
-
-    let dayRecords: [DayRecord?] = appState.dayRecords.map {
-      let ibsRecords = $0.ibsRecords.filter {
-        let content = ($0.text ?? "") + $0.tags.joined(separator: "")
-        return
-          (filters.isEmpty || filters.contains($0.type)) &&
-          (search == "" || content.contains(search))
-      }
-      if ibsRecords.isNotEmpty {
-        return DayRecord(date: $0.date, ibsRecords: ibsRecords)
-      }
-      return nil
-    }
-    return dayRecords.compactMap { $0 }
-  }
+  var records: [DayRecord]
 
   var body: some View {
-    List {
-      ForEach(records) { dayRecord in
-        let dateString = dayRecord.date.string(for: "dd MMM YYYY")
-        Section(header: Text(dateString)) {
+    ScrollView {
+      LazyVStack(spacing: 0) {
+        ForEach(records) { dayRecord in
+          Text(dayRecord.date.string(for: "dd MMM YYYY"))
+            .padding(3)
+            .frame(maxWidth: .infinity)
+            .background(Color.secondary.opacity(0.5))
           ForEach(dayRecord.ibsRecords, id: \.self) { record in
             ItemTypeDayRowView(record: record)
-            .listRowInsets(EdgeInsets())
+            Divider()
+              .padding(.horizontal, 10)
           }
         }
       }
     }
-    .id(UUID())
   }
 }
