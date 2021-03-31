@@ -10,12 +10,12 @@ import SwiftUI
 struct DayView: View {
   @EnvironmentObject private var appState: IBSData
 
-  private var date: Date { appState.currentDate }
+  private var date: Date { appState.activeDate }
 
   private var isShowingToday: Bool {
     let calendar = Calendar.current
 
-    let displayDate = calendar.dateComponents([.year, .month, .day], from: appState.currentDate)
+    let displayDate = calendar.dateComponents([.year, .month, .day], from: appState.activeDate)
     let currentDate = calendar.dateComponents([.year, .month, .day], from: IBSData.currentDate())
 
     return displayDate == currentDate
@@ -43,7 +43,7 @@ struct DayView: View {
       .toolbar {
         ToolbarItem(placement: .principal) {
           HStack {
-            DatePicker("Current date", selection: $appState.currentDate, displayedComponents: .date)
+            DatePicker("Current date", selection: $appState.activeDate, displayedComponents: .date)
               .datePickerStyle(CompactDatePickerStyle())
               .labelsHidden()
             Button(action: changeDayToToday) {
@@ -87,11 +87,11 @@ struct DayView: View {
 
 private extension DayView {
   func changeDay(by days: Int) {
-    appState.currentDate = Calendar.current.date(byAdding: .day, value: days, to: date) ?? date
+    appState.activeDate = Calendar.current.date(byAdding: .day, value: days, to: date) ?? date
   }
 
   func changeDayToToday() {
-    appState.currentDate = IBSData.currentDate()
+    appState.activeDate = IBSData.currentDate()
   }
 
   func dateString() -> String {

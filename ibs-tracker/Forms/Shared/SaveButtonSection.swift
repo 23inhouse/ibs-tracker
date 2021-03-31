@@ -24,7 +24,7 @@ struct SaveButtonSection: View {
           DispatchQueue.main.async {
             appState.tabSelection = .day
             guard let timestamp = record?.timestamp else { return }
-            appState.currentDate = IBSData.currentDate(for: timestamp)
+            appState.activeDate = IBSData.currentDate(for: timestamp)
           }
           presentation.dismiss(animation: .none)
         }

@@ -20,7 +20,7 @@ class IBSData: ObservableObject {
   @Published var activeChart: Charts = .symptoms
   @Published var dayRecords: [DayRecord]
   @Published var lastWeight: Decimal
-  @Published var currentDate: Date
+  @Published var activeDate: Date
   @Published var records: [IBSRecord]
 
   static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
@@ -44,7 +44,7 @@ class IBSData: ObservableObject {
     self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
-    self.currentDate = IBSData.currentDate()
+    self.activeDate = IBSData.currentDate()
     self.records = allRecords.reversed()
   }
 }
