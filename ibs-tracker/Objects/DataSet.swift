@@ -54,17 +54,4 @@ extension DataSet {
     }
     return nil
   }
-
-  static func pdfFileUrl() -> URL? {
-    do {
-      throw "pdfFileUrl"
-//      let records: [DayRecord] = try AppDB.current.exportRecords()
-//
-//      let pdf = PDF(ibsRecords: records)
-//      return try PDF.encode(pdf, path: "export.pdf")
-    } catch {
-      print("Error: \(error)")
-    }
-    return nil
-  }
 }
