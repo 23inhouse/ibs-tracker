@@ -36,7 +36,6 @@ struct NoteFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .note)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

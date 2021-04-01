@@ -51,4 +51,15 @@ class IBSDataTests: XCTestCase {
     let recordCount = dayRecords.count
     XCTAssertEqual(recordCount, 2, "wrong number records")
   }
+
+  func testTagOrder() throws {
+    let bundle = Bundle(for: type(of: self))
+    let dataSet = try bundle.decode(DataSet.self, from: "records-recent-food.json")
+    try appDB.importRecords(dataSet.ibsRecords)
+
+    let ibsData = IBSData(.test)
+
+    let tags = ibsData.tags(for: .food)
+    XCTAssertEqual(tags, ["Peanut butter", "Potato chips"], "wrong tag records")
+  }
 }

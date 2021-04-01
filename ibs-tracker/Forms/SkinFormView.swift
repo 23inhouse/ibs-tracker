@@ -37,7 +37,6 @@ struct SkinFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .skin)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

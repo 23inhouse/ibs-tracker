@@ -39,7 +39,6 @@ struct GutFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .gut)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return
@@ -48,7 +47,7 @@ struct GutFormView: View {
             showAllTags ||
             availableTag.contains(viewModel.newTag.lowercased())
         )
-    }
+      }
   }
 
   var body: some View {
@@ -61,8 +60,8 @@ struct GutFormView: View {
       if bloating != .none || pain != .none {
         SaveButtonSection(name: "Gut", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
 
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
     }
   }
 }

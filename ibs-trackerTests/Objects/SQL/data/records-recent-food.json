@@ -2,19 +2,19 @@
   "ibs-records": [
     {
        "type": "food",
-       "timestamp": "2020-10-31 20:00:00 +0000",
-       "text": "Chips & peanut butter",
-       "size": null,
-       "risk": null,
-       "tags": ["Peanut butter", "Potato chips"]
-    },
-    {
-       "type": "food",
        "timestamp": "2020-10-30 20:55:00 +0000",
        "text": "Chips",
        "size": null,
        "risk": null,
        "tags": ["Potato chips"]
+    },
+    {
+       "type": "food",
+       "timestamp": "2020-10-31 20:00:00 +0000",
+       "text": "Peanut butter",
+       "size": null,
+       "risk": null,
+       "tags": ["Peanut butter"]
     },
     {
        "type": "food",

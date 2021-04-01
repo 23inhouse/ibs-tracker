@@ -59,6 +59,21 @@ extension AppDB {
       return try request.fetchAll(db).map { $0.ID }
     }
   }
+
+  func tags(of type: ItemType) throws -> [QueryInterfaceRequest<SQLTagRecord>.RowDecoder?] {
+    try dbWriter.read { db in
+      let recordAlias = TableAlias(name: "IBSRecords")
+      let mostRecent = max(recordAlias[Column("timestamp")]).forKey("mostRecent")
+      let request = SQLTagRecord
+        .select(Column("type"), Column("name"), mostRecent)
+        .joining(optional: SQLTagRecord.ibsRecords.aliased(recordAlias))
+        .filter(Column("type") == type.rawValue)
+        .order(sql: "mostRecent DESC")
+        .group(Column("name"))
+
+      return try request.fetchAll(db)
+    }
+  }
 }
 
 private extension AppDB {

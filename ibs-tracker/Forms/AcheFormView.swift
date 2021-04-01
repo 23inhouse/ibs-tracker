@@ -39,7 +39,6 @@ struct AcheFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .ache)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

@@ -39,7 +39,6 @@ struct MoodFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .mood)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

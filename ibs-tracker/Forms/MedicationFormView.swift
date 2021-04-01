@@ -53,7 +53,6 @@ struct MedicationFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .medication)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

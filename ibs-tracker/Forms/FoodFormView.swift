@@ -57,7 +57,6 @@ struct FoodFormView: View {
     guard showAllTags || !isEditingName else { return [] }
     return
       appState.tags(for: .food)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return

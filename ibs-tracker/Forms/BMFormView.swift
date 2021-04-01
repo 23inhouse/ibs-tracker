@@ -52,7 +52,6 @@ struct BMFormView: View {
   private var suggestedTags: [String] {
     return
       appState.tags(for: .bm)
-      .sorted()
       .filter {
         let availableTag = $0.lowercased()
         return
