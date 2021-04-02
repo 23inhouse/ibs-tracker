@@ -16,6 +16,7 @@ struct NoteFormView: View {
   @State private var isFirstResponder = false
 
   @State private var showAllTags: Bool = false
+  @State private var suggestedTags: [String] = []
 
   init(for noteRecord: NoteRecord? = nil) {
     guard let record = noteRecord else { return }
@@ -31,20 +32,6 @@ struct NoteFormView: View {
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
     return IBSRecord(note: text, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
-  }
-
-  private var suggestedTags: [String] {
-    return
-      appState.tags(for: .note)
-      .filter {
-        let availableTag = $0.lowercased()
-        return
-          !viewModel.tags.contains($0) &&
-          (
-            showAllTags ||
-              availableTag.contains(viewModel.newTag.lowercased())
-          )
-      }
   }
 
   private var tagPlaceholder: String {
@@ -67,7 +54,31 @@ struct NoteFormView: View {
         SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+    }
+    .onAppear {
+      calcSuggestedTags()
+    }
+    .onChange(of: [showAllTags]) { _ in
+      calcSuggestedTags()
+    }
+    .onChange(of: [viewModel.tags, [viewModel.newTag]]) { _ in
+      calcSuggestedTags()
+    }
+  }
+
+  private func calcSuggestedTags() {
+    DispatchQueue.main.async {
+      suggestedTags = appState.tags(for: .note)
+        .filter {
+          let availableTag = $0.lowercased()
+          return
+            !viewModel.tags.contains($0) &&
+            (
+              showAllTags ||
+                availableTag.contains(viewModel.newTag.lowercased())
+            )
+        }
     }
   }
 }

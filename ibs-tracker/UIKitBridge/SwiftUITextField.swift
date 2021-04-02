@@ -70,6 +70,7 @@ extension UIKitBridge {
       }
 
       func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         parent.onCommit()
         return true
       }

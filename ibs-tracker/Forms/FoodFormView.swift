@@ -22,6 +22,7 @@ struct FoodFormView: View {
   @State private var tagIsFirstResponder: Bool = false
 
   @State private var showAllTags: Bool = false
+  @State private var suggestedTags: [String] = []
 
   let tagAutoScrollLimit = 3
 
@@ -53,31 +54,6 @@ struct FoodFormView: View {
     return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size, medicinal: medicinal)
   }
 
-  private var suggestedTags: [String] {
-    guard showAllTags || !isEditingName else { return [] }
-    return
-      appState.tags(for: .food)
-      .filter {
-        let availableTag = $0.lowercased()
-        return
-          !viewModel.tags.contains($0) &&
-          (
-            showAllTags ||
-            availableTag.contains(viewModel.newTag.lowercased()) ||
-            (
-              nameIsCompleted &&
-              name.split(separator: " ").filter {
-                let word = String($0.lowercased())
-                return
-                  word.count > 2 &&
-                  viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
-                  (availableTag.contains(word) || word.contains(availableTag))
-              }.isNotEmpty
-            )
-        )
-    }
-  }
-
   private var tagPlaceholder: String {
     viewModel.tags.isEmpty ? "Add ingredient" : "Add another ingredient"
   }
@@ -90,14 +66,7 @@ struct FoodFormView: View {
             viewModel.scrollToTags(scroller: scroller)
           }
 
-        List { EditableTagList(tags: $viewModel.tags) }
-        UIKitBridge.SwiftUITextFieldView(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: tagIsFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
-          .onTapGesture {
-            commitName()
-            viewModel.scrollToTags(scroller: scroller)
-          }
-          .onChange(of: viewModel.newTag) { _ in viewModel.scrollToTags(scroller: scroller) }
-        List { SuggestedTagList(suggestedTags: suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag, showAllTags: $showAllTags) }
+        TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, scroller: scroller)
       }
       .id(ScrollViewProxy.tagAnchor())
 
@@ -114,6 +83,15 @@ struct FoodFormView: View {
       if name.isNotEmpty && viewModel.tags.isNotEmpty {
         SaveButtonSection(name: "Meal", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+    }
+    .onAppear {
+      calcSuggestedTags()
+    }
+    .onChange(of: [showAllTags, isEditingName, nameIsCompleted]) { _ in
+      calcSuggestedTags()
+    }
+    .onChange(of: [viewModel.tags, [viewModel.newTag], [name]]) { _ in
+      calcSuggestedTags()
     }
   }
 
@@ -137,9 +115,9 @@ struct FoodFormView: View {
   }
 
   private func commitName() {
+    tagIsFirstResponder = true
     isEditingName = false
     nameIsCompleted = true
-    tagIsFirstResponder = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
     DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
       tagIsFirstResponder = false
@@ -148,6 +126,36 @@ struct FoodFormView: View {
 
   private func editName(_ isEditing: Bool) {
     isEditingName = isEditing
+  }
+
+  private func calcSuggestedTags() {
+    guard showAllTags || !isEditingName else {
+      suggestedTags = []
+      return
+    }
+
+    DispatchQueue.main.async {
+      suggestedTags = appState.tags(for: .food)
+        .filter {
+          let availableTag = $0.lowercased()
+          return
+            !viewModel.tags.contains($0) &&
+            (
+              showAllTags ||
+                availableTag.contains(viewModel.newTag.lowercased()) ||
+                (
+                  nameIsCompleted &&
+                    name.split(separator: " ").filter {
+                      let word = String($0.lowercased())
+                      return
+                        word.count > 2 &&
+                        viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
+                        (availableTag.contains(word) || word.contains(availableTag))
+                    }.isNotEmpty
+                )
+            )
+        }
+    }
   }
 }
 

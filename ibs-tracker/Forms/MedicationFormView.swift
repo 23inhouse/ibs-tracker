@@ -13,11 +13,13 @@ struct MedicationFormView: View {
 
   @StateObject private var viewModel = FormViewModel()
   @State private var name: String = ""
+  @State private var isEditingName: Bool = false
   @State private var nameIsCompleted: Bool = false
   @State private var medicationTypes: [MedicationType] = []
   @State private var recentMedicationSelection: IBSRecord?
 
   @State private var showAllTags: Bool = false
+  @State private var suggestedTags: [String] = []
 
   let tagAutoScrollLimit = 3
 
@@ -50,30 +52,6 @@ struct MedicationFormView: View {
     appState.recentRecords(of: .medication)
   }
 
-  private var suggestedTags: [String] {
-    return
-      appState.tags(for: .medication)
-      .filter {
-        let availableTag = $0.lowercased()
-        return
-          !viewModel.tags.contains($0) &&
-          (
-            showAllTags ||
-            availableTag.contains(viewModel.newTag.lowercased()) ||
-            (
-              nameIsCompleted &&
-              name.split(separator: " ").filter {
-                let word = String($0.lowercased())
-                return
-                  word.count > 2 &&
-                  viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
-                  (availableTag.contains(word) || word.contains(availableTag))
-              }.isNotEmpty
-            )
-        )
-    }
-  }
-
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -84,9 +62,8 @@ struct MedicationFormView: View {
       .id(1)
 
       Section {
-        UIKitBridge.SwiftUITextField("Medication name. e.g. Metamucil", text: $name, onCommit: commitName)
+        UIKitBridge.SwiftUITextField("Medication name. e.g. Metamucil", text: $name, onEditingChanged: editName, onCommit: commitName)
           .onTapGesture {
-            commitName()
             let scrollId = recentMedications.isNotEmpty ? 1 : 2
             viewModel.scrollTo(scrollId, scroller: scroller)
           }
@@ -105,7 +82,16 @@ struct MedicationFormView: View {
         SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+    }
+    .onAppear {
+      calcSuggestedTags()
+    }
+    .onChange(of: [showAllTags, isEditingName, nameIsCompleted]) { _ in
+      calcSuggestedTags()
+    }
+    .onChange(of: [viewModel.tags, [viewModel.newTag]]) { _ in
+      calcSuggestedTags()
     }
   }
 
@@ -130,8 +116,42 @@ struct MedicationFormView: View {
   }
 
   private func commitName() {
+    isEditingName = false
     nameIsCompleted = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+
+  private func editName(_ isEditing: Bool) {
+    isEditingName = isEditing
+  }
+
+  private func calcSuggestedTags() {
+    guard showAllTags || !isEditingName else {
+      suggestedTags = []
+      return
+    }
+
+    DispatchQueue.main.async {
+      suggestedTags = appState.tags(for: .medication)
+        .filter {
+          let availableTag = $0.lowercased()
+          return
+            !viewModel.tags.contains($0) &&
+            (
+              showAllTags ||
+                availableTag.contains(viewModel.newTag.lowercased()) ||
+                (
+                  nameIsCompleted &&
+                    name.split(separator: " ").filter {
+                      let word = String($0.lowercased())
+                      return
+                        viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
+                        (availableTag.contains(word) || word.contains(availableTag))
+                    }.isNotEmpty
+                )
+            )
+        }
+    }
   }
 }
 

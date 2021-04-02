@@ -15,6 +15,7 @@ struct WeightFormView: View {
   @State private var weight: Decimal = 0
 
   @State private var showAllTags: Bool = false
+  @State private var suggestedTags: [String] = []
 
   init(for weightRecord: WeightRecord? = nil) {
     guard let record = weightRecord else { return }
@@ -32,20 +33,6 @@ struct WeightFormView: View {
     return IBSRecord(weight: weight, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
   }
 
-  private var suggestedTags: [String] {
-    return
-      appState.tags(for: .weight)
-      .filter {
-        let availableTag = $0.lowercased()
-        return
-          !viewModel.tags.contains($0) &&
-          (
-            showAllTags ||
-              availableTag.contains(viewModel.newTag.lowercased())
-          )
-      }
-  }
-
   var body: some View {
     FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
       SaveButtonSection(name: "Weight", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
@@ -59,7 +46,31 @@ struct WeightFormView: View {
           }
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+    }
+    .onAppear {
+      calcSuggestedTags()
+    }
+    .onChange(of: [showAllTags]) { _ in
+      calcSuggestedTags()
+    }
+    .onChange(of: [viewModel.tags, [viewModel.newTag]]) { _ in
+      calcSuggestedTags()
+    }
+  }
+
+  private func calcSuggestedTags() {
+    DispatchQueue.main.async {
+      suggestedTags = appState.tags(for: .weight)
+        .filter {
+          let availableTag = $0.lowercased()
+          return
+            !viewModel.tags.contains($0) &&
+            (
+              showAllTags ||
+                availableTag.contains(viewModel.newTag.lowercased())
+            )
+        }
     }
   }
 }

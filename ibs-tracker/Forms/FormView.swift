@@ -26,14 +26,24 @@ struct FormView<Content: View>: View {
   var body: some View {
     ScrollViewReader { scroller in
       Form {
-        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
+        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp)
 
         content(scroller)
 
-        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp, initial: editableRecord?.timestamp)
+        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp)
       }
       .onAppear() {
         viewModel.initializeTimestamp()
+        guard !editMode else { return }
+        DispatchQueue.main.async {
+          viewModel.isValidTimestamp = isValid(timestamp: viewModel.timestamp)
+        }
+      }
+      .onChange(of: viewModel.timestamp) { value in
+        viewModel.timestamp = value
+        DispatchQueue.main.async {
+          viewModel.isValidTimestamp = isValid(timestamp: value)
+        }
       }
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -66,6 +76,13 @@ struct FormView<Content: View>: View {
       primaryButton: .destructive(Text("OK"), action: action),
       secondaryButton: .cancel()
     )
+  }
+
+  private func isValid(timestamp: Date?) -> Bool {
+    guard let timestamp = timestamp else { return false }
+    guard timestamp != editableRecord?.timestamp else { return true }
+
+    return appState.isAvailable(timestamp: timestamp)
   }
 }
 

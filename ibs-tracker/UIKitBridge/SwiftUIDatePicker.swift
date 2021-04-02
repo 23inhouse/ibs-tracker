@@ -39,26 +39,22 @@ extension UIKitBridge {
 
     func updateUIView(_ uiView: UIDatePicker, context: Context) {
       guard let selection = selection else { return }
-      datePicker.date = selection
+      uiView.date = selection
     }
 
-    func makeCoordinator() -> SwiftUIDatePicker.Coordinator {
-      Coordinator(selection: $selection, in: range, minuteInterval: minuteInterval)
+    func makeCoordinator() -> Coordinator {
+      Coordinator(self)
     }
 
     class Coordinator: NSObject {
-      private let selection: Binding<Date?>
-      private let range: ClosedRange<Date>?
-      private let minuteInterval: Int
+      var parent: SwiftUIDatePicker
 
-      init(selection: Binding<Date?>, in range: ClosedRange<Date>? = nil, minuteInterval: Int = 5) {
-        self.selection = selection
-        self.range = range
-        self.minuteInterval = minuteInterval
+      init(_ datePicker: UIKitBridge.SwiftUIDatePicker) {
+        self.parent = datePicker
       }
 
       @objc func changed(_ sender: UIDatePicker) {
-        self.selection.wrappedValue = sender.date
+        parent.selection = sender.date
       }
     }
   }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SuggestedTagList: View {
-  var suggestedTags: [String]
+  @Binding var suggestedTags: [String]
   @Binding var tags: [String]
   @Binding var newTag: String
   @Binding var showAllTags: Bool
@@ -27,7 +27,7 @@ struct SuggestedTagList: View {
 struct SuggestedTagList_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      SuggestedTagList(suggestedTags: ["suggested 1", "suggested 2"], tags: Binding.constant(["tag 1", "tag 2"]), newTag: Binding.constant("suggest"), showAllTags: Binding.constant(false))
+      SuggestedTagList(suggestedTags: Binding.constant(["suggested 1", "suggested 2"]), tags: Binding.constant(["tag 1", "tag 2"]), newTag: Binding.constant("suggest"), showAllTags: Binding.constant(false))
         .environmentObject(IBSData())
     }
   }

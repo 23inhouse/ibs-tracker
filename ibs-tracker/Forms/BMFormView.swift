@@ -21,6 +21,7 @@ struct BMFormView: View {
   @State private var wetness: Scales = .none
 
   @State private var showAllTags: Bool = false
+  @State private var suggestedTags: [String] = []
 
   init(for bmRecord: BMRecord? = nil) {
     guard let record = bmRecord else { return }
@@ -47,20 +48,6 @@ struct BMFormView: View {
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
     return IBSRecord(bristolScale: bristolScale, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, color: color, pressure: pressure, smell: smell, evacuation: evacuation, dryness: dryness, wetness: wetness)
-  }
-
-  private var suggestedTags: [String] {
-    return
-      appState.tags(for: .bm)
-      .filter {
-        let availableTag = $0.lowercased()
-        return
-          !viewModel.tags.contains($0) &&
-          (
-            showAllTags ||
-              availableTag.contains(viewModel.newTag.lowercased())
-          )
-      }
   }
 
   private var tagPlaceholder: String {
@@ -92,11 +79,20 @@ struct BMFormView: View {
         ScaleSlider($dryness, "Dryness", descriptions: Scales.drynessDescriptions)
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: suggestedTags, scroller: scroller)
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
       if bristolScale != nil {
         SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
+    }
+    .onAppear {
+      calcSuggestedTags()
+    }
+    .onChange(of: [showAllTags]) { _ in
+      calcSuggestedTags()
+    }
+    .onChange(of: [viewModel.tags, [viewModel.newTag]]) { _ in
+      calcSuggestedTags()
     }
   }
 
@@ -183,6 +179,21 @@ struct BMFormView: View {
 
   private func foregroundColor(for scale: BristolType?) -> Color? {
     scale == bristolScale ? nil : .secondary
+  }
+
+  private func calcSuggestedTags() {
+    DispatchQueue.main.async {
+      suggestedTags = appState.tags(for: .bm)
+        .filter {
+          let availableTag = $0.lowercased()
+          return
+            !viewModel.tags.contains($0) &&
+            (
+              showAllTags ||
+                availableTag.contains(viewModel.newTag.lowercased())
+            )
+        }
+    }
   }
 }
 
