@@ -8,85 +8,58 @@
 import SwiftUI
 
 struct SearchView: View {
-  @Environment(\.colorScheme) var colorScheme
-  @EnvironmentObject private var appState: IBSData
-
   @State private var filters: [ItemType] = []
   @State private var showFilters: Bool = false
   @State private var search: String = ""
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
-  private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
-
-  private var records: [DayRecord] {
-    guard filters.isNotEmpty || search != "" else { return appState.dayRecords }
-
-    let dayRecords: [DayRecord?] = appState.dayRecords.map {
-      let ibsRecords = $0.ibsRecords.filter {
-        let content = ($0.text ?? "") + $0.tags.joined(separator: "")
-        return
-          (filters.isEmpty || filters.contains($0.type)) &&
-          (search == "" || content.contains(search))
-      }
-      if ibsRecords.isNotEmpty {
-        return DayRecord(date: $0.date, ibsRecords: ibsRecords)
-      }
-      return nil
-    }
-    return dayRecords.compactMap { $0 }
-  }
-
   var body: some View {
     NavigationView {
       ZStack {
-        SearchList(filters: $filters, search: $search, records: records)
+        SearchList(search: $search, filters: $filters)
         if showFilters {
-          List {
-            ForEach(ItemType.allCases, id: \.self) { itemType in
-              Toggle(isOn: Binding(
-                get: { filters.contains(itemType) },
-                set: { filters.toggle(on: $0, element: itemType)}
-              )) {
-                HStack {
-                  TypeShape(type: itemType)
-                    .stroke(style: strokeStyle)
-                    .foregroundColor(.secondary)
-                    .frame(25)
-                    .padding(5)
-                  Text(itemType.rawValue.capitalized)
-                }
-              }
-            }
-          }
+          filtersList
         }
       }
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          TextField("Search ...", text: $search)
-            .padding(5)
-            .padding(.leading, 20)
-            .frame(width: 300)
-            .backgroundColor(backgroundColor)
-            .cornerRadius(8)
-            .overlay(
-              HStack {
-                Image(systemName: "magnifyingglass")
-                  .foregroundColor(.secondary)
-                  .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                  .padding(.leading, 4)
-
-              })
+          SearchField(search: $search)
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            showFilters.toggle()
-          } label: {
-            Image(systemName: "slider.horizontal.3")
+          toggleFilters
+        }
+      }
+    }
+    .gesture(DragGesture().onChanged { _ in endEditing(true) })
+  }
+
+  private var filtersList: some View {
+    List {
+      ForEach(ItemType.allCases, id: \.self) { itemType in
+        Toggle(isOn: Binding(
+          get: { filters.contains(itemType) },
+          set: { filters.toggle(on: $0, element: itemType)}
+        )) {
+          HStack {
+            TypeShape(type: itemType)
+              .stroke(style: strokeStyle)
+              .foregroundColor(.secondary)
+              .frame(25)
+              .padding(5)
+            Text(itemType.rawValue.capitalized)
           }
         }
       }
+    }
+  }
+
+  private var toggleFilters: some View {
+    Button {
+      showFilters.toggle()
+    } label: {
+      Image(systemName: "slider.horizontal.3")
     }
   }
 }
@@ -98,13 +71,37 @@ struct SearchView_Previews: PreviewProvider {
   }
 }
 
+struct SearchField: View {
+  @Environment(\.colorScheme) var colorScheme
+  @Binding var search: String
+
+  private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
+
+  var body: some View {
+    return TextField("Search ...", text: $search)
+      .padding(5)
+      .padding(.leading, 20)
+      .frame(width: 300)
+      .backgroundColor(backgroundColor)
+      .cornerRadius(8)
+      .overlay(
+        HStack {
+          Image(systemName: "magnifyingglass")
+            .foregroundColor(.secondary)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 4)
+
+        })
+  }
+}
+
 struct SearchList: View {
   @EnvironmentObject private var appState: IBSData
 
-  @Binding var filters: [ItemType]
-  @Binding var search: String
+  @State var records: [DayRecord] = []
 
-  var records: [DayRecord]
+  @Binding var search: String
+  @Binding var filters: [ItemType]
 
   var body: some View {
     ScrollView {
@@ -121,6 +118,35 @@ struct SearchList: View {
           }
         }
       }
+    }
+    .onAppear() { calcRecords() }
+    .onChange(of: search)  { _ in calcRecords() }
+    .onChange(of: filters)  { _ in calcRecords() }
+  }
+}
+
+private extension SearchList {
+  func calcRecords() {
+    guard filters.isNotEmpty || search != "" else {
+      records = appState.dayRecords
+      return
+    }
+
+    DispatchQueue.main.async {
+      let dayRecords: [DayRecord?] = appState.dayRecords.map {
+        let ibsRecords = $0.ibsRecords.filter {
+          let content = ($0.text ?? "") + $0.tags.joined(separator: "")
+          return
+            (filters.isEmpty || filters.contains($0.type)) &&
+            (search == "" || content.contains(search))
+        }
+        if ibsRecords.isNotEmpty {
+          return DayRecord(date: $0.date, ibsRecords: ibsRecords)
+        }
+        return nil
+      }
+
+      records = dayRecords.compactMap { $0 }
     }
   }
 }
