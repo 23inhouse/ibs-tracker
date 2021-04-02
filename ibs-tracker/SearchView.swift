@@ -133,12 +133,13 @@ private extension SearchList {
     }
 
     DispatchQueue.main.async {
+      let searchQuery = search.lowercased()
       let dayRecords: [DayRecord?] = appState.dayRecords.map {
         let ibsRecords = $0.ibsRecords.filter {
-          let content = ($0.text ?? "") + $0.tags.joined(separator: "")
+          let content = (($0.text ?? "") + $0.tags.joined(separator: "")).lowercased()
           return
             (filters.isEmpty || filters.contains($0.type)) &&
-            (search == "" || content.contains(search))
+            (searchQuery == "" || content.contains(searchQuery))
         }
         if ibsRecords.isNotEmpty {
           return DayRecord(date: $0.date, ibsRecords: ibsRecords)
