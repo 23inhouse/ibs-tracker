@@ -18,7 +18,6 @@ struct SuggestedTagList: View {
       Button(value) {
         tags.append(value)
         newTag = ""
-        showAllTags = false
       }
     }
   }
