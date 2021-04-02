@@ -31,30 +31,8 @@ struct ChartView: View {
   }
 
   var body: some View {
-    VStack(spacing: 0) {
-      if appState.tabSelection == .chart {
-        Group {
-          switch appState.activeChart {
-          case .symptoms:
-            SymptomsView(include: $sympotomsInclude, graphScale: $graphScale, lastGraphScale: $lastGraphScale, graphOffset: $graphOffset, lastGraphOffset: $lastGraphOffset, lastRecordInterval: $lastRecordInterval, includeBMPerDay: $sympotomsIncludeBMPerDay)
-          default:
-            Text("\(activeChart.rawValue.capitalized)")
-          }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-      }
-      HStack {
-        Spacer()
-        HStack {
-          ForEach(Charts.allCases, id: \.self) { chart in
-            chartSelector(for: chart, active: activeChart == chart)
-          }
-          .padding(.horizontal, 10)
-        }
-        .padding(.bottom, 10)
-        Spacer()
-      }
-    }
+    SymptomsView(include: $sympotomsInclude, graphScale: $graphScale, lastGraphScale: $lastGraphScale, graphOffset: $graphOffset, lastGraphOffset: $lastGraphOffset, lastRecordInterval: $lastRecordInterval, includeBMPerDay: $sympotomsIncludeBMPerDay)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 
   private func chartSelector(for chart: Charts, active: Bool) -> some View {
