@@ -107,10 +107,16 @@ struct SearchList: View {
     ScrollView {
       LazyVStack(spacing: 0) {
         ForEach(records) { dayRecord in
-          Text(dayRecord.date.string(for: "dd MMM YYYY"))
-            .padding(3)
-            .frame(maxWidth: .infinity)
-            .background(Color.secondary.opacity(0.5))
+          Text(dayRecord.date.string(for: "EEEE - dd MMMM YYYY"))
+            .padding(.vertical, 5)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .background(
+              Color.secondary
+                .opacity(0.5)
+                .cornerRadius(radius: 20, corners: [.topLeft, .topRight])
+            )
+            .padding(.horizontal, 10)
+            .padding(.top, 10)
           ForEach(dayRecord.ibsRecords, id: \.self) { record in
             ItemTypeDayRowView(record: record)
             Divider()

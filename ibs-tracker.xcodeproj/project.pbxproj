@@ -25,6 +25,7 @@
 		B5109E2826024080007CB498 /* SkinShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5109E2726024080007CB498 /* SkinShape.swift */; };
 		B5151EA225F4CFF3003B9F59 /* records-to-encode.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA125F4CFF3003B9F59 /* records-to-encode.json */; };
 		B5151EAA25F4D6DF003B9F59 /* records-to-import-unchanging.json in Resources */ = {isa = PBXBuildFile; fileRef = B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */; };
+		B51DD14A26186A8900D05A6E /* View+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DD14926186A8900D05A6E /* View+CornerRadius.swift */; };
 		B51F5EB825EFB442005583AB /* WeightFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EB725EFB442005583AB /* WeightFormView.swift */; };
 		B51F5EBD25EFC282005583AB /* MedicationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F5EBC25EFC282005583AB /* MedicationFormView.swift */; };
 		B5207E5C25D18D240019D18F /* Migratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5207E5B25D18D240019D18F /* Migratable.swift */; };
@@ -208,6 +209,7 @@
 		B5109E2726024080007CB498 /* SkinShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinShape.swift; sourceTree = "<group>"; };
 		B5151EA125F4CFF3003B9F59 /* records-to-encode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-encode.json"; sourceTree = "<group>"; };
 		B5151EA925F4D6DF003B9F59 /* records-to-import-unchanging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "records-to-import-unchanging.json"; sourceTree = "<group>"; };
+		B51DD14926186A8900D05A6E /* View+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+CornerRadius.swift"; sourceTree = "<group>"; };
 		B51F5EB725EFB442005583AB /* WeightFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormView.swift; sourceTree = "<group>"; };
 		B51F5EBC25EFC282005583AB /* MedicationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationFormView.swift; sourceTree = "<group>"; };
 		B5207E5B25D18D240019D18F /* Migratable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migratable.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				B5FCC32F25FBB44400D92621 /* UITextView+CurrentHeight.swift */,
 				B5FCC33725FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift */,
 				B5FCC32425FB914400D92621 /* UITextView+Placeholder.swift */,
+				B51DD14926186A8900D05A6E /* View+CornerRadius.swift */,
 				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
 			);
@@ -936,6 +939,7 @@
 				B52E466825D01FB700C009EC /* IBSRecord+NoteRecord.swift in Sources */,
 				B5ED342B25E8DA760029B274 /* NoteFormView.swift in Sources */,
 				B554CE3A25D02D4200E2EE17 /* AppDB+Records.swift in Sources */,
+				B51DD14A26186A8900D05A6E /* View+CornerRadius.swift in Sources */,
 				B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */,
 				B54EA7BE25B24BB3008C4B74 /* ActionGridView.swift in Sources */,
 				B508995B25B3A2BF00B1EA03 /* GutSymptomRow.swift in Sources */,
