@@ -40,7 +40,7 @@ struct SearchView: View {
       ForEach(ItemType.allCases, id: \.self) { itemType in
         Toggle(isOn: Binding(
           get: { filters.contains(itemType) },
-          set: { filters.toggle(on: $0, element: itemType)}
+          set: { filters.toggle(on: $0, element: itemType) }
         )) {
           HStack {
             TypeShape(type: itemType)
@@ -49,10 +49,22 @@ struct SearchView: View {
               .frame(25)
               .padding(5)
             Text(itemType.rawValue.capitalized)
+            Spacer()
+          }
+          .contentShape(Rectangle())
+          .onTapGesture {
+            withAnimation {
+              filters.toggle(on: !filters.contains(itemType), element: itemType)
+            }
           }
         }
       }
     }
+    .gesture(DragGesture().onChanged { value in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        showFilters.toggle()
+      }
+    })
   }
 
   private var toggleFilters: some View {
