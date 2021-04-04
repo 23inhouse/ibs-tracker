@@ -102,9 +102,9 @@
 		B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */; };
 		B562B82F26127AE000033F97 /* SymptomsVerticalAxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B562B82E26127AE000033F97 /* SymptomsVerticalAxisView.swift */; };
 		B562B83426127B2400033F97 /* SymptomsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B562B83326127B2400033F97 /* SymptomsGraphView.swift */; };
+		B576C0142619ACF800B24FF8 /* AppDB+RecordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B576C00B2619ACF800B24FF8 /* AppDB+RecordsTests.swift */; };
 		B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B8B0525DD18C20030D758 /* IBSDataTests.swift */; };
 		B57B8B0E25DD21940030D758 /* records-recent-food.json in Resources */ = {isa = PBXBuildFile; fileRef = B57B8B0D25DD21940030D758 /* records-recent-food.json */; };
-		B57C88E325E40F4D0060FE13 /* AppDB+RecordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */; };
 		B57C88E825E42E150060FE13 /* RawRepresentable+OptionalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */; };
 		B57DB80425EBFDA400CC4A0A /* bm-tags.txt in Resources */ = {isa = PBXBuildFile; fileRef = B57DB80325EBFDA400CC4A0A /* bm-tags.txt */; };
 		B584BBD32612804300FADD1B /* SymptomsControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B584BBD22612804300FADD1B /* SymptomsControlsView.swift */; };
@@ -284,9 +284,9 @@
 		B55E2A6925DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+GRDBTests.swift"; sourceTree = "<group>"; };
 		B562B82E26127AE000033F97 /* SymptomsVerticalAxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsVerticalAxisView.swift; sourceTree = "<group>"; };
 		B562B83326127B2400033F97 /* SymptomsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsGraphView.swift; sourceTree = "<group>"; };
+		B576C00B2619ACF800B24FF8 /* AppDB+RecordsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDB+RecordsTests.swift"; sourceTree = "<group>"; };
 		B57B8B0525DD18C20030D758 /* IBSDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSDataTests.swift; sourceTree = "<group>"; };
 		B57B8B0D25DD21940030D758 /* records-recent-food.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "records-recent-food.json"; sourceTree = "<group>"; };
-		B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDB+RecordsTests.swift"; sourceTree = "<group>"; };
 		B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+OptionalValue.swift"; sourceTree = "<group>"; };
 		B57DB80325EBFDA400CC4A0A /* bm-tags.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bm-tags.txt"; sourceTree = "<group>"; };
 		B584BBD22612804300FADD1B /* SymptomsControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsControlsView.swift; sourceTree = "<group>"; };
@@ -611,7 +611,7 @@
 			children = (
 				B5207E8725D297BC0019D18F /* data */,
 				B5E01A7F25D03B2D00079309 /* AppDBTests.swift */,
-				B57C88E225E40F4D0060FE13 /* AppDB+RecordsTests.swift */,
+				B576C00B2619ACF800B24FF8 /* AppDB+RecordsTests.swift */,
 			);
 			path = SQL;
 			sourceTree = "<group>";
@@ -1059,8 +1059,8 @@
 			files = (
 				B55E2A6A25DFC33900CB5FE4 /* IBSRecord+GRDBTests.swift in Sources */,
 				B5F169BC2614AD6D00A603BD /* Date+NearestTests.swift in Sources */,
+				B576C0142619ACF800B24FF8 /* AppDB+RecordsTests.swift in Sources */,
 				B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */,
-				B57C88E325E40F4D0060FE13 /* AppDB+RecordsTests.swift in Sources */,
 				B5E3A8E825AE205D00DAC8DD /* ibs_trackerTests.swift in Sources */,
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
 				B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */,
