@@ -16,19 +16,22 @@ struct SearchView: View {
 
   var body: some View {
     NavigationView {
-      ZStack {
-        SearchList(search: $search, filters: $filters)
-        if showFilters {
-          filtersList
+      GeometryReader { geometry in
+        ZStack {
+          SearchList(search: $search, filters: $filters)
+          if showFilters {
+            filtersList
+          }
         }
-      }
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        ToolbarItem(placement: .principal) {
-          SearchField(search: $search)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          toggleFilters
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          ToolbarItem(placement: .principal) {
+            SearchField(search: $search)
+              .frame(width: (geometry.width > 210 ? geometry.width - 70 : 260))
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            toggleFilters
+          }
         }
       }
     }
@@ -80,30 +83,6 @@ struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
     SearchView()
       .environmentObject(IBSData())
-  }
-}
-
-struct SearchField: View {
-  @Environment(\.colorScheme) var colorScheme
-  @Binding var search: String
-
-  private var backgroundColor: Color { colorScheme == .dark ? .black : .white }
-
-  var body: some View {
-    return TextField("Search ...", text: $search)
-      .padding(5)
-      .padding(.leading, 20)
-      .frame(width: 300)
-      .backgroundColor(backgroundColor)
-      .cornerRadius(8)
-      .overlay(
-        HStack {
-          Image(systemName: "magnifyingglass")
-            .foregroundColor(.secondary)
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 4)
-
-        })
   }
 }
 
