@@ -35,10 +35,6 @@ struct SymptomsView: View {
   private let verticalAxisHeight: CGFloat = 10
   private let verticalAxisWidth: CGFloat = 45
 
-  private var recordCount: Int {
-    appState.records.count
-  }
-
   private var firstRecord: IBSRecord {
     appState.records.first ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
   }
@@ -116,10 +112,14 @@ struct SymptomsView: View {
 
   private var chart: some View {
     GeometryReader { geometry in
-      SymptomsGraphView(timestamps: $timestamps, filteredScores: $filteredScores, barsPerColumn: barsPerColumn, numberOfColumns: numberOfColumns)
-        .onAppear {
-          graphSetting(height: geometry.height)
-        }
+      if appState.tabSelection == .chart { // guard against calculating incorrect height
+        SymptomsGraphView(timestamps: $timestamps, filteredScores: $filteredScores, barsPerColumn: barsPerColumn, numberOfColumns: numberOfColumns)
+          .onAppear {
+            graphSetting(height: geometry.height)
+          }
+      } else {
+        EmptyView()
+      }
     }
   }
 
