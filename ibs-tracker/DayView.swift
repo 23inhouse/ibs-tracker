@@ -42,7 +42,8 @@ struct DayView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          HStack {
+          HStack(spacing: 5) {
+            Text(date.string(for: "EEEE"))
             DatePicker("Current date", selection: $appState.activeDate, displayedComponents: .date)
               .datePickerStyle(CompactDatePickerStyle())
               .labelsHidden()
@@ -52,7 +53,7 @@ struct DayView: View {
             }
             .disabled(isShowingToday)
           }
-          .frame(height: 150, alignment: .trailing)
+          .frame(height: 150)
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: prevDay) {
