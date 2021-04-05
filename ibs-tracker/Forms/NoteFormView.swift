@@ -39,7 +39,7 @@ struct NoteFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Note", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         UIKitBridge.SwiftUITextView("Notes...", text: $text, isFirstResponder: isFirstResponder)
           .frame(height: 150)

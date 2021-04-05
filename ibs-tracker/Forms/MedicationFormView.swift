@@ -50,7 +50,7 @@ struct MedicationFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Medication", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         if recentMedications.isNotEmpty {
           recentMedicationSection

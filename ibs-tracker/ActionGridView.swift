@@ -52,8 +52,8 @@ struct ActionGridView: View {
 
       PaddedHStack {
         ActionNavigationLink(type: .mood, text: "Mood\nStress") { MoodFormView() }
-        ActionNavigationLink(type: .ache, text: "Headache\nBody ache") { AcheFormView() }
-        ActionNavigationLink(type: .gut, text: "Bloating\nPain") { GutFormView() }
+        ActionNavigationLink(type: .ache, text: "Headache\nBody pain") { AcheFormView() }
+        ActionNavigationLink(type: .gut, text: "Pain\nBloating") { GutFormView() }
       }
 
       PaddedHStack {

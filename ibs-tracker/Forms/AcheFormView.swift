@@ -38,7 +38,7 @@ struct AcheFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Headache / Body pain", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         ScaleSlider($headache, "Headache", descriptions: Scales.headacheDescriptions)
         ScaleSlider($bodyache, "Other body pain", descriptions: Scales.bodyacheDescriptions)

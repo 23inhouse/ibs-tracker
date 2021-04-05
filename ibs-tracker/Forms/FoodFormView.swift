@@ -56,7 +56,7 @@ struct FoodFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Meal", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
           .onTapGesture {

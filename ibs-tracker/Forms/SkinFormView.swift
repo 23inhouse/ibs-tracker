@@ -40,7 +40,7 @@ struct SkinFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Skin condition", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         ScaleSlider($condition, "Condition", descriptions: Scales.skinConditionDescriptions)
         TextEditor(text: $text)

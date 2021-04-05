@@ -55,7 +55,7 @@ struct BMFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Bowel Movement", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         bristolTypePicker
       }

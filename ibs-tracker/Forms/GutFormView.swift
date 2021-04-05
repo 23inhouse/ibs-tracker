@@ -38,7 +38,7 @@ struct GutFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Pain / Bloating", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         ScaleSlider($pain, "Pain", descriptions: Scales.gutPainDescriptions)
         ScaleSlider($bloating, "Bloating", descriptions: Scales.bloatingDescriptions)

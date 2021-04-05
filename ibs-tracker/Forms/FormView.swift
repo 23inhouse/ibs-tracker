@@ -17,10 +17,13 @@ struct FormView<Content: View>: View {
   private var editMode: Bool { editableRecord != nil }
   private var editableRecord: IBSRecordType? = nil
 
-  init(viewModel: FormViewModel, editableRecord: IBSRecordType? = nil, @ViewBuilder content: @escaping (ScrollViewProxy) -> Content) {
+  private let title: String
+
+  init(_ title: String, viewModel: FormViewModel, editableRecord: IBSRecordType? = nil, @ViewBuilder content: @escaping (ScrollViewProxy) -> Content) {
     self._viewModel = ObservedObject(initialValue: viewModel)
     self.content = content
     self.editableRecord = editableRecord
+    self.title = editableRecord != nil ? "Edit \(title)" : "Add \(title)"
   }
 
   var body: some View {
@@ -31,6 +34,12 @@ struct FormView<Content: View>: View {
         content(scroller)
 
         DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp)
+      }
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          Text(title)
+        }
       }
       .onAppear() {
         viewModel.initializeTimestamp()
@@ -88,7 +97,7 @@ struct FormView<Content: View>: View {
 
 struct FormView_Previews: PreviewProvider {
   static var previews: some View {
-    FormView(viewModel: FormViewModel()) { _ in
+    FormView("Meal", viewModel: FormViewModel()) { _ in
       FoodFormView()
     }
     .environmentObject(IBSData())

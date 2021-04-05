@@ -38,7 +38,7 @@ struct MoodFormView: View {
   }
 
   var body: some View {
-    FormView(viewModel: viewModel, editableRecord: editableRecord) { scroller in
+    FormView("Mood / Stress", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         ScaleSlider($feel, "Mood", descriptions: MoodType.descriptions)
         ScaleSlider($stress, "Stress", descriptions: Scales.stressDescriptions)
