@@ -16,6 +16,7 @@ struct MedicationFormView: View {
   @State private var isEditingName: Bool = false
   @State private var nameIsCompleted: Bool = false
   @State private var medicationTypes: [MedicationType] = []
+  @State private var recentMedications: [IBSRecord] = []
   @State private var recentMedicationSelection: IBSRecord?
 
   @State private var showAllTags: Bool = false
@@ -46,10 +47,6 @@ struct MedicationFormView: View {
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
     return IBSRecord(medication: name, type: medicationTypes.first ?? .none, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
-  }
-
-  private var recentMedications: [IBSRecord] {
-    appState.recentRecords(of: .medication)
   }
 
   var body: some View {
@@ -85,6 +82,7 @@ struct MedicationFormView: View {
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
     }
     .onAppear {
+      calcRecentMedications()
       calcSuggestedTags()
     }
     .onChange(of: [showAllTags, isEditingName, nameIsCompleted]) { _ in
@@ -123,6 +121,12 @@ struct MedicationFormView: View {
 
   private func editName(_ isEditing: Bool) {
     isEditingName = isEditing
+  }
+
+  private func calcRecentMedications() {
+    DispatchQueue.main.async {
+      recentMedications = appState.recentRecords(of: .medication)
+    }
   }
 
   private func calcSuggestedTags() {

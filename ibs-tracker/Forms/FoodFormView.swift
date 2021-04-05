@@ -16,6 +16,7 @@ struct FoodFormView: View {
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
   @State private var medicinal: Bool = false
+  @State private var recentFoods: [IBSRecord] = []
   @State private var recentFoodSelection: IBSRecord?
   @State private var isEditingName: Bool = false
   @State private var nameIsCompleted: Bool = false
@@ -43,10 +44,6 @@ struct FoodFormView: View {
 
   private var recentFoodPlaceholder: String {
     name.isEmpty && viewModel.tags.isEmpty ? "Choose from recent meals" : "Replace with recent meal"
-  }
-
-  private var recentFoods: [IBSRecord] {
-    appState.recentRecords(of: .food)
   }
 
   private var record: IBSRecord? {
@@ -85,6 +82,7 @@ struct FoodFormView: View {
       }
     }
     .onAppear {
+      calcRecentFoods()
       calcSuggestedTags()
     }
     .onChange(of: [showAllTags, isEditingName, nameIsCompleted]) { _ in
@@ -126,6 +124,12 @@ struct FoodFormView: View {
 
   private func editName(_ isEditing: Bool) {
     isEditingName = isEditing
+  }
+
+  private func calcRecentFoods() {
+    DispatchQueue.main.async {
+      recentFoods = appState.recentRecords(of: .food)
+    }
   }
 
   private func calcSuggestedTags() {
