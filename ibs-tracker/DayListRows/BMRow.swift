@@ -14,15 +14,29 @@ struct BMRowView: View {
     self.record = record
   }
 
+  private var scale: BristolType {
+    record.bristolScale ?? .b3
+  }
+
+  private var color: Color {
+    ColorCodedContent.bristolColor(for: scale)
+  }
+
   var body: some View {
     LazyNavigationLink(destination: BMFormView(for: record)) {
       DayRowView(record as! IBSRecord, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
-        Text(record.bristolDescription())
-          .font(.callout)
-          .foregroundColor(.secondary)
-          .frame(height: 25, alignment: .leading)
-          .lineLimit(1)
+        HStack {
+          Image(systemName: "\(scale.rawValue).circle")
+            .resizedToFit()
+            .foregroundColor(color)
+            .frame(15)
+          Text(record.bristolDescription())
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .frame(height: 25, alignment: .leading)
+            .lineLimit(1)
+        }
       }
     }
   }

@@ -14,7 +14,8 @@ struct TimestampView: View {
     Text(record.timestamp.string(for: "h:mm a"))
       .font(.callout)
       .allowsTightening(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-      .frame(alignment: .leading)
+      .frame(width: 120, alignment: .leading)
+
   }
 }
 

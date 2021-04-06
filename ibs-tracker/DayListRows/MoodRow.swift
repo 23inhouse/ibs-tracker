@@ -29,25 +29,20 @@ struct MoodRowView: View {
   var body: some View {
     LazyNavigationLink(destination: MoodFormView(for: record)) {
       DayRowView(record as! IBSRecord, color: worstColor, tags: record.tags) {
-        HStack(alignment: .top, spacing: 0) {
-          TimestampView(record: record as! IBSRecord)
-          Spacer()
-          VStack(alignment: .trailing, spacing: 4) {
-            if let feel = record.feel {
-              PropertyView(
-                text: record.feelText(),
-                scale: feel.rawValue,
-                color: moodColor
-              )
-            }
-            if let stress = record.stress {
-              PropertyView(
-                text: record.stressText(),
-                scale: stress.rawValue,
-                color: stressColor
-              )
-            }
-          }
+        TimestampView(record: record as! IBSRecord)
+        if let feel = record.feel {
+          PropertyView(
+            text: record.feelText(),
+            scale: feel.rawValue,
+            color: moodColor
+          )
+        }
+        if let stress = record.stress {
+          PropertyView(
+            text: record.stressText(),
+            scale: stress.rawValue,
+            color: stressColor
+          )
         }
       }
     }

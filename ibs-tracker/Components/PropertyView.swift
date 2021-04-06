@@ -11,13 +11,13 @@ struct PropertyView: View {
   let text: String?
   let scale: Int
   let color: Color?
-  let direction: LayoutDirection?
+  let direction: LayoutDirection
 
-  init(text: String?, scale: Int, color: Color?, direction: LayoutDirection? = .rightToLeft) {
+  init(text: String?, scale: Int, color: Color?, direction: LayoutDirection? = nil) {
     self.text = text
     self.scale = scale
     self.color = color
-    self.direction = direction
+    self.direction = direction ?? .leftToRight
   }
 
   var body: some View {
@@ -47,8 +47,8 @@ struct PropertyView_Previews: PreviewProvider {
   static var previews: some View {
     HStack {
       VStack {
-        PropertyView(text: "High", scale: 4, color: .purple)
-        PropertyView(text: "Good", scale: 2, color: .green)
+        PropertyView(text: "High", scale: 4, color: .purple, direction: .rightToLeft)
+        PropertyView(text: "Good", scale: 2, color: .green, direction: .rightToLeft)
       }
       VStack {
         PropertyView(text: "High", scale: 4, color: .purple, direction: .leftToRight)

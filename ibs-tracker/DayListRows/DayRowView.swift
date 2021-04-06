@@ -29,9 +29,11 @@ struct DayRowView<Content>: View where Content: View {
   var body: some View {
     HStack(alignment: .top, spacing: 5) {
       iconView
+        .padding(.vertical, 7)
       VStack(alignment: .leading, spacing: 3) {
         contentView
         tagView
+          .padding(.leading, 24)
       }
       .frame(maxWidth: .infinity)
     }
@@ -51,7 +53,7 @@ struct DayRowView<Content>: View where Content: View {
         RowIconView(type: type, color: color, medicinal: medicinal)
       }
     }
-    .frame(width: 50, alignment: .center)
+    .frame(width: 50, height: 50)
   }
 
   var tagView: some View {
@@ -61,10 +63,18 @@ struct DayRowView<Content>: View where Content: View {
 }
 
 struct DayRowView_Previews: PreviewProvider {
+  static let record = IBSRecord(timestamp: Date(), bloating: .mild, pain: nil)
   static var previews: some View {
-    DayRowView(IBSRecord(timestamp: Date(), bloating: .mild, pain: nil), color: .purple, tags: ["Foobar"]) {
-      VStack(alignment: .trailing) {
+    List {
+      DayRowView(record, color: .purple, tags: ["Foobar"]) {
+        TimestampView(record: IBSRecord(condition: .moderate, timestamp: Date()))
         Text("My Row Content with lots and lots of c o n t e n t")
+        PropertyView(
+          text: record.bloatingText(),
+          scale: record.bloating!.rawValue,
+          color: ColorCodedContent.scaleColor(for: record.bloating
+          )
+        )
       }
     }
   }

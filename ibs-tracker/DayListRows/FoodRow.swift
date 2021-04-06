@@ -22,29 +22,23 @@ struct FoodRowView: View {
     LazyNavigationLink(destination: FoodFormView(for: record)) {
       DayRowView(record as! IBSRecord, color: foodColor, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
-        Group {
-          Text(record.text ?? "No meal name recorded")
-            .font(.callout)
-            .foregroundColor(.secondary)
+        if let risk = record.risk {
+          PropertyView(
+            text: record.riskText(),
+            scale: risk.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.risk)
+          )
         }
-        HStack(spacing: 5) {
-          if let risk = record.risk {
-            PropertyView(
-              text: record.riskText(),
-              scale: risk.rawValue,
-              color: ColorCodedContent.scaleColor(for: record.risk),
-              direction: .leftToRight
-            )
-          }
-          if let size = record.size {
-            PropertyView(
-              text: record.sizeText(),
-              scale: size.rawValue,
-              color: ColorCodedContent.foodSizeColor(for: record.size),
-              direction: .leftToRight
-            )
-          }
+        if let size = record.size {
+          PropertyView(
+            text: record.sizeText(),
+            scale: size.rawValue,
+            color: ColorCodedContent.foodSizeColor(for: record.size)
+          )
         }
+        Text(record.text ?? "No meal name recorded")
+          .font(.callout)
+          .foregroundColor(.secondary)
       }
     }
   }

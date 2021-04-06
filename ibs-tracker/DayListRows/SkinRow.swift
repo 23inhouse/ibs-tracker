@@ -21,27 +21,19 @@ struct SkinRowView: View {
   var body: some View {
     LazyNavigationLink(destination: SkinFormView(for: record)) {
       DayRowView(record as! IBSRecord, color: skinConditionColor, tags: record.tags) {
-        HStack(alignment: .top, spacing: 0) {
-          VStack(alignment: .leading) {
-            TimestampView(record: record as! IBSRecord)
-            Text(String(describing: record.text ?? ""))
-              .font(.callout)
-              .lineLimit(2)
-              .multilineTextAlignment(.leading)
-              .foregroundColor(.secondary)
-              .frame(minHeight: 25, alignment: .leading)
-          }
-          .layoutPriority(1)
-          Spacer()
-          VStack(alignment: .trailing, spacing: 4) {
-            if let skin = record.condition {
-              PropertyView(
-                text: record.skinText(),
-                scale: skin.rawValue,
-                color: ColorCodedContent.skinConditionColor(for: record.condition)
-              )
-            }
-          }
+        TimestampView(record: record as! IBSRecord)
+        Text(String(describing: record.text ?? ""))
+          .font(.callout)
+          .lineLimit(2)
+          .multilineTextAlignment(.leading)
+          .foregroundColor(.secondary)
+          .frame(minHeight: 25, alignment: .leading)
+        if let skin = record.condition {
+          PropertyView(
+            text: record.skinText(),
+            scale: skin.rawValue,
+            color: ColorCodedContent.skinConditionColor(for: record.condition)
+          )
         }
       }
     }

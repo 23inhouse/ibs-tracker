@@ -21,7 +21,7 @@ struct WeightRowView: View {
         if record.weight != nil {
           Text(record.weightDescription())
             .font(.body)
-            .foregroundColor(.blue)
+            .foregroundColor(.secondary)
             .frame(minHeight: 25, alignment: .leading)
         }
       }

@@ -14,6 +14,12 @@ struct MedicationRowView: View {
     self.record = record
   }
 
+  private var medicationNames: String {
+    guard let medicationTypes = record.medicationType else { return "" }
+
+    return medicationTypes.map(\.rawValue).joined(separator: ", ")
+  }
+
   var body: some View {
     LazyNavigationLink(destination: MedicationFormView(for: record)) {
       DayRowView(record as! IBSRecord, color: .secondary, tags: record.tags) {
@@ -22,6 +28,10 @@ struct MedicationRowView: View {
           .font(.callout)
           .foregroundColor(.secondary)
           .frame(minHeight: 25, alignment: .leading)
+        Text(medicationNames)
+          .font(.caption2)
+          .foregroundColor(.secondary)
+          .padding(.leading, 24)
       }
     }
   }
