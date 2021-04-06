@@ -18,7 +18,7 @@ protocol SkinRecord: IBSRecordType {
 
 extension IBSRecord: SkinRecord {
   init(condition: Scales, timestamp: Date, text: String? = nil, tags: [String] = []) {
-    self.type = .note
+    self.type = .skin
     self.timestamp = timestamp
     self.condition = condition
     self.text = text
