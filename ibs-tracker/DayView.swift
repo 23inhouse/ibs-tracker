@@ -21,7 +21,7 @@ struct DayView: View {
     return displayDate == currentDate
   }
 
-  var records: [IBSRecord] {
+  private var records: [IBSRecord] {
     let dayRecord = appState.dayRecords
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 
@@ -42,18 +42,7 @@ struct DayView: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          HStack(spacing: 5) {
-            Text(date.string(for: "EEEE"))
-            DatePicker("Current date", selection: $appState.activeDate, displayedComponents: .date)
-              .datePickerStyle(CompactDatePickerStyle())
-              .labelsHidden()
-            Button(action: changeDayToToday) {
-              Image(systemName: "calendar.circle")
-                .padding(5)
-            }
-            .disabled(isShowingToday)
-          }
-          .frame(height: 150)
+          dateTitle
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: prevDay) {
@@ -70,7 +59,26 @@ struct DayView: View {
     .gesture(swipeGesture)
   }
 
-  var swipeGesture: _EndedGesture<DragGesture> {
+  private var dateTitle: some View {
+    let smallScreenSize = UIScreen.mainWidth < 375
+    return HStack(spacing: 5) {
+      DatePicker("Current date", selection: $appState.activeDate, displayedComponents: .date)
+        .datePickerStyle(CompactDatePickerStyle())
+        .labelsHidden()
+        .frame(width: 120, alignment: .trailing)
+      Text(date.string(for: smallScreenSize ? "EEE" : "EEEE"))
+        .frame(width: smallScreenSize ? 40 : 90)
+      Button(action: changeDayToToday) {
+        Image(systemName: "calendar.circle")
+          .resizable()
+          .frame(width: 21, height: 21)
+          .padding(5)
+      }
+      .disabled(isShowingToday)
+    }
+  }
+
+  private var swipeGesture: _EndedGesture<DragGesture> {
     DragGesture(minimumDistance: 20)
       .onEnded {
         let start = $0.startLocation
@@ -92,7 +100,9 @@ private extension DayView {
   }
 
   func changeDayToToday() {
-    appState.activeDate = IBSData.currentDate()
+    withAnimation {
+      appState.activeDate = IBSData.currentDate()
+    }
   }
 
   func dateString() -> String {
@@ -102,11 +112,15 @@ private extension DayView {
   }
 
   func prevDay() {
-    changeDay(by: -1)
+    withAnimation {
+      changeDay(by: -1)
+    }
   }
 
   func nextDay() {
-    changeDay(by: 1)
+    withAnimation {
+      changeDay(by: 1)
+    }
   }
 }
 

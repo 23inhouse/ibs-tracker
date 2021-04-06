@@ -23,7 +23,7 @@ class IBSDataTests: XCTestCase {
     let dataSet = try bundle.decode(DataSet.self, from: "records-recent-food.json")
     try appDB.importRecords(dataSet.ibsRecords)
 
-    let ibsData = IBSData(.test)
+    let ibsData = IBSData(appDB: .test)
     let recordCount = ibsData.recentRecords(of: .food).count
     XCTAssertEqual(recordCount, 2, "wrong number records")
   }
@@ -33,7 +33,7 @@ class IBSDataTests: XCTestCase {
     let dataSet = try bundle.decode(DataSet.self, from: "records-day-one-only.json")
     try appDB.importRecords(dataSet.ibsRecords)
 
-    let ibsData = IBSData(.test)
+    let ibsData = IBSData(appDB: .test)
 
     let dayRecords = ibsData.dayRecords
     let recordCount = dayRecords.count
@@ -45,7 +45,7 @@ class IBSDataTests: XCTestCase {
     let dataSet = try bundle.decode(DataSet.self, from: "records-day-two-days.json")
     try appDB.importRecords(dataSet.ibsRecords)
 
-    let ibsData = IBSData(.test)
+    let ibsData = IBSData(appDB: .test)
 
     let dayRecords = ibsData.dayRecords
     let recordCount = dayRecords.count
@@ -57,7 +57,7 @@ class IBSDataTests: XCTestCase {
     let dataSet = try bundle.decode(DataSet.self, from: "records-recent-food.json")
     try appDB.importRecords(dataSet.ibsRecords)
 
-    let ibsData = IBSData(.test)
+    let ibsData = IBSData(appDB: .test)
 
     let tags = ibsData.tags(for: .food)
     XCTAssertEqual(tags, ["Peanut butter", "Potato chips"], "wrong tag records")

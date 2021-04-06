@@ -107,11 +107,12 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
     SearchView()
-      .environmentObject(IBSData())
+      .environmentObject(IBSData([IBSRecord(condition: .mild, timestamp: Date())]))
   }
 }
 
 struct SearchList: View {
+  @Environment(\.colorScheme) var colorScheme
   @EnvironmentObject private var appState: IBSData
 
   @State var records: [DayRecord] = []
@@ -123,16 +124,19 @@ struct SearchList: View {
     ScrollView {
       LazyVStack(spacing: 0) {
         ForEach(records) { dayRecord in
-          Text(dayRecord.date.string(for: "EEEE - dd MMMM YYYY"))
-            .padding(.vertical, 5)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .background(
-              Color.secondary
-                .opacity(0.5)
-                .cornerRadius(radius: 20, corners: [.topLeft, .topRight])
-            )
-            .padding(.horizontal, 10)
-            .padding(.top, 10)
+          Button(dayRecord.date.string(for: "dd MMMM YYYY - EEEE")) {
+            DispatchQueue.main.async {
+              appState.tabSelection = .day
+              withAnimation {
+                appState.activeDate = dayRecord.date
+              }
+            }
+          }
+          .foregroundColor(colorScheme == .dark ? .black : .white)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(10)
+          .backgroundColor(.blue)
+
           ForEach(dayRecord.ibsRecords, id: \.self) { record in
             ItemTypeDayRowView(record: record)
             Divider()

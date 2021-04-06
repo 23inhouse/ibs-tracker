@@ -24,7 +24,7 @@ class IBSData: ObservableObject {
   @Published var records: [IBSRecord]
 
   static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
-  static var current = IBSData(.current)
+  static var current = IBSData(appDB: .current)
 
   private var allRecords: [IBSRecord] {
     didSet {
@@ -36,12 +36,21 @@ class IBSData: ObservableObject {
 
   private var appDB: AppDB
 
-  init(_ appDB: AppDB = .current) {
+  init(appDB: AppDB) {
     guard !(ibs_trackerApp.isTestRunning() && appDB != .test) else {
       fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
     }
     self.appDB = appDB
     self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
+    self.dayRecords = IBSData.groupByDay(allRecords)
+    self.lastWeight = IBSData.lastWeight(allRecords)
+    self.activeDate = IBSData.currentDate()
+    self.records = allRecords.reversed()
+  }
+
+  init(_ ibsRecords: [IBSRecord] = []) {
+    self.appDB = .test
+    self.allRecords = ibsRecords
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
     self.activeDate = IBSData.currentDate()
