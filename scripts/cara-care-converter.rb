@@ -40,6 +40,7 @@ MEDICATION_NAMES = [
   "ibuprofen",
   "enema",
   "colonic",
+  "laxative",
 ]
 
 TAG_TRANSLATIONS = {
@@ -143,6 +144,8 @@ TAG_TRANSLATIONS = {
   "Gewürzmischungen mit Knoblauch und Zwiebeln" => "Spice mix w/ onions & garlic",
   "Paprika" => "Paprika",
   "Muskat" => "Nutmeg",
+  "Blumenkohl" => "Cauliflower",
+  "Linsen (grün)" => "Lentils (green)",
 }
 
 FOOD_TAGS_TO_REMOVE = [
@@ -297,7 +300,7 @@ end
 def text(mode, id, text, tag_names)
   if [:food, :medication].include? mode
     if tag_names[id].nil?
-      if !text.include?("Enema") && !text.include?("Colonic")
+      if !text.include?("Enema") && !text.include?("Colonic") && !text.include?("laxative")
         puts "Warning: No name for [#{id}] in associated_tags using [#{text}]"
       end
       return text
@@ -551,6 +554,12 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
       next_tags = ["Multi-vitamin"]
     end
 
+    if next_text.include? " (laxative)"
+      next_text = next_text.split(" (")[0]
+      next_tags = [next_text]
+      medication_type = [:laxative]
+    end
+
     cleaned_tags = []
     next_tags.each do |next_tag|
       next_tag.slice! " capsule" if next_tag.include? " capsule"
@@ -645,6 +654,8 @@ def process_line(line, prev_mode, prev_submode, prev_timestamp, prev_scale, tag_
       |       "tags": #{next_tags}
     END
   else # :note
+    downcased = next_text.downcase
+    next_tags << "NSFW" if downcased.include?("semen") || downcased.include?("masturbation")
     lines << <<-END
       |       "type": "#{next_mode}",
       |       "timestamp": "#{next_timestamp}",
