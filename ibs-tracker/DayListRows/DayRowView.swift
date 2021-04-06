@@ -33,7 +33,10 @@ struct DayRowView<Content>: View where Content: View {
       VStack(alignment: .leading, spacing: 3) {
         contentView
         tagView
+          .frame(maxWidth: .infinity, alignment: .trailing)
           .padding(.leading, 24)
+          .padding(.top, 3)
+          .padding(.trailing, 5)
       }
       .frame(maxWidth: .infinity)
     }
@@ -58,7 +61,6 @@ struct DayRowView<Content>: View where Content: View {
 
   var tagView: some View {
     TagCloudView(tags: tags, resize: type != .food)
-      .padding(.top, 3)
   }
 }
 

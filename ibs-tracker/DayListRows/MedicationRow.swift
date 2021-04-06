@@ -29,9 +29,11 @@ struct MedicationRowView: View {
           .foregroundColor(.secondary)
           .frame(minHeight: 25, alignment: .leading)
         Text(medicationNames)
-          .font(.caption2)
+          .font(.caption)
           .foregroundColor(.secondary)
+          .frame(maxWidth: .infinity, alignment: .trailing)
           .padding(.leading, 24)
+          .padding(.trailing, 5)
       }
     }
   }

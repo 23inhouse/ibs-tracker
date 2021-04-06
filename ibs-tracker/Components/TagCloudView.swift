@@ -27,6 +27,7 @@ struct TagCloudView: View {
     Text(tags.map { $0.firstUppercased }.joined(separator: ", "))
       .font(font)
       .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+      .align(.trailing)
   }
 }
 
