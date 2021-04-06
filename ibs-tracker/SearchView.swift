@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct SearchView: View {
+  @EnvironmentObject private var appState: IBSData
+
   @State private var filters: [ItemType] = []
+  @State private var filterOffset: CGSize = CGSize(UIScreen.mainWidth, 0)
   @State private var showFilters: Bool = false
   @State private var search: String = ""
-
-  private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
   var body: some View {
     NavigationView {
       GeometryReader { geometry in
         ZStack {
           SearchList(search: $search, filters: $filters)
-          if showFilters {
-            filtersList
-          }
+          FilterList(filters: $filters)
+            .offset(filterOffset)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -30,51 +30,76 @@ struct SearchView: View {
               .frame(width: (geometry.width > 210 ? geometry.width - 70 : 260))
           }
           ToolbarItem(placement: .navigationBarTrailing) {
-            toggleFilters
+            toggleFiltersButton
           }
         }
       }
     }
-    .gesture(DragGesture().onChanged { _ in endEditing(true) })
+    .gesture(swipeFilterGesture)
+    .simultaneousGesture(clearKeyboardGesture)
   }
 
-  private var filtersList: some View {
-    List {
-      ForEach(ItemType.allCases, id: \.self) { itemType in
-        Toggle(isOn: Binding(
-          get: { filters.contains(itemType) },
-          set: { filters.toggle(on: $0, element: itemType) }
-        )) {
-          HStack {
-            TypeShape(type: itemType)
-              .stroke(style: strokeStyle)
-              .foregroundColor(.secondary)
-              .frame(25)
-              .padding(5)
-            Text(itemType.rawValue.capitalized)
-            Spacer()
-          }
-          .contentShape(Rectangle())
-          .onTapGesture {
-            withAnimation {
-              filters.toggle(on: !filters.contains(itemType), element: itemType)
-            }
+  private var swipeFilterGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+    DragGesture()
+      .onChanged { gesture in
+        let offset = filterOffset.width
+        let translation = gesture.translation.width
+        let xAnchor = showFilters ? 0 : UIScreen.mainWidth
+
+        guard offset >= 0 && offset <= UIScreen.mainWidth else { return }
+
+        filterOffset.width = xAnchor + translation
+        filterOffset.height = 0
+      }.onEnded { _ in
+        let margin: CGFloat = UIScreen.mainWidth / 4.5
+        let offset = filterOffset.width
+
+        if !showFilters && offset > UIScreen.mainWidth - margin {
+          showFilters.toggle()
+        }
+        else if showFilters && offset < margin {
+          showFilters.toggle()
+        }
+
+        DispatchQueue.main.async { toggleFilter() }
+      }
+  }
+
+  private var clearKeyboardGesture: _ChangedGesture<DragGesture> {
+    DragGesture().onChanged { _ in endEditing(true) }
+  }
+
+  private var swipeFilterAwayGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+    DragGesture()
+      .onChanged { gesture in
+        guard gesture.translation.width > 0 else { return }
+
+        filterOffset.width = gesture.translation.width
+        filterOffset.height = 0
+      }.onEnded { _ in
+        DispatchQueue.main.async {
+          if filterOffset.width > 100 {
+            toggleFilter()
+          } else {
+            filterOffset.width = 0
           }
         }
       }
-    }
-    .gesture(DragGesture().onChanged { value in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        showFilters.toggle()
-      }
-    })
   }
 
-  private var toggleFilters: some View {
+  private var toggleFiltersButton: some View {
     Button {
-      showFilters.toggle()
+      toggleFilter()
     } label: {
       Image(systemName: "slider.horizontal.3")
+    }
+  }
+
+  private func toggleFilter() {
+    withAnimation {
+      showFilters.toggle()
+      let x = showFilters ? 0 : UIScreen.mainWidth
+      filterOffset = CGSize(x, 0)
     }
   }
 }
@@ -146,5 +171,39 @@ private extension SearchList {
 
       records = dayRecords.compactMap { $0 }
     }
+  }
+}
+
+struct FilterList: View {
+  @Environment(\.colorScheme) var colorScheme
+
+  @Binding var filters: [ItemType]
+
+  private let allCases: [ItemType] = ItemType.allCases.filter { $0 != .none }
+  private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
+
+  var body: some View {
+    VStack {
+      ForEach(allCases, id: \.self) { itemType in
+        HStack {
+          Toggle(isOn: Binding(
+            get: { filters.contains(itemType) },
+            set: { filters.toggle(on: $0, element: itemType) }
+          )) {
+            TypeShape(type: itemType)
+              .stroke(style: strokeStyle)
+              .foregroundColor(.secondary)
+              .frame(25)
+            Text(itemType.rawValue.capitalized)
+            Spacer()
+          }
+        }
+        .padding(.horizontal, 10)
+        Divider()
+      }
+      Spacer()
+    }
+    .padding(.top, 10)
+    .backgroundColor(colorScheme == .dark ? .black : .white)
   }
 }
