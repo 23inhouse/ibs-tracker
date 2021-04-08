@@ -35,8 +35,6 @@ struct WeightFormView: View {
 
   var body: some View {
     FormView("Weight", viewModel: viewModel, editableRecord: editableRecord) { scroller in
-      SaveButtonSection(name: "Weight", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-
       Section {
         WeightPicker(weight: $weight)
           .pickerStyle(InlinePickerStyle())
@@ -48,6 +46,8 @@ struct WeightFormView: View {
       }
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+
+      SaveButtonSection(name: "Weight", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

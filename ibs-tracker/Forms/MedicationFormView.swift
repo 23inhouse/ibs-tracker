@@ -75,11 +75,11 @@ struct MedicationFormView: View {
       }
       .id(2)
 
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+
       if name.isNotEmpty && medicationTypes.isNotEmpty {
         SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
     }
     .onAppear {
       calcRecentMedications()

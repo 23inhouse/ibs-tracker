@@ -60,10 +60,6 @@ struct BMFormView: View {
         bristolTypePicker
       }
 
-      if bristolScale != nil {
-        SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
-
       Section {
         evacuationPicker
         smellPicker

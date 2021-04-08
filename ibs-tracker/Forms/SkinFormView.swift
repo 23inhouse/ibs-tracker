@@ -51,11 +51,11 @@ struct SkinFormView: View {
       }
       .id(1)
 
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+
       if condition != .none {
         SaveButtonSection(name: "Skin condition", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()

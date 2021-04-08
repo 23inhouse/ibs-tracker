@@ -50,11 +50,11 @@ struct NoteFormView: View {
       }
       .id(1)
 
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+
       if text.isNotEmpty {
         SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
       }
-
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()
