@@ -77,7 +77,9 @@ private extension IBSRecord {
     for tagName in tags {
       var tagID: Int64?
 
-      let validTagName = tagName.replacingOccurrences(of: "|", with: "--")
+      let validTagName = tagName
+        .replacingOccurrences(of: "|", with: "--")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
 
       do {
         var sqlTagRecord = SQLTagRecord(type: sqlIBSRecord.type, name: validTagName)

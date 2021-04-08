@@ -149,7 +149,7 @@ private extension SQLIBSRecord {
     timestamp = record.timestamp
     type = record.type.rawValue
 
-    text = record.text
+    text = record.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     bristolScale = record.bristolScale?.rawValue
     color = record.color?.rawValue
     pressure = nonNegativeOrNil(record.pressure?.rawValue)

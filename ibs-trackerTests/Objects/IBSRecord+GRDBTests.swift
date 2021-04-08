@@ -126,6 +126,23 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(sqlIBSMoodRecord.stress, nil, "The scale should be nil")
   }
 
+  func testInsertSQLWithWhitespaces() throws {
+    let timestamp = Date()
+    let ibsRecord = IBSRecord(food: "  non whitespaces  ", timestamp: timestamp, tags: ["  non whitespace tag  ", "  other tag  "], risk: nil, size: nil)
+    try ibsRecord.insertSQL(into: appDB)
+
+    guard let newSQLIBSRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: "food", at: timestamp) else {
+      throw "Couldn't select the inserted record"
+    }
+    XCTAssertEqual(newSQLIBSRecord.text, "non whitespaces", "The leading and trailing whitespaces should have been removed text")
+
+    let newSQLTagRecords = try appDB.selectRecords(in: SQLTagRecord.self, of: .food)
+    XCTAssertEqual(newSQLTagRecords.count, 2, "There should be 2 tags")
+    XCTAssertEqual(newSQLTagRecords.first!!.name, "non whitespace tag", "The leading and trailing whitespaces should have been removed from the tags")
+    XCTAssertEqual(newSQLTagRecords.last!!.name, "other tag", "The leading and trailing whitespaces should have been removed from the tags")
+  }
+
+
   func testUpdateSQL() throws {
     let recordTypeStrng = ItemType.bm.rawValue
     let originalBristolScale = BristolType.b4
