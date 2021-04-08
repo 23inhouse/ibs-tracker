@@ -40,6 +40,7 @@ struct WeightFormView: View {
       Section {
         WeightPicker(weight: $weight)
           .pickerStyle(InlinePickerStyle())
+          .scaleEffect(x: 0.33, y: 1.0, anchor: .center)
           .onAppear {
             guard !editMode else { return }
             weight = appState.lastWeight
@@ -96,6 +97,7 @@ struct WeightPicker: View {
     Picker("Weight", selection: $weight) {
       ForEach(weights, id: \.self) { weight in
         Text("\(String(describing: weight)) kg")
+          .scaleEffect(x: 3.0, y: 1.0, anchor: .center)
           .tag(weight)
       }
     }
