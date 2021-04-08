@@ -31,6 +31,8 @@ struct ScaleSlider<T: Sliderable>: View {
     self.descriptions = descriptions
   }
 
+  private let slideSize: CGFloat = 28
+
   private var defaultTitle: String { "\(title)" }
 
   private var description: String {
@@ -48,44 +50,62 @@ struct ScaleSlider<T: Sliderable>: View {
 
   var body: some View {
     VStack {
-      ZStack {
-        Text(description)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .foregroundColor(titleColor)
-          .background(
-            GeometryReader { proxy in
-              Color.clear.preference(key: SizePreferenceKey.self, value: proxy.size)
-            }
-          )
+      Text(description)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundColor(titleColor)
+        .background(sizeReader)
+        .onPreferenceChange(SizePreferenceKey.self, perform: widthSetter)
+      ZStack(alignment: .leading) {
+        Slider(value: $slider, in: -1...4, step: 0.1)
+          .accentColor(titleColor)
+          .onChange(of: slider, perform: { value in
+            guard let scale = T(rawValue: Int(value)) else { return }
+            titleColor = scale.scaleColor
+          })
+          .onAppear {
+            slider = Double(scale.rawValue)
+            titleColor = scale.scaleColor
+          }
+        Color.clear
+          .contentShape(Rectangle())
+          .frame(width: slideSize * 2, height: slideSize)
+          .offset(sliderOffset, 0)
+          .gesture(dragGesture)
       }
-      .onPreferenceChange(SizePreferenceKey.self) { preferences in
-        sliderWidth = preferences.width
-      }
-      Slider(value: $slider, in: -1...4, step: 0.1)
-        .accentColor(titleColor)
-        .gesture(
-          DragGesture()
-            .onChanged { gesture in
-              let movement = gesture.location.width
-              let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
-              guard abs(translation - slider) < 1.0 else { return }
-              slider = translation
-            }
-            .onEnded { gesture in
-              let movement = gesture.location.width
-              let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
-              scale = T(rawValue: Int(translation))!
-            }
-        )
-        .onChange(of: slider, perform: { value in
-          guard let scale = T(rawValue: Int(value)) else { return }
-          titleColor = scale.scaleColor
-        })
-        .onAppear {
-          slider = Double(scale.rawValue)
-          titleColor = scale.scaleColor
-        }
     }
+  }
+
+  private var sliderOffset: CGFloat {
+    let value = CGFloat(scale.rawValue) + 1
+    return value * sliderWidth / 5 - (value * (sliderWidth / slideSize / 2) + (slideSize / 2))
+  }
+
+  private var sizeReader: some View {
+    GeometryReader { proxy in
+      Color.clear.preference(key: SizePreferenceKey.self, value: proxy.size)
+    }
+  }
+
+  private var dragGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+    DragGesture()
+      .onChanged { gesture in
+        let movement = gesture.location.width
+        let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
+        guard abs(translation - slider) < 1.0 else { return }
+        slider = translation
+      }
+      .onEnded { gesture in
+        let movement = gesture.location.width
+        let translation = Double(round(Double(movement / sliderWidth * 5 - 1) * 10) / 10)
+        scale = T(rawValue: Int(translation))!
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+          slider = Double(scale.rawValue)
+        }
+      }
+  }
+
+  private func widthSetter(_ preferences: CGSize) {
+    sliderWidth = preferences.width
   }
 }
 
