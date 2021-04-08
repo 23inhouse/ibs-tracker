@@ -13,7 +13,7 @@ struct SaveButtonSection: View {
 
   var name: String
   var record: IBSRecord?
-  var isValidTimestamp: Bool = true
+  var savable: Bool = true
   var editMode: Bool = false
   var editTimestamp: Date?
 
@@ -33,18 +33,18 @@ struct SaveButtonSection: View {
           .frame(maxWidth: .infinity)
       }
     }
-    .modifierIf(isValidTimestamp) {
+    .modifierIf(savable) {
       $0
         .listRowBackground(Color.blue)
         .foregroundColor(.white)
     }
-    .modifierIf(!isValidTimestamp) {
+    .modifierIf(!savable) {
       $0
-        .listRowBackground(Color.secondary)
-        .opacity(0.8)
-        .foregroundColor(Color(red: 1, green: 0, blue: 0, opacity: 0.333))
+        .listRowBackground(Color.secondary.opacity(0.5))
+        .foregroundColor(.white)
+        .opacity(0.5)
     }
-    .disabled(!isValidTimestamp)
+    .disabled(!savable)
   }
 
   private func insertOrUpdate(completionHandler: @escaping () -> Void) {
@@ -71,8 +71,10 @@ struct SaveButtonSection: View {
 
 struct SaveButtonSection_Previews: PreviewProvider {
   static var previews: some View {
-    List {
+    Form {
       SaveButtonSection(name: "Meal")
+        .environmentObject(IBSData())
+      SaveButtonSection(name: "Meal", savable: false)
         .environmentObject(IBSData())
     }
   }

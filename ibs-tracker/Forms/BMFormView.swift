@@ -54,6 +54,11 @@ struct BMFormView: View {
     viewModel.tags.isEmpty ? "Add tag" : "Add another tag"
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      bristolScale != nil
+  }
+
   var body: some View {
     FormView("Bowel Movement", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -77,9 +82,7 @@ struct BMFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if bristolScale != nil {
-        SaveButtonSection(name: "Bowel Movement", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Bowel Movement", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

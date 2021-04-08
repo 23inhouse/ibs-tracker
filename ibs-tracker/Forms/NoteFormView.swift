@@ -38,6 +38,11 @@ struct NoteFormView: View {
     viewModel.tags.isEmpty ? "Add tag" : "Add another tag"
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      text.isNotEmpty
+  }
+
   var body: some View {
     FormView("Note", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -52,9 +57,8 @@ struct NoteFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if text.isNotEmpty {
-        SaveButtonSection(name: "Note", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Note", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
+        .disabled(!savable)
     }
     .onAppear {
       calcSuggestedTags()

@@ -37,6 +37,11 @@ struct AcheFormView: View {
     return IBSRecord(timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, headache: headache, bodyache: bodyache)
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      (bodyache != .none || headache != .none)
+  }
+
   var body: some View {
     FormView("Headache / Body pain", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -46,9 +51,7 @@ struct AcheFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if bodyache != .none || headache != .none {
-        SaveButtonSection(name: "Ache", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Ache", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

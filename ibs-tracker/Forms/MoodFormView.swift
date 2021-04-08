@@ -37,6 +37,11 @@ struct MoodFormView: View {
     return IBSRecord(timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, feel: feel, stress: stress)
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      (stress != .none || feel != .none)
+  }
+
   var body: some View {
     FormView("Mood / Stress", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -46,9 +51,7 @@ struct MoodFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if stress != .none || feel != .none {
-        SaveButtonSection(name: "Mood", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Mood", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

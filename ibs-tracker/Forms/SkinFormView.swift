@@ -39,6 +39,11 @@ struct SkinFormView: View {
     viewModel.tags.isEmpty ? "Add tag" : "Add another tag"
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      condition != .none
+  }
+
   var body: some View {
     FormView("Skin condition", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -53,9 +58,7 @@ struct SkinFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if condition != .none {
-        SaveButtonSection(name: "Skin condition", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Skin condition", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

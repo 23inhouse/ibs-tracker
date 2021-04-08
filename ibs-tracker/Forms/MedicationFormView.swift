@@ -49,6 +49,11 @@ struct MedicationFormView: View {
     return IBSRecord(medication: name, type: medicationTypes.first ?? .none, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      name.isNotEmpty && medicationTypes.isNotEmpty
+  }
+
   var body: some View {
     FormView("Medication", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -64,6 +69,9 @@ struct MedicationFormView: View {
             let scrollId = recentMedications.isNotEmpty ? 1 : 2
             viewModel.scrollTo(scrollId, scroller: scroller)
           }
+      }
+
+      Section {
         List {
           ForEach(availableMedicationTypes, id: \.self) { medicationType in
             Toggle(medicationType.rawValue.capitalized, isOn: Binding(
@@ -77,9 +85,7 @@ struct MedicationFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      if name.isNotEmpty && medicationTypes.isNotEmpty {
-        SaveButtonSection(name: "Medication", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Medication", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcRecentMedications()

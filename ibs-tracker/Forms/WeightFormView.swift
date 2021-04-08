@@ -33,6 +33,10 @@ struct WeightFormView: View {
     return IBSRecord(weight: weight, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp
+  }
+
   var body: some View {
     FormView("Weight", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
@@ -47,7 +51,7 @@ struct WeightFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
 
-      SaveButtonSection(name: "Weight", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
+      SaveButtonSection(name: "Weight", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcSuggestedTags()

@@ -55,8 +55,17 @@ struct FoodFormView: View {
     viewModel.tags.isEmpty ? "Add ingredient" : "Add another ingredient"
   }
 
+  private var savable: Bool {
+    viewModel.isValidTimestamp &&
+      name.isNotEmpty && viewModel.tags.isNotEmpty
+  }
+
   var body: some View {
     FormView("Meal", viewModel: viewModel, editableRecord: editableRecord) { scroller in
+      if recentFoods.isNotEmpty {
+        recentFoodSection
+      }
+
       Section {
         UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
           .onTapGesture {
@@ -67,19 +76,13 @@ struct FoodFormView: View {
       }
       .id(ScrollViewProxy.tagAnchor())
 
-      if recentFoods.isNotEmpty {
-        recentFoodSection
-      }
-
       Section {
         ScaleSlider($size, "Size", descriptions: FoodSizes.descriptions)
         ScaleSlider($risk, "Risk", descriptions: Scales.foodRiskDescriptions)
         Toggle("Medicinal", isOn: $medicinal)
       }
 
-      if name.isNotEmpty && viewModel.tags.isNotEmpty {
-        SaveButtonSection(name: "Meal", record: record, isValidTimestamp: viewModel.isValidTimestamp, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-      }
+      SaveButtonSection(name: "Meal", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }
     .onAppear {
       calcRecentFoods()
