@@ -32,8 +32,6 @@ struct FormView<Content: View>: View {
         DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp)
 
         content(scroller)
-
-        DatePickerSectionView(timestamp: $viewModel.timestamp, isValid: $viewModel.isValidTimestamp)
       }
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
