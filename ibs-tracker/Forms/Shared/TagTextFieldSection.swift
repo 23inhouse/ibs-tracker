@@ -13,13 +13,15 @@ struct TagTextFieldSection: View {
   @Binding private var suggestedTags: [String]
   @Binding private var isFirstResponder: Bool
 
+  private var onEditingChanged: (Bool) -> Void
   private var scroller: ScrollViewProxy
 
-  init(_ viewModel: FormViewModel, showAllTags: Binding<Bool>, suggestedTags: Binding<[String]>, isFirstResponder: Binding<Bool> = Binding.constant(false), scroller: ScrollViewProxy) {
+  init(_ viewModel: FormViewModel, showAllTags: Binding<Bool>, suggestedTags: Binding<[String]>, isFirstResponder: Binding<Bool> = Binding.constant(false), onEditingChanged: @escaping (Bool) -> Void, scroller: ScrollViewProxy) {
     self.viewModel = viewModel
     self._showAllTags = showAllTags
     self._suggestedTags = suggestedTags
     self._isFirstResponder = isFirstResponder
+    self.onEditingChanged = onEditingChanged
     self.scroller = scroller
   }
 
@@ -31,7 +33,7 @@ struct TagTextFieldSection: View {
     Section {
       List { EditableTagList(tags: $viewModel.tags) }
       HStack {
-        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: isFirstResponder, onEditingChanged: viewModel.showTagSuggestions, onCommit: viewModel.addNewTag)
+        UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: isFirstResponder, onEditingChanged: onEditingChanged, onCommit: viewModel.addNewTag)
           .onTapGesture { viewModel.scrollToTags(scroller: scroller) }
           .onChange(of: viewModel.newTag) { _ in
             showAllTags = false
@@ -49,8 +51,8 @@ struct TagTextField_Previews: PreviewProvider {
   static var previews: some View {
     ScrollViewReader { scroller in
       Form {
-        TagTextFieldSection(FormViewModel(), showAllTags: Binding.constant(false), suggestedTags: Binding.constant([]), scroller: scroller)
-        TagTextFieldSection(FormViewModel(), showAllTags: Binding.constant(true), suggestedTags: Binding.constant(["Tag 1", "Tag 2"]), scroller: scroller)
+        TagTextFieldSection(FormViewModel(), showAllTags: Binding.constant(false), suggestedTags: Binding.constant([]), onEditingChanged: { _ in }, scroller: scroller)
+        TagTextFieldSection(FormViewModel(), showAllTags: Binding.constant(true), suggestedTags: Binding.constant(["Tag 1", "Tag 2"]), onEditingChanged: { _ in }, scroller: scroller)
       }
     }
   }

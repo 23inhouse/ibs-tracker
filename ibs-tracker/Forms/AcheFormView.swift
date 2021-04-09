@@ -49,7 +49,7 @@ struct AcheFormView: View {
         ScaleSlider($bodyache, "Other body pain", descriptions: Scales.bodyacheDescriptions)
       }
 
-      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, scroller: scroller)
+      TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
       SaveButtonSection(name: "Ache", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
     }

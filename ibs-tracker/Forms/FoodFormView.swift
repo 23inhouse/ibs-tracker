@@ -19,11 +19,14 @@ struct FoodFormView: View {
   @State private var recentFoods: [IBSRecord] = []
   @State private var recentFoodSelection: IBSRecord?
   @State private var isEditingName: Bool = false
-  @State private var nameIsCompleted: Bool = false
+  @State private var isEditingTags: Bool = false
   @State private var tagIsFirstResponder: Bool = false
 
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
+  @State private var tagFilterWorkItem: DispatchWorkItem?
+
+
 
   let tagAutoScrollLimit = 3
 
@@ -36,7 +39,6 @@ struct FoodFormView: View {
     self._size = State(initialValue: record.size ?? .none)
     self._risk = State(initialValue: record.risk ?? .none)
     self._medicinal = State(initialValue: record.medicinal ?? false)
-    self._nameIsCompleted = State(initialValue: true)
   }
 
   private var editMode: Bool { editableRecord != nil }
@@ -72,7 +74,7 @@ struct FoodFormView: View {
             viewModel.scrollToTags(scroller: scroller)
           }
 
-        TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, scroller: scroller)
+        TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, onEditingChanged: editTags, scroller: scroller)
       }
       .id(ScrollViewProxy.tagAnchor())
 
@@ -88,10 +90,13 @@ struct FoodFormView: View {
       calcRecentFoods()
       calcSuggestedTags()
     }
-    .onChange(of: [showAllTags, isEditingName, nameIsCompleted]) { _ in
-      calcSuggestedTags()
+    .onChange(of: [showAllTags, isEditingName, isEditingTags]) { _ in
+      calcSuggestedTags(delay: 0)
     }
-    .onChange(of: [viewModel.tags, [viewModel.newTag], [name]]) { _ in
+    .onChange(of: [viewModel.tags]) { _ in
+      calcSuggestedTags(delay: 0)
+    }
+    .onChange(of: [viewModel.newTag]) { _ in
       calcSuggestedTags()
     }
   }
@@ -117,16 +122,20 @@ struct FoodFormView: View {
 
   private func commitName() {
     tagIsFirstResponder = true
-    isEditingName = false
-    nameIsCompleted = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
-      tagIsFirstResponder = false
-    }
   }
 
   private func editName(_ isEditing: Bool) {
     isEditingName = isEditing
+  }
+
+  private func editTags(_ isEditing: Bool) {
+    if isEditing && !isEditingTags {
+      name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    isEditingTags = isEditing
+    tagIsFirstResponder = false
+    viewModel.showTagSuggestions(isEditing)
   }
 
   private func calcRecentFoods() {
@@ -135,14 +144,20 @@ struct FoodFormView: View {
     }
   }
 
-  private func calcSuggestedTags() {
-    guard showAllTags || !isEditingName else {
+  private func calcSuggestedTags(delay: Double = 0.333) {
+    guard showAllTags || (!isEditingName && name.isNotEmpty) else {
       suggestedTags = []
       return
     }
 
-    DispatchQueue.main.async {
-      suggestedTags = appState.tags(for: .food)
+    tagFilterWorkItem?.cancel()
+
+    let currentWorkItem = DispatchWorkItem {
+      let tagsFromName = name
+        .split(separator: " ")
+        .filter { $0.count > 2 }
+        .map { String($0) }
+      suggestedTags = Array(Set(tagsFromName + appState.tags(for: .food))).sorted()
         .filter {
           let availableTag = $0.lowercased()
           return
@@ -151,11 +166,9 @@ struct FoodFormView: View {
               showAllTags ||
                 availableTag.contains(viewModel.newTag.lowercased()) ||
                 (
-                  nameIsCompleted &&
-                    name.split(separator: " ").filter {
+                    tagsFromName.filter {
                       let word = String($0.lowercased())
                       return
-                        word.count > 2 &&
                         viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
                         (availableTag.contains(word) || word.contains(availableTag))
                     }.isNotEmpty
@@ -163,6 +176,9 @@ struct FoodFormView: View {
             )
         }
     }
+
+    tagFilterWorkItem = currentWorkItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: currentWorkItem)
   }
 }
 
