@@ -10,7 +10,7 @@ import SwiftUI
 struct AppIconView: View {
   @Environment(\.colorScheme) var colorScheme
 
-  private let size: CGFloat = 150
+  var size: CGFloat = 150
   private var padding: CGFloat { size / 15 }
   private var gutSize: CGFloat { size / 3 }
   private var circleSize: CGFloat { gutSize * 1.3 }
@@ -38,6 +38,7 @@ struct AppIconView: View {
         .frame(gutSize)
         .offset(x: xOffset, y: -yOffset)
     }
+    .offset(x: xOffset * 2, y: 0)
   }
 }
 

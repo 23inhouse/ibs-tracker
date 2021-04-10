@@ -16,6 +16,7 @@ struct SaveButtonSection: View {
   var savable: Bool = true
   var editMode: Bool = false
   var editTimestamp: Date?
+  var scroller: ScrollViewProxy? = nil
 
   var body: some View {
     Section {
@@ -33,6 +34,7 @@ struct SaveButtonSection: View {
           .frame(maxWidth: .infinity)
       }
     }
+    .id(9)
     .modifierIf(savable) {
       $0
         .listRowBackground(Color.blue)
@@ -45,6 +47,23 @@ struct SaveButtonSection: View {
         .opacity(0.5)
     }
     .disabled(!savable)
+
+    VStack(alignment: .center) {
+      VStack(alignment: .center) {
+        AppIconButton(angle: .degrees(0), scale: 1.8)
+          .opacity(0.1)
+          .scaledToFit()
+          .onTapGesture {
+            guard scroller != nil else { return }
+            withAnimation {
+              scroller!.scrollTo(id: 9, anchor: .bottom)
+            }
+          }
+      }
+      .frame(maxWidth: 150)
+    }
+    .frame(maxWidth: .infinity)
+    .frame(height: UIScreen.mainHeight * 0.666, alignment: .bottom)
   }
 
   private func insertOrUpdate(completionHandler: @escaping () -> Void) {

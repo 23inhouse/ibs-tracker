@@ -51,7 +51,7 @@ struct WeightFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
-      SaveButtonSection(name: "Weight", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
+      SaveButtonSection(name: "Weight", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()

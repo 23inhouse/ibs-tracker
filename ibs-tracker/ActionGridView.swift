@@ -67,10 +67,7 @@ struct ActionGridView: View {
   }
 
   private func appIconButton(scroller: ScrollViewProxy, anchor: UnitPoint, rotate angle: Angle = .degrees(0)) -> some View {
-    AppIconView()
-      .contentShape(Rectangle())
-      .rotate(angle)
-      .foregroundColor(.secondary)
+    AppIconButton(angle: angle)
       .onTapGesture {
         withAnimation {
           scroller.scrollTo(id: 1, anchor: anchor)

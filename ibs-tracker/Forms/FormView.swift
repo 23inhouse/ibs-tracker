@@ -96,7 +96,9 @@ struct FormView<Content: View>: View {
 struct FormView_Previews: PreviewProvider {
   static var previews: some View {
     FormView("Meal", viewModel: FormViewModel()) { _ in
-      FoodFormView()
+      Section {
+        TextField("Placeholder...", text: Binding.constant(""))
+      }
     }
     .environmentObject(IBSData())
   }

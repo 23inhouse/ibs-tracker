@@ -84,7 +84,7 @@ struct FoodFormView: View {
         Toggle("Medicinal", isOn: $medicinal)
       }
 
-      SaveButtonSection(name: "Meal", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
+      SaveButtonSection(name: "Meal", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }
     .onAppear {
       calcRecentFoods()

@@ -134,6 +134,7 @@
 		B5BCF28525EE421A00F88D01 /* String+CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */; };
 		B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */; };
 		B5D476EE2610A57100AB466E /* SwiftUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D476ED2610A57100AB466E /* SwiftUITextView.swift */; };
+		B5D538042624E5ED002BF697 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D538032624E5ED002BF697 /* AppIconButton.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
 		B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675725E9955A004E0895 /* SuggestedTagList.swift */; };
@@ -316,6 +317,7 @@
 		B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirstLetter.swift"; sourceTree = "<group>"; };
 		B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldSection.swift; sourceTree = "<group>"; };
 		B5D476ED2610A57100AB466E /* SwiftUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextView.swift; sourceTree = "<group>"; };
+		B5D538032624E5ED002BF697 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
 		B5D9675725E9955A004E0895 /* SuggestedTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTagList.swift; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 		B5ED344E25E91DFD0029B274 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B5D538032624E5ED002BF697 /* AppIconButton.swift */,
 				B5ED344625E91D2C0029B274 /* DatePickerSectionView.swift */,
 				B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */,
 				B5D9675225E984B0004E0895 /* EditableTagList.swift */,
@@ -928,6 +931,7 @@
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
 				B5109E1E26023B17007CB498 /* SkinRow.swift in Sources */,
 				B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */,
+				B5D538042624E5ED002BF697 /* AppIconButton.swift in Sources */,
 				B5207E9E25D417CD0019D18F /* String+Error.swift in Sources */,
 				B5A5D20125D70A60009C6285 /* SwiftUIActivityViewController.swift in Sources */,
 				B533AC0E25BADAF8009B6290 /* ItemType.swift in Sources */,

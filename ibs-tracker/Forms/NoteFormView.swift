@@ -57,8 +57,7 @@ struct NoteFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
-      SaveButtonSection(name: "Note", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp)
-        .disabled(!savable)
+      SaveButtonSection(name: "Note", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()
