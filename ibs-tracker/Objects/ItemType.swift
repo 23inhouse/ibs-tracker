@@ -137,19 +137,19 @@ extension BristolType: Strideable {
 
 enum FoodSizes: Int, CaseIterable {
   case none = -1
-  case tiny = 0
-  case small = 1
-  case normal = 2
-  case large = 3
-  case huge = 4
+  case small = 0
+  case normal = 1
+  case large = 2
+  case huge = 3
+  case extreme = 4
 
   static let descriptions: [FoodSizes: String] = [
     .none: "",
-    .tiny: "tiny portion",
     .small: "small portion",
     .normal: "normal portion",
     .large: "large portion",
     .huge: "huge portion",
+    .extreme: "extremely large portion",
   ]
 }
 

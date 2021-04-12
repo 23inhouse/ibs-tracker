@@ -53,11 +53,11 @@ struct ColorCodedContent {
 
   static func foodSizeColor(for scale: FoodSizes?, default defaultColor: Color = .secondary) -> Color {
     let colors: [FoodSizes: Color] = [
-      .tiny: .green,
       .small: .green,
       .normal: .yellow,
-      .large: .red,
-      .huge: .purple
+      .large: .orange,
+      .huge: .red,
+      .extreme: .purple
     ]
 
     guard let scale = scale else { return defaultColor }
