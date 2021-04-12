@@ -209,19 +209,19 @@ extension MedicationType: OptionalValue {
 
 enum MoodType: Int {
   case none = -1
-  case great = 0
-  case good = 1
-  case soso = 2
-  case bad = 3
-  case awful = 4
+  case good = 0
+  case soso = 1
+  case bad = 2
+  case awful = 3
+  case extreme = 4
 
   static let descriptions: [MoodType: String] = [
     .none: "",
-    .great: "I feel very good",
     .good: "I feel good",
-    .soso: "I feel so so",
-    .bad: "I don't feel good",
+    .soso: "I feel so-so",
+    .bad: "I feel bad",
     .awful: "I feel awful",
+    .extreme: "Life sucks",
   ]
 }
 

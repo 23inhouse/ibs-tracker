@@ -37,7 +37,7 @@ class IBSRecord_DecodableTests: XCTestCase {
     XCTAssertEqual(ibsRecords[3].headache, .moderate, "Headache should equal moderate")
 
     XCTAssertEqual(ibsRecords[4].type, .mood, "Should be a mood record")
-    XCTAssertEqual(ibsRecords[4].feel, .good, "Feel should equal good")
+    XCTAssertEqual(ibsRecords[4].feel, .soso, "Feel should equal soso")
     XCTAssertEqual(ibsRecords[4].stress, .mild, "Stress should equal mild")
 
     XCTAssertEqual(ibsRecords[5].type, .medication, "Should be a medication record")

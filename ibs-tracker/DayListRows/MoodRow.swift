@@ -53,12 +53,11 @@ struct MoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
       MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: MoodType.none, stress: .zero))
-      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .great, stress: Scales.none))
-      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .good, stress: .mild))
-      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .soso, stress: .moderate))
-      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .bad, stress: .severe))
-      // error case
-      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .awful, stress: .extreme))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .good, stress: Scales.none))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .soso, stress: .mild))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .bad, stress: .moderate))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .awful, stress: .severe))
+      MoodRowView(for: IBSRecord(timestamp: Date(), tags: [""], feel: .extreme, stress: .extreme))
     }
   }
 }

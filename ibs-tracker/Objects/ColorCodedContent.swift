@@ -84,11 +84,11 @@ struct ColorCodedContent {
 
   static func moodColor(for scale: MoodType?, default defaultColor: Color = .primary) -> Color {
     let colors: [MoodType: Color] = [
-      .great: .green,
       .good: .green,
       .soso: .yellow,
-      .bad: .red,
-      .awful: .purple,
+      .bad: .orange,
+      .awful: .red,
+      .extreme: .purple,
     ]
 
     guard let scale = scale else { return defaultColor }
