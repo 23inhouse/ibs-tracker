@@ -32,7 +32,14 @@ struct SettingsView: View {
     NavigationView {
       Form {
         Section {
+          resetDataSection
+        }
+
+        Section {
           importSection
+        }
+
+        Section {
           exportJSONButton
             .sheet(isPresented: $isSharingJSON) {
               UIKitBridge.SwiftUIActivityViewController(activityItems: $sharedItems)
@@ -41,13 +48,13 @@ struct SettingsView: View {
 
         Section {
           Toggle("Include food", isOn: $includeFood)
+          LazyNavigationLink(destination: PDFReportView(includeFood: $includeFood)) {
+            Text("View PDF report \(includeFood ? "with food" : "")")
+          }
           exportPDFButton
             .sheet(isPresented: $isSharingPDF) {
               UIKitBridge.SwiftUIActivityViewController(activityItems: $sharedItems)
             }
-          LazyNavigationLink(destination: PDFReportView(includeFood: $includeFood)) {
-            Text("View PDF report \(includeFood ? "with food" : "")")
-          }
         }
       }
       .disabled(isDisabled)
@@ -57,6 +64,7 @@ struct SettingsView: View {
           Text("Settings")
         }
       }
+      .gesture(DragGesture().onChanged({ _ in endEditing(true) }))
     }
   }
 
@@ -99,20 +107,8 @@ struct SettingsView: View {
     Group {
       TextField("JSON URL with the DataSet", text: $url)
       Toggle("Delete existing records", isOn: $truncate)
-      loadingButton($isReseting, text: "Reset", icon: "square") {
-        isReseting = true
-      }
-      .alert(isPresented: $isReseting) {
-        deleteAlert {
-          DispatchQueue.main.async {
-            AppDB.current.resetRecords()
-            DispatchQueue.main.async {
-              appState.reloadRecordsFromSQL()
-            }
-            isReseting = false
-          }
-        }
-      }
+        .foregroundColor(url.isEmpty ? .secondary : .primary)
+        .disabled(url.isEmpty)
       loadingButton($isImporting, text: "Import JSON from URL", icon: "square.and.arrow.down") {
         isImporting = true
         url.fetchJSON() { data in
@@ -121,6 +117,24 @@ struct SettingsView: View {
             appState.reloadRecordsFromSQL()
             isImporting = false
           }
+        }
+      }
+      .disabled(url.isEmpty)
+    }
+  }
+
+  private var resetDataSection: some View {
+    loadingButton($isReseting, text: "Reset all data", icon: "square") {
+      isReseting = true
+    }
+    .alert(isPresented: $isReseting) {
+      deleteAlert {
+        DispatchQueue.main.async {
+          AppDB.current.resetRecords()
+          DispatchQueue.main.async {
+            appState.reloadRecordsFromSQL()
+          }
+          isReseting = false
         }
       }
     }
