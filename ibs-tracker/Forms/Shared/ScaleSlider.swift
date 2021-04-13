@@ -57,6 +57,7 @@ struct ScaleSlider<T: Sliderable>: View {
         .onPreferenceChange(SizePreferenceKey.self, perform: widthSetter)
       ZStack(alignment: .leading) {
         Slider(value: $slider, in: -1...4, step: 0.1)
+          .padding(.bottom, 10)
           .accentColor(titleColor)
           .onChange(of: slider, perform: { value in
             guard let scale = T(rawValue: Int(value)) else { return }
