@@ -153,8 +153,8 @@ private extension SQLIBSRecord {
     bristolScale = record.bristolScale?.rawValue
     color = record.color?.rawValue
     pressure = nonNegativeOrNil(record.pressure?.rawValue)
-    smell = record.smell?.rawValue
-    evacuation = record.evacuation?.rawValue
+    smell = nonEmpty(record.smell?.rawValue)
+    evacuation = nonEmpty(record.evacuation?.rawValue)
     dryness = nonNegativeOrNil(record.dryness?.rawValue)
     wetness = nonNegativeOrNil(record.wetness?.rawValue)
     size = nonNegativeOrNil(record.size?.rawValue)
@@ -174,6 +174,12 @@ private extension SQLIBSRecord {
   func nonNegativeOrNil(_ value: Int?) -> Int? {
     guard let value = value else { return nil }
     guard value >= 0 else { return nil }
+    return value
+  }
+
+  func nonEmpty(_ value: String?) -> String? {
+    guard let value = value else { return nil }
+    guard value != "" else { return nil }
     return value
   }
 }

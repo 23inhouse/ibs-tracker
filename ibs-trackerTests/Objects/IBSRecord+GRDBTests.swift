@@ -66,18 +66,22 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(sqlIBSAcheRecord.headache, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSAcheRecord.bodyache, nil, "The scale should be nil")
 
-    let ibsBMRecord = IBSRecord(bristolScale: nil, timestamp: timestamp, tags: [], color: nil, pressure: Scales.none, smell: nil, evacuation: nil, dryness: Scales.none, wetness: Scales.none)
+    let ibsBMRecord = IBSRecord(bristolScale: nil, timestamp: timestamp, tags: [], color: nil, pressure: Scales.none, smell: BMSmell.none, evacuation: BMEvacuation.none, dryness: Scales.none, wetness: Scales.none)
     try ibsBMRecord.insertSQL(into: appDB)
     guard var sqlIBSBMRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsBMRecord.type.rawValue, at: timestamp) else {
       throw "Couldn't select the orignal BM record"
     }
 
+    XCTAssertEqual(sqlIBSBMRecord.evacuation, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.smell, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.pressure, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.dryness, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.wetness, nil, "The scale should be nil")
 
     sqlIBSBMRecord.update(from: ibsBMRecord)
 
+    XCTAssertEqual(sqlIBSBMRecord.evacuation, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSBMRecord.smell, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.pressure, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.dryness, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSBMRecord.wetness, nil, "The scale should be nil")
