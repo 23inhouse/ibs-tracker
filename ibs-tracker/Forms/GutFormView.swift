@@ -18,8 +18,6 @@ struct GutFormView: View {
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
 
-  let tagAutoScrollLimit = 3
-
   init(for gutRecord: GutRecord? = nil) {
     guard let record = gutRecord else { return }
     self.editableRecord = record
@@ -48,6 +46,7 @@ struct GutFormView: View {
         ScaleSlider($pain, "Pain", descriptions: Scales.gutPainDescriptions)
         ScaleSlider($bloating, "Bloating", descriptions: Scales.bloatingDescriptions)
       }
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 

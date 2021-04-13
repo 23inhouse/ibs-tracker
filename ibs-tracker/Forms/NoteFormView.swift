@@ -50,10 +50,11 @@ struct NoteFormView: View {
           .frame(height: 150)
           .onTapGesture {
             isFirstResponder = true
-            viewModel.scrollTo(1, scroller: scroller)
+            scroller.scrollTo(id: .note)
           }
       }
-      .id(1)
+      .scrollID(.note)
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 

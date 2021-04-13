@@ -26,10 +26,6 @@ struct FoodFormView: View {
   @State private var suggestedTags: [String] = []
   @State private var tagFilterWorkItem: DispatchWorkItem?
 
-
-
-  let tagAutoScrollLimit = 3
-
   init(for foodRecord: FoodRecord? = nil) {
     guard let record = foodRecord else { return }
     self.editableRecord = record
@@ -70,13 +66,12 @@ struct FoodFormView: View {
 
       Section {
         UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
-          .onTapGesture {
-            viewModel.scrollToTags(scroller: scroller)
-          }
+          .onTapGesture { scroller.scrollTo(id: .tags) }
 
         TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, onEditingChanged: editTags, scroller: scroller)
       }
-      .id(ScrollViewProxy.tagAnchor())
+      .scrollID(.tags)
+      .scrollID(.info)
 
       Section {
         ScaleSlider($size, "Size", descriptions: FoodSizes.descriptions)
@@ -91,13 +86,13 @@ struct FoodFormView: View {
       calcSuggestedTags()
     }
     .onChange(of: [showAllTags, isEditingName, isEditingTags]) { _ in
-      calcSuggestedTags(delay: 0)
+      calcSuggestedTags()
     }
     .onChange(of: [viewModel.tags]) { _ in
-      calcSuggestedTags(delay: 0)
+      calcSuggestedTags()
     }
     .onChange(of: [viewModel.newTag]) { _ in
-      calcSuggestedTags()
+      calcSuggestedTags(delay: 0.333)
     }
   }
 
@@ -144,7 +139,7 @@ struct FoodFormView: View {
     }
   }
 
-  private func calcSuggestedTags(delay: Double = 0.333) {
+  private func calcSuggestedTags(delay: Double = 0) {
     guard showAllTags || (!isEditingName && name.isNotEmpty) else {
       suggestedTags = []
       return

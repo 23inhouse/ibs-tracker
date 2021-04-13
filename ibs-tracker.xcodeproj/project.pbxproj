@@ -135,6 +135,7 @@
 		B5BDCBFB25F8BFB800D8FFFC /* TagTextFieldSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */; };
 		B5D476EE2610A57100AB466E /* SwiftUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D476ED2610A57100AB466E /* SwiftUITextView.swift */; };
 		B5D538042624E5ED002BF697 /* AppIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D538032624E5ED002BF697 /* AppIconButton.swift */; };
+		B5D5380C26259E17002BF697 /* View+ScrollID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D5380B26259E17002BF697 /* View+ScrollID.swift */; };
 		B5D9674B25E982EC004E0895 /* DeleteRecordToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */; };
 		B5D9675325E984B0004E0895 /* EditableTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675225E984B0004E0895 /* EditableTagList.swift */; };
 		B5D9675825E9955A004E0895 /* SuggestedTagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D9675725E9955A004E0895 /* SuggestedTagList.swift */; };
@@ -318,6 +319,7 @@
 		B5BDCBFA25F8BFB800D8FFFC /* TagTextFieldSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextFieldSection.swift; sourceTree = "<group>"; };
 		B5D476ED2610A57100AB466E /* SwiftUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITextView.swift; sourceTree = "<group>"; };
 		B5D538032624E5ED002BF697 /* AppIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconButton.swift; sourceTree = "<group>"; };
+		B5D5380B26259E17002BF697 /* View+ScrollID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ScrollID.swift"; sourceTree = "<group>"; };
 		B5D9674A25E982EC004E0895 /* DeleteRecordToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordToolbarItem.swift; sourceTree = "<group>"; };
 		B5D9675225E984B0004E0895 /* EditableTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagList.swift; sourceTree = "<group>"; };
 		B5D9675725E9955A004E0895 /* SuggestedTagList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTagList.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				B51DD14926186A8900D05A6E /* View+CornerRadius.swift */,
 				B5E5915325E6748700AE3DD1 /* View+EndEditing.swift */,
 				B54B7B4225E25EC000C388ED /* View+ModifierIf.swift */,
+				B5D5380B26259E17002BF697 /* View+ScrollID.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1015,6 +1018,7 @@
 				B54CFA9826061A5100492F9B /* Array+ItemType.swift in Sources */,
 				B584BBD32612804300FADD1B /* SymptomsControlsView.swift in Sources */,
 				B5EE367925BC863000DC9D74 /* DayView.swift in Sources */,
+				B5D5380C26259E17002BF697 /* View+ScrollID.swift in Sources */,
 				B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */,
 				B5E9D53F25B6558300E52387 /* StringProtocol+Case.swift in Sources */,
 				B520A9D8260A14410066ED68 /* Array+Chunked.swift in Sources */,

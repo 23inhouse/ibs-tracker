@@ -38,8 +38,9 @@ struct FormView<Content: View>: View {
         ToolbarItem(placement: .principal) {
           Text(title)
         }
+        DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
       }
-      .onAppear() {
+      .onAppear {
         viewModel.initializeTimestamp()
         guard !editMode else { return }
         DispatchQueue.main.async {
@@ -51,10 +52,6 @@ struct FormView<Content: View>: View {
         DispatchQueue.main.async {
           viewModel.isValidTimestamp = isValid(timestamp: value)
         }
-      }
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        DeleteRecordToolbarItem(editMode: editMode, showAlert: $viewModel.showAlert)
       }
       .alert(isPresented: $viewModel.showAlert) {
         deleteAlert {

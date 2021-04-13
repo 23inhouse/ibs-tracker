@@ -22,8 +22,6 @@ struct MedicationFormView: View {
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
 
-  let tagAutoScrollLimit = 3
-
   init(for medicationRecord: MedicationRecord? = nil) {
     guard let record = medicationRecord else { return }
     self.editableRecord = medicationRecord
@@ -61,15 +59,14 @@ struct MedicationFormView: View {
           recentMedicationSection
         }
       }
-      .id(1)
 
       Section {
         UIKitBridge.SwiftUITextField("Medication name. e.g. Metamucil", text: $name, onEditingChanged: editName, onCommit: commitName)
           .onTapGesture {
-            let scrollId = recentMedications.isNotEmpty ? 1 : 2
-            viewModel.scrollTo(scrollId, scroller: scroller)
+            scroller.scrollTo(id: .medication)
           }
       }
+      .scrollID(.medication)
 
       Section {
         List {
@@ -81,9 +78,9 @@ struct MedicationFormView: View {
           }
         }
       }
-      .id(2)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
+        .scrollID(.info)
 
       SaveButtonSection(name: "Medication", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }

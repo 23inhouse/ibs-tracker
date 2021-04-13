@@ -20,7 +20,7 @@ struct ActionGridView: View {
             VStack(alignment: .center) {
               appIconButton(scroller: scroller, anchor: .top)
               contentGrid
-                .id(1)
+                .scrollID(.gridContent)
               appIconButton(scroller: scroller, anchor: .bottom, rotate: .degrees(180))
             }
             Spacer()
@@ -30,7 +30,7 @@ struct ActionGridView: View {
           appIconButton(scroller: scroller, anchor: .top)
         }
         .onAppear {
-          scroller.scrollTo(id: 1, anchor: .bottom)
+          scroller.scrollTo(id: .gridContent, anchor: .bottom, animate: false)
         }
       }
       .navigationBarTitleDisplayMode(.inline)
@@ -69,9 +69,7 @@ struct ActionGridView: View {
   private func appIconButton(scroller: ScrollViewProxy, anchor: UnitPoint, rotate angle: Angle = .degrees(0)) -> some View {
     AppIconButton(angle: angle)
       .onTapGesture {
-        withAnimation {
-          scroller.scrollTo(id: 1, anchor: anchor)
-        }
+        scroller.scrollTo(id: .gridContent, anchor: anchor)
       }
   }
 }

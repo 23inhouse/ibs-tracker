@@ -51,10 +51,11 @@ struct SkinFormView: View {
         TextEditor(text: $text)
           .frame(height: 100)
           .onTapGesture {
-            viewModel.scrollTo(1, scroller: scroller)
+            scroller.scrollTo(id: .condition)
           }
       }
-      .id(1)
+      .scrollID(.condition)
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 

@@ -34,7 +34,7 @@ struct SaveButtonSection: View {
           .frame(maxWidth: .infinity)
       }
     }
-    .id(9)
+    .scrollID(.saveButton)
     .modifierIf(savable) {
       $0
         .listRowBackground(Color.blue)
@@ -56,7 +56,7 @@ struct SaveButtonSection: View {
           .onTapGesture {
             guard scroller != nil else { return }
             withAnimation {
-              scroller!.scrollTo(id: 9, anchor: .bottom)
+              scroller!.scrollTo(id: .saveButton, anchor: .bottom)
             }
           }
       }

@@ -18,8 +18,6 @@ struct MoodFormView: View {
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
 
-  let tagAutoScrollLimit = 3
-
   init(for moodRecord: MoodRecord? = nil) {
     guard let record = moodRecord else { return }
     self.editableRecord = record
@@ -48,6 +46,7 @@ struct MoodFormView: View {
         ScaleSlider($feel, "Mood", descriptions: MoodType.descriptions)
         ScaleSlider($stress, "Stress", descriptions: Scales.stressDescriptions)
       }
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 

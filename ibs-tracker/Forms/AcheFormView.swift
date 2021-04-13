@@ -18,8 +18,6 @@ struct AcheFormView: View {
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
 
-  let tagAutoScrollLimit = 3
-
   init(for acheRecord: AcheRecord? = nil) {
     guard let record = acheRecord else { return }
     self.editableRecord = record
@@ -48,6 +46,7 @@ struct AcheFormView: View {
         ScaleSlider($headache, "Headache", descriptions: Scales.headacheDescriptions)
         ScaleSlider($bodyache, "Other body pain", descriptions: Scales.bodyacheDescriptions)
       }
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 

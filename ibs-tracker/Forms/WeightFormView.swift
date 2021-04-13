@@ -48,6 +48,7 @@ struct WeightFormView: View {
             weight = appState.lastWeight
           }
       }
+      .scrollID(.info)
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
