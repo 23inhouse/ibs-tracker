@@ -103,10 +103,10 @@ extension IBSRecord: BMRecord {
   }
 
   func drynessText() -> String {
-    return Scales.pressureDescriptions[dryness ?? .zero] ?? ""
+    return Scales.drynessDescriptions[dryness ?? .zero] ?? ""
   }
 
   func wetnessText() -> String {
-    return Scales.pressureDescriptions[wetness ?? .zero] ?? ""
+    return Scales.wetnessDescriptions[wetness ?? .zero] ?? ""
   }
 }

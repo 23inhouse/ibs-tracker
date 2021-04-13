@@ -29,6 +29,26 @@ struct ColorCodedContent {
     return colors[scale] ?? defaultColor
   }
 
+  static func scaleColor(for scale: BMEvacuation?, default defaultColor: Color = .primary) -> Color {
+    let colors: [BMEvacuation: Color] = [
+      .full: .green,
+      .partial: .yellow,
+    ]
+
+    guard let scale = scale else { return defaultColor }
+    return colors[scale] ?? defaultColor
+  }
+
+  static func scaleColor(for scale: BMSmell?, default defaultColor: Color = .primary) -> Color {
+    let colors: [BMSmell: Color] = [
+      .sweet: .yellow,
+      .foul: .orange,
+    ]
+
+    guard let scale = scale else { return defaultColor }
+    return colors[scale] ?? defaultColor
+  }
+
   static func bristolColor(for scale: BristolType?, default defaultColor: Color = .primary) -> Color {
     guard let scale = scale else { return defaultColor }
     switch scale {

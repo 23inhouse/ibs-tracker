@@ -8,30 +8,41 @@
 import SwiftUI
 
 struct BristolView: View {
+  static let defaultSize: CGFloat = 50
+
   let scale: BristolType
   let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
   let frameSize: CGFloat
   let foregroundColor: Color
 
-  init(scale: BristolType, frameSize: CGFloat = 50, foregroundColor: Color? = nil) {
+  init(scale: BristolType, frameSize: CGFloat = defaultSize, foregroundColor: Color? = nil) {
     self.scale = scale
     self.frameSize = frameSize
     self.foregroundColor = foregroundColor ?? ColorCodedContent.bristolColor(for: scale)
   }
 
   var body: some View {
-    Group {
-      if scale == .b0 {
-        Image(systemName: "nosign")
-          .resizedToFit()
-          .padding(frameSize / 6.25)
-      } else {
-        BristolShape(scale: scale)
-          .stroke(style: strokeStyle)
+    ZStack(alignment: .bottomLeading) {
+      Image(systemName: "\(scale.rawValue).circle")
+        .resizedToFit()
+        .frame(frameSize * 0.3)
+        .offset(x: 1.25, y: 9.25)
+        .opacity(frameSize < BristolView.defaultSize ? 0.25 : 1.0)
+      Group {
+        if scale == .b0 {
+          Image(systemName: "nosign")
+            .resizedToFit()
+            .padding(frameSize / 6.25)
+            .offset(x: 0, y: frameSize / 10)
+        } else {
+          BristolShape(scale: scale)
+            .stroke(style: strokeStyle)
+        }
       }
     }
     .foregroundColor(foregroundColor)
     .frame(frameSize, frameSize)
+    .padding(.bottom, 10)
   }
 }
 

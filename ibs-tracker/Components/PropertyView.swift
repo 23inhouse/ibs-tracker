@@ -20,6 +20,20 @@ struct PropertyView: View {
     self.direction = direction ?? .leftToRight
   }
 
+  init(text: String?, scale: BMEvacuation, color: Color?, direction: LayoutDirection? = nil) {
+    self.text = text
+    self.scale = scale == .full ? 0 : 1
+    self.color = color
+    self.direction = direction ?? .leftToRight
+  }
+
+  init(text: String?, scale: BMSmell, color: Color?, direction: LayoutDirection? = nil) {
+    self.text = text
+    self.scale = scale == .sweet ? 1 : 2
+    self.color = color
+    self.direction = direction ?? .leftToRight
+  }
+
   var body: some View {
     HStack {
       if direction == .leftToRight { icon }

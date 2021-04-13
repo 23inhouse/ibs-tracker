@@ -25,17 +25,52 @@ struct BMRowView: View {
   var body: some View {
     LazyNavigationLink(destination: BMFormView(for: record)) {
       DayRowView(record as! IBSRecord, tags: record.tags) {
-        TimestampView(record: record as! IBSRecord)
         HStack {
-          Image(systemName: "\(scale.rawValue).circle")
-            .resizedToFit()
-            .foregroundColor(color)
-            .frame(15)
+          TimestampView(record: record as! IBSRecord)
+            .frame(width: 80, alignment: .leading)
           Text(record.bristolDescription())
-            .font(.callout)
+            .truncationMode(.middle)
+            .font(.caption2)
             .foregroundColor(.secondary)
-            .frame(height: 25, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .frame(height: 25)
             .lineLimit(1)
+            .layoutPriority(1)
+        }
+        if let evacuation = record.evacuation {
+          PropertyView(
+            text: record.evacuationText(),
+            scale: evacuation,
+            color: ColorCodedContent.scaleColor(for: record.evacuation)
+          )
+        }
+        if let smell = record.smell {
+          PropertyView(
+            text: record.smellText(),
+            scale: smell,
+            color: ColorCodedContent.scaleColor(for: record.smell)
+          )
+        }
+        if let pressure = record.pressure {
+          PropertyView(
+            text: record.pressureText(),
+            scale: pressure.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.pressure)
+          )
+        }
+        if let dryness = record.dryness {
+          PropertyView(
+            text: record.drynessText(),
+            scale: dryness.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.dryness)
+          )
+        }
+        if let wetness = record.wetness {
+          PropertyView(
+            text: record.wetnessText(),
+            scale: wetness.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.wetness)
+          )
         }
       }
     }
@@ -44,6 +79,23 @@ struct BMRowView: View {
 
 struct BowelMovementRowView_Previews: PreviewProvider {
   static var previews: some View {
-    BMRowView(for: IBSRecord(bristolScale: .b4, timestamp: Date(), tags: ["Almost sausage"]))
+    List {
+      BMRowView(for: IBSRecord(bristolScale: .b0, timestamp: Date(), tags: ["Almost sausage"]))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b1, timestamp: Date(), tags: ["Almost sausage"], evacuation: .partial))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b2, timestamp: Date(), tags: ["Almost sausage"], smell: .sweet, evacuation: .full, dryness: .moderate))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b3, timestamp: Date(), tags: ["Almost sausage"], pressure: .mild))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b4, timestamp: Date(), tags: ["Almost sausage"], evacuation: .full))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b5, timestamp: Date(), tags: ["Almost sausage"], pressure: .mild, evacuation: .full, wetness: .moderate))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b6, timestamp: Date(), tags: ["Almost sausage"], pressure: .moderate, wetness: .severe))
+        .listRowInsets(EdgeInsets())
+      BMRowView(for: IBSRecord(bristolScale: .b7, timestamp: Date(), tags: ["Almost sausage"], pressure: .severe, evacuation: .partial))
+        .listRowInsets(EdgeInsets())
+    }
   }
 }

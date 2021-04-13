@@ -66,8 +66,8 @@ enum BMEvacuation: String, CaseIterable {
 
   static let descriptions: [BMEvacuation: String] = [
     .none: "",
-    .partial: "Partial",
-    .full: "Full",
+    .partial: "partial evacuation",
+    .full: "full evacuation",
   ]
 }
 
@@ -84,8 +84,8 @@ enum BMSmell: String, CaseIterable {
 
   static let descriptions: [BMSmell: String] = [
     .none: "",
-    .foul: "Foul smelling",
-    .sweet: "Sweet smelling",
+    .foul: "foul smelling",
+    .sweet: "sweet smelling",
   ]
 }
 
@@ -269,7 +269,7 @@ enum Scales: Int, CaseIterable {
     .none: "",
     .zero: "not dry",
     .mild: "a bit dry",
-    .moderate: "dry",
+    .moderate: "moderately dry",
     .severe: "very dry",
     .extreme: "extremely dry",
   ]
@@ -331,7 +331,7 @@ enum Scales: Int, CaseIterable {
     .none: "",
     .zero: "not wet",
     .mild: "a bit wet",
-    .moderate: "wet",
+    .moderate: "moderately wet",
     .severe: "very wet",
     .extreme: "extremely wet",
   ]
