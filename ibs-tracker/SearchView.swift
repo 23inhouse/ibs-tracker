@@ -133,9 +133,11 @@ struct SearchList: View {
             }
           }
           .foregroundColor(colorScheme == .dark ? .black : .white)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding(10)
+          .frame(maxWidth: .infinity, alignment: .center)
+          .contentShape(Rectangle())
+          .padding(3)
           .backgroundColor(.blue)
+          .padding(.top, 30)
 
           ForEach(dayRecord.ibsRecords, id: \.self) { record in
             ItemTypeDayRowView(record: record)
