@@ -21,7 +21,7 @@ class ibs_trackerUITests: XCTestCase {
   }
 
   func testLaunchPerformance() throws {
-    if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+    if #available(iOS 14.0, *) {
       measure(metrics: [XCTApplicationLaunchMetric()]) {
         XCUIApplication().launch()
       }

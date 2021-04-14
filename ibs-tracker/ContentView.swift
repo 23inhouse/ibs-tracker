@@ -11,12 +11,13 @@ import PureSwiftUI
 struct ContentView: View {
   @EnvironmentObject private var appState: IBSData
   var body: some View {
-    mainTabView()
+    tabView
+      .onAppear {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { appState.loadData() }
+      }
   }
-}
 
-private extension ContentView {
-  func mainTabView() -> some View {
+  private var tabView: some View {
     TabView(selection: $appState.tabSelection) {
       SettingsView()
         .tabItem {

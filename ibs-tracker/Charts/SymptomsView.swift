@@ -68,6 +68,10 @@ struct SymptomsView: View {
     .onAppear {
       filteredScores = filterScores()
     }
+    .onChange(of: appState.records) { _ in
+      timestamps = calcTimestamps()
+      filteredScores = filterScores()
+    }
   }
 
   private var magnificationGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>> {

@@ -41,20 +41,24 @@ class IBSData: ObservableObject {
       fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
     }
     self.appDB = appDB
-    self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
-    self.dayRecords = IBSData.groupByDay(allRecords)
-    self.lastWeight = IBSData.lastWeight(allRecords)
     self.activeDate = IBSData.currentDate()
-    self.records = allRecords.reversed()
+    self.allRecords = []
+    self.dayRecords = []
+    self.lastWeight = 0
+    self.records = []
   }
 
   init(_ ibsRecords: [IBSRecord] = []) {
     self.appDB = .test
+    self.activeDate = IBSData.currentDate()
     self.allRecords = ibsRecords
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
-    self.activeDate = IBSData.currentDate()
     self.records = allRecords.reversed()
+  }
+
+  func loadData() {
+    self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
   }
 }
 
