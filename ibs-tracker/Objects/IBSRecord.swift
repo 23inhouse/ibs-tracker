@@ -20,6 +20,7 @@ struct IBSRecord {
   var text: String?
   var size: FoodSizes?
   var risk: Scales?
+  var speed: Scales?
   var pain: Scales?
   var bloating: Scales?
   var bodyache: Scales?
@@ -49,6 +50,7 @@ extension IBSRecord {
     self.text = other.text?.lowercased()
     self.size = nil
     self.risk = nil
+    self.speed = nil
     self.pain = other.pain
     self.bloating = other.bloating
     self.bodyache = other.bodyache

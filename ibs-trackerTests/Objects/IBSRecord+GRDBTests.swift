@@ -101,7 +101,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(sqlIBSGutRecord.bloating, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSGutRecord.pain, nil, "The scale should be nil")
 
-    let ibsFoodRecord = IBSRecord(food: "Pizza", timestamp: timestamp, risk: Scales.none, size: FoodSizes.none)
+    let ibsFoodRecord = IBSRecord(food: "Pizza", timestamp: timestamp, risk: Scales.none, size: FoodSizes.none, speed: Scales.none)
     try ibsFoodRecord.insertSQL(into: appDB)
     guard var sqlIBSFoodRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsFoodRecord.type.rawValue, at: timestamp) else {
       throw "Couldn't select the orignal BM record"
@@ -109,11 +109,13 @@ class IBSRecord_GRDBTests: XCTestCase {
 
     XCTAssertEqual(sqlIBSFoodRecord.risk, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSFoodRecord.size, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSFoodRecord.speed, nil, "The scale should be nil")
 
     sqlIBSFoodRecord.update(from: ibsFoodRecord)
 
     XCTAssertEqual(sqlIBSFoodRecord.risk, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSFoodRecord.size, nil, "The scale should be nil")
+    XCTAssertEqual(sqlIBSFoodRecord.speed, nil, "The scale should be nil")
 
     let ibsMoodRecord = IBSRecord(timestamp: timestamp, feel: MoodType.none, stress: Scales.none)
     try ibsMoodRecord.insertSQL(into: appDB)
@@ -132,7 +134,7 @@ class IBSRecord_GRDBTests: XCTestCase {
 
   func testInsertSQLWithWhitespaces() throws {
     let timestamp = Date()
-    let ibsRecord = IBSRecord(food: "  non whitespaces  ", timestamp: timestamp, tags: ["  non whitespace tag  ", "  other tag  "], risk: nil, size: nil)
+    let ibsRecord = IBSRecord(food: "  non whitespaces  ", timestamp: timestamp, tags: ["  non whitespace tag  ", "  other tag  "], risk: nil, size: nil, speed: nil)
     try ibsRecord.insertSQL(into: appDB)
 
     guard let newSQLIBSRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: "food", at: timestamp) else {

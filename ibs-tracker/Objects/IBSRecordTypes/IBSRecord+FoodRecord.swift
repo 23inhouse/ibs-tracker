@@ -9,23 +9,26 @@ import Foundation
 
 protocol FoodRecord: IBSRecordType {
   var text: String? { get }
+  var speed: Scales? { get }
   var size: FoodSizes? { get }
   var risk: Scales? { get }
   var medicinal: Bool? { get }
-  init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?, medicinal: Bool)
+  init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool)
   func FoodScore() -> Int
   func foodDescription() -> String
   func riskText() -> String
   func sizeText() -> String
+  func speedText() -> String
 }
 
 extension IBSRecord: FoodRecord {
-  init(food: String, timestamp: Date, tags: [String] = [], risk: Scales?, size: FoodSizes?, medicinal: Bool = false) {
+  init(food: String, timestamp: Date, tags: [String] = [], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool = false) {
     self.type = .food
     self.timestamp = timestamp
     self.text = food
     self.risk = risk
     self.size = size
+    self.speed = speed
     self.medicinal = medicinal
     self.tags = tags
   }
@@ -47,5 +50,9 @@ extension IBSRecord: FoodRecord {
 
   func sizeText() -> String {
     return FoodSizes.descriptions[size ?? .none] ?? ""
+  }
+
+  func speedText() -> String {
+    return Scales.foodSpeedDescriptions[speed ?? .none] ?? ""
   }
 }

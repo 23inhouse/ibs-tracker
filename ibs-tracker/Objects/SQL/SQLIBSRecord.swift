@@ -24,6 +24,7 @@ struct SQLIBSRecord {
   var evacuation: String?
   var dryness: Int?
   var wetness: Int?
+  var speed: Int?
   var size: Int?
   var risk: Int?
   var bloating: Int?
@@ -65,6 +66,7 @@ extension SQLIBSRecord: Codable {
     static let evacuation = Column(CodingKeys.evacuation)
     static let dryness = Column(CodingKeys.dryness)
     static let wetness = Column(CodingKeys.wetness)
+    static let speed = Column(CodingKeys.speed)
     static let size = Column(CodingKeys.size)
     static let risk = Column(CodingKeys.risk)
     static let bloating = Column(CodingKeys.bloating)
@@ -135,6 +137,12 @@ extension SQLIBSRecord: Migratable {
       t.add(column: "medicinal", .boolean)
     }
   }
+
+  static func addSpeedColumn(_ db: Database) throws {
+    try db.alter(table: "IBSRecords") { t in
+      t.add(column: "speed", .integer)
+    }
+  }
 }
 
 extension SQLIBSRecord {
@@ -157,6 +165,7 @@ private extension SQLIBSRecord {
     evacuation = nonEmpty(record.evacuation?.rawValue)
     dryness = nonNegativeOrNil(record.dryness?.rawValue)
     wetness = nonNegativeOrNil(record.wetness?.rawValue)
+    speed = nonNegativeOrNil(record.speed?.rawValue)
     size = nonNegativeOrNil(record.size?.rawValue)
     risk = nonNegativeOrNil(record.risk?.rawValue)
     bloating = nonNegativeOrNil(record.bloating?.rawValue)

@@ -283,6 +283,15 @@ enum Scales: Int, CaseIterable {
     .extreme: "I know I can't eat this",
   ]
 
+  static let foodSpeedDescriptions: [Scales: String] = [
+    .none: "",
+    .zero: "slowly chewed every bite",
+    .mild: "chewed every bite",
+    .moderate: "quickly chewed most of it",
+    .severe: "chewed some of it",
+    .extreme: "I inhaled it",
+  ]
+
   static let gutPainDescriptions: [Scales: String] = [
     .none: "",
     .zero: "no tummy pain at all",

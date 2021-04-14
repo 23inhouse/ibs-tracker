@@ -19,6 +19,7 @@ extension IBSRecord: Codable {
     case dryness
     case wetness
     case text
+    case speed
     case size
     case risk
     case pain
@@ -47,6 +48,7 @@ extension IBSRecord: Codable {
     dryness = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .dryness))
     wetness = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .wetness))
     text = try values.decodeIfPresent(String.self, forKey: .text)
+    speed = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .speed))
     size = FoodSizes(optionalValue: try values.decodeIfPresent(Int.self, forKey: .size))
     risk = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .risk))
     pain = Scales(optionalValue: try values.decodeIfPresent(Int.self, forKey: .pain))
@@ -87,6 +89,7 @@ extension IBSRecord: Codable {
     try container.encodeIfPresent(dryness?.optionalValue, forKey: .dryness)
     try container.encodeIfPresent(wetness?.optionalValue, forKey: .wetness)
     try container.encodeIfPresent(text, forKey: .text)
+    try container.encodeIfPresent(speed?.optionalValue, forKey: .speed)
     try container.encodeIfPresent(size?.optionalValue, forKey: .size)
     try container.encodeIfPresent(risk?.optionalValue, forKey: .risk)
     try container.encodeIfPresent(pain?.optionalValue, forKey: .pain)

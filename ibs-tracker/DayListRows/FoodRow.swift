@@ -22,6 +22,13 @@ struct FoodRowView: View {
     LazyNavigationLink(destination: FoodFormView(for: record)) {
       DayRowView(record as! IBSRecord, color: foodColor, tags: record.tags) {
         TimestampView(record: record as! IBSRecord)
+        if let speed = record.speed {
+          PropertyView(
+            text: record.speedText(),
+            scale: speed.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.speed)
+          )
+        }
         if let risk = record.risk {
           PropertyView(
             text: record.riskText(),
@@ -47,8 +54,8 @@ struct FoodRowView: View {
 struct FoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      FoodRowView(for: IBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: .extreme, size: .normal))
-      FoodRowView(for: IBSRecord(food: "Dinner w/ not much stuff", timestamp: Date(), tags: ["Pasta"], risk: .mild, size: nil))
+      FoodRowView(for: IBSRecord(food: "Dinner w/ alot of extra stuff and extra info to display!", timestamp: Date(), tags: ["Pasta"], risk: .extreme, size: .normal, speed: Scales.none))
+      FoodRowView(for: IBSRecord(food: "Dinner w/ not much stuff", timestamp: Date(), tags: ["Pasta"], risk: .mild, size: nil, speed: nil))
     }
   }
 }

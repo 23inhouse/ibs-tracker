@@ -120,6 +120,7 @@ private extension AppDB {
           text: row["text"],
           size: FoodSizes(optionalValue: row["size"]),
           risk: Scales(optionalValue: row["risk"]),
+          speed: Scales(optionalValue: row["speed"]),
           pain: Scales(optionalValue: row["pain"]),
           bloating: Scales(optionalValue: row["bloating"]),
           bodyache: Scales(optionalValue: row["bodyache"]),

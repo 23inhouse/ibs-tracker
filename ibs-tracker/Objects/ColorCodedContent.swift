@@ -65,6 +65,7 @@ struct ColorCodedContent {
 
   static func foodColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
     return worstColor([
+      scaleColor(for: record.speed, default: defaultColor),
       foodSizeColor(for: record.size, default: defaultColor),
       scaleColor(for: record.risk, default: defaultColor),
       foodTimeColor(for: record, default: defaultColor)

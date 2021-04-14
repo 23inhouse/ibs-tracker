@@ -37,6 +37,7 @@ class AppDB_RecordsTests: XCTestCase {
       XCTAssertEqual(exportedRecords[i].text, record.text, "The record at index[\(i)] doesn't match the text")
       XCTAssertEqual(exportedRecords[i].size, record.size, "The record at index[\(i)] doesn't match the size")
       XCTAssertEqual(exportedRecords[i].risk, record.risk, "The record at index[\(i)] doesn't match the risk")
+      XCTAssertEqual(exportedRecords[i].speed, record.speed, "The record at index[\(i)] doesn't match the speed")
       XCTAssertEqual(exportedRecords[i].pain, record.pain, "The record at index[\(i)] doesn't match the pain")
       XCTAssertEqual(exportedRecords[i].bloating, record.bloating, "The record at index[\(i)] doesn't match the bloating")
       XCTAssertEqual(exportedRecords[i].bodyache, record.bodyache, "The record at index[\(i)] doesn't match the bodyache")

@@ -13,6 +13,7 @@ struct FoodFormView: View {
 
   @StateObject private var viewModel = FormViewModel()
   @State private var name: String = ""
+  @State private var speed: Scales = .none
   @State private var size: FoodSizes = .none
   @State private var risk: Scales = .none
   @State private var medicinal: Bool = false
@@ -32,6 +33,7 @@ struct FoodFormView: View {
     let vm = FormViewModel(timestamp: record.timestamp, tags: record.tags)
     self._viewModel = StateObject(wrappedValue: vm)
     self._name = State(initialValue: record.text ?? "")
+    self._speed = State(initialValue: record.speed ?? .none)
     self._size = State(initialValue: record.size ?? .none)
     self._risk = State(initialValue: record.risk ?? .none)
     self._medicinal = State(initialValue: record.medicinal ?? false)
@@ -46,7 +48,7 @@ struct FoodFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size, medicinal: medicinal)
+    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size, speed: speed, medicinal: medicinal)
   }
 
   private var tagPlaceholder: String {
@@ -74,6 +76,7 @@ struct FoodFormView: View {
       .scrollID(.info)
 
       Section {
+        ScaleSlider($speed, "Speed", descriptions: Scales.foodSpeedDescriptions)
         ScaleSlider($size, "Size", descriptions: FoodSizes.descriptions)
         ScaleSlider($risk, "Risk", descriptions: Scales.foodRiskDescriptions)
         Toggle("Medicinal", isOn: $medicinal)

@@ -45,6 +45,10 @@ struct AppDB {
       try SQLIBSRecord.addMedicinalColumn(db)
     }
 
+    migrator.registerMigration("v3") { db in
+      try SQLIBSRecord.addSpeedColumn(db)
+    }
+
     return migrator
   }
 

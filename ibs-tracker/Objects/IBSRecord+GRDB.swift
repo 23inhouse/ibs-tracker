@@ -21,6 +21,7 @@ extension IBSRecord {
     self.evacuation = BMEvacuation(optionalValue: record.evacuation)
     self.dryness = Scales(optionalValue: record.dryness)
     self.wetness = Scales(optionalValue: record.wetness)
+    self.speed = Scales(optionalValue: record.speed)
     self.size = FoodSizes(optionalValue: record.size)
     self.risk = Scales(optionalValue: record.risk)
     self.bloating = Scales(optionalValue: record.bloating)

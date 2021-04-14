@@ -16,6 +16,7 @@
        "type": "food",
        "timestamp": "2020-10-31 21:00:00 +0000",
        "text": "Chips & peanut butter",
+       "speed": 1,
        "size": null,
        "risk": null,
        "tags": ["Peanut butter", "Potato chips"]
