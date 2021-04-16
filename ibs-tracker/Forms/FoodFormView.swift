@@ -140,7 +140,7 @@ struct FoodFormView: View {
   }
 
   private func calcSuggestedTags(delay: Double = 0) {
-    guard showAllTags || (!isEditingName && name.isNotEmpty) else {
+    guard showAllTags || (!isEditingName && name.isNotEmpty) || viewModel.newTag.isNotEmpty else {
       suggestedTags = []
       return
     }
@@ -151,22 +151,24 @@ struct FoodFormView: View {
       let tagsFromName = name
         .split(separator: " ")
         .filter { $0.count > 2 }
-        .map { String($0) }
-      suggestedTags = Array(Set(tagsFromName + appState.tags(for: .food))).sorted()
+        .map { String($0).capitalizeFirstLetter() }
+      let newTag = viewModel.newTag.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+      suggestedTags = Array(Set(tagsFromName + appState.tags(for: .food))).sorted(by: tagSorting(tagsFromName.map { $0.lowercased() }))
         .filter {
           let availableTag = $0.lowercased()
           return
             !viewModel.tags.contains($0) &&
             (
               showAllTags ||
-                availableTag.contains(viewModel.newTag.lowercased()) ||
+                availableTag.contains(newTag) ||
                 (
-                    tagsFromName.filter {
-                      let word = String($0.lowercased())
-                      return
-                        viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
-                        (availableTag.contains(word) || word.contains(availableTag))
-                    }.isNotEmpty
+                  viewModel.newTag.isEmpty &&
+                  tagsFromName.filter {
+                    let word = String($0.lowercased())
+                    return
+                      viewModel.tags.filter { $0.lowercased().contains(word) }.isEmpty &&
+                      (availableTag.contains(word) || word.contains(availableTag))
+                  }.isNotEmpty
                 )
             )
         }
@@ -174,6 +176,31 @@ struct FoodFormView: View {
 
     tagFilterWorkItem = currentWorkItem
     DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: currentWorkItem)
+  }
+
+  private func tagSorting(_ tagsFromName: [String]) -> (String, String) -> Bool {
+    return { (lhs: String, rhs: String) -> Bool in
+      var lhsI: Int = .max
+      var rhsI: Int = .max
+      let lhsL = lhs.lowercased()
+      let rhsL = rhs.lowercased()
+      for (i, word) in tagsFromName.enumerated().reversed() {
+        if (lhsL.contains(word.lowercased()) || word.contains(lhsL)) {
+          lhsI = i
+        }
+        if (rhsL.contains(word) || word.contains(rhsL)) {
+          rhsI = i
+        }
+      }
+
+      if lhsI < rhsI {
+        return true
+      } else if rhsI < lhsI {
+        return false
+      } else {
+        return lhsL < rhsL
+      }
+    }
   }
 }
 
