@@ -165,6 +165,7 @@
 		B5EE367425BC85C600DC9D74 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367325BC85C600DC9D74 /* SearchView.swift */; };
 		B5EE367925BC863000DC9D74 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EE367825BC863000DC9D74 /* DayView.swift */; };
 		B5F169BC2614AD6D00A603BD /* Date+NearestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F169BA2614AD6D00A603BD /* Date+NearestTests.swift */; };
+		B5F984D726299F8A00170D6E /* Decimal+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F984D626299F8A00170D6E /* Decimal+Round.swift */; };
 		B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */; };
 		B5FCC30825FB4FAD00D92621 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30725FB4FAD00D92621 /* Utilities.swift */; };
 		B5FCC30D25FB6CC700D92621 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FCC30C25FB6CC700D92621 /* AppIconView.swift */; };
@@ -355,6 +356,7 @@
 		B5EE367325BC85C600DC9D74 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B5EE367825BC863000DC9D74 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		B5F169BA2614AD6D00A603BD /* Date+NearestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+NearestTests.swift"; sourceTree = "<group>"; };
+		B5F984D626299F8A00170D6E /* Decimal+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Round.swift"; sourceTree = "<group>"; };
 		B5FCC2F525FA885B00D92621 /* LazyNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationLink.swift; sourceTree = "<group>"; };
 		B5FCC30725FB4FAD00D92621 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B5FCC30C25FB6CC700D92621 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				B520A9DF260A28B80066ED68 /* Date+Date.swift */,
 				B5421F5125BD8D9400E8B5AA /* Date+String.swift */,
 				B5207F0325D606310019D18F /* Date+Nearest.swift */,
+				B5F984D626299F8A00170D6E /* Decimal+Round.swift */,
 				B57C88E725E42E150060FE13 /* RawRepresentable+OptionalValue.swift */,
 				B50738E125F76F800069FB50 /* ScrollViewProxy+Tags.swift */,
 				B5BCF28425EE421A00F88D01 /* String+CapitalizeFirstLetter.swift */,
@@ -932,6 +935,7 @@
 				B5A5D21125D728E8009C6285 /* String+Url.swift in Sources */,
 				B520A9EB260E16620066ED68 /* ColoredRowChartStyle.swift in Sources */,
 				B54EA7CB25B2587B008C4B74 /* BristolView.swift in Sources */,
+				B5F984D726299F8A00170D6E /* Decimal+Round.swift in Sources */,
 				B5109E1E26023B17007CB498 /* SkinRow.swift in Sources */,
 				B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */,
 				B5D538042624E5ED002BF697 /* AppIconButton.swift in Sources */,

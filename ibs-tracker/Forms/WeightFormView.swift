@@ -91,8 +91,15 @@ struct WeightFormView_Previews: PreviewProvider {
 struct WeightPicker: View {
   @Binding var weight: Decimal
 
-  private let maxWeight: Decimal = 140.1
-  private let minWeight: Decimal = 40
+  private var maxWeight: Decimal {
+    guard weight > 0 else { return 140.1 }
+    return (weight + 2.5).rounded(.up) + 0.1
+  }
+
+  private var minWeight: Decimal {
+    guard weight > 0 else { return 40 }
+    return (weight - 2.5).rounded(.down)
+  }
 
   private var weights: [Decimal] {
     return Array(stride(from: minWeight, to: maxWeight, by: 0.1))
