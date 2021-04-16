@@ -74,7 +74,7 @@ struct SymptomsView: View {
     }
   }
 
-  private var magnificationGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>> {
+  private var magnificationGesture: some Gesture {
     MagnificationGesture()
       .onChanged { scale in
         let calculatedScale = lastGraphScale * scale
@@ -91,7 +91,7 @@ struct SymptomsView: View {
       }
   }
 
-  private var dragGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+  private var dragGesture: some Gesture {
     DragGesture()
       .onChanged { gesture in
         let offset = gesture.translation.y

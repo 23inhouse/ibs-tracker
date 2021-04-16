@@ -87,7 +87,7 @@ struct ScaleSlider<T: Sliderable>: View {
     }
   }
 
-  private var dragGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+  private var dragGesture: some Gesture {
     DragGesture()
       .onChanged { gesture in
         let movement = gesture.location.width

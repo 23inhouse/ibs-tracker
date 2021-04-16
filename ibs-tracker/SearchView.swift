@@ -39,7 +39,7 @@ struct SearchView: View {
     .simultaneousGesture(clearKeyboardGesture)
   }
 
-  private var swipeFilterGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
+  private var swipeFilterGesture: some Gesture {
     DragGesture()
       .onChanged { gesture in
         let offset = filterOffset.width
