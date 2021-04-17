@@ -137,13 +137,15 @@ struct SearchList: View {
           .contentShape(Rectangle())
           .padding(3)
           .backgroundColor(.blue)
-          .padding(.top, 30)
 
           ForEach(dayRecord.ibsRecords, id: \.self) { record in
             ItemTypeDayRowView(record: record)
             Divider()
               .padding(.horizontal, 10)
           }
+
+          Spacer()
+            .frame(height: 30)
         }
       }
     }
