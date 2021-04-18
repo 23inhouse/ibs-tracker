@@ -34,7 +34,7 @@
 		<key>UIImageName</key>
 		<string>Launch Image.png</string>
 		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
