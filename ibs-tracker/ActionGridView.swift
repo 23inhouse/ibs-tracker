@@ -33,10 +33,10 @@ struct ActionGridView: View {
           scroller.scrollTo(id: .gridContent, anchor: .bottom, animate: false)
         }
       }
-      .navigationBarTitleDisplayMode(.inline)
+      .navigationBarTitleDisplayMode(.large)
       .toolbar {
         ToolbarItem(placement: .principal) {
-          Text("IBS Tracker")
+          AppIconView(size: 25)
         }
       }
     }
