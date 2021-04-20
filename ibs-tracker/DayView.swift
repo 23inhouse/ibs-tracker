@@ -16,7 +16,7 @@ struct DayView: View {
     let calendar = Calendar.current
 
     let displayDate = calendar.dateComponents([.year, .month, .day], from: appState.activeDate)
-    let currentDate = calendar.dateComponents([.year, .month, .day], from: IBSData.currentDate())
+    let currentDate = calendar.dateComponents([.year, .month, .day], from: IBSData.timeShiftedDate())
 
     return displayDate == currentDate
   }
@@ -101,7 +101,7 @@ private extension DayView {
 
   func changeDayToToday() {
     withAnimation {
-      appState.activeDate = IBSData.currentDate()
+      appState.activeDate = IBSData.timeShiftedDate()
     }
   }
 

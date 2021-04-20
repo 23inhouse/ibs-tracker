@@ -41,7 +41,7 @@ class IBSData: ObservableObject {
       fatalError("FAILURE: IBSData must be set to .test mode while the tests are running")
     }
     self.appDB = appDB
-    self.activeDate = IBSData.currentDate()
+    self.activeDate = IBSData.timeShiftedDate()
     self.allRecords = []
     self.dayRecords = []
     self.lastWeight = 0
@@ -50,7 +50,7 @@ class IBSData: ObservableObject {
 
   init(_ ibsRecords: [IBSRecord] = []) {
     self.appDB = .test
-    self.activeDate = IBSData.currentDate()
+    self.activeDate = IBSData.timeShiftedDate()
     self.allRecords = ibsRecords
     self.dayRecords = IBSData.groupByDay(allRecords)
     self.lastWeight = IBSData.lastWeight(allRecords)
@@ -63,7 +63,10 @@ class IBSData: ObservableObject {
 }
 
 extension IBSData {
-  static func currentDate(for date: Date = Date()) -> Date {
+  // currentDate moves records before 5am to the previous day
+  // So a record at 2am will be display after the 11pm records
+  // In the context of food and IBS 5am is the start of a new day
+  static func timeShiftedDate(for date: Date = Date()) -> Date {
     Calendar.current.date(byAdding: .hour, value: -numberOfHoursInMorningIncludedInPreviousDay, to: date) ?? date
   }
 
@@ -115,8 +118,8 @@ private extension IBSData {
       let record = sortedRecords[i]
       i += 1
 
-      guard let keyString = DayRecord.keyDate(for: record.timestamp)?.string(for: keyStringFormat) else { continue }
-      guard let keyDate = DayRecord.keyDate(for: record.timestamp) else { continue }
+      let keyString = timeShiftedDate(for: record.timestamp).string(for: keyStringFormat)
+      let keyDate = timeShiftedDate(for: record.timestamp)
 
       if keyString != previousKeyString {
         if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {

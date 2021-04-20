@@ -90,7 +90,7 @@ struct ColorCodedContent {
     guard !medicinal else { return defaultColor }
     let timestamp = record.timestamp
     let calendar = Calendar.current
-    let date = IBSData.currentDate(for: timestamp)
+    let date = IBSData.timeShiftedDate(for: timestamp)
     let hour = calendar.component(.hour, from: date)
     let eightPMAdjusted = 20 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
     let ninePMAdjusted = 21 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
