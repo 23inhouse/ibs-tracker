@@ -13,6 +13,7 @@ struct WeightFormView: View {
 
   @StateObject private var viewModel = FormViewModel()
   @State private var weight: Decimal = 0
+  @State private var initialWeight: String = ""
 
   @State private var showAllTags: Bool = false
   @State private var suggestedTags: [String] = []
@@ -40,13 +41,21 @@ struct WeightFormView: View {
   var body: some View {
     FormView("Weight", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
-        WeightPicker(weight: $weight)
-          .pickerStyle(InlinePickerStyle())
-          .scaleEffect(x: 0.33, y: 1.0, anchor: .center)
-          .onAppear {
-            guard !editMode else { return }
-            weight = appState.lastWeight
-          }
+        if appState.lastWeight > 0 {
+          WeightPicker(weight: $weight)
+            .pickerStyle(InlinePickerStyle())
+            .scaleEffect(x: 0.33, y: 1.0, anchor: .center)
+            .onAppear {
+              guard !editMode else { return }
+              weight = appState.lastWeight
+            }
+        } else {
+          TextField("Weight in kg", text: $initialWeight)
+            .onChange(of: initialWeight) { _ in
+              guard let initialWeight = Decimal(string: initialWeight) else { return }
+              weight = initialWeight
+            }
+        }
       }
       .scrollID(.info)
 

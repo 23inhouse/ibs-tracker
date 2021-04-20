@@ -44,7 +44,7 @@ struct MedicationFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(medication: name, type: medicationTypes.first ?? .none, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
+    return IBSRecord(medication: name, type: medicationTypes, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
   }
 
   private var savable: Bool {
@@ -117,6 +117,7 @@ struct MedicationFormView: View {
   }
 
   private func commitName() {
+    endEditing(true)
     isEditingName = false
     nameIsCompleted = true
     name = name.trimmingCharacters(in: .whitespacesAndNewlines)

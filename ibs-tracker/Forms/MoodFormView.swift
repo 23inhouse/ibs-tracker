@@ -50,7 +50,7 @@ struct MoodFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
-      SaveButtonSection(name: "Mood", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
+      SaveButtonSection(name: "Mood / Stress", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()

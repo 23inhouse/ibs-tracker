@@ -125,6 +125,7 @@ struct BMFormView: View {
                 .strokeBorder(Color.secondary, lineWidth: 1)
                 .background(Circle().fill(color.color))
                 .scaledToFit()
+                .accessibility(identifier: color.rawValue)
                 .onTapGesture {
                   self.color = color
                 }

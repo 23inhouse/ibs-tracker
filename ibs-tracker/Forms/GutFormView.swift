@@ -50,7 +50,7 @@ struct GutFormView: View {
 
       TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, onEditingChanged: viewModel.showTagSuggestions, scroller: scroller)
 
-      SaveButtonSection(name: "Gut", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
+       SaveButtonSection(name: "Pain / Bloating", record: record, savable: savable, editMode: editMode, editTimestamp: editableRecord?.timestamp, scroller: scroller)
     }
     .onAppear {
       calcSuggestedTags()

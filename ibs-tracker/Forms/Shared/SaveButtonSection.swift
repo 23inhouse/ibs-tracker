@@ -18,6 +18,10 @@ struct SaveButtonSection: View {
   var editTimestamp: Date?
   var scroller: ScrollViewProxy? = nil
 
+  private var label: String {
+    editMode ? "Update \(name)" : "Add \(name)"
+  }
+
   var body: some View {
     Section {
       Button(action: {
@@ -30,7 +34,7 @@ struct SaveButtonSection: View {
           presentation.dismiss(animation: .none)
         }
       }) {
-        Text(editMode ? "Update \(name)" : "Add \(name)")
+        Text(label)
           .frame(maxWidth: .infinity)
       }
     }

@@ -48,7 +48,7 @@ struct SkinFormView: View {
     FormView("Skin condition", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       Section {
         ScaleSlider($condition, "Condition", descriptions: Scales.skinConditionDescriptions)
-        TextEditor(text: $text)
+        UIKitBridge.SwiftUITextView("more info ...", text: $text)
           .frame(height: 100)
           .onTapGesture {
             scroller.scrollTo(id: .condition)

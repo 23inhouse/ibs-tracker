@@ -46,7 +46,7 @@ struct ActionGridView: View {
     VStack(alignment: .center) {
       PaddedHStack {
         ActionNavigationLink(type: .note, text: "Notes") { NoteFormView() }
-        ActionNavigationLink(type: .medication, text: "medicaiton") { MedicationFormView() }
+        ActionNavigationLink(type: .medication, text: "Medication") { MedicationFormView() }
         ActionNavigationLink(type: .food, text: "Food") { FoodFormView() }
       }
 
@@ -57,7 +57,7 @@ struct ActionGridView: View {
       }
 
       PaddedHStack {
-        ActionNavigationLink(type: .skin, text: "Skin") { SkinFormView() }
+        ActionNavigationLink(type: .skin, text: "Skin\ncondition") { SkinFormView() }
         ActionNavigationLink(type: .weight, text: "Weight") { WeightFormView() }
         ActionNavigationLink(type: .bm, text: "Poop") { BMFormView() }
       }

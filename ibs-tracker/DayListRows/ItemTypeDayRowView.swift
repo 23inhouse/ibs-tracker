@@ -36,7 +36,7 @@ struct ItemTypeDayRowView_Previews: PreviewProvider {
       ItemTypeDayRowView(record: IBSRecord(bristolScale: .b3, timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(food: "Meal name", timestamp: Date(), tags: ["tag"], risk: .mild, size: .large))
       ItemTypeDayRowView(record: IBSRecord(note: "A custome note", timestamp: Date(), tags: ["tag"]))
-      ItemTypeDayRowView(record: IBSRecord(medication: "Vitamin", type: .probiotic, timestamp: Date(), tags: ["tag"]))
+      ItemTypeDayRowView(record: IBSRecord(medication: "Vitamin", type: [.probiotic], timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(weight: 60, timestamp: Date(), tags: ["tag"]))
       ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], bloating: .mild, pain: .moderate))
       ItemTypeDayRowView(record: IBSRecord(timestamp: Date(), tags: ["tag"], headache: .moderate, bodyache: .severe))

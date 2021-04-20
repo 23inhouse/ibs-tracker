@@ -311,7 +311,7 @@ enum Scales: Int, CaseIterable {
   ]
 
   static let skinConditionDescriptions: [Scales: String] = [
-    .zero: "no skin condition",
+    .zero: "good condition",
     .mild: "mildly bad condition",
     .moderate: "moderately bad condition",
     .severe: "serverely bad condition",
@@ -320,7 +320,7 @@ enum Scales: Int, CaseIterable {
 
   static let stressDescriptions: [Scales: String] = [
     .none: "",
-    .zero: "no stressed at all",
+    .zero: "I feel calm",
     .mild: "I feel a little stress",
     .moderate: "I feel somewhat stressed",
     .severe: "I feel really stressed",
