@@ -152,7 +152,7 @@ struct SearchList: View {
     .onAppear { calcRecords() }
     .onChange(of: search)  { _ in calcRecords() }
     .onChange(of: filters)  { _ in calcRecords() }
-    .onChange(of: appState.records)  { _ in calcRecords() }
+    .onChange(of: appState.computedRecords)  { _ in calcRecords() }
   }
 }
 

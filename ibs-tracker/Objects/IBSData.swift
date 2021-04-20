@@ -21,16 +21,16 @@ class IBSData: ObservableObject {
   @Published var dayRecords: [DayRecord]
   @Published var lastWeight: Decimal
   @Published var activeDate: Date
-  @Published var records: [IBSRecord]
+  @Published var computedRecords: [IBSRecord]
 
   static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
   static var current = IBSData(appDB: .current)
 
-  private var allRecords: [IBSRecord] {
+  private var savedRecords: [IBSRecord] {
     didSet {
-      self.dayRecords = IBSData.groupByDay(allRecords)
-      self.lastWeight = IBSData.lastWeight(allRecords)
-      self.records = allRecords.reversed()
+      self.dayRecords = IBSData.groupByDay(savedRecords)
+      self.lastWeight = IBSData.lastWeight(savedRecords)
+      self.computedRecords = savedRecords.reversed()
     }
   }
 
@@ -42,23 +42,23 @@ class IBSData: ObservableObject {
     }
     self.appDB = appDB
     self.activeDate = IBSData.timeShiftedDate()
-    self.allRecords = []
+    self.savedRecords = []
     self.dayRecords = []
     self.lastWeight = 0
-    self.records = []
+    self.computedRecords = []
   }
 
   init(_ ibsRecords: [IBSRecord] = []) {
     self.appDB = .test
     self.activeDate = IBSData.timeShiftedDate()
-    self.allRecords = ibsRecords
-    self.dayRecords = IBSData.groupByDay(allRecords)
-    self.lastWeight = IBSData.lastWeight(allRecords)
-    self.records = allRecords.reversed()
+    self.savedRecords = ibsRecords
+    self.dayRecords = IBSData.groupByDay(savedRecords)
+    self.lastWeight = IBSData.lastWeight(savedRecords)
+    self.computedRecords = savedRecords.reversed()
   }
 
   func loadData() {
-    self.allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
+    self.savedRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
   }
 }
 
@@ -85,7 +85,7 @@ extension IBSData {
   }
 
   func reloadRecordsFromSQL() {
-    allRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
+    savedRecords = IBSData.loadRecordsFromSQL(appDB: appDB)
   }
 
   func tags(for type: ItemType) -> [String] {
@@ -161,7 +161,7 @@ private extension IBSData {
   }
 
   func recentRecords(of type: ItemType) -> [IBSRecord] {
-    let preSortedTypedRecords = allRecords
+    let preSortedTypedRecords = savedRecords
       .filter { $0.type == type }
       .sorted { $0.timestamp > $1.timestamp }
 

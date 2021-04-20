@@ -36,11 +36,11 @@ struct SymptomsView: View {
   private let verticalAxisWidth: CGFloat = 45
 
   private var firstRecord: IBSRecord {
-    appState.records.first ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
+    appState.computedRecords.first ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
   }
 
   private var lastRecord: IBSRecord {
-    appState.records.last ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
+    appState.computedRecords.last ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
   }
 
   private var recordInterval: TimeInterval {
@@ -68,7 +68,7 @@ struct SymptomsView: View {
     .onAppear {
       filteredScores = filterScores()
     }
-    .onChange(of: appState.records) { _ in
+    .onChange(of: appState.computedRecords) { _ in
       timestamps = calcTimestamps()
       filteredScores = filterScores()
     }
@@ -157,7 +157,7 @@ struct SymptomsView: View {
 private extension SymptomsView {
   func filterScores() -> [GraphScore] {
     let (constipationRecords, bmsPerDay) = constipationDays()
-    let recordsWithConstipationDays: [IBSRecord] = appState.records + constipationRecords
+    let recordsWithConstipationDays: [IBSRecord] = appState.computedRecords + constipationRecords
     return recordsWithConstipationDays.compactMap { record in
       let timestamp = record.timestamp
 
