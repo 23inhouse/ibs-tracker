@@ -28,9 +28,8 @@ class IBSData: ObservableObject {
 
   private var savedRecords: [IBSRecord] {
     didSet {
-      self.recordsByDay = IBSData.groupByDay(savedRecords)
+      (self.recordsByDay, self.computedRecords) = IBSData.computeAnalysedRecords(savedRecords)
       self.lastWeight = IBSData.lastWeight(savedRecords)
-      self.computedRecords = savedRecords.reversed()
     }
   }
 
@@ -44,17 +43,16 @@ class IBSData: ObservableObject {
     self.activeDate = IBSData.timeShiftedDate()
     self.savedRecords = []
     self.recordsByDay = []
-    self.lastWeight = 0
     self.computedRecords = []
+    self.lastWeight = 0
   }
 
   init(_ ibsRecords: [IBSRecord] = []) {
     self.appDB = .test
     self.activeDate = IBSData.timeShiftedDate()
     self.savedRecords = ibsRecords
-    self.recordsByDay = IBSData.groupByDay(savedRecords)
+    (self.recordsByDay, self.computedRecords) = IBSData.computeAnalysedRecords(savedRecords)
     self.lastWeight = IBSData.lastWeight(savedRecords)
-    self.computedRecords = savedRecords.reversed()
   }
 
   func loadData() {
@@ -101,49 +99,6 @@ extension IBSData {
 }
 
 private extension IBSData {
-  static func groupByDay(_ records: [IBSRecord]) -> [DayRecord] {
-    let sortedRecords = records.sorted { $0.timestamp > $1.timestamp }
-
-    guard sortedRecords.count > 0 else { return [] }
-
-    let keyStringFormat = "yyyy-MM-dd"
-    let count = sortedRecords.count
-    var i = 0
-    var recordsByDay: [DayRecord] = []
-    var currentIBSRecords: [IBSRecord] = []
-    var previousKeyString: String?
-    var previousKeyDate: Date?
-
-    repeat {
-      let record = sortedRecords[i]
-      i += 1
-
-      let keyString = timeShiftedDate(for: record.timestamp).string(for: keyStringFormat)
-      let keyDate = timeShiftedDate(for: record.timestamp)
-
-      if keyString != previousKeyString {
-        if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
-          let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
-          recordsByDay.append(dayRecord)
-        }
-
-        currentIBSRecords = []
-      }
-
-      currentIBSRecords.append(record)
-
-      previousKeyString = keyString
-      previousKeyDate = keyDate
-    } while i < count
-
-    if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
-      let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
-      recordsByDay.append(dayRecord)
-    }
-
-    return recordsByDay
-  }
-
   static func lastWeight(_ records: [IBSRecord]) -> Decimal {
     records
       .filter { $0.type == .weight }
