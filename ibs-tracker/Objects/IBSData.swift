@@ -18,7 +18,7 @@ enum Tabs {
 class IBSData: ObservableObject {
   @Published var tabSelection: Tabs = .add
   @Published var activeChart: Charts = .symptoms
-  @Published var dayRecords: [DayRecord]
+  @Published var recordsByDay: [DayRecord]
   @Published var lastWeight: Decimal
   @Published var activeDate: Date
   @Published var computedRecords: [IBSRecord]
@@ -28,7 +28,7 @@ class IBSData: ObservableObject {
 
   private var savedRecords: [IBSRecord] {
     didSet {
-      self.dayRecords = IBSData.groupByDay(savedRecords)
+      self.recordsByDay = IBSData.groupByDay(savedRecords)
       self.lastWeight = IBSData.lastWeight(savedRecords)
       self.computedRecords = savedRecords.reversed()
     }
@@ -43,7 +43,7 @@ class IBSData: ObservableObject {
     self.appDB = appDB
     self.activeDate = IBSData.timeShiftedDate()
     self.savedRecords = []
-    self.dayRecords = []
+    self.recordsByDay = []
     self.lastWeight = 0
     self.computedRecords = []
   }
@@ -52,7 +52,7 @@ class IBSData: ObservableObject {
     self.appDB = .test
     self.activeDate = IBSData.timeShiftedDate()
     self.savedRecords = ibsRecords
-    self.dayRecords = IBSData.groupByDay(savedRecords)
+    self.recordsByDay = IBSData.groupByDay(savedRecords)
     self.lastWeight = IBSData.lastWeight(savedRecords)
     self.computedRecords = savedRecords.reversed()
   }
@@ -109,7 +109,7 @@ private extension IBSData {
     let keyStringFormat = "yyyy-MM-dd"
     let count = sortedRecords.count
     var i = 0
-    var dayRecords: [DayRecord] = []
+    var recordsByDay: [DayRecord] = []
     var currentIBSRecords: [IBSRecord] = []
     var previousKeyString: String?
     var previousKeyDate: Date?
@@ -124,7 +124,7 @@ private extension IBSData {
       if keyString != previousKeyString {
         if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
           let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
-          dayRecords.append(dayRecord)
+          recordsByDay.append(dayRecord)
         }
 
         currentIBSRecords = []
@@ -138,10 +138,10 @@ private extension IBSData {
 
     if currentIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
       let dayRecord = DayRecord(date: prevKeyDate, ibsRecords: currentIBSRecords)
-      dayRecords.append(dayRecord)
+      recordsByDay.append(dayRecord)
     }
 
-    return dayRecords
+    return recordsByDay
   }
 
   static func lastWeight(_ records: [IBSRecord]) -> Decimal {

@@ -88,7 +88,7 @@ struct SettingsView: View {
       loadingButton($isExportingPDF, text: "Export PDF", icon: "square.and.arrow.up") {
         isExportingPDF = true
         DispatchQueue.main.async {
-          let pdf = PDF(dayRecords: appState.dayRecords, includeFood: includeFood)
+          let pdf = PDF(recordsByDay: appState.recordsByDay, includeFood: includeFood)
           do {
             if let pdfFileUrl = try PDF.encode(pdf).url(path: "report.pdf") {
               isSharingPDF = true

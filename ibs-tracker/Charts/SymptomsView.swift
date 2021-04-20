@@ -177,7 +177,7 @@ private extension SymptomsView {
 
     guard includeBMPerDay else { return (constipationRecords, bmsPerDay) }
 
-    for day in appState.dayRecords {
+    for day in appState.recordsByDay {
       let date = day.date.date()
       let hourOfDay = IBSData.numberOfHoursInMorningIncludedInPreviousDay + 1
       let interval = Double(hourOfDay * 60 * 60)

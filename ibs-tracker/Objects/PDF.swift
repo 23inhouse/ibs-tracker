@@ -10,7 +10,7 @@ import PDFKit
 import SwiftUI
 
 struct PDF {
-  let dayRecords: [DayRecord]
+  let recordsByDay: [DayRecord]
   let includeFood: Bool
 
   static let pageA4width = 595
@@ -86,7 +86,7 @@ extension PDF {
 
       var yPos: Int = 0 + padding
 
-      for dayRecord in pdf.dayRecords {
+      for dayRecord in pdf.recordsByDay {
         if yPos > pageA4height - ((3 * height) + (2 * vSpacer) + padding) {
           context.beginPage()
           yPos = 0 + padding

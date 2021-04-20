@@ -159,13 +159,13 @@ struct SearchList: View {
 private extension SearchList {
   func calcRecords() {
     guard filters.isNotEmpty || search != "" else {
-      records = appState.dayRecords
+      records = appState.recordsByDay
       return
     }
 
     DispatchQueue.main.async {
       let searchQuery = search.lowercased()
-      let dayRecords: [DayRecord?] = appState.dayRecords.map {
+      let recordsByDay: [DayRecord?] = appState.recordsByDay.map {
         let ibsRecords = $0.ibsRecords.filter {
           let content = (($0.text ?? "") + $0.tags.joined(separator: "")).lowercased()
           return
@@ -178,7 +178,7 @@ private extension SearchList {
         return nil
       }
 
-      records = dayRecords.compactMap { $0 }
+      records = recordsByDay.compactMap { $0 }
     }
   }
 }

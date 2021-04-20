@@ -37,8 +37,8 @@ class IBSDataTests: XCTestCase {
     let ibsData = IBSData(appDB: .test)
     ibsData.loadData()
 
-    let dayRecords = ibsData.dayRecords
-    let recordCount = dayRecords.count
+    let recordsByDay = ibsData.recordsByDay
+    let recordCount = recordsByDay.count
     XCTAssertEqual(recordCount, 1, "wrong number records")
   }
 
@@ -50,8 +50,8 @@ class IBSDataTests: XCTestCase {
     let ibsData = IBSData(appDB: .test)
     ibsData.loadData()
 
-    let dayRecords = ibsData.dayRecords
-    let recordCount = dayRecords.count
+    let recordsByDay = ibsData.recordsByDay
+    let recordCount = recordsByDay.count
     XCTAssertEqual(recordCount, 2, "wrong number records")
   }
 

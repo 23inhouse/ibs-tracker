@@ -22,7 +22,7 @@ struct DayView: View {
   }
 
   private var records: [IBSRecord] {
-    let dayRecord = appState.dayRecords
+    let dayRecord = appState.recordsByDay
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 
     return dayRecord?.ibsRecords ?? []

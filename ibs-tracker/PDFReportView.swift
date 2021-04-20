@@ -16,7 +16,7 @@ struct PDFReportView: View {
   }
 
   var url: URL? {
-    let pdf = PDF(dayRecords: appState.dayRecords, includeFood: includeFood)
+    let pdf = PDF(recordsByDay: appState.recordsByDay, includeFood: includeFood)
     do {
       return try PDF.encode(pdf).url(path: "report.pdf")
     } catch {
