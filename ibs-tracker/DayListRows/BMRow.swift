@@ -72,6 +72,13 @@ struct BMRowView: View {
             color: ColorCodedContent.scaleColor(for: record.wetness)
           )
         }
+        if let numberOf = record.numberOfBMsScale, numberOf.rawValue > 1 {
+          PropertyView(
+            text: record.numberOfBMsText(),
+            scale: numberOf.rawValue,
+            color: ColorCodedContent.scaleColor(for: numberOf)
+          )
+        }
       }
     }
   }

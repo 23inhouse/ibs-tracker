@@ -15,6 +15,9 @@ protocol BMRecord: IBSRecordType {
   var evacuation: BMEvacuation? { get }
   var dryness: Scales? { get }
   var wetness: Scales? { get }
+  var numberOfBMs: UInt? { get }
+  var numberOfBMsScale: Scales? { get }
+
   init(bristolScale: BristolType?, timestamp: Date, tags: [String], color: BMColor?, pressure: Scales?, smell: BMSmell?, evacuation: BMEvacuation?, dryness: Scales?, wetness: Scales?)
   func bmScore() -> Scales
   func bristolDescription() -> String
@@ -24,6 +27,7 @@ protocol BMRecord: IBSRecordType {
   func evacuationText() -> String
   func wetnessText() -> String
   func drynessText() -> String
+  func numberOfBMsText() -> String
 }
 
 extension IBSRecord: BMRecord {
@@ -40,9 +44,30 @@ extension IBSRecord: BMRecord {
     self.tags = tags
   }
 
+  var numberOfBMsScale: Scales? {
+    get {
+      let number = numberOfBMs ?? 0
+      let scale: Scales
+      if number == 0 {
+        scale = .none
+      } else if number == 1 {
+        scale = .zero
+      } else if number == 2 {
+        scale = .mild
+      } else if number == 3 {
+        scale = .moderate
+      } else if number == 4 {
+        scale = .severe
+      } else {
+        scale = .extreme
+      }
+      return scale
+    }
+  }
+
   func bmScore() -> Scales {
-    let scales = [dryness ?? .none, wetness ?? .none, pressure ?? .none]
-    let worst: Scales = scales.max { a, b in a.rawValue > b.rawValue } ?? .none
+    let scales = [dryness ?? .none, wetness ?? .none, pressure ?? .none, numberOfBMsScale ?? .none]
+    let worst: Scales = scales.max { a, b in a.rawValue < b.rawValue } ?? .none
 
     guard let bristolScale = bristolScale else { return .none }
 
@@ -54,25 +79,34 @@ extension IBSRecord: BMRecord {
       if evacuation == .partial {
         return .extreme
       }
+      if worst.rawValue > Scales.severe.rawValue {
+        return worst
+      }
+
       return .severe
 
     case .b2, .b5:
+      if worst.rawValue > Scales.severe.rawValue {
+        return worst
+      }
       if evacuation == .partial {
         return .severe
       }
-      if worst.rawValue > Scales.severe.rawValue {
-        return .severe
+      if worst.rawValue > Scales.moderate.rawValue {
+        return worst
       }
 
       return .moderate
+
     case .b3, .b4:
+      if worst.rawValue > Scales.moderate.rawValue {
+        return worst
+      }
       if evacuation == .partial {
         return .moderate
       }
-      if worst.rawValue > Scales.moderate.rawValue {
-        return .moderate
-      } else if worst.rawValue > Scales.mild.rawValue {
-        return .mild
+      if worst.rawValue > Scales.zero.rawValue {
+        return worst
       }
 
       return .zero
@@ -108,5 +142,10 @@ extension IBSRecord: BMRecord {
 
   func wetnessText() -> String {
     return Scales.wetnessDescriptions[wetness ?? .zero] ?? ""
+  }
+
+  func numberOfBMsText() -> String {
+    let scale = numberOfBMsScale ?? .none
+    return Scales.numberOfBMsDescriptions[scale] ?? ""
   }
 }

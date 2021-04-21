@@ -11,6 +11,7 @@ struct IBSRecord {
   var type: ItemType
   var timestamp: Date
   var bristolScale: BristolType?
+  var numberOfBMs: UInt?
   var color: BMColor?
   var pressure: Scales?
   var smell: BMSmell?

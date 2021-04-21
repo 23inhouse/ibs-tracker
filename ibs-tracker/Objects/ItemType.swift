@@ -310,6 +310,15 @@ enum Scales: Int, CaseIterable {
     .extreme: "extreme headache",
   ]
 
+  static let numberOfBMsDescriptions: [Scales: String] = [
+    .none: "",
+    .zero: "no bowel movements",
+    .mild: "mild number of bowel movements",
+    .moderate: "moderate number of bowel movements",
+    .severe: "severe number of bowel movements",
+    .extreme: "extreme number of bowel movements",
+  ]
+
   static let pressureDescriptions: [Scales: String] = [
     .none: "",
     .zero: "no pressure",

@@ -31,7 +31,7 @@ struct ChartView: View {
   }
 
   var body: some View {
-    SymptomsView(include: $sympotomsInclude, graphScale: $graphScale, lastGraphScale: $lastGraphScale, graphOffset: $graphOffset, lastGraphOffset: $lastGraphOffset, lastRecordInterval: $lastRecordInterval, includeBMPerDay: $sympotomsIncludeBMPerDay)
+    SymptomsView(include: $sympotomsInclude, graphScale: $graphScale, lastGraphScale: $lastGraphScale, graphOffset: $graphOffset, lastGraphOffset: $lastGraphOffset, lastRecordInterval: $lastRecordInterval)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 

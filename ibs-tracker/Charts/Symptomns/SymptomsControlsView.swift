@@ -10,7 +10,6 @@ import SwiftUI
 struct SymptomsControlsView: View {
   @Environment(\.colorScheme) var colorScheme
   @Binding var include: [ItemType]
-  @Binding var includeBMPerDay: Bool
 
   var resetAction: () -> Void
 
@@ -21,11 +20,6 @@ struct SymptomsControlsView: View {
 
   var body: some View {
     VStack {
-      Image(systemName: "circle.grid.cross")
-        .foregroundColor(includeBMPerDay ? .blue : .secondary)
-        .onTapGesture {
-          includeBMPerDay.toggle()
-        }
       ForEach(options, id: \.self) { itemType in
         TypeShape(type: itemType)
           .stroke(style: strokeStyle)
@@ -57,6 +51,6 @@ struct SymptomsControlsView: View {
 
 struct SymptomsControlsView_Previews: PreviewProvider {
   static var previews: some View {
-    SymptomsControlsView(include: Binding.constant([.bm, .gut]), includeBMPerDay: Binding.constant(true), resetAction: {})
+    SymptomsControlsView(include: Binding.constant([.bm, .gut]), resetAction: {})
   }
 }
