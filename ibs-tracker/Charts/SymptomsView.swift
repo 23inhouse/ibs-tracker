@@ -67,7 +67,7 @@ struct SymptomsView: View {
     .onAppear {
       filteredScores = calcFilterScores()
     }
-    .onChange(of: appState.computedRecords) { _ in
+    .onChange(of: appState.savedRecords) { _ in
       timestamps = calcTimestamps()
       filteredScores = calcFilterScores()
     }

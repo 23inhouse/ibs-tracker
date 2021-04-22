@@ -138,7 +138,13 @@ struct SearchList: View {
           .padding(3)
           .backgroundColor(.blue)
 
-          ForEach(dayRecord.ibsRecords, id: \.self) { record in
+          if dayRecord.records.filter(\.isSummary).isNotEmpty {
+            SummaryRowView(dayRecord.records, filters: filters)
+            Divider()
+              .padding(.horizontal, 10)
+          }
+
+          ForEach(dayRecord.records, id: \.self) { record in
             ItemTypeDayRowView(record: record)
             Divider()
               .padding(.horizontal, 10)
@@ -152,7 +158,7 @@ struct SearchList: View {
     .onAppear { calcRecords() }
     .onChange(of: search)  { _ in calcRecords() }
     .onChange(of: filters)  { _ in calcRecords() }
-    .onChange(of: appState.computedRecords)  { _ in calcRecords() }
+    .onChange(of: appState.savedRecords)  { _ in calcRecords() }
   }
 }
 
@@ -165,15 +171,15 @@ private extension SearchList {
 
     DispatchQueue.main.async {
       let searchQuery = search.lowercased()
-      let recordsByDay: [DayRecord?] = appState.recordsByDay.map {
-        let ibsRecords = $0.ibsRecords.filter {
-          let content = (($0.text ?? "") + $0.tags.joined(separator: "")).lowercased()
+      let recordsByDay: [DayRecord?] = appState.recordsByDay.map { dayRecord in
+        let records = dayRecord.records.filter { record in
+          let content = ((record.text ?? "") + record.tags.joined(separator: "")).lowercased()
           return
-            (filters.isEmpty || filters.contains($0.type)) &&
+            (filters.isEmpty || filters.contains(record.type)) &&
             (searchQuery == "" || content.contains(searchQuery))
         }
-        if ibsRecords.isNotEmpty {
-          return DayRecord(date: $0.date, ibsRecords: ibsRecords)
+        if records.isNotEmpty {
+          return DayRecord(date: dayRecord.date, records: records, unfilteredRecords: dayRecord.records)
         }
         return nil
       }

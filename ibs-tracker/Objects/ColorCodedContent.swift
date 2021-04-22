@@ -16,6 +16,25 @@ struct ColorCodedContent {
     .green
   ]
 
+  static func color(for record: IBSRecord) -> Color {
+    switch record.type {
+    case .ache:
+      return worstColor([record.bodyache, record.headache])
+    case .bm:
+      return bristolColor(for: record.bristolScale)
+    case .food:
+      return foodColor(for: record, default: .green)
+    case .gut:
+      return worstColor([record.bloating, record.pain])
+    case .mood:
+      return worstColor(moodColor(for: record.feel), scaleColor(for: record.stress))
+    case .skin:
+      return skinConditionColor(for: record.condition)
+    default:
+      return .secondary
+    }
+  }
+
   static func scaleColor(for scale: Scales?, default defaultColor: Color = .primary) -> Color {
     let colors: [Scales: Color] = [
       .zero: .green,
@@ -64,11 +83,14 @@ struct ColorCodedContent {
   }
 
   static func foodColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
+    guard record.medicinal != true else { return .secondary }
     return worstColor([
-      scaleColor(for: record.speed, default: defaultColor),
       foodSizeColor(for: record.size, default: defaultColor),
+      scaleColor(for: record.speed, default: defaultColor),
       scaleColor(for: record.risk, default: defaultColor),
-      foodTimeColor(for: record, default: defaultColor)
+      scaleColor(for: record.mealTooLate, default: defaultColor),
+      scaleColor(for: record.mealTooLong, default: defaultColor),
+      scaleColor(for: record.mealTooSoon, default: defaultColor),
     ])
   }
 
@@ -83,24 +105,6 @@ struct ColorCodedContent {
 
     guard let scale = scale else { return defaultColor }
     return colors[scale] ?? defaultColor
-  }
-
-  static func foodTimeColor(for record: IBSRecord, default defaultColor: Color = .secondary) -> Color {
-    let medicinal = record.medicinal ?? false
-    guard !medicinal else { return defaultColor }
-    let timestamp = record.timestamp
-    let calendar = Calendar.current
-    let date = IBSData.timeShiftedDate(for: timestamp)
-    let hour = calendar.component(.hour, from: date)
-    let eightPMAdjusted = 20 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
-    let ninePMAdjusted = 21 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
-    if hour < eightPMAdjusted {
-      return defaultColor
-    } else if hour < ninePMAdjusted {
-      return .yellow
-    } else {
-      return .red
-    }
   }
 
   static func moodColor(for scale: MoodType?, default defaultColor: Color = .primary) -> Color {
@@ -127,6 +131,11 @@ struct ColorCodedContent {
 
     guard let scale = scale else { return defaultColor }
     return colors[scale] ?? .secondary
+  }
+
+  static func worstColor(_ scales: [Scales?]) -> Color {
+    let colers = scales.map { scaleColor(for: $0) }.compactMap { $0 }
+    return worstColor(colers)
   }
 
   static func worstColor(_ colors: [Color]) -> Color {

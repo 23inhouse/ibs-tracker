@@ -165,6 +165,14 @@ extension FoodSizes: OptionalValue {
   }
 }
 
+enum MealType: String {
+  case none
+  case breakfast
+  case lunch
+  case dinner
+  case snack
+}
+
 enum MedicationType: String, CaseIterable {
   case analgesic
   case antibiotic
@@ -308,6 +316,33 @@ enum Scales: Int, CaseIterable {
     .moderate: "moderate headache",
     .severe: "severe headache",
     .extreme: "extreme headache",
+  ]
+
+  static let mealTooLateDescriptions: [Scales: String] = [
+    .none: "",
+    .zero: "ok meal time",
+    .mild: "mildly late meal time",
+    .moderate: "moderately late meal time late",
+    .severe: "severely late meal time",
+    .extreme: "extremely late meal time",
+  ]
+
+  static let mealTooLongDescriptions: [Scales: String] = [
+    .none: "",
+    .zero: "ok meal duration",
+    .mild: "mildly long meal duration",
+    .moderate: "moderately long meal duration",
+    .severe: "severely long meal duration",
+    .extreme: "extremely long meal duration",
+  ]
+
+  static let mealTooSoonDescriptions: [Scales: String] = [
+    .none: "",
+    .zero: "fully cleansed small intestine",
+    .mild: "mildly uncleansed small intestine",
+    .moderate: "moderately uncleansed small intestine",
+    .severe: "severely uncleansed small intestine",
+    .extreme: "extremely uncleansed small intestine",
   ]
 
   static let numberOfBMsDescriptions: [Scales: String] = [

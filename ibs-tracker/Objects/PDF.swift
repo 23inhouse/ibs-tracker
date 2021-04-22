@@ -92,7 +92,7 @@ extension PDF {
           yPos = 0 + padding
         }
 
-        let reportedRecords = dayRecord.ibsRecords.filter {
+        let reportedRecords = dayRecord.records.filter {
           guard !pdf.includeFood else { return true }
 
           let type = $0.medicinal ?? false ? .medication : $0.type

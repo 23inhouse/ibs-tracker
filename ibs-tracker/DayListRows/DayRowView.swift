@@ -14,6 +14,7 @@ struct DayRowView<Content>: View where Content: View {
   let tags: [String]
   let bristolType: BristolType?
   let medicinal: Bool
+  let mealType: MealType?
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
@@ -24,6 +25,7 @@ struct DayRowView<Content>: View where Content: View {
     self.tags = tags ?? []
     self.bristolType = record.bristolScale
     self.medicinal = record.medicinal ?? false
+    self.mealType = record.mealType
   }
 
   var body: some View {
@@ -53,7 +55,7 @@ struct DayRowView<Content>: View where Content: View {
       if let bristolType = bristolType {
         BristolView(scale: bristolType)
       } else {
-        RowIconView(type: type, color: color, medicinal: medicinal)
+        RowIconView(type: type, color: color, medicinal: medicinal, mealType: mealType)
       }
     }
     .frame(width: 50, height: 50)
@@ -65,16 +67,30 @@ struct DayRowView<Content>: View where Content: View {
 }
 
 struct DayRowView_Previews: PreviewProvider {
-  static let record = IBSRecord(timestamp: Date(), bloating: .mild, pain: nil)
+  static let gutRecord = IBSRecord(timestamp: Date(), bloating: .mild, pain: nil)
+  static let foodRecord: IBSRecord = {
+    var record = IBSRecord(timestamp: Date(), food: "Coffee", risk: Scales.none, size: FoodSizes.none, speed: .mild, mealType: .dinner)
+    return record
+  }()
   static var previews: some View {
     List {
-      DayRowView(record, color: .purple, tags: ["Foobar"]) {
-        TimestampView(record: record)
+      DayRowView(gutRecord, color: .purple, tags: ["Foobar"]) {
+        TimestampView(record: gutRecord)
         Text("My Row Content with lots and lots of c o n t e n t")
         PropertyView(
-          text: record.bloatingText(),
-          scale: record.bloating!.rawValue,
-          color: ColorCodedContent.scaleColor(for: record.bloating
+          text: gutRecord.bloatingText(),
+          scale: gutRecord.bloating!.rawValue,
+          color: ColorCodedContent.scaleColor(for: gutRecord.bloating
+          )
+        )
+      }
+      DayRowView(foodRecord, color: .purple, tags: ["Foobar"]) {
+        TimestampView(record: foodRecord)
+        Text("My Row Content with lots and lots of c o n t e n t")
+        PropertyView(
+          text: gutRecord.bloatingText(),
+          scale: gutRecord.bloating!.rawValue,
+          color: ColorCodedContent.scaleColor(for: gutRecord.bloating
           )
         )
       }

@@ -15,7 +15,7 @@ struct FoodRowView: View {
   }
 
   var foodColor: Color {
-    ColorCodedContent.foodColor(for: record as! IBSRecord)
+    ColorCodedContent.foodColor(for: record as! IBSRecord, default: .green)
   }
 
   var body: some View {
@@ -43,6 +43,27 @@ struct FoodRowView: View {
             color: ColorCodedContent.foodSizeColor(for: record.size)
           )
         }
+        if let mealTooLate = record.mealTooLate {
+          PropertyView(
+            text: record.mealTooLateText(),
+            scale: mealTooLate.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.mealTooLate)
+          )
+        }
+        if let mealTooLong = record.mealTooLong {
+          PropertyView(
+            text: record.mealTooLongText(),
+            scale: mealTooLong.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.mealTooLong)
+          )
+        }
+        if let mealTooSoon = record.mealTooSoon {
+          PropertyView(
+            text: record.mealTooSoonText(),
+            scale: mealTooSoon.rawValue,
+            color: ColorCodedContent.scaleColor(for: record.mealTooSoon)
+          )
+        }
         Text(record.text ?? "No meal name recorded")
           .font(.callout)
           .foregroundColor(.secondary)
@@ -54,7 +75,7 @@ struct FoodRowView: View {
 struct FoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ alot of extra stuff and extra info to display!", tags: ["Pasta"], risk: .extreme, size: .normal, speed: Scales.none))
+      FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ alot of extra stuff and extra info to display!", tags: ["Pasta"], risk: .extreme, size: .normal, speed: Scales.none, mealType: .lunch))
       FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ not much stuff", tags: ["Pasta"], risk: .mild, size: nil, speed: nil))
     }
   }

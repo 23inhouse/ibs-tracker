@@ -20,6 +20,10 @@ struct IBSRecord {
   var wetness: Scales?
   var text: String?
   var size: FoodSizes?
+  var mealType: MealType?
+  var mealTooLate: Scales?
+  var mealTooLong: Scales?
+  var mealTooSoon: Scales?
   var risk: Scales?
   var speed: Scales?
   var pain: Scales?
@@ -83,6 +87,20 @@ extension IBSRecord {
 }
 
 extension IBSRecord {
+  static let summaryTypes: [ItemType] = [.ache, .bm, .food, .gut, .medication, .mood, .skin]
+
+  var isNotMedicinalFood: Bool {
+    get {
+      type == .food && medicinal == false
+    }
+  }
+
+  var isSummary: Bool {
+    get {
+      IBSRecord.summaryTypes.contains(type)
+    }
+  }
+
   func graphScore(include included: [ItemType] = [.ache, .bm, .gut, .mood, .skin]) -> Int {
     guard included.contains(type) else { return Scales.none.rawValue }
 

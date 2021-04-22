@@ -11,28 +11,53 @@ struct RowIconView: View {
   let type: ItemType
   let color: Color?
   let medicinal: Bool
+  let mealType: MealType?
 
   private let strokeStyle = StrokeStyle(lineWidth: 1.5, lineJoin: .round)
 
   var body: some View {
     medicinalView(medicinal) {
-      if [.food, .weight, .medication].contains(type) {
-        TypeShape(type: type)
-          .stroke(style: strokeStyle)
-          .foregroundColor(color)
+      if mealType != nil {
+        ZStack {
+          typeShap
+            .frame(35)
+            .padding(10)
+            .offset(x: 0, y: -3)
+          mealName
+        }
+      } else if [.food, .weight, .medication].contains(type) {
+        typeShap
           .frame(35)
           .padding(10)
       } else {
-        TypeShape(type: type)
-          .stroke(style: strokeStyle)
-          .foregroundColor(color)
+        typeShap
           .frame(40)
           .padding(5)
       }
     }
   }
 
-  func medicinalView<Content: View>(_ medicinal: Bool, @ViewBuilder content: @escaping () -> Content) -> some View {
+  private var typeShap: some View {
+    TypeShape(type: type)
+      .stroke(style: strokeStyle)
+      .foregroundColor(color)
+  }
+
+  private var mealName: some View {
+    Text(mealTypeName)
+      .offset(x: 0, y: 24)
+      .truncationMode(.middle)
+      .fontSize(9)
+      .foregroundColor(color)
+      .lineLimit(1)
+      .layoutPriority(1)
+  }
+
+  private var mealTypeName: String {
+    mealType?.rawValue.capitalized ?? "Food"
+  }
+
+  private func medicinalView<Content: View>(_ medicinal: Bool, @ViewBuilder content: @escaping () -> Content) -> some View {
     Group {
       if medicinal {
         ZStack {
@@ -54,10 +79,29 @@ struct RowIconView: View {
 }
 
 struct RowIconView_Previews: PreviewProvider {
+  static let filler: some View = Color.secondary.frame(height: 60)
   static var previews: some View {
-    VStack {
-      RowIconView(type: .food, color: .cgMagenta, medicinal: true)
-      RowIconView(type: .note, color: .cgMagenta, medicinal: false)
+    List {
+      HStack {
+        RowIconView(type: .food, color: .secondary, medicinal: true, mealType: nil)
+          .width(45)
+        filler
+      }
+      HStack {
+        RowIconView(type: .food, color: .green, medicinal: false, mealType: .breakfast)
+          .width(45)
+        filler
+      }
+      HStack {
+        RowIconView(type: .food, color: .orange, medicinal: false, mealType: .lunch)
+          .width(45)
+        filler
+      }
+      HStack {
+        RowIconView(type: .note, color: .secondary, medicinal: false, mealType: nil)
+          .width(45)
+        filler
+      }
     }
   }
 }

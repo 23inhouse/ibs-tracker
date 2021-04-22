@@ -25,13 +25,18 @@ struct DayView: View {
     let dayRecord = appState.recordsByDay
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 
-    return dayRecord?.ibsRecords ?? []
+    return dayRecord?.records ?? []
   }
 
   var body: some View {
     NavigationView {
       ScrollView {
         LazyVStack(spacing: 0) {
+          if records.filter(\.isSummary).isNotEmpty {
+            SummaryRowView(records)
+            Divider()
+              .padding(.horizontal, 10)
+          }
           ForEach(records, id: \.self) { record in
             ItemTypeDayRowView(record: record)
             Divider()
@@ -61,13 +66,14 @@ struct DayView: View {
 
   private var dateTitle: some View {
     let smallScreenSize = UIScreen.mainWidth < 375
+    let width: CGFloat = smallScreenSize ? 40 : 90
     return HStack(spacing: 5) {
       DatePicker("Current date", selection: $appState.activeDate, displayedComponents: .date)
         .datePickerStyle(CompactDatePickerStyle())
         .labelsHidden()
         .frame(width: 120, alignment: .trailing)
       Text(date.string(for: smallScreenSize ? "EEE" : "EEEE"))
-        .frame(width: smallScreenSize ? 40 : 90)
+        .frame(width: width)
       Button(action: changeDayToToday) {
         Image(systemName: "calendar.circle")
           .resizable()

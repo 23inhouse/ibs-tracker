@@ -26,9 +26,9 @@ class IBSData: ObservableObject {
   static let numberOfHoursInMorningIncludedInPreviousDay = 4 // up to 4am
   static var current = IBSData(appDB: .current)
 
-  private var savedRecords: [IBSRecord] {
+  private(set) var savedRecords: [IBSRecord] {
     didSet {
-      (self.recordsByDay, self.computedRecords) = IBSData.computeAnalysedRecords(savedRecords)
+      prepareRecords(savedRecords)
       self.lastWeight = IBSData.lastWeight(savedRecords)
     }
   }
@@ -51,8 +51,11 @@ class IBSData: ObservableObject {
     self.appDB = .test
     self.activeDate = IBSData.timeShiftedDate()
     self.savedRecords = ibsRecords
-    (self.recordsByDay, self.computedRecords) = IBSData.computeAnalysedRecords(savedRecords)
+    self.recordsByDay = []
+    self.computedRecords = []
     self.lastWeight = IBSData.lastWeight(savedRecords)
+
+    prepareRecords(savedRecords)
   }
 
   func loadData() {
@@ -64,8 +67,12 @@ extension IBSData {
   // currentDate moves records before 5am to the previous day
   // So a record at 2am will be display after the 11pm records
   // In the context of food and IBS 5am is the start of a new day
-  static func timeShiftedDate(for date: Date = Date()) -> Date {
+  static func timeShiftedDate(for date: Date) -> Date {
     Calendar.current.date(byAdding: .hour, value: -numberOfHoursInMorningIncludedInPreviousDay, to: date) ?? date
+  }
+
+  static func timeShiftedDate() -> Date {
+    timeShiftedDate(for: Date()).date()
   }
 
   func isAvailable(timestamp: Date) -> Bool {
@@ -113,6 +120,53 @@ private extension IBSData {
       print("Error: Couldn't load records from sql: \(error)")
     }
     return []
+  }
+
+  func prepareRecords(_ records: [IBSRecord]) {
+    recordsByDay = []
+    computedRecords = []
+
+    let sortedRecords = records.sorted { $0.timestamp > $1.timestamp }
+
+    guard sortedRecords.count > 0 else { return }
+
+    let keyStringFormat = "yyyy-MM-dd"
+    let count = sortedRecords.count
+    var i = 0
+    var currentDayIBSRecords: [IBSRecord] = []
+    var previousKeyString: String?
+    var previousKeyDate: Date?
+
+    repeat {
+      let record = sortedRecords[i]
+      i += 1
+
+      let keyDate = IBSData.timeShiftedDate(for: record.timestamp).date()
+      let keyString = keyDate.string(for: keyStringFormat)
+
+      if keyString != previousKeyString {
+        if currentDayIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
+          let dayRecord = DayRecord(date: prevKeyDate, records: currentDayIBSRecords)
+          computedRecords += dayRecord.records
+          recordsByDay.append(dayRecord)
+        }
+
+        currentDayIBSRecords = []
+      }
+
+      currentDayIBSRecords.append(record)
+
+      previousKeyString = keyString
+      previousKeyDate = keyDate
+    } while i < count
+
+    if currentDayIBSRecords.isNotEmpty, let prevKeyDate: Date = previousKeyDate {
+      let dayRecord = DayRecord(date: prevKeyDate, records: currentDayIBSRecords)
+      computedRecords += dayRecord.records
+      recordsByDay.append(dayRecord)
+    }
+
+    computedRecords.reverse()
   }
 
   func recentRecords(of type: ItemType) -> [IBSRecord] {
