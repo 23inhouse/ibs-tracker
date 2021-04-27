@@ -107,7 +107,7 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
     SearchView()
-      .environmentObject(IBSData([IBSRecord(condition: .mild, timestamp: Date())]))
+      .environmentObject(IBSData([IBSRecord(timestamp: Date(), condition: .mild)]))
   }
 }
 

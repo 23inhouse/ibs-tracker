@@ -32,7 +32,7 @@ struct SkinFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(condition: condition, timestamp: timestamp.nearest(5, .minute), text: text, tags: viewModel.tags)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), condition: condition, text: text, tags: viewModel.tags)
   }
 
   private var tagPlaceholder: String {

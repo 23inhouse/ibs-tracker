@@ -87,21 +87,21 @@ struct BMRowView: View {
 struct BowelMovementRowView_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      BMRowView(for: IBSRecord(bristolScale: .b0, timestamp: Date(), tags: ["Almost sausage"]))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b0, tags: ["Almost sausage"]))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b1, timestamp: Date(), tags: ["Almost sausage"], evacuation: .partial))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b1, tags: ["Almost sausage"], evacuation: .partial))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b2, timestamp: Date(), tags: ["Almost sausage"], smell: .sweet, evacuation: .full, dryness: .moderate))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b2, tags: ["Almost sausage"], smell: .sweet, evacuation: .full, dryness: .moderate))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b3, timestamp: Date(), tags: ["Almost sausage"], pressure: .mild))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b3, tags: ["Almost sausage"], pressure: .mild))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b4, timestamp: Date(), tags: ["Almost sausage"], evacuation: .full))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b4, tags: ["Almost sausage"], evacuation: .full))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b5, timestamp: Date(), tags: ["Almost sausage"], pressure: .mild, evacuation: .full, wetness: .moderate))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b5, tags: ["Almost sausage"], pressure: .mild, evacuation: .full, wetness: .moderate))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b6, timestamp: Date(), tags: ["Almost sausage"], pressure: .moderate, wetness: .severe))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b6, tags: ["Almost sausage"], pressure: .moderate, wetness: .severe))
         .listRowInsets(EdgeInsets())
-      BMRowView(for: IBSRecord(bristolScale: .b7, timestamp: Date(), tags: ["Almost sausage"], pressure: .severe, evacuation: .partial))
+      BMRowView(for: IBSRecord(timestamp: Date(), bristolScale: .b7, tags: ["Almost sausage"], pressure: .severe, evacuation: .partial))
         .listRowInsets(EdgeInsets())
     }
   }

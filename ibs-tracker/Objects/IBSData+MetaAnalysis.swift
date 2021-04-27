@@ -78,7 +78,7 @@ private extension IBSData {
     let count = bmRecords.count
 
     guard count > 0 else {
-      return [IBSRecord(bristolScale: .b0, timestamp: timestamp)]
+      return [IBSRecord(timestamp: timestamp, bristolScale: .b0)]
     }
 
     var numberOfBMs = 0

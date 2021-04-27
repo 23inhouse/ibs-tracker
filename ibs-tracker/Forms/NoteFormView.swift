@@ -31,7 +31,7 @@ struct NoteFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(note: text, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), note: text, tags: viewModel.tags)
   }
 
   private var tagPlaceholder: String {

@@ -47,7 +47,7 @@ struct BMFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(bristolScale: bristolScale, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, color: color, pressure: pressure, smell: smell, evacuation: evacuation, dryness: dryness, wetness: wetness)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), bristolScale: bristolScale, tags: viewModel.tags, color: color, pressure: pressure, smell: smell, evacuation: evacuation, dryness: dryness, wetness: wetness)
   }
 
   private var tagPlaceholder: String {

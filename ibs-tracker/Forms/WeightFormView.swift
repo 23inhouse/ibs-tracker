@@ -31,7 +31,7 @@ struct WeightFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(weight: weight, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), weight: weight, tags: viewModel.tags)
   }
 
   private var savable: Bool {

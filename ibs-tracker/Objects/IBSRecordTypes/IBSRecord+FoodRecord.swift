@@ -13,7 +13,7 @@ protocol FoodRecord: IBSRecordType {
   var size: FoodSizes? { get }
   var risk: Scales? { get }
   var medicinal: Bool? { get }
-  init(food: String, timestamp: Date, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool)
+  init(timestamp: Date, food: String, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool)
   func FoodScore() -> Int
   func foodDescription() -> String
   func riskText() -> String
@@ -22,7 +22,7 @@ protocol FoodRecord: IBSRecordType {
 }
 
 extension IBSRecord: FoodRecord {
-  init(food: String, timestamp: Date, tags: [String] = [], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool = false) {
+  init(timestamp: Date, food: String, tags: [String] = [], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool = false) {
     self.type = .food
     self.timestamp = timestamp
     self.text = food

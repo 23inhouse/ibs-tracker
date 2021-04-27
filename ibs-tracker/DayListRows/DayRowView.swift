@@ -69,7 +69,7 @@ struct DayRowView_Previews: PreviewProvider {
   static var previews: some View {
     List {
       DayRowView(record, color: .purple, tags: ["Foobar"]) {
-        TimestampView(record: IBSRecord(condition: .moderate, timestamp: Date()))
+        TimestampView(record: record)
         Text("My Row Content with lots and lots of c o n t e n t")
         PropertyView(
           text: record.bloatingText(),

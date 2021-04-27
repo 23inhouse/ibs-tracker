@@ -48,7 +48,7 @@ struct FoodFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(food: name, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags, risk: risk, size: size, speed: speed, medicinal: medicinal)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), food: name, tags: viewModel.tags, risk: risk, size: size, speed: speed, medicinal: medicinal)
   }
 
   private var tagPlaceholder: String {

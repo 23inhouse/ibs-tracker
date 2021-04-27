@@ -43,11 +43,11 @@ struct SkinRowView: View {
 struct SkinRowView_Previews: PreviewProvider {
   static var previews: some View {
     VStack{
-      SkinRowView(for: IBSRecord(condition: .zero, timestamp: Date(), text: "Ulcer - with a second one next to it", tags: ["Ulcer"]))
-      SkinRowView(for: IBSRecord(condition: .mild, timestamp: Date(), text: "No change", tags: ["Ulcer"]))
-      SkinRowView(for: IBSRecord(condition: .moderate, timestamp: Date(), text: "No change", tags: ["Ulcer"]))
-      SkinRowView(for: IBSRecord(condition: .severe, timestamp: Date(), text: "No change", tags: ["Ulcer"]))
-      SkinRowView(for: IBSRecord(condition: .extreme, timestamp: Date(), text: "No change", tags: ["Ulcer"]))
+      SkinRowView(for: IBSRecord(timestamp: Date(), condition: .zero, text: "Ulcer - with a second one next to it", tags: ["Ulcer"]))
+      SkinRowView(for: IBSRecord(timestamp: Date(), condition: .mild, text: "No change", tags: ["Ulcer"]))
+      SkinRowView(for: IBSRecord(timestamp: Date(), condition: .moderate, text: "No change", tags: ["Ulcer"]))
+      SkinRowView(for: IBSRecord(timestamp: Date(), condition: .severe, text: "No change", tags: ["Ulcer"]))
+      SkinRowView(for: IBSRecord(timestamp: Date(), condition: .extreme, text: "No change", tags: ["Ulcer"]))
     }
   }
 }

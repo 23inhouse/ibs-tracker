@@ -19,7 +19,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   }
 
   func testDeleteSQL() throws {
-    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: Date())
+    let ibsRecord = IBSRecord(timestamp: Date(), bristolScale: .b4)
     try ibsRecord.insertSQL(into: appDB)
 
     try ibsRecord.deleteSQL(into: appDB)
@@ -29,7 +29,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   }
 
   func testInsertSQL() throws {
-    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: Date())
+    let ibsRecord = IBSRecord(timestamp: Date(), bristolScale: .b4)
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -38,10 +38,10 @@ class IBSRecord_GRDBTests: XCTestCase {
 
   func testInsertSQLInvalid() throws {
     let date = Date()
-    let ibsRecord = IBSRecord(bristolScale: .b4, timestamp: date)
+    let ibsRecord = IBSRecord(timestamp: date, bristolScale: .b4)
     try ibsRecord.insertSQL(into: appDB)
 
-    let invalidIBSRecord = IBSRecord(bristolScale: .b3, timestamp: date)
+    let invalidIBSRecord = IBSRecord(timestamp: date, bristolScale: .b3)
 
     XCTAssertThrowsError(try invalidIBSRecord.insertSQL(into: appDB), "Should throw an error")
 
@@ -66,7 +66,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(sqlIBSAcheRecord.headache, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSAcheRecord.bodyache, nil, "The scale should be nil")
 
-    let ibsBMRecord = IBSRecord(bristolScale: nil, timestamp: timestamp, tags: [], color: nil, pressure: Scales.none, smell: BMSmell.none, evacuation: BMEvacuation.none, dryness: Scales.none, wetness: Scales.none)
+    let ibsBMRecord = IBSRecord(timestamp: timestamp, bristolScale: nil, tags: [], color: nil, pressure: Scales.none, smell: BMSmell.none, evacuation: BMEvacuation.none, dryness: Scales.none, wetness: Scales.none)
     try ibsBMRecord.insertSQL(into: appDB)
     guard var sqlIBSBMRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsBMRecord.type.rawValue, at: timestamp) else {
       throw "Couldn't select the orignal BM record"
@@ -101,7 +101,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     XCTAssertEqual(sqlIBSGutRecord.bloating, nil, "The scale should be nil")
     XCTAssertEqual(sqlIBSGutRecord.pain, nil, "The scale should be nil")
 
-    let ibsFoodRecord = IBSRecord(food: "Pizza", timestamp: timestamp, risk: Scales.none, size: FoodSizes.none, speed: Scales.none)
+    let ibsFoodRecord = IBSRecord(timestamp: timestamp, food: "Pizza", risk: Scales.none, size: FoodSizes.none, speed: Scales.none)
     try ibsFoodRecord.insertSQL(into: appDB)
     guard var sqlIBSFoodRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: ibsFoodRecord.type.rawValue, at: timestamp) else {
       throw "Couldn't select the orignal BM record"
@@ -134,7 +134,7 @@ class IBSRecord_GRDBTests: XCTestCase {
 
   func testInsertSQLWithWhitespaces() throws {
     let timestamp = Date()
-    let ibsRecord = IBSRecord(food: "  non whitespaces  ", timestamp: timestamp, tags: ["  non whitespace tag  ", "  other tag  "], risk: nil, size: nil, speed: nil)
+    let ibsRecord = IBSRecord(timestamp: timestamp, food: "  non whitespaces  ", tags: ["  non whitespace tag  ", "  other tag  "], risk: nil, size: nil, speed: nil)
     try ibsRecord.insertSQL(into: appDB)
 
     guard let newSQLIBSRecord = try appDB.selectRecord(in: SQLIBSRecord.self, of: "food", at: timestamp) else {
@@ -154,7 +154,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     let originalBristolScale = BristolType.b4
     let newBristolScale = BristolType.b3
 
-    var ibsRecord = IBSRecord(bristolScale: originalBristolScale, timestamp: Date())
+    var ibsRecord = IBSRecord(timestamp: Date(), bristolScale: originalBristolScale)
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -182,7 +182,7 @@ class IBSRecord_GRDBTests: XCTestCase {
   func testUpdateSQLChangeTheTimestamp() throws {
     let recordTypeStrng = ItemType.bm.rawValue
 
-    var ibsRecord = IBSRecord(bristolScale: .b3, timestamp: Date())
+    var ibsRecord = IBSRecord(timestamp: Date(), bristolScale: .b3)
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)
@@ -216,7 +216,7 @@ class IBSRecord_GRDBTests: XCTestCase {
     var calender = Calendar.current
     calender.timeZone = TimeZone(abbreviation: "UTC")!
     let date = calender.startOfDay(for: Date())
-    let ibsRecord = IBSRecord(bristolScale: .b3, timestamp: date, tags: invalidTags)
+    let ibsRecord = IBSRecord(timestamp: date, bristolScale: .b3, tags: invalidTags)
     try ibsRecord.insertSQL(into: appDB)
 
     let ibsRecordCount = try appDB.countRecords(in: SQLIBSRecord.self)

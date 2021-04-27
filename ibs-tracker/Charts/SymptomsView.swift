@@ -35,11 +35,11 @@ struct SymptomsView: View {
   private let verticalAxisWidth: CGFloat = 45
 
   private var firstRecord: IBSRecord {
-    appState.computedRecords.first ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
+    appState.computedRecords.first ?? IBSRecord(timestamp: Date().nearest(5, .minute), note: "")
   }
 
   private var lastRecord: IBSRecord {
-    appState.computedRecords.last ?? IBSRecord(note: "", timestamp: Date().nearest(5, .minute))
+    appState.computedRecords.last ?? IBSRecord(timestamp: Date().nearest(5, .minute), note: "")
   }
 
   private var recordInterval: TimeInterval {

@@ -32,8 +32,8 @@ struct WeightRowView: View {
 struct WeightRowView_Previews: PreviewProvider {
   static var previews: some View {
     ScrollView {
-      WeightRowView(for: IBSRecord(weight: 57.8, timestamp: Date(), tags: []))
-      WeightRowView(for: IBSRecord(weight: 72.0, timestamp: Date(), tags: []))
+      WeightRowView(for: IBSRecord(timestamp: Date(), weight: 57.8, tags: []))
+      WeightRowView(for: IBSRecord(timestamp: Date(), weight: 72.0, tags: []))
     }
   }
 }

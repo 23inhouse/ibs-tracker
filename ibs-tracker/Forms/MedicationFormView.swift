@@ -44,7 +44,7 @@ struct MedicationFormView: View {
 
   private var record: IBSRecord? {
     guard let timestamp = viewModel.timestamp else { return nil }
-    return IBSRecord(medication: name, type: medicationTypes, timestamp: timestamp.nearest(5, .minute), tags: viewModel.tags)
+    return IBSRecord(timestamp: timestamp.nearest(5, .minute), medication: name, type: medicationTypes, tags: viewModel.tags)
   }
 
   private var savable: Bool {

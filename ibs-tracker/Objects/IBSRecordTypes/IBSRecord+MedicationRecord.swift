@@ -10,11 +10,11 @@ import Foundation
 protocol MedicationRecord: IBSRecordType {
   var text: String? { get }
   var medicationType: [MedicationType]? { get }
-  init(medication text: String, type medicationType: [MedicationType], timestamp: Date, tags: [String])
+  init(timestamp: Date, medication text: String, type medicationType: [MedicationType], tags: [String])
 }
 
 extension IBSRecord: MedicationRecord {
-  init(medication text: String, type medicationType: [MedicationType], timestamp: Date, tags: [String] = []) {
+  init(timestamp: Date, medication text: String, type medicationType: [MedicationType], tags: [String] = []) {
     self.type = .medication
     self.timestamp = timestamp
     self.text = text

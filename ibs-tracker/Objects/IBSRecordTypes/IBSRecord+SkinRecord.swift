@@ -10,14 +10,14 @@ import Foundation
 protocol SkinRecord: IBSRecordType {
   var text: String? { get }
   var condition: Scales? { get }
-  init(condition: Scales, timestamp: Date, text: String?, tags: [String])
+  init(timestamp: Date, condition: Scales, text: String?, tags: [String])
   func skinScore() -> Scales
   func skinDescription() -> String
   func skinText() -> String
 }
 
 extension IBSRecord: SkinRecord {
-  init(condition: Scales, timestamp: Date, text: String? = nil, tags: [String] = []) {
+  init(timestamp: Date, condition: Scales, text: String? = nil, tags: [String] = []) {
     self.type = .skin
     self.timestamp = timestamp
     self.condition = condition

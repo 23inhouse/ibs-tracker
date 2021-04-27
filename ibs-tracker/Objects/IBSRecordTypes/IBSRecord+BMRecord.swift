@@ -18,7 +18,7 @@ protocol BMRecord: IBSRecordType {
   var numberOfBMs: UInt? { get }
   var numberOfBMsScale: Scales? { get }
 
-  init(bristolScale: BristolType?, timestamp: Date, tags: [String], color: BMColor?, pressure: Scales?, smell: BMSmell?, evacuation: BMEvacuation?, dryness: Scales?, wetness: Scales?)
+  init(timestamp: Date, bristolScale: BristolType?, tags: [String], color: BMColor?, pressure: Scales?, smell: BMSmell?, evacuation: BMEvacuation?, dryness: Scales?, wetness: Scales?)
   func bmScore() -> Scales
   func bristolDescription() -> String
   func colorText() -> String
@@ -31,7 +31,7 @@ protocol BMRecord: IBSRecordType {
 }
 
 extension IBSRecord: BMRecord {
-  init(bristolScale: BristolType? = nil, timestamp: Date, tags: [String] = [], color: BMColor? = nil, pressure: Scales? = nil, smell: BMSmell? = nil, evacuation: BMEvacuation? = nil, dryness: Scales? = nil, wetness: Scales? = nil) {
+  init(timestamp: Date, bristolScale: BristolType? = nil, tags: [String] = [], color: BMColor? = nil, pressure: Scales? = nil, smell: BMSmell? = nil, evacuation: BMEvacuation? = nil, dryness: Scales? = nil, wetness: Scales? = nil) {
     self.type = .bm
     self.timestamp = timestamp
     self.bristolScale = bristolScale
