@@ -131,6 +131,7 @@
 		B5A5D21A25D72B3D009C6285 /* String+UrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */; };
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
 		B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */; };
+		B5B1B655263A061A00D9DBDB /* BrainShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1B654263A061A00D9DBDB /* BrainShape.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BMRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BMRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
@@ -322,6 +323,7 @@
 		B5A5D21925D72B3D009C6285 /* String+UrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlTests.swift"; sourceTree = "<group>"; };
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FetchJSON.swift"; sourceTree = "<group>"; };
+		B5B1B654263A061A00D9DBDB /* BrainShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainShape.swift; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BMRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				B5E3A8D925AE205D00DAC8DD /* Assets.xcassets */,
 				B5FCC30725FB4FAD00D92621 /* Utilities.swift */,
 				B5FCC30C25FB6CC700D92621 /* AppIconView.swift */,
+				B5B1B654263A061A00D9DBDB /* BrainShape.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				B5FCC33825FBB89300D92621 /* UITextView+NSTextStorageDelegate.swift in Sources */,
 				B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */,
 				B5FCC2F625FA885B00D92621 /* LazyNavigationLink.swift in Sources */,
+				B5B1B655263A061A00D9DBDB /* BrainShape.swift in Sources */,
 				B5207E8025D1D1270019D18F /* IDable.swift in Sources */,
 				B5A5D20925D70A7B009C6285 /* UIKitBridge.swift in Sources */,
 				B54EA79F25B21455008C4B74 /* Bristol7Shape.swift in Sources */,
