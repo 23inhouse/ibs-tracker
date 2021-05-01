@@ -80,7 +80,7 @@ struct DayView: View {
           .frame(width: 21, height: 21)
           .padding(5)
       }
-      .disabled(isShowingToday)
+      .foregroundColor(isShowingToday ? .primary : .blue)
     }
   }
 

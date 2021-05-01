@@ -27,7 +27,7 @@ struct ContentView: View {
         .tag(Tabs.settings)
       DayView()
         .tabItem {
-          Image(systemName: "slider.horizontal.below.rectangle")
+          Image(systemName: "calendar")
           Text("Day")
         }
         .tag(Tabs.day)
