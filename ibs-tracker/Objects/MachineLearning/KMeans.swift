@@ -34,10 +34,10 @@ class KMeans<Label: Hashable> {
     let gapModifier: Double
     if mealInterval < (6 * hour) {
       gapModifier = 1.0
-    } else if mealInterval < (11 * hour) {
-      gapModifier = mealInterval / (9.15 * hour)
+    } else if mealInterval < (12.5 * hour) {
+      gapModifier = mealInterval / (9.1 * hour)
     } else {
-      gapModifier = mealInterval / (9.715 * hour)
+      gapModifier = mealInterval / (10.15 * hour)
     }
 
     let breakfastTime = firstMealTime
