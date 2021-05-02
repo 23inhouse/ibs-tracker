@@ -23,10 +23,10 @@ struct SummaryRowView: View {
     .bm: [.bm],
   ]
 
-  private let rowHeight: CGFloat = 15
+  private let rowHeight: CGFloat = 16
   private let rowPadding: CGFloat = UIScreen.mainWidth / 31
   private let dotRadius: CGFloat = 4
-  private let strokeStyle = StrokeStyle(lineWidth: 0.75, lineJoin: .round)
+  private let strokeStyle = StrokeStyle(lineWidth: 0.65, lineJoin: .round)
 
   private let hourInSeconds: Double = 60 * 60
 
@@ -86,7 +86,7 @@ struct SummaryRowView: View {
       TypeShape(type: key)
         .stroke(style: strokeStyle)
         .foregroundColor(.secondary)
-        .frame(width: rowHeight - 4, height: rowHeight - 4)
+        .frame(width: rowHeight - 3, height: rowHeight - 3)
         .frame(width: rowHeight, height: rowHeight)
     }
   }
@@ -220,19 +220,11 @@ struct SummaryRowView_Previews: PreviewProvider {
     IBSRecord(timestamp: time(at: 14), food: "medical milk", tags: [], risk: nil, size: nil, speed: nil, medicinal: true),
     IBSRecord(timestamp: time(at: 11), bristolScale: .b4, tags: []),
     IBSRecord(timestamp: time(at: 16), bloating: .mild, pain: Scales.none),
-    IBSRecord(timestamp: time(at: 17), feel: .awful, stress: .mild),
-    IBSRecord(timestamp: time(at: 18), headache: .mild, bodyache: .mild),
-    IBSRecord(timestamp: time(at: 19), condition: .mild, text: "ulcer"),
+    IBSRecord(timestamp: time(at: 17), feel: .bad, stress: .mild),
+    IBSRecord(timestamp: time(at: 18), headache: .severe, bodyache: .mild),
+    IBSRecord(timestamp: time(at: 19), condition: .extreme, text: "ulcer"),
     IBSRecord(timestamp: time(at: 7), medication: "goodgut", type: [.prokinetic]),
     IBSRecord(timestamp: time(at: 7), weight: 60),
-  ]
-  static let symptomsDay = [
-    IBSRecord(timestamp: time(at: 8), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
-    IBSRecord(timestamp: time(at: 10), food: "porridge", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
-    IBSRecord(timestamp: time(at: 20), food: "medical milk", tags: [], risk: nil, size: nil, speed: nil, medicinal: true),
-    IBSRecord(timestamp: time(at: 11), bristolScale: .b6, tags: []),
-    IBSRecord(timestamp: time(at: 12), bloating: .mild, pain: Scales.none),
-    IBSRecord(timestamp: time(at: 13), medication: "goodgut", type: [.prokinetic])
   ]
   static let fullDay = Array((1 ..< 24)).flatMap { hour -> [IBSRecord] in
     let hour = Double(hour + 4)
@@ -246,8 +238,6 @@ struct SummaryRowView_Previews: PreviewProvider {
       SummaryRowView(normalDay.reversed())
         .listRowInsets(EdgeInsets())
       SummaryRowView(everyType.reversed())
-        .listRowInsets(EdgeInsets())
-      SummaryRowView(symptomsDay.reversed())
         .listRowInsets(EdgeInsets())
       SummaryRowView(fullDay.reversed())
         .listRowInsets(EdgeInsets())

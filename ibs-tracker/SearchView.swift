@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
   @EnvironmentObject private var appState: IBSData
 
+  @State private var filterSummary: Bool = false
   @State private var filters: [ItemType] = []
   @State private var filterOffset: CGSize = CGSize(UIScreen.mainWidth, 0)
   @State private var showFilters: Bool = false
@@ -19,8 +20,8 @@ struct SearchView: View {
     NavigationView {
       GeometryReader { geometry in
         ZStack {
-          SearchList(search: $search, filters: $filters)
-          FilterList(filters: $filters)
+          SearchList(search: $search, filterSummary: $filterSummary, filters: $filters)
+          FilterList(filterSummary: $filterSummary, filters: $filters)
             .offset(filterOffset)
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -118,6 +119,7 @@ struct SearchList: View {
   @State var records: [DayRecord] = []
 
   @Binding var search: String
+  @Binding var filterSummary: Bool
   @Binding var filters: [ItemType]
 
   var body: some View {
@@ -138,16 +140,20 @@ struct SearchList: View {
           .padding(3)
           .backgroundColor(.blue)
 
-          if dayRecord.records.filter(\.isSummary).isNotEmpty {
-            SummaryRowView(dayRecord.records, filters: filters)
-            Divider()
-              .padding(.horizontal, 10)
+          if filterSummary == true || filters.isEmpty {
+            if dayRecord.records.filter(\.isSummary).isNotEmpty {
+              SummaryRowView(dayRecord.records, filters: filters)
+              Divider()
+                .padding(.horizontal, 10)
+            }
           }
 
-          ForEach(dayRecord.records, id: \.self) { record in
-            ItemTypeDayRowView(record: record)
-            Divider()
-              .padding(.horizontal, 10)
+          if filterSummary != true || filters.isNotEmpty {
+            ForEach(dayRecord.records, id: \.self) { record in
+              ItemTypeDayRowView(record: record)
+              Divider()
+                .padding(.horizontal, 10)
+            }
           }
 
           Spacer()
@@ -192,6 +198,7 @@ private extension SearchList {
 struct FilterList: View {
   @Environment(\.colorScheme) var colorScheme
 
+  @Binding var filterSummary: Bool
   @Binding var filters: [ItemType]
 
   private let allCases: [ItemType] = ItemType.allCases.filter { $0 != .none }
@@ -199,6 +206,15 @@ struct FilterList: View {
 
   var body: some View {
     VStack {
+      HStack {
+        Toggle(isOn: $filterSummary) {
+          Image(systemName: "circle.grid.2x2")
+          Text("Summary")
+          Spacer()
+        }
+      }
+      .padding(.horizontal, 10)
+      Divider()
       ForEach(allCases, id: \.self) { itemType in
         HStack {
           Toggle(isOn: Binding(
