@@ -280,13 +280,14 @@ struct TimelineView: View {
   }
 
   private func time(for date: Date, index: Int) -> some View {
-    let demarkation: Bool = index % 6 == 0
+    let demarkation: Bool = (index - 1) % 2 == 0
     let hour = date.string(for: "h").lowercased()
     let ampm = date.string(for: demarkation ? "a" : "").lowercased()
-    let fontSize: CGFloat = 6
-    let fontSizeLarge = fontSize + 2
+    let fontSize: CGFloat = 8
+    let fontSizeLarge = fontSize + 1
+    let fontSizeSmaller = fontSize - 2
 
-    return HStack(spacing: 0) {
+    return HStack(alignment: .top, spacing: 0) {
       Group {
         Text(hour)
           .font(Font.system(size: demarkation ?  fontSizeLarge : fontSize))
@@ -294,7 +295,7 @@ struct TimelineView: View {
           .align(.trailing)
         if ampm.isNotEmpty {
           Text(ampm)
-            .font(Font.system(size: fontSize))
+            .font(Font.system(size: fontSizeSmaller))
             .fontWeight(.light)
             .align(.leading)
         }
