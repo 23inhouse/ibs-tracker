@@ -25,7 +25,7 @@ struct DayView: View {
     let dayRecord = appState.recordsByDay
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 
-    return dayRecord ?? DayRecord(date: Date(), records: [])
+    return dayRecord ?? DayRecord(date: Date(), records: [], calculateMeta: false)
   }
 
   private var records: [IBSRecord] {
