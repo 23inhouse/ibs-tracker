@@ -61,7 +61,6 @@
 		B52E466D25D01FF300C009EC /* IBSRecord+WeightRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E466C25D01FF300C009EC /* IBSRecord+WeightRecord.swift */; };
 		B52E467225D0203100C009EC /* IBSRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E467125D0203100C009EC /* IBSRecordType.swift */; };
 		B52E467D25D0207D00C009EC /* IBSRecord+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */; };
-		B530E860263EE90700ABE5DB /* DayRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B530E85F263EE90700ABE5DB /* DayRecordTests.swift */; };
 		B533AC0E25BADAF8009B6290 /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC0D25BADAF8009B6290 /* ItemType.swift */; };
 		B533AC1325BADCA3009B6290 /* MedicationShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC1225BADCA3009B6290 /* MedicationShape.swift */; };
 		B533AC1825BADCBA009B6290 /* WeightShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B533AC1725BADCBA009B6290 /* WeightShape.swift */; };
@@ -132,6 +131,7 @@
 		B5A5D22225D72E6B009C6285 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22125D72E6B009C6285 /* DataSet.swift */; };
 		B5A5D22D25D754C4009C6285 /* String+FetchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */; };
 		B5B1B655263A061A00D9DBDB /* BrainShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1B654263A061A00D9DBDB /* BrainShape.swift */; };
+		B5B251C726407FAB00E0D4E2 /* DayRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B251C626407FAA00E0D4E2 /* DayRecordTests.swift */; };
 		B5B3260F25B31DE40023E286 /* Pathable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3260E25B31DE40023E286 /* Pathable.swift */; };
 		B5B3261425B343780023E286 /* BMRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261325B343780023E286 /* BMRow.swift */; };
 		B5B3261925B343FF0023E286 /* FoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B3261825B343FF0023E286 /* FoodRow.swift */; };
@@ -255,7 +255,6 @@
 		B52E466C25D01FF300C009EC /* IBSRecord+WeightRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+WeightRecord.swift"; sourceTree = "<group>"; };
 		B52E467125D0203100C009EC /* IBSRecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBSRecordType.swift; sourceTree = "<group>"; };
 		B52E467C25D0207D00C009EC /* IBSRecord+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IBSRecord+Codable.swift"; sourceTree = "<group>"; };
-		B530E85F263EE90700ABE5DB /* DayRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayRecordTests.swift; sourceTree = "<group>"; };
 		B533AC0D25BADAF8009B6290 /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		B533AC1225BADCA3009B6290 /* MedicationShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationShape.swift; sourceTree = "<group>"; };
 		B533AC1725BADCBA009B6290 /* WeightShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightShape.swift; sourceTree = "<group>"; };
@@ -324,6 +323,7 @@
 		B5A5D22125D72E6B009C6285 /* DataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
 		B5A5D22C25D754C4009C6285 /* String+FetchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FetchJSON.swift"; sourceTree = "<group>"; };
 		B5B1B654263A061A00D9DBDB /* BrainShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainShape.swift; sourceTree = "<group>"; };
+		B5B251C626407FAA00E0D4E2 /* DayRecordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayRecordTests.swift; sourceTree = "<group>"; };
 		B5B3260E25B31DE40023E286 /* Pathable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathable.swift; sourceTree = "<group>"; };
 		B5B3261325B343780023E286 /* BMRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMRow.swift; sourceTree = "<group>"; };
 		B5B3261825B343FF0023E286 /* FoodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRow.swift; sourceTree = "<group>"; };
@@ -643,7 +643,7 @@
 			isa = PBXGroup;
 			children = (
 				B5E01A7E25D03B2D00079309 /* SQL */,
-				B530E85F263EE90700ABE5DB /* DayRecordTests.swift */,
+				B5B251C626407FAA00E0D4E2 /* DayRecordTests.swift */,
 				B59C9EB72630D35300291A7D /* IBSData+MetaAnalysisTests.swift */,
 				B57B8B0525DD18C20030D758 /* IBSDataTests.swift */,
 				B5207ED425D48A2C0019D18F /* IBSRecord+DecodableTests.swift */,
@@ -1124,7 +1124,7 @@
 				B5E01A8025D03B2D00079309 /* AppDBTests.swift in Sources */,
 				B57B8B0625DD18C20030D758 /* IBSDataTests.swift in Sources */,
 				B5207ED525D48A2C0019D18F /* IBSRecord+DecodableTests.swift in Sources */,
-				B530E860263EE90700ABE5DB /* DayRecordTests.swift in Sources */,
+				B5B251C726407FAB00E0D4E2 /* DayRecordTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

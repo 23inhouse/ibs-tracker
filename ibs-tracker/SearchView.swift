@@ -142,7 +142,7 @@ struct SearchList: View {
 
           if filterSummary == true || filters.isEmpty {
             if dayRecord.records.filter(\.isSummary).isNotEmpty {
-              SummaryRowView(dayRecord.records, filters: filters)
+              SummaryRowView(dayRecord, filters: filters)
               Divider()
                 .padding(.horizontal, 10)
             }

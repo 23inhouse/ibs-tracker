@@ -75,7 +75,7 @@ struct FoodRowView: View {
 struct FoodRowView_Previews: PreviewProvider {
   static var previews: some View {
     List {
-      FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ alot of extra stuff and extra info to display!", tags: ["Pasta"], risk: .extreme, size: .normal, speed: Scales.none, mealType: .lunch))
+      FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ alot of extra stuff and extra info to display!", tags: ["Pasta"], risk: .extreme, size: .normal, speed: Scales.none))
       FoodRowView(for: IBSRecord(timestamp: Date(), food: "Dinner w/ not much stuff", tags: ["Pasta"], risk: .mild, size: nil, speed: nil))
     }
   }

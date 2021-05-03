@@ -11,8 +11,8 @@ struct SummaryRowView: View {
   let records: [IBSRecord]
   let filters: [ItemType]
 
-  init(_ records: [IBSRecord], filters: [ItemType] = []) {
-    self.records = records.reversed()
+  init(_ dayRecord: DayRecord, filters: [ItemType] = []) {
+    self.records = dayRecord.records.reversed()
     self.filters = filters.isNotEmpty ? filters : IBSRecord.summaryTypes
   }
 
@@ -94,16 +94,18 @@ struct SummaryRowView: View {
   var summary: some View {
     GeometryReader { geomentry in
       ForEach(keys, id: \.self) { key in
-        ForEach(flatRecords(key: key), id: \.self) { record in
+        let records = flatRecords(key: key)
+
+        ForEach(records, id: \.self) { record in
           dot(for: record, on: rowIndex(of: key), in: geomentry)
-          if key == .food {
+          if key == .food && record.mealStart == true && record.mealEnd == true {
             let endRecord = endingAt(record)
             dot(for: endRecord, on: rowIndex(of: key), in: geomentry)
             meal(for: [record, endRecord], on: rowIndex(of: key), in: geomentry)
           }
         }
         if key == .food {
-          meal(for: flatRecords(key: key), on: rowIndex(of: key), in: geomentry)
+          meal(for: records, on: rowIndex(of: key), in: geomentry)
         }
       }
     }
@@ -206,17 +208,17 @@ struct SummaryRowView_Previews: PreviewProvider {
   }
 
   static let normalDay = [
-    IBSRecord(timestamp: time(at: 8), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
-    IBSRecord(timestamp: time(at: 10), food: "porridge", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
-    IBSRecord(timestamp: time(at: 13), food: "lunch", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .lunch),
-    IBSRecord(timestamp: time(at: 19), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .dinner),
-    IBSRecord(timestamp: time(at: 20), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .dinner),
-    IBSRecord(timestamp: time(at: 21), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .dinner),
+    IBSRecord(timestamp: time(at: 9), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
+    IBSRecord(timestamp: time(at: 10), food: "porridge", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
+    IBSRecord(timestamp: time(at: 13.5), food: "lunch", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
+    IBSRecord(timestamp: time(at: 18.5), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
+    IBSRecord(timestamp: time(at: 19), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
+    IBSRecord(timestamp: time(at: 20), food: "dinner", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
     IBSRecord(timestamp: time(at: 8.5), bristolScale: .b4, tags: []),
   ]
   static let everyType = [
     IBSRecord(timestamp: time(at: 9), note: "note"),
-    IBSRecord(timestamp: time(at: 8), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
+    IBSRecord(timestamp: time(at: 8), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
     IBSRecord(timestamp: time(at: 14), food: "medical milk", tags: [], risk: nil, size: nil, speed: nil, medicinal: true),
     IBSRecord(timestamp: time(at: 11), bristolScale: .b4, tags: []),
     IBSRecord(timestamp: time(at: 16), bloating: .mild, pain: Scales.none),
@@ -229,17 +231,17 @@ struct SummaryRowView_Previews: PreviewProvider {
   static let fullDay = Array((1 ..< 24)).flatMap { hour -> [IBSRecord] in
     let hour = Double(hour + 4)
     return [
-      IBSRecord(timestamp: time(at: hour), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false, mealType: .breakfast),
+      IBSRecord(timestamp: time(at: hour), food: "coffee", tags: [], risk: nil, size: nil, speed: nil, medicinal: false),
       IBSRecord(timestamp: time(at: hour), bristolScale: .b4, tags: []),
     ]
   }
   static var previews: some View {
     List {
-      SummaryRowView(normalDay.reversed())
+      SummaryRowView(DayRecord(date: time(at: 0), records: normalDay.sorted(by: { $0.timestamp > $1.timestamp })))
         .listRowInsets(EdgeInsets())
-      SummaryRowView(everyType.reversed())
+      SummaryRowView(DayRecord(date: time(at: 0), records: everyType.sorted(by: { $0.timestamp > $1.timestamp })))
         .listRowInsets(EdgeInsets())
-      SummaryRowView(fullDay.reversed())
+      SummaryRowView(DayRecord(date: time(at: 0), records: fullDay.sorted(by: { $0.timestamp > $1.timestamp })))
         .listRowInsets(EdgeInsets())
     }
   }

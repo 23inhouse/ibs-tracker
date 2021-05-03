@@ -69,7 +69,7 @@ struct DayRowView<Content>: View where Content: View {
 struct DayRowView_Previews: PreviewProvider {
   static let gutRecord = IBSRecord(timestamp: Date(), bloating: .mild, pain: nil)
   static let foodRecord: IBSRecord = {
-    var record = IBSRecord(timestamp: Date(), food: "Coffee", risk: Scales.none, size: FoodSizes.none, speed: .mild, mealType: .dinner)
+    var record = IBSRecord(timestamp: Date(), food: "Coffee", risk: Scales.none, size: FoodSizes.none, speed: .mild)
     return record
   }()
   static var previews: some View {

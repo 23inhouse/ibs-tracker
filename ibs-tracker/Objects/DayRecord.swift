@@ -66,6 +66,7 @@ private extension DayRecord {
     var lastTimestamp = date
     var currentTimestamp = date
     var currentMealType: MealType? = nil
+    var currentIndex: Int? = nil
     for (i, mealType) in recordTags.enumerated() {
       records[i].mealType = mealType
 
@@ -86,9 +87,17 @@ private extension DayRecord {
       }
 
       if mealType != currentMealType {
+        records[i].mealStart = true
+        records[i].mealEnd = true
         currentTimestamp = record.timestamp
+        currentIndex = i
       } else {
         lastTimestamp = record.timestamp
+        records[i].mealEnd = true
+        if let currentIndex = currentIndex {
+          records[currentIndex].mealEnd = nil
+        }
+        currentIndex = i
       }
       currentMealType = mealType
     }

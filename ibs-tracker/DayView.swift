@@ -21,11 +21,15 @@ struct DayView: View {
     return displayDate == currentDate
   }
 
-  private var records: [IBSRecord] {
+  private var dayRecord: DayRecord {
     let dayRecord = appState.recordsByDay
       .first { $0.date.string(for: "YYYY-MM-DD") == date.string(for: "YYYY-MM-DD") }
 
-    return dayRecord?.records ?? []
+    return dayRecord ?? DayRecord(date: Date(), records: [])
+  }
+
+  private var records: [IBSRecord] {
+    dayRecord.records
   }
 
   var body: some View {
@@ -33,7 +37,7 @@ struct DayView: View {
       ScrollView {
         LazyVStack(spacing: 0) {
           if records.filter(\.isSummary).isNotEmpty {
-            SummaryRowView(records)
+            SummaryRowView(dayRecord)
             Divider()
               .padding(.horizontal, 10)
           }

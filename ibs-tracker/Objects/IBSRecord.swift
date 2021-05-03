@@ -24,6 +24,8 @@ struct IBSRecord {
   var mealTooLate: Scales?
   var mealTooLong: Scales?
   var mealTooSoon: Scales?
+  var mealStart: Bool?
+  var mealEnd: Bool?
   var risk: Scales?
   var speed: Scales?
   var pain: Scales?

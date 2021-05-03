@@ -17,8 +17,10 @@ protocol FoodRecord: IBSRecordType {
   var mealTooLate: Scales? { get }
   var mealTooLong: Scales? { get }
   var mealTooSoon: Scales? { get }
+  var mealStart: Bool? { get }
+  var mealEnd: Bool? { get }
   var durationInMinutes: TimeInterval { get }
-  init(timestamp: Date, food: String, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool, mealType: MealType?)
+  init(timestamp: Date, food: String, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool)
   func FoodScore() -> Int
   func foodDescription() -> String
   func riskText() -> String
@@ -31,7 +33,7 @@ protocol FoodRecord: IBSRecordType {
 }
 
 extension IBSRecord: FoodRecord {
-  init(timestamp: Date, food: String, tags: [String] = [], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool = false, mealType: MealType? = nil) {
+  init(timestamp: Date, food: String, tags: [String] = [], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool = false) {
     self.type = .food
     self.timestamp = timestamp
     self.text = food
@@ -39,7 +41,6 @@ extension IBSRecord: FoodRecord {
     self.size = size
     self.speed = speed
     self.medicinal = medicinal
-    self.mealType = mealType
     self.tags = tags
   }
 

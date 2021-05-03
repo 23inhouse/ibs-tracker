@@ -65,6 +65,8 @@ class DayRecordTests: XCTestCase {
 
     for (i, (_, expectation)) in meals.enumerated() {
       XCTAssertEqual(metaRecords[i].mealType ?? MealType.none, expectation, "wrong meal type at index [\(i)]")
+      XCTAssertEqual(metaRecords[i].mealStart, true, "wrong meal start at index [\(i)]")
+      XCTAssertEqual(metaRecords[i].mealEnd, true, "wrong meal end at index [\(i)]")
     }
   }
 
@@ -81,15 +83,18 @@ class DayRecordTests: XCTestCase {
   }
 
   func testCalcFoodMetaRecordsLongBreakfast() throws {
-    let meals:[(Double, MealType)] = [
-      (11, .breakfast),
-      (13, .breakfast),
+    let meals:[(Double, MealType, Bool?, Bool?)] = [
+      (11, .breakfast, true, nil),
+      (12, .breakfast, nil, nil),
+      (13, .breakfast, nil, true),
     ].reversed()
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
 
-    for (i, (_, expectation)) in meals.enumerated() {
-      XCTAssertEqual(metaRecords[i].mealType ?? MealType.none, expectation, "wrong meal type at index [\(i)]")
+    for (i, (_, mealType, mealStart, mealEnd)) in meals.enumerated() {
+      XCTAssertEqual(metaRecords[i].mealType ?? MealType.none, mealType, "wrong meal type at index [\(i)]")
+      XCTAssertEqual(metaRecords[i].mealStart, mealStart, "wrong meal start at index [\(i)]")
+      XCTAssertEqual(metaRecords[i].mealEnd, mealEnd, "wrong meal end at index [\(i)]")
     }
   }
 
