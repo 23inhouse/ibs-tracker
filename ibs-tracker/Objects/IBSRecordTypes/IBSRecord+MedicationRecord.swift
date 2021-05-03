@@ -11,6 +11,7 @@ protocol MedicationRecord: IBSRecordType {
   var text: String? { get }
   var medicationType: [MedicationType]? { get }
   init(timestamp: Date, medication text: String, type medicationType: [MedicationType], tags: [String])
+  func calcMedicationMetaTags() -> [String]
 }
 
 extension IBSRecord: MedicationRecord {
@@ -20,5 +21,10 @@ extension IBSRecord: MedicationRecord {
     self.text = text
     self.medicationType = medicationType
     self.tags = tags
+  }
+
+  func calcMedicationMetaTags() -> [String] {
+    let medicationTypes: [String] = medicationType.map({ ["\($0)"] }) ?? []
+    return ["\(type)", text ?? ""] + medicationTypes + tags
   }
 }

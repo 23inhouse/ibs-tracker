@@ -11,6 +11,7 @@ protocol WeightRecord: IBSRecordType {
   var weight: Decimal? { get }
   init(timestamp: Date, weight: Decimal, tags: [String])
   func weightDescription() -> String
+  func calcWeightMetaTags() -> [String]
 }
 
 extension IBSRecord: WeightRecord {
@@ -24,5 +25,9 @@ extension IBSRecord: WeightRecord {
   func weightDescription() -> String {
     guard let weight = weight else { return "" }
     return "\(String(describing: weight))kg"
+  }
+
+  func calcWeightMetaTags() -> [String] {
+    return ["\(type)", weightDescription()] + tags
   }
 }

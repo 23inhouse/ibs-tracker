@@ -117,6 +117,7 @@ struct SearchList: View {
   @EnvironmentObject private var appState: IBSData
 
   @State var records: [DayRecord] = []
+  @State private var searchFilterWorkItem: DispatchWorkItem?
 
   @Binding var search: String
   @Binding var filterSummary: Bool
@@ -125,6 +126,12 @@ struct SearchList: View {
   var body: some View {
     ScrollView {
       LazyVStack(spacing: 0) {
+        if search.isNotEmpty {
+          Text("Showing \(records.count) records")
+            .padding(.vertical, 10)
+          Divider()
+            .padding(.horizontal, 10)
+        }
         ForEach(records) { dayRecord in
           Button(dayRecord.date.string(for: "dd MMMM YYYY - EEEE")) {
             DispatchQueue.main.async {
@@ -175,14 +182,18 @@ private extension SearchList {
       return
     }
 
-    DispatchQueue.main.async {
+    searchFilterWorkItem?.cancel()
+
+    let currentWorkItem = DispatchWorkItem {
       let searchQuery = search.lowercased()
+      let searchTerms = searchQuery.parseTokens()
+
       let recordsByDay: [DayRecord?] = appState.recordsByDay.map { dayRecord in
         let records = dayRecord.records.filter { record in
-          let content = ((record.text ?? "") + record.tags.joined(separator: "")).lowercased()
+          let content = record.metaTags.joined(separator: "").lowercased()
           return
             (filters.isEmpty || filters.contains(record.type)) &&
-            (searchQuery == "" || content.contains(searchQuery))
+            (searchQuery == "" || searchTerms.first(where: { content.contains($0) }) != nil)
         }
         if records.isNotEmpty {
           return DayRecord(date: dayRecord.date, records: records, unfilteredRecords: dayRecord.records)
@@ -192,6 +203,10 @@ private extension SearchList {
 
       records = recordsByDay.compactMap { $0 }
     }
+
+    let delay = 0.666
+    searchFilterWorkItem = currentWorkItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: currentWorkItem)
   }
 }
 

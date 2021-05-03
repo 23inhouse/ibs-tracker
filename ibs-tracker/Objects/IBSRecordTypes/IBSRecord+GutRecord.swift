@@ -15,6 +15,7 @@ protocol GutRecord: IBSRecordType {
   func gutDescription() -> String
   func bloatingText() -> String
   func gutPainText() -> String
+  func calcGutMetaTags() -> [String]
 }
 
 extension IBSRecord: GutRecord {
@@ -43,5 +44,9 @@ extension IBSRecord: GutRecord {
   func gutPainText() -> String {
     guard let pain = pain else { return "" }
     return Scales.gutPainDescriptions[pain]!
+  }
+
+  func calcGutMetaTags() -> [String] {
+    return ["\(type)", "\(gutScore())", gutDescription()] + tags
   }
 }

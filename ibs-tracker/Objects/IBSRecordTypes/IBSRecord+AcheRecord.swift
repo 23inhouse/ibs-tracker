@@ -15,6 +15,7 @@ protocol AcheRecord: IBSRecordType {
   func acheDescription() -> String
   func headacheText() -> String
   func bodyacheText() -> String
+  func calcAcheMetaTags() -> [String]
 }
 
 extension IBSRecord: AcheRecord {
@@ -43,5 +44,9 @@ extension IBSRecord: AcheRecord {
   func bodyacheText() -> String {
     guard let bodyache = bodyache else { return "" }
     return Scales.bodyacheDescriptions[bodyache]!
+  }
+
+  func calcAcheMetaTags() -> [String] {
+    return ["\(type)", "\(acheScore())", acheDescription()] + tags
   }
 }

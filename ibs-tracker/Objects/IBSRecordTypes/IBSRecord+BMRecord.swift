@@ -28,6 +28,8 @@ protocol BMRecord: IBSRecordType {
   func wetnessText() -> String
   func drynessText() -> String
   func numberOfBMsText() -> String
+  func calcBMMetaTags() -> [String]
+
 }
 
 extension IBSRecord: BMRecord {
@@ -147,5 +149,20 @@ extension IBSRecord: BMRecord {
   func numberOfBMsText() -> String {
     let scale = numberOfBMsScale ?? .none
     return Scales.numberOfBMsDescriptions[scale] ?? ""
+  }
+
+  func calcBMMetaTags() -> [String] {
+    return [
+      "\(type)",
+      "\(bristolScale!)",
+      "\(bmScore())",
+      bristolDescription(),
+      colorText(),
+      pressureText(),
+      smellText(),
+      evacuationText(),
+      drynessText(),
+      wetnessText(),
+    ] + tags
   }
 }

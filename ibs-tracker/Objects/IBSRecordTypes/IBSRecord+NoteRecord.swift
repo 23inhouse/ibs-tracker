@@ -10,6 +10,7 @@ import Foundation
 protocol NoteRecord: IBSRecordType {
   var text: String? { get }
   init(timestamp: Date, note text: String, tags: [String])
+  func calcNoteMetaTags() -> [String]
 }
 
 extension IBSRecord: NoteRecord {
@@ -18,5 +19,9 @@ extension IBSRecord: NoteRecord {
     self.timestamp = timestamp
     self.text = text
     self.tags = tags
+  }
+
+  func calcNoteMetaTags() -> [String] {
+    return ["\(type)", text ?? ""] + tags
   }
 }

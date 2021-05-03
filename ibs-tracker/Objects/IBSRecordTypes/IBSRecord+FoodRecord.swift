@@ -21,7 +21,7 @@ protocol FoodRecord: IBSRecordType {
   var mealEnd: Bool? { get }
   var durationInMinutes: TimeInterval { get }
   init(timestamp: Date, food: String, tags: [String], risk: Scales?, size: FoodSizes?, speed: Scales?, medicinal: Bool)
-  func FoodScore() -> Int
+  func foodScore() -> Scales
   func foodDescription() -> String
   func riskText() -> String
   func sizeText() -> String
@@ -30,6 +30,7 @@ protocol FoodRecord: IBSRecordType {
   func mealTooLateText() -> String
   func mealTooLongText() -> String
   func mealTooSoonText() -> String
+  func calcFoodMetaTags() -> [String]
 }
 
 extension IBSRecord: FoodRecord {
@@ -58,8 +59,16 @@ extension IBSRecord: FoodRecord {
     }
   }
 
-  func FoodScore() -> Int {
-    [risk?.rawValue ?? 0, size?.rawValue ?? 0].max() ?? 0
+  func foodScore() -> Scales {
+    let worstScore = [
+      risk?.rawValue ?? -1,
+      size?.rawValue ?? -1,
+      speed?.rawValue ?? -1,
+      mealTooLate?.rawValue ?? -1,
+      mealTooLong?.rawValue ?? -1,
+      mealTooSoon?.rawValue ?? -1,
+    ].max()
+    return Scales(optionalValue: worstScore) ?? .none
   }
 
   func foodDescription() -> String {
@@ -96,5 +105,20 @@ extension IBSRecord: FoodRecord {
 
   func mealTooSoonText() -> String {
     return Scales.mealTooSoonDescriptions[mealTooSoon ?? .none] ?? ""
+  }
+
+  func calcFoodMetaTags() -> [String] {
+    return [
+      "\(type)",
+      foodDescription(),
+      "\(foodScore())",
+      riskText(),
+      sizeText(),
+      speedText(),
+      mealTypeText(),
+      mealTooLateText(),
+      mealTooLongText(),
+      mealTooSoonText(),
+    ] + tags
   }
 }

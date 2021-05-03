@@ -39,6 +39,7 @@ struct IBSRecord {
   var condition: Scales?
   var medicinal: Bool?
   var tags: [String] = []
+  var metaTags: [String] = []
 }
 
 extension IBSRecord: Hashable {}

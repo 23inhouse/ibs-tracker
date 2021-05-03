@@ -15,6 +15,7 @@ protocol MoodRecord: IBSRecordType {
   func moodDescription() -> String
   func feelText() -> String
   func stressText() -> String
+  func calcMoodMetaTags() -> [String]
 }
 
 extension IBSRecord: MoodRecord {
@@ -43,5 +44,9 @@ extension IBSRecord: MoodRecord {
   func stressText() -> String {
     guard let stress = stress else { return "" }
     return Scales.stressDescriptions[stress]!
+  }
+
+  func calcMoodMetaTags() -> [String] {
+    return ["\(type)", "\(moodScore())", moodDescription()] + tags
   }
 }

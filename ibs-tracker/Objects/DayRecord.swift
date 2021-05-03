@@ -27,6 +27,7 @@ private extension DayRecord {
     var mutatableRecords = Array(records.reversed()) // return earliest first
     let metaBMRecords = calcBMMetaRecords(records: &mutatableRecords)
     let metaFoodRecords = calcFoodMetaRecords(records: &mutatableRecords)
+    calcFoodMetaTags(records: &mutatableRecords)
 
     records = (metaBMRecords + mutatableRecords + metaFoodRecords)
       .sorted { $0.timestamp > $1.timestamp } // return latest first
@@ -103,6 +104,35 @@ private extension DayRecord {
     }
 
     return []
+  }
+
+  func calcFoodMetaTags(records: inout [IBSRecord]) {
+    for (i, record) in records.enumerated() {
+      let metaTags: [String]
+      switch record.type {
+      case .ache:
+        metaTags = record.calcAcheMetaTags()
+      case .bm:
+        metaTags = record.calcBMMetaTags()
+      case .food:
+        metaTags = record.calcFoodMetaTags()
+      case .gut:
+        metaTags = record.calcGutMetaTags()
+      case .medication:
+        metaTags = record.calcMedicationMetaTags()
+      case .mood:
+        metaTags = record.calcMoodMetaTags()
+      case .note:
+        metaTags = record.calcNoteMetaTags()
+      case .skin:
+        metaTags = record.calcSkinMetaTags()
+      case .weight:
+        metaTags = record.calcWeightMetaTags()
+      case .none:
+        metaTags = record.tags
+      }
+      records[i].metaTags = metaTags
+    }
   }
 
   /**

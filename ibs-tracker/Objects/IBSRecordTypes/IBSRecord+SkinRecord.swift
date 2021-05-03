@@ -14,6 +14,7 @@ protocol SkinRecord: IBSRecordType {
   func skinScore() -> Scales
   func skinDescription() -> String
   func skinText() -> String
+  func calcSkinMetaTags() -> [String]
 }
 
 extension IBSRecord: SkinRecord {
@@ -37,5 +38,9 @@ extension IBSRecord: SkinRecord {
   func skinText() -> String {
     guard let skin = condition else { return "" }
     return Scales.skinConditionDescriptions[skin]!
+  }
+
+  func calcSkinMetaTags() -> [String] {
+    return ["\(type)", "\(skinScore())", skinDescription()] + tags
   }
 }
