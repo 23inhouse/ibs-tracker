@@ -196,7 +196,7 @@ private extension SearchList {
             (searchQuery == "" || searchTerms.first(where: { content.contains($0) }) != nil)
         }
         if records.isNotEmpty {
-          return DayRecord(date: dayRecord.date, records: records, unfilteredRecords: dayRecord.records)
+          return DayRecord(date: dayRecord.date, records: records, unfilteredRecords: dayRecord.records, calculateMeta: false)
         }
         return nil
       }

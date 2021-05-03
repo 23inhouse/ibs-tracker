@@ -13,12 +13,14 @@ struct DayRecord: Identifiable {
   private(set) var records: [IBSRecord]
   private let unfilteredRecords: [IBSRecord]
 
-  init(date: Date, records: [IBSRecord], unfilteredRecords: [IBSRecord] = []) {
+  init(date: Date, records: [IBSRecord], unfilteredRecords: [IBSRecord] = [], calculateMeta: Bool = true) {
     self.date = date
     self.records = records
     self.unfilteredRecords = unfilteredRecords.isNotEmpty ? unfilteredRecords : records
 
-    calcMetaRecords()
+    if calculateMeta {
+      calcMetaRecords()
+    }
   }
 }
 
