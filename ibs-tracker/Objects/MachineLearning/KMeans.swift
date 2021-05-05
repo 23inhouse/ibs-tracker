@@ -24,7 +24,7 @@ class KMeans<Label: Hashable> {
     return points.map(fit)
   }
 
-  func calcCenters(on date: Date, for timestamps: [Date], labels: [MealType]) -> [Vector] {
+  func calcCenters(on date: Date, for timestamps: [Date], labels: [MealType], stretchTime: Bool = false) -> [Vector] {
     guard timestamps.isNotEmpty else { return [] }
     let hour: Double = 60 * 60
 
@@ -32,21 +32,21 @@ class KMeans<Label: Hashable> {
 
     let mealInterval = timestamps.last!.timeIntervalSince(timestamps.first!)
     let gapModifier: Double
-    if mealInterval < (6 * hour) {
+
+    if stretchTime == false || mealInterval < (6 * hour) {
       gapModifier = 1.0
-    } else if mealInterval < (12.5 * hour) {
-      gapModifier = mealInterval / (9.1 * hour)
     } else {
-      gapModifier = mealInterval / (10.15 * hour)
+      let totalHours = labels.count == 3 ? 8.0 : 10.5
+      gapModifier = mealInterval / (totalHours * hour)
     }
 
     let breakfastTime = firstMealTime
     let lunchTime     = firstMealTime + (4 * hour * gapModifier)
     let dinnerTime    = firstMealTime + (8 * hour * gapModifier)
-    let snackTime     = firstMealTime + (10 * hour * gapModifier)
+    let snackTime     = firstMealTime + (10.5 * hour * gapModifier)
 
     let breakfast = Vector([breakfastTime], weighting: 1.1)
-    let lunch     = Vector([lunchTime], weighting: 0.95)
+    let lunch     = Vector([lunchTime], weighting: 1.0)
     let dinner    = Vector([dinnerTime], weighting: 1.1)
     let snack     = Vector([snackTime], weighting: 0.9)
 

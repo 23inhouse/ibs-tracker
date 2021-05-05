@@ -27,11 +27,12 @@ struct DayRecord: Identifiable {
 private extension DayRecord {
   mutating func calcMetaRecords() {
     var mutatableRecords = Array(records.reversed()) // return earliest first
+//    var mutatableRecords = records.sorted { $0.timestamp < $1.timestamp } // return earliest first
     let metaBMRecords = calcBMMetaRecords(records: &mutatableRecords)
-    let metaFoodRecords = calcFoodMetaRecords(records: &mutatableRecords)
-    calcFoodMetaTags(records: &mutatableRecords)
+    calcFoodMetaRecords(records: &mutatableRecords)
+    calcMetaTags(records: &mutatableRecords)
 
-    records = (metaBMRecords + mutatableRecords + metaFoodRecords)
+    records = (metaBMRecords + mutatableRecords)
       .sorted { $0.timestamp > $1.timestamp } // return latest first
   }
 
@@ -57,15 +58,50 @@ private extension DayRecord {
     return []
   }
 
-  func calcFoodMetaRecords(records: inout [IBSRecord]) -> [IBSRecord] {
+  func calcFoodMetaRecords(records: inout [IBSRecord]) {
     let foodRecords = records.filter(\.isNotMedicinalFood)
     let count = foodRecords.count
 
-    guard count > 0 else { return [] }
+    guard count > 0 else { return }
 
-    let fittableLabels: [MealType] = [.breakfast, .lunch, .dinner, .snack]
-    let recordTags = fitTags(labels: fittableLabels, records: records, taggable: \.isNotMedicinalFood)
+    let configs: [([MealType], Bool)] = [
+      ([.breakfast, .lunch, .dinner], true),
+      ([.breakfast, .lunch, .dinner, .lateMeal], true),
+      ([.breakfast, .lunch, .dinner], false),
+      ([.breakfast, .lunch, .dinner, .lateMeal], false),
+    ]
 
+    var fittedRecords: [IBSRecord] = []
+    var lowest: Double = .infinity
+    for config in configs {
+      let (labels, stretchTime) = config
+      let scaledLabels = calcMealScales(for: records, fittedTo: labels, stretchTime: stretchTime)
+
+      let mealRecords = scaledLabels.filter({ $0.mealType != nil })
+      let fittedLabelsCount = Dictionary(grouping: mealRecords, by: \.mealType).count
+
+      if labels.count > 3 {
+        if fittedLabelsCount != labels.count { continue }
+      }
+
+      let adjustedment = Double(fittedLabelsCount)
+
+      let score = score(for: scaledLabels) / adjustedment
+      if score < lowest {
+        lowest = score
+        fittedRecords = scaledLabels
+      }
+    }
+
+    for (i, record) in fittedRecords.enumerated() {
+      records[i] = record
+    }
+  }
+
+  func calcMealScales(for records: [IBSRecord], fittedTo labels: [MealType], stretchTime: Bool = false) -> [IBSRecord] {
+    var records = records
+
+    let recordTags = fitTags(labels: labels, records: records, taggable: \.isNotMedicinalFood, stretchTime: stretchTime)
     var lastTimestamp = date
     var currentTimestamp = date
     var currentMealType: MealType? = nil
@@ -77,15 +113,15 @@ private extension DayRecord {
 
       let record = records[i]
 
-      records[i].mealTooLate = calcMealTooLateScale(from: record.timestamp)
+      records[i].mealTooLate = DayRecordScales.calcMealTooLate(from: record.timestamp)
 
       if let currentMealType = currentMealType {
         if mealType != currentMealType {
           let cleansingDuration = record.timestamp.timeIntervalSince(lastTimestamp)
-          records[i].mealTooSoon = calcMealTooSoonScale(from: cleansingDuration)
+          records[i].mealTooSoon = DayRecordScales.calcMealTooSoon(from: cleansingDuration)
         } else {
           let mealDuration = record.timestamp.timeIntervalSince(currentTimestamp)
-          records[i].mealTooLong = calcMealTooLongScale(from: mealDuration)
+          records[i].mealTooLong = DayRecordScales.calcMealTooLong(from: mealDuration)
         }
       }
 
@@ -95,20 +131,32 @@ private extension DayRecord {
         currentTimestamp = record.timestamp
         currentIndex = i
       } else {
-        lastTimestamp = record.timestamp
         records[i].mealEnd = true
         if let currentIndex = currentIndex {
           records[currentIndex].mealEnd = nil
         }
         currentIndex = i
       }
+      lastTimestamp = record.timestamp
       currentMealType = mealType
     }
 
-    return []
+    return records
   }
 
-  func calcFoodMetaTags(records: inout [IBSRecord]) {
+  func score(for records: [IBSRecord]) -> Double {
+    return records.reduce(0.0, { (sum, record) in sum + mealScore(for: record) })
+  }
+
+  func mealScore(for record: IBSRecord) -> Double {
+    let mealScales: [Scales] = [record.mealTooLong ?? Scales.none, record.mealTooSoon ?? Scales.none]
+    return mealScales.reduce(0.0, { (sum, scale) in
+      let score = scale.rawValue < 0 ? 0 : scale.rawValue
+      return sum + Double(score)
+    })
+  }
+
+  func calcMetaTags(records: inout [IBSRecord]) {
     for (i, record) in records.enumerated() {
       let metaTags: [String]
       switch record.type {
@@ -137,42 +185,7 @@ private extension DayRecord {
     }
   }
 
-  /**
-   Calculate the scale based on the time interval
-   [7:30 pm, 8:30pm, 9.30pm, 10:30pm, 11:30pm] -> [.zero, .mild, .moderate, .severe, .extreme]
-   */
-  func calcMealTooLateScale(from timestamp: Date) -> Scales? {
-    let adjustedTimestamp = IBSData.timeShiftedDate(for: timestamp)
-    let adjustedHour = Calendar.current.component(.hour, from: adjustedTimestamp)
-    let adjustedSevenPM = 19 - IBSData.numberOfHoursInMorningIncludedInPreviousDay
-
-    let scale = adjustedHour - adjustedSevenPM
-    guard scale > 0 else { return nil }
-    return Scales(rawValue: scale > 0 ? scale < 4 ? scale : 4 : 0)!
-  }
-
-  /**
-   Calculate the scale based on the time interval
-   [1.5 hours, 2.0 hours, 2.5 hours, 3.0 hours, 3.5 hours] -> [.zero, .mild, .moderate, .severe, .extreme]
-   */
-  func calcMealTooLongScale(from duration: TimeInterval) -> Scales? {
-    let hour: Double = 60 * 60
-    let scale = Int(round((duration - (1.5 * hour)) / hour * 2))
-    guard scale > 0 else { return nil }
-    return Scales(rawValue: scale > 0 ? scale < 4 ? scale : 4 : 0)!
-  }
-
-  /**
-   Calculate the scale based on the time interval
-   [3.5 hours, 3.0 hours, 2.5 hours, 2.0 hours, 1.5 hours] -> [.zero, .mild, .moderate, .severe, .extreme]
-   */
-  func calcMealTooSoonScale(from duration: TimeInterval) -> Scales {
-    let hour: Double = 60 * 60
-    let scale = 4 - Int(round((duration - (1.75 * hour)) / hour * 2))
-    return Scales(rawValue: scale > 0 ? scale < 4 ? scale : 4 : 0)!
-  }
-
-  func fitTags(labels: [MealType], records: [IBSRecord], taggable: (IBSRecord) -> Bool) -> [MealType?] {
+  func fitTags(labels: [MealType], records: [IBSRecord], taggable: (IBSRecord) -> Bool, stretchTime: Bool = false) -> [MealType?] {
     let timestamps = records.filter(taggable).map(\.timestamp)
     guard timestamps.isNotEmpty else { return [] }
 
@@ -184,7 +197,7 @@ private extension DayRecord {
 
     let convergeDistance: Double = 300 // 5 minutes (distance is measured in seconds)
     let kmm = KMeans<MealType>(labels: labels)
-    let centers = kmm.calcCenters(on: date, for: timestamps, labels: labels)
+    let centers = kmm.calcCenters(on: date, for: timestamps, labels: labels, stretchTime: stretchTime)
     let trainingPoints = points.compactMap { $0 }
     kmm.train(points: trainingPoints, convergeDistance: convergeDistance, towards: centers)
     kmm.sortCenters()

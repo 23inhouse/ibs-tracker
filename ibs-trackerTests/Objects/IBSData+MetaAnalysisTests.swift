@@ -72,4 +72,29 @@ class IBSData_MetaAnalysisTests: XCTestCase {
       XCTAssertEqual(computedRecords[i].mealType ?? MealType.none, expectation, "wrong meal type at index [\(i)]")
     }
   }
+
+  func testCalcFoodMetaRecordsIncludingMedicinalFoodRecord() throws {
+    let meals:[(Double, MealType, Bool)] = [
+      (10.583, .breakfast, false),
+      (14.75, .lunch, false),
+      (15, .none, true),
+      (18.416, .dinner, false),
+      (18.666, .dinner, false),
+      (20.916, .dinner, false),
+      (24.916, .lateMeal, false),
+    ]
+
+    let today = IBSData.timeShiftedDate()
+    let records:[IBSRecord] = meals.map { (time, _, medicinal) in
+      let mealTime = today.advanced(by: time * 60 * 60)
+      return IBSRecord(timestamp: mealTime, food: "meal", risk: nil, size: nil, speed: nil, medicinal: medicinal)
+    }
+    let ibsData = IBSData(records)
+
+    let computedRecords = Array(ibsData.recordsByDay.first!.records.reversed())
+
+    for (i, (_, expectation, _)) in meals.enumerated() {
+      XCTAssertEqual(computedRecords[i].mealType ?? MealType.none, expectation, "wrong meal type at index [\(i)]")
+    }
+  }
 }
