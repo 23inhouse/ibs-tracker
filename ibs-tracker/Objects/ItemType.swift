@@ -170,8 +170,15 @@ enum MealType: String {
   case breakfast
   case lunch
   case dinner
-  case lateMeal = "late meal"
+  case snack1
+  case snack2
+  case snack3
+  case snack4
+  case snack5
+  case snack6
 }
+
+extension MealType: CaseIterable {}
 
 enum MedicationType: String, CaseIterable {
   case analgesic

@@ -80,8 +80,8 @@ class IBSData_MetaAnalysisTests: XCTestCase {
       (15, .none, true),
       (18.416, .dinner, false),
       (18.666, .dinner, false),
-      (20.916, .dinner, false),
-      (24.916, .lateMeal, false),
+      (20.916, .snack1, false),
+      (24.916, .snack2, false),
     ]
 
     let today = IBSData.timeShiftedDate()

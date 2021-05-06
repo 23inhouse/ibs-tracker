@@ -47,12 +47,12 @@ extension IBSRecord: FoodRecord {
 
   var durationInMinutes: TimeInterval {
     get {
-      let size = (size ?? .normal).rawValue
-      let speed = (speed ?? .mild).rawValue
+      let sizeValue = (size ?? .normal).rawValue
+      let speedValue = (speed ?? .mild).rawValue
 
       let normalDurationInMinutes = 20
-      let sizeInMinutes = (size - 1) * 5 // -5 ... 15 minutes (15 ... 35 minutes)
-      let speedCubed = (speed - 1) * (speed - 1) * (speed - 1)
+      let sizeInMinutes = (sizeValue - 1) * 5 // -5 ... 15 minutes (15 ... 35 minutes)
+      let speedCubed = (speedValue - 1) * (speedValue - 1) * (speedValue - 1)
       let speedFactor = Double(speedCubed) / 3 + 1 // 0.66, 1, 1.33, 3.66, 10
 
       return round(Double(normalDurationInMinutes + sizeInMinutes) / speedFactor * 10) / 10

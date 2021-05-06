@@ -12,20 +12,17 @@ struct Vector {
 
   private let data: [Double]
   let numberOfDimensions: Int
-  let weighting: Double
 
-  init(_ data: [Double], weighting: Double = 1) {
+  init(_ data: [Double]) {
     assert(data.count <= Vector.maximumNumberOfDimensions, "Data exceeds maximum number of dimensions")
     self.data = data
     self.numberOfDimensions = data.count
-    self.weighting = weighting
   }
 
-  init(from other: Vector, weighting: Double = 1) {
+  init(from other: Vector) {
     let numberOfDimensions = other.numberOfDimensions
     self.data = other.data
     self.numberOfDimensions = numberOfDimensions
-    self.weighting = weighting
   }
 
   func dimension(_ index: Int) -> Double {
@@ -35,18 +32,17 @@ struct Vector {
 
   func distance(to other: Vector) -> Double {
     let result: Double = data.enumerated().reduce(0.0) { sum, data in
-      let distance = pow(data.element - other.data[data.offset], 2)
-      let weighting = pow(other.weighting, 2)
-      return sum + distance / weighting
+      let distance = abs(data.element - other.data[data.offset])
+      return sum + distance
     }
 
-    return sqrt(result)
+    return result / Double(numberOfDimensions)
   }
 }
 
 extension Vector: CustomStringConvertible {
   var description: String {
-    return "Vector [\(data)] weighting: \(weighting)"
+    return "Vector [\(data.map { "\(floor($0 / 60 / 60 * 1000) / 1000)" })]"
   }
 }
 

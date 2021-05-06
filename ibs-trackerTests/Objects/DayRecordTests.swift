@@ -162,7 +162,7 @@ class DayRecordTests: XCTestCase {
       (14, .lunch),
       (16, .lunch),
       (19, .dinner),
-      (22, .lateMeal),
+      (22, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -176,27 +176,27 @@ class DayRecordTests: XCTestCase {
     let meals:[(Double, MealType)] = [
       (05, .breakfast), // 0
       (06, .breakfast), // 1
-      (07, .breakfast), // 2
-      (08, .breakfast), // 3
-      (09, .breakfast), // 4
-      (10, .breakfast), // 5
+      (07, .snack1),    // 2
+      (08, .snack1),    // 3
+      (09, .snack1),    // 4
+      (10, .lunch),     // 5
       (11, .lunch),     // 6
       (12, .lunch),     // 7
-      (13, .lunch),     // 8
-      (14, .lunch),     // 9
-      (15, .lunch),     // 10
-      (16, .lunch),     // 11
-      (17, .lunch),     // 12
+      (13, .snack2),    // 8
+      (14, .snack2),    // 9
+      (15, .snack2),    // 10
+      (16, .snack2),    // 11
+      (17, .dinner),    // 12
       (18, .dinner),    // 13
       (19, .dinner),    // 14
-      (20, .dinner),    // 15
-      (21, .dinner),    // 16
-      (22, .dinner),    // 17
-      (23, .dinner),    // 18
-      (24, .lateMeal),  // 19
-      (25, .lateMeal),  // 20
-      (26, .lateMeal),  // 21
-      (27, .lateMeal),  // 22
+      (20, .snack3),    // 15
+      (21, .snack3),    // 16
+      (22, .snack3),    // 17
+      (23, .snack4),    // 18
+      (24, .snack4),    // 19
+      (25, .snack4),    // 20
+      (26, .snack5),    // 21
+      (27, .snack5),    // 22
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -211,18 +211,18 @@ class DayRecordTests: XCTestCase {
       (08, .breakfast), // 0
       (09, .breakfast), // 1
       (10, .breakfast), // 2
-      (11, .breakfast), // 3
-      (12, .lunch),     // 4
-      (13, .lunch),     // 5
+      (11, .snack1),    // 3
+      (12, .snack1),    // 4
+      (13, .snack1),    // 5
       (14, .lunch),     // 6
       (15, .lunch),     // 7
-      (16, .dinner),    // 8
-      (17, .dinner),    // 9
-      (18, .dinner),    // 10
-      (19, .dinner),    // 11
-      (20, .lateMeal),  // 12
-      (21, .lateMeal),  // 13
-      (22, .lateMeal),  // 14
+      (16, .lunch),     // 8
+      (17, .lunch),     // 9
+      (18, .snack2),    // 10
+      (19, .snack2),    // 11
+      (20, .snack2),    // 12
+      (21, .dinner),    // 13
+      (22, .dinner),    // 14
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -237,14 +237,14 @@ class DayRecordTests: XCTestCase {
       (09, .breakfast), // 0
       (10, .breakfast), // 1
       (11, .breakfast), // 2
-      (12, .breakfast), // 3
-      (13, .lunch),     // 4
-      (14, .lunch),     // 5
+      (12, .snack1),    // 3
+      (13, .snack1),    // 4
+      (14, .snack1),    // 5
       (15, .lunch),     // 6
-      (16, .dinner),    // 7
-      (17, .dinner),    // 8
-      (18, .dinner),    // 9
-      (19, .dinner),    // 10
+      (16, .lunch),     // 7
+      (17, .lunch),     // 8
+      (18, .snack2),    // 9
+      (19, .snack2),    // 10
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -259,7 +259,7 @@ class DayRecordTests: XCTestCase {
       (10, .breakfast),
       (13.5, .lunch),
       (19, .dinner),
-      (23, .lateMeal),
+      (23, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -275,7 +275,7 @@ class DayRecordTests: XCTestCase {
       (15.166, .lunch),
       (20, .dinner),
       (20.33, .dinner),
-      (25, .lateMeal),
+      (25, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -291,7 +291,7 @@ class DayRecordTests: XCTestCase {
       (15.5, .lunch),
       (19.25, .dinner),
       (20.833, .dinner),
-      (23.5, .lateMeal),
+      (23.5, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -340,8 +340,8 @@ class DayRecordTests: XCTestCase {
       (12.75, .lunch),
       (16, .dinner),
       (16.166, .dinner),
-      (21.75, .lateMeal),
-      (22.166, .lateMeal),
+      (21.75, .snack1),
+      (22.166, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -358,7 +358,7 @@ class DayRecordTests: XCTestCase {
       (11, .lunch),
       (15.166, .dinner),
       (15.5, .dinner),
-      (20.833, .lateMeal),
+      (20.833, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -373,10 +373,10 @@ class DayRecordTests: XCTestCase {
       (11.416, .breakfast),
       (16.166, .lunch),
       (16.416, .lunch),
-      (19, .dinner),
-      (21.333, .lateMeal),
-      (21.666, .lateMeal),
-      (24, .lateMeal),
+      (19, .snack1),
+      (21.333, .dinner),
+      (21.666, .dinner),
+      (24, .snack2),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -392,8 +392,8 @@ class DayRecordTests: XCTestCase {
       (10, .breakfast),
       (16.25, .lunch),
       (19.25, .dinner),
-      (21, .dinner),
-      (22.666, .lateMeal),
+      (21, .snack1),
+      (22.666, .snack1),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -407,12 +407,12 @@ class DayRecordTests: XCTestCase {
     let meals:[(Double, MealType)] = [ // 14.916
       (9, .breakfast),
       (14.5, .lunch),
-      (16.666, .dinner),
-      (16.833, .dinner),
-      (16.916, .dinner),
+      (16.666, .snack1),
+      (16.833, .snack1),
+      (16.916, .snack1),
       (18.416, .dinner),
       (19, .dinner),
-      (24.166, .lateMeal),
+      (24.166, .snack2),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -445,9 +445,9 @@ class DayRecordTests: XCTestCase {
       (15.583, .lunch, nil, nil, .moderate),
       (19.416, .dinner, nil, nil, .zero),
       (19.666, .dinner, nil, nil, nil),
-      (22, .dinner, .severe, .severe, nil),
-      (24.333, .lateMeal, .extreme, nil, .severe),
-      (24.416, .lateMeal, .extreme, nil, nil),
+      (22, .snack1, .severe, nil, .severe),
+      (24.333, .snack2, .extreme, nil, .severe),
+      (24.416, .snack2, .extreme, nil, nil),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -466,8 +466,8 @@ class DayRecordTests: XCTestCase {
       (14.75, .lunch),
       (18.416, .dinner),
       (18.666, .dinner),
-      (20.916, .dinner),
-      (24.916, .lateMeal),
+      (20.916, .snack1),
+      (24.916, .snack2),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -482,7 +482,7 @@ class DayRecordTests: XCTestCase {
       (9.833, .breakfast),
       (11.083, .breakfast),
       (13.666, .lunch),
-      (16.583, .lunch),
+      (16.583, .snack1),
       (20, .dinner),
       (20.416, .dinner),
     ]
@@ -499,11 +499,11 @@ class DayRecordTests: XCTestCase {
       (11.083, .breakfast, nil, nil, nil),
       (12.583, .breakfast, nil, .mild, nil),
       (16.916, .lunch, nil, nil, .zero),
-      (18.333, .dinner, nil, nil, .extreme),
-      (18.833, .dinner, nil, nil, nil),
-      (19.333, .dinner, nil, nil, nil),
-      (23.416, .lateMeal, .extreme, nil, .zero),
-      (23.833, .lateMeal, .extreme, nil, nil),
+      (18.333, .snack1, nil, nil, .extreme),
+      (18.833, .snack1, nil, nil, nil),
+      (19.333, .snack1, nil, nil, nil),
+      (23.416, .dinner, .extreme, nil, .zero),
+      (23.833, .dinner, .extreme, nil, nil),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -534,13 +534,14 @@ class DayRecordTests: XCTestCase {
   }
 
   func testCalcFoodMetaRecordsComplicated_2021_04_16() throws {
-    let meals:[(Double, MealType)] = [ // 10.583
+    let meals:[(Double, MealType)] = [ // 11.166
       (10.75, .breakfast),
-      (13.083, .breakfast),
+      (13.083, .snack1),
       (18.166, .lunch),
       (18.25, .lunch),
-      (21.416, .dinner),
       (21.333, .dinner),
+      (21.416, .dinner),
+      (21.916, .dinner),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)
@@ -553,12 +554,12 @@ class DayRecordTests: XCTestCase {
   func testCalcFoodMetaRecordsComplicated_2021_04_19() throws {
     let meals:[(Double, MealType)] = [
       (11.166, .breakfast),
-      (13.583, .breakfast),
+      (13.583, .snack1),
       (18.666, .lunch),
       (18.916, .lunch),
       (19, .lunch),
-      (21.083, .dinner),
-      (24.583, .lateMeal),
+      (21.083, .snack2),
+      (24.583, .dinner),
     ]
     let hours = meals.map { $0.0 }
     let metaRecords = calcMetaRecords(for: hours)

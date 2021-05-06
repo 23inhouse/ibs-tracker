@@ -7,69 +7,45 @@
 
 import Foundation
 
-class KMeans<Label: Hashable> {
-  let labels: [Label]
+class KMeans {
+  private let labels: [MealType]
+  private let maximumNumberOfCenters: Int
+  private let convergeDistance: Double
+  private let minimumDistance: Double
+  private let maximumDistance: Double
 
-  private(set) var centroids = [Vector]()
-  private let numberOfCenters: Int
+  private(set) var centers: [Vector] = []
 
-  init(labels: [Label]) {
-    self.labels = labels
-    self.numberOfCenters = labels.count
+  init() {
+    self.labels = Array(repeating: .none, count: MealType.allCases.count)
+    self.maximumNumberOfCenters = labels.count
+
+    self.convergeDistance = 300 // 5 minutes (distance is measured in seconds)
+    self.minimumDistance = 7200 // 2 hours (distance is measured in seconds)
+    self.maximumDistance = 7200 // 2 hours either side of center (distance is measured in seconds)
   }
 
-  func fit(_ points: [Vector?]) -> [Label?] {
-    assert(!centroids.isEmpty, "Exception: KMeans tried to fit on a non trained model.")
+  func train(points: [Vector]) -> [MealType] {
+    let sortedRandomCenters = sampleReservoir(of: points)
 
-    return points.map(fit)
-  }
-
-  func calcCenters(on date: Date, for timestamps: [Date], labels: [MealType], stretchTime: Bool = false) -> [Vector] {
-    guard timestamps.isNotEmpty else { return [] }
-    let hour: Double = 60 * 60
-
-    let firstMealTime = timestamps.first!.timeIntervalSince(date)
-
-    let mealInterval = timestamps.last!.timeIntervalSince(timestamps.first!)
-    let gapModifier: Double
-
-    if stretchTime == false || mealInterval < (6 * hour) {
-      gapModifier = 1.0
-    } else {
-      let totalHours = labels.count == 3 ? 8.0 : 10.5
-      gapModifier = mealInterval / (totalHours * hour)
+    var counter = 0
+    var labels: [MealType] = []
+    let numberOfPoints = points.count
+    let maximumNumberOfAttempts = numberOfPoints * 2
+    while labels.count < numberOfPoints && counter < maximumNumberOfAttempts {
+      let trainedCenters = train(points: points, towards: sortedRandomCenters)
+      centers = trainedCenters
+      labels = points.map(fit)
+      counter += 1
     }
+    assert(counter < maximumNumberOfAttempts, "FULLY MAXED OUT")
 
-    let breakfastTime = firstMealTime
-    let lunchTime     = firstMealTime + (4 * hour * gapModifier)
-    let dinnerTime    = firstMealTime + (8 * hour * gapModifier)
-    let snackTime     = firstMealTime + (10.5 * hour * gapModifier)
-
-    let breakfast = Vector([breakfastTime], weighting: 1.1)
-    let lunch     = Vector([lunchTime], weighting: 1.0)
-    let dinner    = Vector([dinnerTime], weighting: 1.1)
-    let snack     = Vector([snackTime], weighting: 0.9)
-
-    let moreThanThree = labels.count > 3 && timestamps.count > 3 && mealInterval > (11 * hour)
-    let centers = moreThanThree ? [breakfast, lunch, dinner, snack] : [breakfast, lunch, dinner]
-
-    return centers
+    return labels
   }
 
-  func sortCenters() {
-    centroids = centroids.sorted(by: { $0.dimension(0) < $1.dimension(0) })
-  }
-
-  func train(points: [Vector], convergeDistance: Double, towards centers: [Vector]? = nil) {
-    var centers = centers ?? sampleReservoir(points, numberOfCenters)
-
-    var adjustmentDistance = 0.0
-    repeat {
-      let classifications = classify(points: points, into: centers)
-      adjustmentDistance = adjust(centers: &centers, from: classifications)
-    } while adjustmentDistance > convergeDistance
-
-    centroids = centers
+  func indexes(points: [Vector]) -> [Int?] {
+    points
+      .map({ indexOfNearestCenter(for: $0, in: centers) })
   }
 }
 
@@ -79,18 +55,19 @@ private extension KMeans {
     classifications.enumerated().forEach { (i, vectors) in
       guard centers.indices.contains(i) else { return }
       let averageVector = vectors.average
-      let weighting = centers[i].weighting
-      centers[i] = Vector(from: averageVector, weighting: weighting)
+      centers[i] = Vector(from: averageVector)
     }
 
     return distance(from: oldCenters, to: centers)
   }
 
   func classify(points: [Vector], into centers: [Vector]) -> [[Vector]] {
+    let numberOfCenters = centers.count
     var classifications: [[Vector]] = .init(repeating: [], count: numberOfCenters)
     for point in points {
-      let index = indexOfNearestCenter(point, centers: centers)
-      classifications[index].append(point)
+      if let index = indexOfNearestCenter(for: point, in: centers) {
+        classifications[index].append(point)
+      }
     }
     return classifications
   }
@@ -104,45 +81,91 @@ private extension KMeans {
     return distances
   }
 
-  func fit(_ point: Vector?) -> Label? {
-    assert(!centroids.isEmpty, "Exception: KMeans tried to fit on a non trained model.")
-    guard let point = point else { return nil }
+  func fit(_ point: Vector) -> MealType {
+    assert(!centers.isEmpty, "Exception: KMeans tried to fit on a non trained model.")
 
-    let centroidIndex = indexOfNearestCenter(point, centers: centroids)
-    return labels[centroidIndex]
+    if let centerIndex = indexOfNearestCenter(for: point, in: centers) {
+      return labels[centerIndex]
+    }
+
+    return .none
   }
 
-  func indexOfNearestCenter(_ vector: Vector, centers: [Vector]) -> Int {
-    var nearestDistance = Double.greatestFiniteMagnitude
-    var minimumIndex = 0
+  func indexOfNearestCenter(for vector: Vector, in centers: [Vector]) -> Int? {
+    var closestDistance = Double.greatestFiniteMagnitude
+    var closestIndex: Int? = nil
 
     for (index, center) in centers.enumerated() {
       let distance = vector.distance(to: center)
 
-      if distance < nearestDistance {
-        minimumIndex = index
-        nearestDistance = distance
+      if distance < closestDistance && distance <= maximumDistance {
+        closestIndex = index
+        closestDistance = distance
       }
     }
-    return minimumIndex
+    return closestIndex
   }
 
-  // Pick k random elements from samples
-  func sampleReservoir<T>(_ samples: [T], _ numberOfCenters: Int) -> [T] {
-    var result = [T]()
+  func isUniqueCenter(randomIndex: Int, indexes: Set<Int>, points: [Vector]) -> Bool {
+    guard indexes.isNotEmpty else { return true }
 
-    // Fill the result array with first k elements
-    for i in 0 ..< numberOfCenters {
-      result.append(samples[i])
-    }
-
-    // Randomly replace elements from remaining pool
-    for i in numberOfCenters ..< samples.count {
-      let j = Int.random(in: 0 ... i)
-      if j < numberOfCenters {
-        result[j] = samples[i]
+    for index in indexes {
+      let distanceToCenter = abs(points[index].dimension(0) - points[randomIndex].dimension(0))
+      if distanceToCenter <= minimumDistance {
+        return false
       }
     }
-    return result
+    return true
+  }
+
+  func sampleIndex(indexes: Set<Int>, points: [Vector]) -> Int? {
+    var samplePoints = points
+    for index in indexes.sorted(by: { $0 > $1 }) {
+      samplePoints.remove(at: index)
+    }
+
+    while samplePoints.isNotEmpty {
+      let samplePoint = indexes.count % 2 == 0 ? samplePoints.last! : samplePoints.first!
+      let randomIndex = points.firstIndex(of: samplePoint)!
+      let sampleIndex = samplePoints.firstIndex(of: samplePoint)!
+
+      if isUniqueCenter(randomIndex: randomIndex, indexes: indexes, points: points) {
+        return randomIndex
+      }
+      samplePoints.remove(at: sampleIndex)
+    }
+
+    return nil
+  }
+
+  func sampleReservoir(of points: [Vector]) -> [Vector] {
+    let count = points.count
+    let sampleSize = [count, maximumNumberOfCenters].min()!
+
+    let first = points.first!
+    let last = points.last!
+    let isMoreThanOne = (last.dimension(0) - first.dimension(0)) > maximumDistance
+    var indexes: Set<Int> = isMoreThanOne ? [0, count - 1] : [0] // add first and last cluster
+
+    while indexes.count < sampleSize {
+      if let randomIndex = sampleIndex(indexes: indexes, points: points) {
+        indexes.insert(randomIndex)
+      } else {
+        break
+      }
+    }
+
+    return indexes.sorted().map { points[$0] }
+  }
+
+  func train(points: [Vector], towards centers: [Vector]) -> [Vector] {
+    var centers = centers
+    var adjustmentDistance = 0.0
+    repeat {
+      let classifications = classify(points: points, into: centers)
+      adjustmentDistance = adjust(centers: &centers, from: classifications)
+    } while adjustmentDistance > convergeDistance
+
+    return centers
   }
 }

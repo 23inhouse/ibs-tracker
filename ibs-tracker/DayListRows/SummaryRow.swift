@@ -169,8 +169,12 @@ struct SummaryRowView: View {
     } else {
       pairs = Array(zip(records.dropLast(), records.dropFirst()))
     }
+
+    let minDuration: Double = 15 * 60
     return ForEach(pairs, id: \.0) { (first, last) in
-      line(from: first, to: last, on: row, in: geometry)
+      if last.timestamp.timeIntervalSince(first.timestamp) > minDuration {
+        line(from: first, to: last, on: row, in: geometry)
+      }
     }
   }
 
