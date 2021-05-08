@@ -25,7 +25,7 @@ class DayRecordTests: XCTestCase {
     XCTAssertEqual(dayRecord.records[1].mealType, .breakfast, "wrong meal type")
   }
 
-  func testCalcBMMetaRecords() throws {
+  func testCalcBMMetaRecordsConstipation() throws {
     let hour: Double = 60 * 60
     let oneDay: Double = 24 * hour
     let eightOClock: Double = 8 * hour
@@ -43,6 +43,44 @@ class DayRecordTests: XCTestCase {
     XCTAssertEqual(bmRecord.type, .bm, "wrong type of record")
     XCTAssertEqual(bmRecord.bristolScale, .b0, "wrong type of bm")
     XCTAssertEqual(noteRecord.type, .note, "wrong type of record")
+  }
+
+  func testCalcBMMetaRecordsNumberOfBMs() throws {
+    let hour: Double = 60 * 60
+    let oneDay: Double = 24 * hour
+    let eightOClock: Double = 8 * hour
+    let today = IBSData.timeShiftedDate()
+    let yesterday = today.advanced(by: -oneDay + eightOClock)
+    let records = [
+      IBSRecord(timestamp: yesterday.advanced(by: 4 * hour), bristolScale: .b1),
+      IBSRecord(timestamp: yesterday.advanced(by: 3 * hour), bristolScale: .b2),
+      IBSRecord(timestamp: yesterday.advanced(by: 2 * hour), bristolScale: .b3),
+      IBSRecord(timestamp: yesterday.advanced(by: 1 * hour), bristolScale: .b4),
+    ]
+    let dayRecord = DayRecord(date: yesterday, records: records)
+
+    XCTAssertEqual(dayRecord.records.count, 4, "wrong number records")
+
+    let bm1Record = dayRecord.records[0]
+    let bm2Record = dayRecord.records[1]
+    let bm3Record = dayRecord.records[2]
+    let bm4Record = dayRecord.records[3]
+
+    XCTAssertEqual(bm4Record.type, .bm, "wrong type of record")
+    XCTAssertEqual(bm4Record.bristolScale, .b4, "wrong type of bm")
+    XCTAssertEqual(bm4Record.numberOfBMsScale, Scales.none, "wrong number of bms scale")
+
+    XCTAssertEqual(bm3Record.type, .bm, "wrong type of record")
+    XCTAssertEqual(bm3Record.bristolScale, .b3, "wrong type of bm")
+    XCTAssertEqual(bm3Record.numberOfBMsScale, .zero, "wrong number of bms scale")
+
+    XCTAssertEqual(bm2Record.type, .bm, "wrong type of record")
+    XCTAssertEqual(bm2Record.bristolScale, .b2, "wrong type of bm")
+    XCTAssertEqual(bm2Record.numberOfBMsScale, .mild, "wrong number of bms scale")
+
+    XCTAssertEqual(bm1Record.type, .bm, "wrong type of record")
+    XCTAssertEqual(bm1Record.bristolScale, .b1, "wrong type of bm")
+    XCTAssertEqual(bm1Record.numberOfBMsScale, .moderate, "wrong number of bms scale")
   }
 
   func testCalcFoodMetaRecords() throws {

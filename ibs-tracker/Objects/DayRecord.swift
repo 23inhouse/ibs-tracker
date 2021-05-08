@@ -27,7 +27,6 @@ struct DayRecord: Identifiable {
 private extension DayRecord {
   mutating func calcMetaRecords() {
     var mutatableRecords = Array(records.reversed()) // return earliest first
-//    var mutatableRecords = records.sorted { $0.timestamp < $1.timestamp } // return earliest first
     let metaBMRecords = calcBMMetaRecords(records: &mutatableRecords)
     calcFoodMetaRecords(records: &mutatableRecords)
     calcMetaTags(records: &mutatableRecords)
@@ -39,11 +38,11 @@ private extension DayRecord {
   func calcBMMetaRecords(records: inout [IBSRecord]) -> [IBSRecord] {
     guard date != IBSData.timeShiftedDate() else { return [] }
 
-    let constipationTimestamp = adjustedTimestamp(at: 1)
     let unfilteredRecordsBMRecords = unfilteredRecords.filter { $0.type == .bm }
     let count = unfilteredRecordsBMRecords.count
 
     guard count > 0 else {
+      let constipationTimestamp = adjustedTimestamp(at: 1)
       return [IBSRecord(timestamp: constipationTimestamp, bristolScale: .b0)]
     }
 
@@ -51,7 +50,7 @@ private extension DayRecord {
     for (i, record) in records.enumerated() {
       guard record.type == .bm else { continue }
 
-      records[i].numberOfBMs = UInt(count - numberOfBMs)
+      records[i].numberOfBMs = UInt(numberOfBMs)
       numberOfBMs += 1
     }
 
