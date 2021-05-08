@@ -56,6 +56,16 @@ struct SettingsView: View {
               UIKitBridge.SwiftUIActivityViewController(activityItems: $sharedItems)
             }
         }
+
+        Text("Just record everything honestly. If in doubt about your symptons use the moderate (orange) scale to start with. Be consistent and record everytihng.\n\nYou can export your data at anytime.")
+          .foregroundColor(.secondary)
+          .font(.body)
+          .fontWeight(.light)
+          .align(.center)
+          .opacity(0.5)
+          .lineSpacing(5)
+          .padding(.horizontal, 5)
+          .padding(.vertical, 20)
       }
       .disabled(isDisabled)
       .navigationBarTitleDisplayMode(.inline)

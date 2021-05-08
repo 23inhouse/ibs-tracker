@@ -12,6 +12,16 @@ struct ActionGridView: View {
     NavigationView {
       ScrollViewReader { scroller in
         ScrollView {
+          Text("Just like a donut.")
+            .foregroundColor(.secondary)
+            .font(.body)
+            .fontWeight(.light)
+            .align(.center)
+            .rotationEffect(.degrees(180))
+            .opacity(0.5)
+            .lineSpacing(5)
+            .padding(.horizontal, 50)
+            .padding(.vertical, 25)
           appIconButton(scroller: scroller, anchor: .bottom, rotate: .degrees(180))
           Spacer()
             .height(400)
@@ -28,6 +38,15 @@ struct ActionGridView: View {
           Spacer()
             .height(400)
           appIconButton(scroller: scroller, anchor: .top)
+          Text("Topologically speaking, the human body and a donut have exactly the same shape. The human GI tract and that of any creature more advanced than a parasitic flatworm, have a continous surface of skin with a hole that goes all the way through.\n\nJust like a donut.")
+            .foregroundColor(.secondary)
+            .font(.body)
+            .fontWeight(.light)
+            .align(.center)
+            .opacity(0.5)
+            .lineSpacing(5)
+            .padding(.horizontal, 50)
+            .padding(.vertical, 25)
         }
         .onAppear {
           scroller.scrollTo(id: .gridContent, anchor: .bottom, animate: false)
