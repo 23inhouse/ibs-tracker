@@ -72,7 +72,6 @@ struct FoodFormView: View {
 
         TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, onEditingChanged: editTags, scroller: scroller)
       }
-      .scrollID(.tags)
       .scrollID(.info)
 
       Section {
