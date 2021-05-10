@@ -71,7 +71,9 @@ extension UIKitBridge {
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<SwiftUITextFieldViewInner>) {
       uiView.placeholder = title
       uiView.text = text
-      height = uiView.currentHeight()
+      DispatchQueue.main.async {
+        height = uiView.currentHeight()
+      }
 
       guard isFirstResponder else { return }
 
@@ -98,8 +100,11 @@ extension UIKitBridge {
       }
 
       func textViewDidChangeSelection(_ textView: UITextView) {
-        parent.text = textView.text ?? ""
-        parent.height = textView.currentHeight()
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.parent.text = textView.text ?? ""
+          self.parent.height = textView.currentHeight()
+        }
       }
 
       func textViewDidEndEditing(_ textView: UITextView) {
