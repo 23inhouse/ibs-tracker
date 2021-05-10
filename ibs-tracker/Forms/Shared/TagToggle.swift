@@ -10,8 +10,6 @@ import SwiftUI
 struct TagToggle: View {
   @Binding var showAllTags: Bool
 
-  var scroller: ScrollViewProxy? = nil
-
   private var showAllTagsIcon: String {
     showAllTags ? "chevron.up" : "chevron.down"
   }
@@ -21,12 +19,6 @@ struct TagToggle: View {
       .foregroundColor(.secondary)
       .onTapGesture {
         showAllTags.toggle()
-
-        guard showAllTags && scroller != nil else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-          scroller!.scrollTo(id: .info)
-          endEditing(true)
-        }
       }
   }
 }

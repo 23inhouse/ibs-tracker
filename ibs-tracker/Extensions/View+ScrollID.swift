@@ -15,6 +15,7 @@ enum ScrollID {
   case note
   case saveButton
   case tags
+  case none
 }
 
 extension View {

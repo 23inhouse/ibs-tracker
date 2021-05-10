@@ -34,16 +34,23 @@ struct TagTextFieldSection: View {
       List { EditableTagList(tags: $viewModel.tags) }
       HStack {
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: isFirstResponder, onEditingChanged: onEditingChanged, onCommit: viewModel.addNewTag)
-          .onTapGesture { scroller.scrollTo(id: .tags) }
-          .onChange(of: viewModel.newTag) { _ in
-            showAllTags = false
-            scroller.scrollTo(id: .tags)
+          .onTapGesture {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+              scroller.scrollTo(id: .tags, anchor: .center)
+            }
           }
-        TagToggle(showAllTags: $showAllTags, scroller: scroller)
+          .onChange(of: viewModel.newTag) { _ in showAllTags = false }
+        TagToggle(showAllTags: $showAllTags)
       }
+      .scrollID(.tags)
       List { SuggestedTagList(suggestedTags: $suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag, showAllTags: $showAllTags) }
     }
-    .scrollID(.tags)
+    .onChange(of: isFirstResponder) { _ in
+      guard viewModel.tags.count > 3 else { return }
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        scroller.scrollTo(id: .tags, anchor: .center)
+      }
+    }
   }
 }
 

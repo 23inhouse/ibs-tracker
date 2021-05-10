@@ -68,7 +68,7 @@ struct FoodFormView: View {
 
       Section {
         UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
-          .onTapGesture { scroller.scrollTo(id: .tags) }
+          .onTapGesture { scroller.scrollTo(id: .info) }
 
         TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, onEditingChanged: editTags, scroller: scroller)
       }
