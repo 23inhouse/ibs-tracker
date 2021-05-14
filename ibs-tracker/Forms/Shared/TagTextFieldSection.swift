@@ -35,6 +35,7 @@ struct TagTextFieldSection: View {
       HStack {
         UIKitBridge.SwiftUITextField(tagPlaceholder, text: $viewModel.newTag, isFirstResponder: isFirstResponder, onEditingChanged: onEditingChanged, onCommit: viewModel.addNewTag)
           .onTapGesture {
+            guard viewModel.tags.count > 3 else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
               scroller.scrollTo(id: .tags, anchor: .center)
             }
@@ -44,12 +45,6 @@ struct TagTextFieldSection: View {
       }
       .scrollID(.tags)
       List { SuggestedTagList(suggestedTags: $suggestedTags, tags: $viewModel.tags, newTag: $viewModel.newTag, showAllTags: $showAllTags) }
-    }
-    .onChange(of: isFirstResponder) { _ in
-      guard viewModel.tags.count > 3 else { return }
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        scroller.scrollTo(id: .tags, anchor: .center)
-      }
     }
   }
 }
