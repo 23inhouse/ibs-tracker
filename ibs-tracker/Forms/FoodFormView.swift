@@ -109,6 +109,7 @@ struct FoodFormView: View {
       .onChange(of: recentFoodSelection) { record in
         guard let record = record else { return }
         name = record.text ?? ""
+        medicinal = record.medicinal ?? false
         viewModel.tags = record.tags
         recentFoodSelection = nil
       }
