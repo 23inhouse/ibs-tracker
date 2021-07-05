@@ -64,10 +64,17 @@ struct FoodFormView: View {
     FormView("Meal", viewModel: viewModel, editableRecord: editableRecord) { scroller in
       if recentFoods.isNotEmpty {
         recentFoodSection
+          .scrollID(.recent)
+          .onChange(of: recentFoodSelection) { _ in scroller.scrollTo(id: .recent) }
       }
 
       Section {
-        UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName)
+        UIKitBridge.SwiftUITextFieldView("Meal name. e.g. Pizza", text: $name, onEditingChanged: editName, onCommit: commitName(scroller))
+          .scrollID(.info)
+          .onTapGesture {
+            guard isEditingName == false else { return }
+            scroller.scrollTo(id: .recent)
+          }
 
         TagTextFieldSection(viewModel, showAllTags: $showAllTags, suggestedTags: $suggestedTags, isFirstResponder: $tagIsFirstResponder, onEditingChanged: editTags, scroller: scroller)
       }
@@ -116,9 +123,14 @@ struct FoodFormView: View {
     }
   }
 
-  private func commitName() {
-    tagIsFirstResponder = true
-    name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+  private func commitName(_ scroller: ScrollViewProxy) -> () -> Void {
+    return {
+      tagIsFirstResponder = true
+      name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+      if viewModel.tags.count > FormViewModel.tagCenteringMinimum {
+        scroller.scrollTo(id: .tags, anchor: .center)
+      }
+    }
   }
 
   private func editName(_ isEditing: Bool) {

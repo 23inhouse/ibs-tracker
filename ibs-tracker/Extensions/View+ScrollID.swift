@@ -13,6 +13,7 @@ enum ScrollID {
   case info
   case medication
   case note
+  case recent
   case saveButton
   case tags
   case none

@@ -8,6 +8,8 @@
 import SwiftUI
 
 class FormViewModel: ObservableObject {
+  static let tagCenteringMinimum = 3
+
   @Published var timestamp: Date?
   @Published var isValidTimestamp: Bool = true
   @Published var tags = [String]()
